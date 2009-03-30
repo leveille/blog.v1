@@ -3,7 +3,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 5
-_modified_time = 1238385080.88749
+_modified_time = 1238423903.5198929
 _template_filename='/home/leveille/development/python/pylons/Wurdig/wurdig/templates/base/secondary.html'
 _template_uri='/base/secondary.html'
 _template_cache=cache.Cache(__name__, _modified_time)
@@ -177,9 +177,16 @@ def render_tags(context):
 def render_primary_nav(context):
     context.caller_stack._push_frame()
     try:
+        h = context.get('h', UNDEFINED)
         __M_writer = context.writer()
         # SOURCE LINE 90
-        __M_writer(u'\n    <div id="primary-nav" class="grid_16">\n        <ul>\n            <li class="grid_4 alpha">\n                <a href="/" title="Home">Home <span>Some content here</span></a>\n            </li>\n            <li class="grid_4">\n                <a href="/sub-page.html" title="About">About <span>Some content here</span></a>\n            </li>\n            <li class="grid_4">\n                <a href="/sub-page.html" title="Teaching">Teaching <span>Some content here</span></a>\n            </li>\n            <li class="grid_4 omega">\n                <a href="/lifestream" title="Lifestream">Lifestream <span>Some content here</span></a>\n            </li> \n        </ul>\n    </div>\n')
+        __M_writer(u'\n    <div id="primary-nav" class="grid_16">\n        <ul>\n            <li class="grid_4 alpha">\n                <a href="/" title="Home">Home <span>Some content here</span></a>\n            </li>\n            <li class="grid_4">\n                <a href="')
+        # SOURCE LINE 97
+        __M_writer(escape(h.url_for(controller='page', action='view', slug='about')))
+        __M_writer(u'">About <span>About me and this site</span></a>\n            </li>\n            <li class="grid_4">\n                <a href="')
+        # SOURCE LINE 100
+        __M_writer(escape(h.url_for(controller='page', action='view', slug='teaching')))
+        __M_writer(u'">Teaching <span>My former life as a teacher</span></a>\n            </li>\n            <li class="grid_4 omega">\n                <a href="/lifestream" title="Lifestream">Lifestream <span>Some content here</span></a>\n            </li> \n        </ul>\n    </div>\n')
         return ''
     finally:
         context.caller_stack._pop_frame()

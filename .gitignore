@@ -3,3 +3,5 @@
 *.pyc
 development.ini
 *.tmp*
+data/cache
+data/cache/*
