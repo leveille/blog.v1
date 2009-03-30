@@ -1,0 +1,230 @@
+## -*- coding: utf-8 -*-
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
+        <meta http-equiv="Content-Language" content="en-us">
+        <meta name="author" content="Jason R. Leveille">
+        <meta name="copyright" content="http://jasonleveille.com">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <meta name="ICBM" content="37.0625, -95.677068">
+        <meta name="geo.position" content="37.0625, -95.677068">
+        <meta name="geo.placename" content="Frederick, Maryland">
+        <meta name="geo.region" content="US-MD">
+        <meta name="geo.country" content="US">
+        
+        <title>${self.title()}</title>
+        ${self.css()}
+    </head>
+    
+    <body id="home">
+        
+        <div class="container_16">
+            ${self.primary_nav()}
+        </div>
+        
+        ${self.header()}
+        
+        <div id="content">
+            <div class="container_16">
+                
+                <div id="primary-content" class="grid_11">
+                    ${self.flash()}
+                    ${next.body()}                    
+                </div>
+                
+                <div id="sidebar" class="grid_5">
+                    <div id="categories" class="grid_4 alpha">
+                        ${self.categories()}
+                    </div>
+                    <div id="archives" class="grid_4 omega">
+                        ${self.archives()}
+                    </div>
+                    <div id="tags" class="grid_4 alpha">
+                        ${self.tags()}
+                    </div>
+                    <div id="recent-comments" class="grid_4 omega">
+                        ${self.recent_comments()}
+                    </div>
+                </div>
+            </div>
+        </div>
+        ${self.secondary_content()}
+        ${self.footer()}
+        ${self.js()}      
+    </body>
+</html>
+
+<%def name="title()">Jason Leveille's Blog</%def>
+
+<%def name="css()">
+    ${h.stylesheet_link(h.url_for('/css/reset.css'), media="screen, projection")}
+    ${h.stylesheet_link(h.url_for('/css/text.css'), media="screen, projection")}
+    ${h.stylesheet_link(h.url_for('/css/960.css'), media="screen, projection")}
+    ${h.stylesheet_link(h.url_for('/css/base.css'), media="screen, projection")}
+    ${h.stylesheet_link(h.url_for('/css/print.css'), media="print")}
+</%def>
+
+<%def name="header()">
+    <div id="header">
+        <div class="container_16">
+            <div class="grid_16">
+                <div class="grid_8 alpha">
+                    <h1>Jason Leveille</h1>
+                    <p>Web Responsible, From Design Through Deployment</p>
+                </div>
+                <div class="grid_8 omega">
+                    <div id="subscribe" class="grid_4 alpha">
+                        <p>Subscribe</p>
+                    </div>
+                    <div id="search" class="grid_4 alpha">
+                        <p>Search</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</%def>
+
+<%def name="primary_nav()">
+    <div id="primary-nav" class="grid_16">
+        <ul>
+            <li class="grid_4 alpha">
+                <a href="/" title="Home">Home <span>Some content here</span></a>
+            </li>
+            <li class="grid_4">
+                <a href="/sub-page.html" title="About">About <span>Some content here</span></a>
+            </li>
+            <li class="grid_4">
+                <a href="/sub-page.html" title="Teaching">Teaching <span>Some content here</span></a>
+            </li>
+            <li class="grid_4 omega">
+                <a href="/lifestream" title="Lifestream">Lifestream <span>Some content here</span></a>
+            </li> 
+        </ul>
+    </div>
+</%def>
+
+<%def name="twitter_updates()">
+    <h4>Twitter Updates</h4>
+    <ul>
+        <li>Update</li>
+        <li>Update</li>
+        <li>Update</li>
+        <li>Update</li>
+    </ul>
+</%def>
+
+<%def name="categories()">
+    <h4>Categories</h4>
+    <ul>
+        <li>Category</li>
+        <li>Category</li>
+        <li>Category</li>
+        <li>Category</li>
+    </ul>
+</%def>
+
+<%def name="archives()">
+    <h4>Archives</h4>
+    <ul>
+        <li>Archive</li>
+        <li>Archive</li>
+        <li>Archive</li>
+        <li>Archive</li>
+    </ul>
+</%def>
+
+<%def name="tags()">
+    <h4>Tags</h4>
+    <ul>
+        <li>Tag</li>
+        <li>Tag</li>
+        <li>Tag</li>
+        <li>Tag</li>
+    </ul>
+</%def>
+
+<%def name="recent_comments()">
+    <h4>Recent Comments</h4>
+    <ul>
+        <li>Comment</li>
+        <li>Comment</li>
+        <li>Comment</li>
+        <li>Comment</li>
+    </ul>
+</%def>
+
+<%def name="development_stream()">
+    <h4>Development Stream</h4>
+    <ul>
+        <li>Link</li>
+        <li>Link</li>
+        <li>Link</li>
+        <li>Link</li>
+    </ul>
+</%def>
+
+<%def name="secondary_content()">
+    <div id="secondary-content">
+        <div class="container_12">
+            <div class=grid_12>
+                <div id="delicious-bookmarks" class="grid_4 alpha">
+                    <h4>Bookmarks</h4>
+                    <ul>
+                        <li>Bookmark</li>
+                        <li>Bookmark</li>
+                        <li>Bookmark</li>
+                        <li>Bookmark</li>
+                    </ul>
+                </div>
+                <div id="flickr-stream" class="grid_4">
+                    <h4>Public Flickr Stream</h4>
+                    <p>Content</p>
+                </div>
+                <div id="blogroll" class="grid_4 omega">
+                    <h4>Blogroll</h4>
+                    <p>Content</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</%def>
+
+<%def name="footer()">
+    <div id="footer">
+        <div class="container_12">
+            <div class="grid_12">
+                <div class="grid_6 alpha">
+                    <p>Content</p>
+                </div>
+                <div class="grid_6 omega">
+                    <p>Content</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</%def>
+
+<%def name="flash()">
+    % if session.has_key('flash'):
+    <div id="flash"><p>${session.get('flash')}</p></div>
+    <%
+        del session['flash']
+        session.save()
+    %>
+    % endif
+</%def>
+
+<%def name="js()">
+    <script type="text/javascript">
+        var djConfig = {
+            isDebug:false, 
+            parseOnLoad:true
+        };
+    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.2/dojo/dojo.xd.js"></script>
+    ${h.javascript_link(h.url_for('/javascripts/application.js'))}
+</%def>
+
