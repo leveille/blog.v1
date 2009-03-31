@@ -2,6 +2,7 @@
 .pydevproject
 *.pyc
 development.ini
+test.ini
 *.tmp*
 data/cache
 data/cache/*

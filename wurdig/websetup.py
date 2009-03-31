@@ -16,7 +16,7 @@ def setup_app(command, conf, vars):
     meta.metadata.bind = meta.engine
     
     filename = os.path.split(conf.filename)[-1]
-    if filename == 'development.ini':
+    if filename == 'test.ini':
         # Permanently drop any existing tables
         log.info("Dropping existing tables...")
         meta.metadata.drop_all(checkfirst=True)
@@ -107,8 +107,8 @@ def setup_app(command, conf, vars):
     post_x = meta.Session.query(model.Post)
     post_y = post_x.get(int(2))
     tag_x = meta.Session.query(model.Tag)
-    tag_y = tag_x.filter_by(name='Python').first()
-    tag_z = tag_x.filter_by(name='Pylons').first()
+    tag_y = tag_x.filter_by(name=u'Python').first()
+    tag_z = tag_x.filter_by(name=u'Pylons').first()
     post_y.tags.append(tag_y)
     post_y.tags.append(tag_z)
     meta.Session.add(post_y)
