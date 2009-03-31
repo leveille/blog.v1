@@ -1,5 +1,4 @@
 MANIFEST.in
-README.txt
 setup.cfg
 setup.py
 Wurdig.egg-info/PKG-INFO
@@ -35,7 +34,6 @@ wurdig/public/css/print.css
 wurdig/public/css/reset.css
 wurdig/public/css/text.css
 wurdig/public/javascripts/application.js
-wurdig/templates/base/.tmp_home.html.21300~
 wurdig/templates/base/home.html
 wurdig/templates/base/secondary.html
 wurdig/templates/derived/page/home.html
