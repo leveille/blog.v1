@@ -38,6 +38,7 @@ posts_table = schema.Table('posts', meta.metadata,
     schema.Column('title', types.Unicode(255), default=u'Untitled Post'), 
     schema.Column('slug', types.Unicode(125), nullable=False, unique=True),
     schema.Column('content', types.Text(), nullable=False),
+    schema.Column('comments_allowed', types.Boolean(), default=True),
     schema.Column('created_on', types.TIMESTAMP(), default=now()),
     schema.Column('posted_on', types.TIMESTAMP()),
 )
