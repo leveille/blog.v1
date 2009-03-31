@@ -52,7 +52,7 @@ comments_table = schema.Table('comments', meta.metadata,
     schema.Column('email', types.Unicode(255), nullable=False),
     schema.Column('url', types.Unicode(150), default=u''),
     schema.Column('created_on', types.TIMESTAMP(), default=now()),
-    schema.Column('approved_on', types.TIMESTAMP(), default=u''),
+    schema.Column('approved', types.Boolean(), default=False),
 )
 
 tags_table = schema.Table('tags', meta.metadata,
