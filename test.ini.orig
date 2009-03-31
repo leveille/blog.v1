@@ -6,9 +6,9 @@
 [DEFAULT]
 debug = true
 # Uncomment and replace with the address which should receive any error reports
-email_to = leveillej@gmail.com
+# email_to = you@yourdomain.com
 smtp_server = localhost
-error_email_from = server.error@jasonleveille.com
+error_email_from = paste@localhost
 
 [server:main]
 use = egg:Paste#http
@@ -16,12 +16,6 @@ host = 127.0.0.1
 port = 5000
 
 [app:main]
-use = egg:Wurdig
-full_stack = true
-static_files = true
-
-cache_dir = %(here)s/data
-beaker.session.key = wurdig
-beaker.session.secret = "Wurdigs Holiday Acres"
+# use = config:development.ini
 
 # Add additional test specific configuration options as necessary.
