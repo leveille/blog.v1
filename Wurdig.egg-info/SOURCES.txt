@@ -19,6 +19,7 @@ wurdig/config/routing.py
 wurdig/controllers/__init__.py
 wurdig/controllers/error.py
 wurdig/controllers/page.py
+wurdig/controllers/post.py
 wurdig/lib/__init__.py
 wurdig/lib/app_globals.py
 wurdig/lib/base.py
@@ -42,3 +43,4 @@ wurdig/tests/__init__.py
 wurdig/tests/test_models.py
 wurdig/tests/functional/__init__.py
 wurdig/tests/functional/test_page.py
+wurdig/tests/functional/test_post.py

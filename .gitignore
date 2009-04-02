@@ -4,5 +4,6 @@
 development.ini
 test.ini
 *.tmp*
-data/cache
-data/cache/*
+data
+data/*
+test.db

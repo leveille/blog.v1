@@ -15,7 +15,7 @@ class PageController(BaseController):
     def home(self):
         return render('/derived/page/home.html')
 
-    def view(self, slug):
+    def view(self, slug=None):
         if slug is None:
             abort(404)
         page_q = meta.Session.query(model.Page)
