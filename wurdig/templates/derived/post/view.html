@@ -1,0 +1,9 @@
+<%inherit file="/base/secondary.html"/>
+
+<%def name="title()">${parent.title()} &gt; ${c.post.title}</%def>
+
+<h2>${c.post.title}</h2>
+
+<div class="entry">
+    ${c.post.content}
+</div>

@@ -20,7 +20,23 @@ def make_map():
 
     # CUSTOM ROUTES HERE
     map.connect('/', controller='page', action='home')
-    map.connect('/{slug}', controller='page', action='view', requirements = {'slug' : '[a-z1-9-]+'})
+    map.connect('/{slug}', controller='page', 
+                action='view', 
+                requirements = {'slug' : '[a-z1-9-]+'})
+    
+    map.connect('/{year}/{month}/{slug}', controller='post', 
+                action='view', 
+                requirements = {'year' : '\d{2,4}', 
+                                'month' : '\d{1,2}', 
+                                'slug' : '[a-z1-9-]+'})
+    
+    map.connect('/{year}/{month}', controller='post', 
+                action='archive', 
+                requirements = {'year' : '\d{2,4}', 'month' : '\d{1,2}'})
+    
+    map.connect('/{year}', controller='post', 
+                action='archive', 
+                requirements = {'year' : '\d{2,4}'})
 
     map.connect('/{controller}/{action}')
     map.connect('/{controller}/{action}/{id}')

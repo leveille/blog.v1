@@ -1,0 +1,25 @@
+<%inherit file="/base/secondary.html"/>
+
+
+<%def name="title()">${parent.title()} &gt; test</%def>
+
+% if len(c.paginator):
+<p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
+<div class="entries">
+% for post in c.paginator:
+    <h3>${post.title}</h3>
+    <div class="entry">
+        <div class="entry-content">
+            ${h.literal(post.content)}
+            <p>
+            </p>
+        </div>
+    </div>
+% endfor
+</div>
+<p>${ c.paginator.pager('~2~') }</p>
+% else:
+<p>
+    No posts.
+</p>
+% endif

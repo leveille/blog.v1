@@ -37,8 +37,14 @@ wurdig/public/css/text.css
 wurdig/public/javascripts/application.js
 wurdig/templates/base/home.html
 wurdig/templates/base/secondary.html
+wurdig/templates/derived/page/.tmp_view.html.53223~
 wurdig/templates/derived/page/home.html
 wurdig/templates/derived/page/view.html
+wurdig/templates/derived/post/.tmp_archive.html.79785~
+wurdig/templates/derived/post/.tmp_archive.html.86139~
+wurdig/templates/derived/post/.tmp_view.html.65195~
+wurdig/templates/derived/post/archive.html
+wurdig/templates/derived/post/view.html
 wurdig/tests/__init__.py
 wurdig/tests/test_models.py
 wurdig/tests/functional/__init__.py
