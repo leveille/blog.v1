@@ -1,17 +1,14 @@
 from wurdig.tests import *
 
 class TestPostController(TestController):
-
-    def test_archives_404_missing_year(self):
-        response = self.app.get(url(controller='post', action='archive'), status=404)
         
-    def test_archives_year_only(self):
+    def test_archive_year_only(self):
         response = self.app.get(url(controller='post', action='archive', year='2008'))
         assert 'Fifth test post' in response
         assert '<p>This is the fifth test post</p>' in response
         assert 'REQUEST_METHOD' in response.req.environ
         
-    def test_archives_year_and_month(self):
+    def test_archive_year_and_month(self):
         response = self.app.get(url(controller='post', 
                                     action='archive', 
                                     year='2009', month='03'))
@@ -28,13 +25,7 @@ class TestPostController(TestController):
         assert 'Third test post' in response
         assert '<p>This is the third test post</p>' in response
         assert 'REQUEST_METHOD' in response.req.environ
-        
-    def test_view_404_missing_slug(self):
-        response = self.app.get(url(controller='post', 
-                                    action='view', 
-                                    year='2009', 
-                                    month='03'), status=404)
-        
+                
     def test_view_404_invalid_slug(self):
         response = self.app.get(url(controller='post', 
                                     action='view', 

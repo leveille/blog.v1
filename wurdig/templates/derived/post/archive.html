@@ -1,7 +1,8 @@
 <%inherit file="/base/secondary.html"/>
 
 
-<%def name="title()">${parent.title()} &gt; test</%def>
+<%def name="title()">${parent.title()} &gt; Archives for ${c.date}</%def>
+<h2>Archives for ${c.date}</h2>
 
 % if len(c.paginator):
 <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
