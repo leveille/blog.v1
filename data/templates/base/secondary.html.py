@@ -3,7 +3,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 5
-_modified_time = 1238423903.5198929
+_modified_time = 1238878942.7598741
 _template_filename='/home/leveille/development/python/pylons/Wurdig/wurdig/templates/base/secondary.html'
 _template_uri='/base/secondary.html'
 _template_cache=cache.Cache(__name__, _modified_time)
@@ -66,27 +66,27 @@ def render_body(context,**pageargs):
         __M_writer(u'\n\n')
         # SOURCE LINE 88
         __M_writer(u'\n\n')
-        # SOURCE LINE 107
+        # SOURCE LINE 113
         __M_writer(u'\n\n')
-        # SOURCE LINE 117
+        # SOURCE LINE 123
         __M_writer(u'\n\n')
-        # SOURCE LINE 127
+        # SOURCE LINE 133
         __M_writer(u'\n\n')
-        # SOURCE LINE 137
+        # SOURCE LINE 143
         __M_writer(u'\n\n')
-        # SOURCE LINE 147
+        # SOURCE LINE 153
         __M_writer(u'\n\n')
-        # SOURCE LINE 157
+        # SOURCE LINE 163
         __M_writer(u'\n\n')
-        # SOURCE LINE 167
+        # SOURCE LINE 173
         __M_writer(u'\n\n')
-        # SOURCE LINE 193
+        # SOURCE LINE 199
         __M_writer(u'\n\n')
-        # SOURCE LINE 208
+        # SOURCE LINE 214
         __M_writer(u'\n\n')
-        # SOURCE LINE 218
+        # SOURCE LINE 224
         __M_writer(u'\n\n')
-        # SOURCE LINE 229
+        # SOURCE LINE 235
         __M_writer(u'\n\n')
         return ''
     finally:
@@ -97,7 +97,7 @@ def render_footer(context):
     context.caller_stack._push_frame()
     try:
         __M_writer = context.writer()
-        # SOURCE LINE 195
+        # SOURCE LINE 201
         __M_writer(u'\n    <div id="footer">\n        <div class="container_12">\n            <div class="grid_12">\n                <div class="grid_6 alpha">\n                    <p>Content</p>\n                </div>\n                <div class="grid_6 omega">\n                    <p>Content</p>\n                </div>\n            </div>\n        </div>\n    </div>\n')
         return ''
     finally:
@@ -108,7 +108,7 @@ def render_secondary_content(context):
     context.caller_stack._push_frame()
     try:
         __M_writer = context.writer()
-        # SOURCE LINE 169
+        # SOURCE LINE 175
         __M_writer(u'\n    <div id="secondary-content">\n        <div class="container_12">\n            <div class=grid_12>\n                <div id="delicious-bookmarks" class="grid_4 alpha">\n                    <h4>Bookmarks</h4>\n                    <ul>\n                        <li>Bookmark</li>\n                        <li>Bookmark</li>\n                        <li>Bookmark</li>\n                        <li>Bookmark</li>\n                    </ul>\n                </div>\n                <div id="flickr-stream" class="grid_4">\n                    <h4>Public Flickr Stream</h4>\n                    <p>Content</p>\n                </div>\n                <div id="blogroll" class="grid_4 omega">\n                    <h4>Blogroll</h4>\n                    <p>Content</p>\n                </div>\n            </div>\n        </div>\n    </div>\n')
         return ''
     finally:
@@ -120,21 +120,21 @@ def render_flash(context):
     try:
         session = context.get('session', UNDEFINED)
         __M_writer = context.writer()
-        # SOURCE LINE 210
+        # SOURCE LINE 216
         __M_writer(u'\n')
-        # SOURCE LINE 211
+        # SOURCE LINE 217
         if session.has_key('flash'):
-            # SOURCE LINE 212
+            # SOURCE LINE 218
             __M_writer(u'    <div id="flash"><p>')
             __M_writer(escape(session.get('flash')))
             __M_writer(u'</p></div>\n    ')
-            # SOURCE LINE 213
+            # SOURCE LINE 219
 
             del session['flash']
             session.save()
                 
             
-            # SOURCE LINE 216
+            # SOURCE LINE 222
             __M_writer(u'\n')
         return ''
     finally:
@@ -145,7 +145,7 @@ def render_development_stream(context):
     context.caller_stack._push_frame()
     try:
         __M_writer = context.writer()
-        # SOURCE LINE 159
+        # SOURCE LINE 165
         __M_writer(u'\n    <h4>Development Stream</h4>\n    <ul>\n        <li>Link</li>\n        <li>Link</li>\n        <li>Link</li>\n        <li>Link</li>\n    </ul>\n')
         return ''
     finally:
@@ -167,7 +167,7 @@ def render_tags(context):
     context.caller_stack._push_frame()
     try:
         __M_writer = context.writer()
-        # SOURCE LINE 139
+        # SOURCE LINE 145
         __M_writer(u'\n    <h4>Tags</h4>\n    <ul>\n        <li>Tag</li>\n        <li>Tag</li>\n        <li>Tag</li>\n        <li>Tag</li>\n    </ul>\n')
         return ''
     finally:
@@ -180,13 +180,16 @@ def render_primary_nav(context):
         h = context.get('h', UNDEFINED)
         __M_writer = context.writer()
         # SOURCE LINE 90
-        __M_writer(u'\n    <div id="primary-nav" class="grid_16">\n        <ul>\n            <li class="grid_4 alpha">\n                <a href="/" title="Home">Home <span>Some content here</span></a>\n            </li>\n            <li class="grid_4">\n                <a href="')
-        # SOURCE LINE 97
+        __M_writer(u'\n    <div id="primary-nav" class="grid_16">\n        <ul>\n            <li class="grid_4 alpha">\n                <a href="')
+        # SOURCE LINE 94
+        __M_writer(escape(h.url_for(controller='page', action='home')))
+        __M_writer(u'" title="Home">\n                    Home <span>Some content here</span>\n                </a>\n            </li>\n            <li class="grid_4">\n                <a href="')
+        # SOURCE LINE 99
         __M_writer(escape(h.url_for(controller='page', action='view', slug='about')))
-        __M_writer(u'">About <span>About me and this site</span></a>\n            </li>\n            <li class="grid_4">\n                <a href="')
-        # SOURCE LINE 100
+        __M_writer(u'" title="About">\n                    About <span>About me and this site</span>\n                </a>\n            </li>\n            <li class="grid_4">\n                <a href="')
+        # SOURCE LINE 104
         __M_writer(escape(h.url_for(controller='page', action='view', slug='teaching')))
-        __M_writer(u'">Teaching <span>My former life as a teacher</span></a>\n            </li>\n            <li class="grid_4 omega">\n                <a href="/lifestream" title="Lifestream">Lifestream <span>Some content here</span></a>\n            </li> \n        </ul>\n    </div>\n')
+        __M_writer(u'" title="Teaching">\n                    Teaching <span>My former life as a teacher</span>\n                </a>\n            </li>\n            <li class="grid_4 omega">\n                <a href="/lifestream" title="Lifestream">Lifestream <span>Some content here</span></a>\n            </li> \n        </ul>\n    </div>\n')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -207,7 +210,7 @@ def render_recent_comments(context):
     context.caller_stack._push_frame()
     try:
         __M_writer = context.writer()
-        # SOURCE LINE 149
+        # SOURCE LINE 155
         __M_writer(u'\n    <h4>Recent Comments</h4>\n    <ul>\n        <li>Comment</li>\n        <li>Comment</li>\n        <li>Comment</li>\n        <li>Comment</li>\n    </ul>\n')
         return ''
     finally:
@@ -218,7 +221,7 @@ def render_twitter_updates(context):
     context.caller_stack._push_frame()
     try:
         __M_writer = context.writer()
-        # SOURCE LINE 109
+        # SOURCE LINE 115
         __M_writer(u'\n    <h4>Twitter Updates</h4>\n    <ul>\n        <li>Update</li>\n        <li>Update</li>\n        <li>Update</li>\n        <li>Update</li>\n    </ul>\n')
         return ''
     finally:
@@ -257,9 +260,9 @@ def render_js(context):
     try:
         h = context.get('h', UNDEFINED)
         __M_writer = context.writer()
-        # SOURCE LINE 220
+        # SOURCE LINE 226
         __M_writer(u'\n    <script type="text/javascript">\n        var djConfig = {\n            isDebug:false, \n            parseOnLoad:true\n        };\n    </script>\n    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.2/dojo/dojo.xd.js"></script>\n    ')
-        # SOURCE LINE 228
+        # SOURCE LINE 234
         __M_writer(escape(h.javascript_link(h.url_for('/javascripts/application.js'))))
         __M_writer(u'\n')
         return ''
@@ -271,7 +274,7 @@ def render_categories(context):
     context.caller_stack._push_frame()
     try:
         __M_writer = context.writer()
-        # SOURCE LINE 119
+        # SOURCE LINE 125
         __M_writer(u'\n    <h4>Categories</h4>\n    <ul>\n        <li>Category</li>\n        <li>Category</li>\n        <li>Category</li>\n        <li>Category</li>\n    </ul>\n')
         return ''
     finally:
@@ -282,7 +285,7 @@ def render_archives(context):
     context.caller_stack._push_frame()
     try:
         __M_writer = context.writer()
-        # SOURCE LINE 129
+        # SOURCE LINE 135
         __M_writer(u'\n    <h4>Archives</h4>\n    <ul>\n        <li>Archive</li>\n        <li>Archive</li>\n        <li>Archive</li>\n        <li>Archive</li>\n    </ul>\n')
         return ''
     finally:
