@@ -16,12 +16,7 @@ log = logging.getLogger(__name__)
 
 class PostController(BaseController):
 
-    def archive(self, year, month=None):
-        """
-        Display archived blog posts for a given year,
-        or a given year and month
-        """
-            
+    def archive(self, year, month=None):   
         (c.posts, c.date, year_i, month_start, month_end, day_end) = (None, year, int(year), 1, 12, 31)
         
         if month is not None:
@@ -44,10 +39,6 @@ class PostController(BaseController):
         return render('/derived/post/archive.html')
     
     def view(self, year, month, slug):
-        """
-        Display a specific blog post
-        """
-
         (year_i, month_i) = (int(year), int(month))
         c.post = meta.Session.query(model.Post).filter(
             and_(model.Post.created_on >= d.datetime(year_i, month_i, 1), 
