@@ -2,7 +2,7 @@ from wurdig.tests import *
 
 class TestPostController(TestController):
         
-    def test_archive_year_only(self):
+    def test_archive_year_only_2008(self):
         response = self.app.get(url(controller='post', action='archive', year='2008'))
         assert 'Fifth test post' in response
         assert '<p>This is the fifth test post</p>' in response
@@ -12,8 +12,8 @@ class TestPostController(TestController):
         response = self.app.get(url(controller='post', 
                                     action='archive', 
                                     year='2009', month='03'))
-        assert 'Second test post' in response
-        assert '<p>This is the second test post</p>' in response
+        assert 'Third test post' in response
+        assert '<p>This is the third test post</p>' in response
         assert 'REQUEST_METHOD' in response.req.environ
         
     def test_view(self):
