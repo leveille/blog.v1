@@ -97,13 +97,19 @@
     <div id="primary-nav" class="grid_16">
         <ul>
             <li class="grid_4 alpha">
-                <a href="/" title="Home">Home <span>Some content here</span></a>
+                <a href="${h.url_for(controller='page', action='home')}" title="Home">
+                    Home <span>Some content here</span>
+                </a>
             </li>
             <li class="grid_4">
-                <a href="/sub-page.html" title="About">About <span>Some content here</span></a>
+                <a href="${h.url_for(controller='page', action='view', slug='about')}" title="About">
+                    About <span>About me and this site</span>
+                </a>
             </li>
             <li class="grid_4">
-                <a href="/sub-page.html" title="Teaching">Teaching <span>Some content here</span></a>
+                <a href="${h.url_for(controller='page', action='view', slug='teaching')}" title="Teaching">
+                    Teaching <span>My former life as a teacher</span>
+                </a>
             </li>
             <li class="grid_4 omega">
                 <a href="/lifestream" title="Lifestream">Lifestream <span>Some content here</span></a>
