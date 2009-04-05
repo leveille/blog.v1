@@ -27,9 +27,9 @@ class PostController(BaseController):
         posts_q = meta.Session.query(model.Post).order_by(model.Post.posted_on.desc())
 
         c.paginator = paginate.Page(
-            posts_q.filter(and_(model.Post.created_on >= d.datetime(year_i, month_start, 1), 
-                model.Post.created_on <= d.datetime(year_i, month_end, day_end),
-                model.Post.posted_on != None)),
+            posts_q.filter(and_(model.Post.posted_on >= d.datetime(year_i, month_start, 1), 
+                model.Post.posted_on <= d.datetime(year_i, month_end, day_end))
+            ),
             page=int(request.params.get('page', 1)),
             items_per_page = 1,
             controller='post',
@@ -41,10 +41,10 @@ class PostController(BaseController):
     def view(self, year, month, slug):
         (year_i, month_i) = (int(year), int(month))
         c.post = meta.Session.query(model.Post).filter(
-            and_(model.Post.created_on >= d.datetime(year_i, month_i, 1), 
-                 model.Post.created_on <= d.datetime(year_i, month_i, calendar.monthrange(year_i, month_i)[1]),
-                 model.Post.posted_on != None,
-                 model.Post.slug == slug)).first()
+            and_(model.Post.posted_on >= d.datetime(year_i, month_i, 1), 
+                 model.Post.posted_on <= d.datetime(year_i, month_i, calendar.monthrange(year_i, month_i)[1]),
+                 model.Post.slug == slug)
+        ).first()
                                  
         if c.post is None:
             abort(404)
