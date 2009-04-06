@@ -1,6 +1,8 @@
 from wurdig.tests import *
 
 class TestPostController(TestController):
+    def test_archive_missing_year(self):
+        response = self.app.get(url(controller='post', action='archive'), status=404)
         
     def test_archive_year_only_2008(self):
         response = self.app.get(url(controller='post', action='archive', year='2008'))
