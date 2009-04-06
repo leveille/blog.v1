@@ -16,14 +16,17 @@ log = logging.getLogger(__name__)
 
 class PostController(BaseController):
 
-    def archive(self, year, month=None):   
+    def archive(self, year=None, month=None):   
+        if year is None:
+            abort(404)
+        
         (c.posts, c.date, year_i, month_start, month_end, day_end) = (None, year, int(year), 1, 12, 31)
         
         if month is not None:
             c.date = calendar.month_name[month_start] + ', ' + year
             (month_start, month_end) = (int(month), int(month))
             day_end = calendar.monthrange(year_i, month_start)[1]
-
+            
         posts_q = meta.Session.query(model.Post).order_by(model.Post.posted_on.desc())
 
         c.paginator = paginate.Page(
@@ -34,6 +37,8 @@ class PostController(BaseController):
             items_per_page = 1,
             controller='post',
             action='archive',
+            year=year,
+            month=month,
         )
                 
         return render('/derived/post/archive.html')
