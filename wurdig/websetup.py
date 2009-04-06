@@ -5,6 +5,8 @@ import datetime
 
 from wurdig import model
 from wurdig.config.environment import load_environment
+from authkit.users.sqlalchemy_driver import UsersFromDatabase
+from authkit.users import md5
 
 log = logging.getLogger(__name__)
 
@@ -15,6 +17,9 @@ def setup_app(command, conf, vars):
     from wurdig.model import meta
     meta.metadata.bind = meta.engine
     
+    log.info("Adding the AuthKit model...")
+    users = UsersFromDatabase(model)
+    
     filename = os.path.split(conf.filename)[-1]
     if filename == 'test.ini':
         # Permanently drop any existing tables
@@ -23,6 +28,11 @@ def setup_app(command, conf, vars):
         
     # Create the tables if they aren't there already
     meta.metadata.create_all(checkfirst=True)
+    
+    log.info("Adding roles and uses...")
+    users.role_create("admin")
+    users.user_create("admin", password=md5("admin"))
+    users.user_add_role("admin", role="admin")
     
     log.info("Adding about page...")
     page1 = model.Page()

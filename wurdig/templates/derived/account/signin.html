@@ -1,0 +1,15 @@
+<%inherit file="/base/admin.html"/>
+
+<%def name="title()">Sign In</%def>
+
+${h.form('%s', method='post')}
+<div class="field">
+    <label for="username">Username</label>
+    ${h.text('username')}
+</div>
+<div class="field">
+    <label for="password">Password</label>
+    ${h.text('password')}
+</div>
+${h.submit('login', 'Login')}
+${h.end_form()}

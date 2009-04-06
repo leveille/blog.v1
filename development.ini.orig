@@ -37,6 +37,14 @@ sqlalchemy.url = sqlite:///%(here)s/development.db
 # execute malicious code after an exception is raised.
 #set debug = false
 
+authkit.setup.enable = true
+authkit.setup.method = form, cookie
+authkit.form.authenticate.user.type = authkit.users.sqlalchemy_driver:UsersFromDatabase
+authkit.form.authenticate.user.data = wurdig.model
+authkit.form.authenticate.user.encrypt = authkit.users:md5
+authkit.cookie.secret = secret string
+authkit.cookie.signoutpath = /signout
+authkit.form.template.obj = wurdig.lib.auth:render_signin
 
 # Logging configuration
 [loggers]

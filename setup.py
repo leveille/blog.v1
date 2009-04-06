@@ -13,9 +13,10 @@ setup(
     author_email='leveillej@gmail.com',
     url='http://jasonleveille.com',
     install_requires=[
-        "Pylons>=0.9.7",
+        "Pylons>=0.9.7,<=0.9.7.99",
         "SQLAlchemy>=0.5,<=0.5.99",
-        "Mako",
+        "Mako>=0.2.2,<=0.2.99",
+        "AuthKit>=0.4.3,<=0.4.99",
     ],
     setup_requires=["PasteScript>=1.6.3"],
     packages=find_packages(exclude=['ez_setup']),
