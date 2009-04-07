@@ -22,13 +22,13 @@ def make_map():
     map.connect('/', controller='page', action='home')
     map.connect('/{slug}', controller='page', 
                 action='view', 
-                requirements = {'slug' : '[a-z1-9-]+'})
+                requirements = {'slug' : '[-\w]+'})
     
     map.connect('/{year}/{month}/{slug}', controller='post', 
                 action='view', 
                 requirements = {'year' : '\d{2,4}', 
                                 'month' : '\d{1,2}', 
-                                'slug' : '[a-z1-9-]+'})
+                                'slug' : '[-\w]+'})
     
     map.connect('/{year}/{month}', controller='post', 
                 action='archive', 

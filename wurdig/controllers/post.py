@@ -6,6 +6,7 @@ import webhelpers.paginate as paginate
 import datetime as d
 import calendar
 import formencode
+import re
 
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
@@ -18,55 +19,64 @@ from authkit.authorize.pylons_adaptors import authorize
 
 log = logging.getLogger(__name__)
 
-class UniquePostSlug(formencode.FancyValidator): 
+class ConstructSlug(formencode.FancyValidator):
+    def _to_python(self, value, state):
+        if value['slug'] in ['', u'', None]:
+            post_title = value['title'].lower()
+            # post_title = re.sub(r'[^\w]+', '-', post_title)
+            value['slug'] = re.compile(r'[^\w-]+', re.U).sub('-', post_title).strip('-') # remove everything that's not alphanumeric or '-'
+        return value
+
+class UniquePostSlug(formencode.FancyValidator):
     messages = {
         'invalid': 'Slug must be unique'
     }
-    def validate_python(self, value, state):
-        filter_kw = {str(self.filter_column): value}
-        query = meta.Session.query(self.orm_class)
-        item = query.filter_by(**filter_kw).first()
+    def _to_python(self, value, state):
+        if value.has_key('id') and value['id'] is not None:
+            # we're editing an existing post.
+            query = meta.Session.query(model.Post)
+            item = query.filter(and_(model.Post.id!=value['id'], model.Post.slug==value['slug'])).first()
+        else:
+            # we're adding a new post.
+            query = meta.Session.query(model.Post)
+            item = query.filter(model.Post.slug==value['slug']).first()
+            
         if item:
             raise formencode.Invalid(
                 self.message('invalid', state),
                 value, state)
+            
         return value
 
-
 class NewPostForm(formencode.Schema):
+    pre_validators = [ConstructSlug()]
     allow_extra_fields = True
     filter_extra_fields = True
-    title = formencode.validators.String(
+    title = formencode.validators.UnicodeString(
         not_empty=True,
         messages={
             'empty':'Enter a post title'
-        }
+        },
+        strip=True
     )
-    slug = formencode.All(
-        # @todo: How can I prevent this from validating UniquePostSlug on self/edit
-        UniquePostSlug(
-            orm_class=model.Post, 
-            filter_column='slug'
-        ),
-        formencode.validators.NotEmpty(
-            messages={
-                'empty':'Enter a post slug.'
-            }
-        )
-    )
-    content = formencode.validators.String(
+    slug = formencode.validators.UnicodeString(max=30, strip=True)
+    content = formencode.validators.UnicodeString(
         not_empty=True,
         messages={
             'empty':'Enter some post content.'
-        }
+        },
+        strip=True
     )
-    draft = formencode.validators.StringBoolean(if_missing=False)
-    comments_allowed = formencode.validators.StringBoolean(if_missing=False)
+    draft = formencode.validators.StringBool(if_missing=False)
+    comments_allowed = formencode.validators.StringBool(if_missing=False)
+    chained_validators = [UniquePostSlug()]
+    
+class EditPostForm(NewPostForm):
+    id = formencode.validators.Int()
 
 class PostController(BaseController):
     # @todo: Assign tags to posts for add/edit
-    # @todo: Remove validation check for slug uniqueness
-    # for self on edit
+    # @todo: Enable commenting for posts
     # @todo: Need to figure out why check="checked" is not working
     # for edit post
     def archive(self, year=None, month=None):   
@@ -149,6 +159,7 @@ class PostController(BaseController):
         if post is None:
             abort(404)
         values = {
+            'id':post.id,
             'title':post.title,
             'slug':post.slug,
             'content':post.content,
@@ -159,7 +170,7 @@ class PostController(BaseController):
     
     @h.auth.authorize(h.auth.is_valid_user)
     @restrict('POST')
-    @validate(schema=NewPostForm(), form='edit')
+    @validate(schema=EditPostForm(), form='edit')
     def save(self, id=None):
         post_q = meta.Session.query(model.Post)
         post = post_q.filter_by(id=id).first()

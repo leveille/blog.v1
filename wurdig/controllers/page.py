@@ -5,6 +5,7 @@ import wurdig.lib.helpers as h
 import webhelpers.paginate as paginate
 import datetime as d
 import formencode
+import re
 
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
@@ -19,48 +20,58 @@ from wurdig.lib.base import BaseController, render
 
 log = logging.getLogger(__name__)
 
-class UniquePageSlug(formencode.FancyValidator): 
+class ConstructSlug(formencode.FancyValidator):
+    def _to_python(self, value, state):
+        if value['slug'] in ['', u'', None]:
+            page_title = value['title'].lower()
+            value['slug'] = re.compile(r'[^\w-]+', re.U).sub('-', page_title).strip('-') # remove everything that's not alphanumeric or '-'
+        return value
+    
+class UniquePageSlug(formencode.FancyValidator):
     messages = {
         'invalid': 'Slug must be unique'
     }
-    def validate_python(self, value, state):
-        filter_kw = {str(self.filter_column): value}
-        query = meta.Session.query(self.orm_class)
-        item = query.filter_by(**filter_kw).first()
+    def _to_python(self, value, state):
+        if value.has_key('id') and value['id'] is not None:
+            # we're editing an existing page.
+            query = meta.Session.query(model.Page)
+            item = query.filter(and_(model.Page.id!=value['id'], model.Page.slug==value['slug'])).first()
+        else:
+            # we're adding a new page.
+            query = meta.Session.query(model.Page)
+            item = query.filter(model.Page.slug==value['slug']).first()
+            
         if item:
             raise formencode.Invalid(
                 self.message('invalid', state),
                 value, state)
+            
         return value
 
 
 class NewPageForm(formencode.Schema):
+    pre_validators = [ConstructSlug()]
     allow_extra_fields = True
     filter_extra_fields = True
-    title = formencode.validators.String(
+    title = formencode.validators.UnicodeString(
         not_empty=True,
         messages={
             'empty':'Enter a page title'
-        }
+        },
+        strip=True
     )
-    slug = formencode.All(
-        # @todo: How can I prevent this from validating UniquePageSlug on self/edit
-        UniquePageSlug(
-            orm_class=model.Page, 
-            filter_column='slug'
-        ),
-        formencode.validators.NotEmpty(
-            messages={
-                'empty':'Enter a page slug.'
-            }
-        )
-    )
-    content = formencode.validators.String(
+    slug = formencode.validators.UnicodeString(max=30, strip=True)
+    content = formencode.validators.UnicodeString(
         not_empty=True,
         messages={
             'empty':'Enter some post content.'
-        }
+        },
+        strip=True
     )
+    chained_validators = [UniquePageSlug()]
+    
+class EditPageForm(NewPageForm):
+    id = formencode.validators.Int()
 
 class PageController(BaseController):
     # @todo: delete confirmation
@@ -109,6 +120,7 @@ class PageController(BaseController):
         if page is None:
             abort(404)
         values = {
+            'id':page.id,
             'title':page.title,
             'slug':page.slug,
             'content':page.content
@@ -117,7 +129,7 @@ class PageController(BaseController):
     
     @h.auth.authorize(h.auth.is_valid_user)
     @restrict('POST')
-    @validate(schema=NewPageForm(), form='edit')
+    @validate(schema=EditPageForm(), form='edit')
     def save(self, id=None):
         page_q = meta.Session.query(model.Page)
         page = page_q.filter_by(id=id).first()

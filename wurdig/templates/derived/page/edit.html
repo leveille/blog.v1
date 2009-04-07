@@ -4,6 +4,7 @@
 <h2>Edit Page</h2>
 
 ${h.form(h.url_for(action='save', controller='page', id=request.urlvars['id']), method='post')}
+    ${h.hidden('id')}
     <div class="field">
         <label for="title">Title</label>
         ${h.text('title')}
