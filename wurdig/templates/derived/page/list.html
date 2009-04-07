@@ -1,0 +1,34 @@
+<%inherit file="/base/admin.html"/>
+
+<%def name="heading()"><h1>Page List</h1></%def>
+
+<%def name="buildrow(page, odd=True)">
+    %if odd:
+        <tr class="odd">
+    %else:
+        <tr class="even">
+    % endif
+        <td valign="top">
+            ${h.link_to(
+                page.id,
+                h.url_for('page', id=page.id)
+            )}
+        </td>
+        <td valign="top">
+            ${page.title}
+        </td>
+        <td valign="top">${page.created_on.strftime('%c')}</td>
+        </tr>
+</%def>
+
+% if len(c.paginator):
+<p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
+<table class="paginator"><tr><th>Page ID</th><th>Page Title</th><th>Created</th></tr>
+<% counter=0 %>
+% for item in c.paginator:
+    ${buildrow(item, counter%2)}
+    <% counter += 1 %>
+% endfor
+</table>
+<p>${ c.paginator.pager('~2~') }</p>
+% endif

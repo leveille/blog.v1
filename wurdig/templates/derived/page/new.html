@@ -1,0 +1,20 @@
+<%inherit file="/base/admin.html"/>
+
+<%def name="title()">${parent.title()} &gt; Create a New Page</%def>
+<h2>Create a New Page</h2>
+
+${h.form(h.url_for(action='create', controller='page'), method='post')}
+<div class="field">
+    <label for="title">Title</label>
+    ${h.text('title')}
+</div>
+<div class="field">
+    <label for="slug">Slug</label>
+    ${h.text('slug')}
+</div>
+<div class="field">
+    <label for="content">Content</label>
+    ${h.textarea('content')}
+</div>
+${h.submit('create', 'Create Page')}
+${h.end_form()}
