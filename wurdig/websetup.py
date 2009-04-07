@@ -73,13 +73,14 @@ def setup_app(command, conf, vars):
     meta.Session.flush()
     
     log.info("Adding fifth post...")
-    post1 = model.Post()
-    post1.title = u'Fifth test post'
-    post1.slug = u'fifth-test-post'
-    post1.content = u'<p>This is the fifth test post</p>'
-    post1.created_on = datetime.datetime(2008, 3, 17, 12, 30, 45)
-    post1.posted_on = datetime.datetime(2008, 3, 18, 12, 30, 45)
-    meta.Session.add(post1)
+    post5 = model.Post()
+    post5.title = u'Fifth test post'
+    post5.slug = u'fifth-test-post'
+    post5.content = u'<p>This is the fifth test post</p>'
+    post5.created_on = datetime.datetime(2008, 3, 17, 12, 30, 45)
+    post5.draft = False
+    post5.posted_on = datetime.datetime(2008, 3, 18, 12, 30, 45)
+    meta.Session.add(post5)
     meta.Session.flush()
     
     log.info("Adding second post...")
@@ -88,6 +89,7 @@ def setup_app(command, conf, vars):
     post2.slug = u'second-test-post'
     post2.content = u'<p>This is the second test post</p>'
     post2.created_on = datetime.datetime(2009, 3, 24, 12, 30, 45)
+    post2.draft = False
     post2.posted_on = datetime.datetime(2009, 3, 24, 12, 30, 45)
     meta.Session.add(post2)
     meta.Session.flush()
@@ -98,6 +100,7 @@ def setup_app(command, conf, vars):
     post3.slug = u'third-test-post'
     post3.content = u'<p>This is the third test post</p>'
     post3.created_on = datetime.datetime(2009, 3, 25, 12, 30, 45)
+    post3.draft = False
     post3.posted_on = datetime.datetime(2009, 3, 25, 12, 30, 45)
     meta.Session.add(post3)
     meta.Session.flush()
@@ -107,8 +110,9 @@ def setup_app(command, conf, vars):
     post4.title = u'Fourth test post'
     post4.slug = u'fourth-test-post'
     post4.content = u'<p>This is the fourth test post</p>'
-    post4.created_on = datetime.datetime(2009, 4, 25, 12, 30, 45)
-    post4.posted_on = datetime.datetime(2009, 4, 25, 12, 30, 45)
+    post4.created_on = datetime.datetime(2009, 4, 5, 12, 30, 45)
+    post4.draft = False
+    post4.posted_on = datetime.datetime(2009, 4, 5, 12, 30, 45)
     meta.Session.add(post4)
     meta.Session.flush()
     

@@ -17,13 +17,14 @@
         <td valign="top">
             ${post.title}
         </td>
-        <td valign="top">${post.posted_on.strftime('%c')}</td>
+        <td valign="top">posted or not</td>
+        <td valign="top">${post.created_on.strftime('%c')}</td>
         </tr>
 </%def>
 
 % if len(c.paginator):
 <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
-<table class="paginator"><tr><th>Page ID</th><th>Page Title</th><th>Posted</th></tr>
+<table class="paginator"><tr><th>Page ID</th><th>Page Title</th><th>Created</th><th>Posted</th></tr>
 <% counter=0 %>
 % for item in c.paginator:
     ${buildrow(item, counter%2)}
