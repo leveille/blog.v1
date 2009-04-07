@@ -61,6 +61,7 @@ tags_table = schema.Table('tags', meta.metadata,
     schema.Column('id', types.Integer,
         schema.Sequence('tag_seq_id', optional=True), primary_key=True),
     schema.Column('name', types.Unicode(20), nullable=False, unique=True),
+    schema.Column('slug', types.Unicode(20), nullable=False, unique=True),
 )
 
 poststags_table = schema.Table('posts_tags', meta.metadata,

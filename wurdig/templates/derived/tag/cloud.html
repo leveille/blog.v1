@@ -1,0 +1,16 @@
+<%inherit file="/base/secondary.html"/>
+
+<%def name="title()">${parent.title()} &gt; Tag Cloud</%def>
+
+<h2>Tag Cloud</h2>
+
+<div class="tag-cloud">
+    <ul>
+    % for tag in c.tags:
+        <li>${h.link_to(
+                tag.name,
+                h.url_for(controller='tag', action='archive', slug=tag.slug)
+            )}</li>
+    % endfor
+    </ul>
+</div>

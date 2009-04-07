@@ -37,6 +37,10 @@ def make_map():
     map.connect('/{year}', controller='post', 
                 action='archive', 
                 requirements = {'year' : '\d{2,4}'})
+         
+    map.connect('/tag/archive/{slug}', controller='tag', 
+                action='archive', 
+                requirements = {'slug' : '[-\w]+'})
 
     map.connect('/{controller}/{action}')
     map.connect('/{controller}/{action}/{id}')

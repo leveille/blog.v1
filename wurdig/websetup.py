@@ -140,24 +140,29 @@ def setup_app(command, conf, vars):
     log.info("Adding first tag...")
     tag1 = model.Tag()
     tag1.name = u'Pylons'
+    tag1.slug = u'pylons'
     meta.Session.add(tag1)
     meta.Session.flush()
     
     log.info("Adding second tag...")
     tag2 = model.Tag()
     tag2.name = u'Python'
+    tag2.slug = u'python'
     meta.Session.add(tag2)
     meta.Session.flush()
     
     log.info("Assigning tags...")
     post_x = meta.Session.query(model.Post)
     post_y = post_x.get(int(2))
+    post_z = post_x.get(int(3))
     tag_x = meta.Session.query(model.Tag)
     tag_y = tag_x.filter_by(name=u'Python').first()
     tag_z = tag_x.filter_by(name=u'Pylons').first()
     post_y.tags.append(tag_y)
     post_y.tags.append(tag_z)
+    post_z.tags.append(tag_z)
     meta.Session.add(post_y)
+    meta.Session.add(post_z)
     meta.Session.flush()
     
     meta.Session.commit()
