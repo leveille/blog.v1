@@ -132,9 +132,8 @@ class PostController(BaseController):
         for k, v in self.form_result.items():
             setattr(post, k, v)
         
-        if post.draft is None or not post.draft:
+        if post.draft in [None, False]:
             post.posted_on = d.datetime.now()
-            post.draft = False
             
         meta.Session.add(post)
         meta.Session.commit()
@@ -220,7 +219,6 @@ class PostController(BaseController):
             abort(404)
         meta.Session.execute(delete(model.poststags_table, model.poststags_table.c.post_id==post.id))
         meta.Session.delete(post)
-        meta.Session.commit()
         meta.Session.commit()
         session['flash'] = 'Post successfully deleted.'
         session.save()
