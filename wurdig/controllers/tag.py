@@ -29,16 +29,15 @@ class ConstructSlug(formencode.FancyValidator):
 
 class UniqueTagSlug(formencode.FancyValidator):
     messages = {
-        'invalid': 'Tag slug already exists'
+        'invalid': 'Slug already exists'
     }
     def _to_python(self, value, state):
+        query = meta.Session.query(model.Tag)
         if value.has_key('id') and value['id'] is not None:
-            # we're editing an existing post.
-            query = meta.Session.query(model.Tag)
+            # we're editing an existing tag.
             item = query.filter(and_(model.Tag.id!=value['id'], model.Tag.slug==value['slug'])).first()
         else:
-            # we're adding a new post.
-            query = meta.Session.query(model.Tag)
+            # we're adding a new tag.
             item = query.filter(model.Tag.slug==value['slug']).first()
             
         if item:
