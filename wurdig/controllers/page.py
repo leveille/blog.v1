@@ -24,7 +24,7 @@ class ConstructSlug(formencode.FancyValidator):
     def _to_python(self, value, state):
         if value['slug'] in ['', u'', None]:
             page_title = value['title'].lower()
-            value['slug'] = re.compile(r'[^\w-]+', re.U).sub('-', page_title).strip('-') # remove everything that's not alphanumeric or '-'
+            value['slug'] = re.compile(r'[^\w-]+', re.U).sub('-', page_title).strip('-')
         return value
     
 class UniquePageSlug(formencode.FancyValidator):
