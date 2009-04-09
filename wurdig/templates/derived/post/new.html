@@ -4,25 +4,25 @@
 <h2>Create a New Post</h2>
 
 ${h.form(h.url_for(action='create', controller='post'), method='post')}
-<div class="field">
-    <label for="title">Title</label>
-    ${h.text('title')}
-</div>
-<div class="field">
-    <label for="slug">Slug</label>
-    ${h.text('slug')}
-</div>
-<div class="field">
-    <label for="content">Content</label>
-    ${h.textarea('content')}
-</div>
-<div class="field">
-    <label for="draft">Is Draft</label>
-    ${h.checkbox('draft')}
-</div>
-<div class="field">
-    <label for="comments_allowed">Comments Allowed</label>
-    ${h.checkbox('comments_allowed', checked=True)}
-</div>
-${h.submit('create', 'Create Post')}
+    <div class="field">
+        <label for="title">Title</label>
+        ${h.text('title')}
+    </div>
+    <div class="field">
+        <label for="slug">Slug</label>
+        ${h.text('slug')}
+    </div>
+    <div class="field">
+        <label for="content">Content</label>
+        ${h.textarea('content')}
+    </div>
+    <div class="field">
+        <label for="draft">Is Draft</label>
+        ${h.checkbox('draft')}
+    </div>
+    <div class="field">
+        <label for="comments_allowed">Comments Allowed</label>
+        ${h.checkbox('comments_allowed', checked=True)}
+    </div>
+    ${h.submit('create', 'Create Post')}
 ${h.end_form()}

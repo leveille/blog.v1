@@ -23,8 +23,7 @@ class ConstructSlug(formencode.FancyValidator):
     def _to_python(self, value, state):
         if value['slug'] in ['', u'', None]:
             post_title = value['title'].lower()
-            # post_title = re.sub(r'[^\w]+', '-', post_title)
-            value['slug'] = re.compile(r'[^\w-]+', re.U).sub('-', post_title).strip('-') # remove everything that's not alphanumeric or '-'
+            value['slug'] = re.compile(r'[^\w-]+', re.U).sub('-', post_title).strip('-')
         return value
 
 class UniquePostSlug(formencode.FancyValidator):
@@ -35,7 +34,8 @@ class UniquePostSlug(formencode.FancyValidator):
         if value.has_key('id') and value['id'] is not None:
             # we're editing an existing post.
             query = meta.Session.query(model.Post)
-            item = query.filter(and_(model.Post.id!=value['id'], model.Post.slug==value['slug'])).first()
+            item = query.filter(and_(model.Post.id!=value['id'], 
+                                     model.Post.slug==value['slug'])).first()
         else:
             # we're adding a new post.
             query = meta.Session.query(model.Post)
@@ -45,7 +45,7 @@ class UniquePostSlug(formencode.FancyValidator):
             raise formencode.Invalid(
                 self.message('invalid', state),
                 value, state)
-            
+        
         return value
 
 class NewPostForm(formencode.Schema):
