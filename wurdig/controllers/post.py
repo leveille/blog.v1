@@ -92,7 +92,7 @@ class PostController(BaseController):
 
         c.paginator = paginate.Page(
             posts_q.filter(and_(model.Post.posted_on >= d.datetime(year_i, month_start, 1), 
-                model.Post.posted_on <= d.datetime(year_i, month_end, day_end))
+                model.Post.posted_on <= d.datetime(year_i, month_end, day_end), model.Post.draft == False)
             ),
             page=int(request.params.get('page', 1)),
             items_per_page = 1,
@@ -109,6 +109,7 @@ class PostController(BaseController):
         c.post = meta.Session.query(model.Post).filter(
             and_(model.Post.posted_on >= d.datetime(year_i, month_i, 1), 
                  model.Post.posted_on <= d.datetime(year_i, month_i, calendar.monthrange(year_i, month_i)[1]),
+                 model.Post.draft == False,
                  model.Post.slug == slug)
         ).first()
                                  
@@ -130,7 +131,7 @@ class PostController(BaseController):
         for k, v in self.form_result.items():
             setattr(post, k, v)
         
-        if post.draft in [None, False]:
+        if not post.draft:
             post.posted_on = d.datetime.now()
             
         meta.Session.add(post)
@@ -177,15 +178,18 @@ class PostController(BaseController):
         for k,v in self.form_result.items():
             if getattr(post, k) != v:
                 setattr(post, k, v)
-         
+        
         if post.draft:
             post.posted_on = None
+        # this check for not post.draft is not necessary, but it is more readable
+        elif not post.draft and post.posted_on is None:
+            post.posted_on = d.datetime.now()
             
         meta.Session.commit()
         session['flash'] = 'Post successfully updated.'
         session.save()
 
-        if post.posted_on is not None:
+        if not post.draft:
             return redirect_to(controller='post', 
                                action='view', 
                                year=post.posted_on.strftime('%Y'), 
