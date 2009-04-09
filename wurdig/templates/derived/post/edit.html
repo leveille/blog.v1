@@ -19,11 +19,11 @@ ${h.form(h.url_for(action='save', controller='post', id=request.urlvars['id']), 
     </div>
     <div class="field">
         <label for="draft">Draft</label>
-        ${h.checkbox('draft')}
+        ${h.checkbox('draft', value=None)}
     </div>
     <div class="field">
         <label for="comments_allowed">Comments Allowed</label>
-        ${h.checkbox('comments_allowed')}
+        ${h.checkbox('comments_allowed', value=None)}
     </div>
     ${h.submit('edit', 'Edit Post')}
 ${h.end_form()}

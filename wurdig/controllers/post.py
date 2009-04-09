@@ -74,11 +74,9 @@ class NewPostForm(formencode.Schema):
 class EditPostForm(NewPostForm):
     id = formencode.validators.Int()
 
-class PostController(BaseController):
+class PostController(BaseController):    
     # @todo: Assign tags to posts for add/edit
     # @todo: Enable commenting for posts
-    # @todo: Need to figure out why check="checked" is not working
-    # for edit post
     def archive(self, year=None, month=None):   
         if year is None:
             abort(404)
@@ -162,7 +160,7 @@ class PostController(BaseController):
             'title':post.title,
             'slug':post.slug,
             'content':post.content,
-            'draft':post.posted_on is None,
+            'draft':post.draft,
             'comments_allowed':post.comments_allowed
         }
         return htmlfill.render(render('/derived/post/edit.html'), values)
