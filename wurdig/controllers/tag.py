@@ -11,6 +11,7 @@ from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
 from pylons.decorators.rest import restrict
+from sqlalchemy import func
 from sqlalchemy.sql import and_, delete
 from formencode import htmlfill
 from wurdig.lib.base import BaseController, render
@@ -26,25 +27,33 @@ class ConstructSlug(formencode.FancyValidator):
             tag_name = value['name'].lower()
             value['slug'] = re.compile(r'[^\w-]+', re.U).sub('-', tag_name).strip('-')
         return value
-
-class UniqueTagSlug(formencode.FancyValidator):
+    
+class UniqueTagNameSlug(formencode.FancyValidator):
     messages = {
-        'invalid': 'Slug already exists'
+        'duplicate_name': 'Tag name already exists',
+        'duplicate_slug': 'Tag slug already exists'
     }
     def _to_python(self, value, state):
         query = meta.Session.query(model.Tag)
         if value.has_key('id') and value['id'] is not None:
             # we're editing an existing tag.
-            item = query.filter(and_(model.Tag.id!=value['id'], model.Tag.slug==value['slug'])).first()
+            name = query.filter(and_(model.Tag.id!=value['id'], 
+                                     func.lower(model.Tag.name)==value['name'].lower())).first()
+            slug = query.filter(and_(model.Tag.id!=value['id'], 
+                                     model.Tag.slug==value['slug'])).first()
         else:
             # we're adding a new tag.
-            item = query.filter(model.Tag.slug==value['slug']).first()
+            name = query.filter(func.lower(model.Tag.name)==value['name'].lower()).first()
+            slug = query.filter(model.Tag.slug==value['slug']).first()
             
-        if item:
+        if name:
             raise formencode.Invalid(
-                self.message('invalid', state),
+                self.message('duplicate_name', state),
                 value, state)
-            
+        elif slug:
+            raise formencode.Invalid(
+                self.message('duplicate_slug', state),
+                value, state)
         return value
 
 class NewTagForm(formencode.Schema):
@@ -59,7 +68,7 @@ class NewTagForm(formencode.Schema):
         strip=True
     )
     slug = formencode.validators.UnicodeString(max=30, strip=True)
-    chained_validators = [UniqueTagSlug()]
+    chained_validators = [UniqueTagNameSlug()]
     
 class EditTagForm(NewTagForm):
     id = formencode.validators.Int()
@@ -119,7 +128,7 @@ class TagController(BaseController):
             abort(404)
         values = {
             'id':tag.id,
-            'title':tag.name,
+            'name':tag.name,
             'slug':tag.slug
         }
         return htmlfill.render(render('/derived/tag/edit.html'), values)

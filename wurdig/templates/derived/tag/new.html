@@ -4,13 +4,13 @@
 <h2>Create a New Tag</h2>
 
 ${h.form(h.url_for(action='create', controller='tag'), method='post')}
-<div class="field">
-    <label for="name">Name</label>
-    ${h.text('name')}
-</div>
-<div class="field">
-    <label for="slug">Slug</label>
-    ${h.text('slug')}
-</div>
-${h.submit('create', 'Create Tag')}
+    <div class="field">
+        <label for="name">Name</label>
+        ${h.text('name')}
+    </div>
+    <div class="field">
+        <label for="slug">Slug</label>
+        ${h.text('slug')}
+    </div>
+    ${h.submit('create', 'Create Tag')}
 ${h.end_form()}
