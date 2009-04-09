@@ -173,7 +173,7 @@ class TagController(BaseController):
         if tag is None:
             abort(404)
         meta.Session.execute(delete(model.poststags_table, model.poststags_table.c.tag_id==tag.id))
-        meta.Session.delete(post)
+        meta.Session.delete(tag)
         meta.Session.commit()
         session['flash'] = 'Tag successfully deleted.'
         session.save()
