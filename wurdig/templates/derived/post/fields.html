@@ -1,0 +1,22 @@
+<div class="field required">
+    <label for="title">Title</label>
+    ${h.text('title')}
+</div>
+<div class="field required">
+    <label for="slug">Slug</label>
+    <span class="description">A slug will be auto-generated if left blank</span>
+    ${h.text('slug')}
+</div>
+<div class="field required">
+    <label for="content">Content</label>
+    <span class="description">The text that will make up the body of this post</span>
+    ${h.textarea('content')}
+</div>
+<div class="field">
+    <label for="draft">Draft?</label>
+    ${h.checkbox('draft', value=None)}
+</div>
+<div class="field">
+    <label for="comments_allowed">Comments Allowed?</label>
+    ${h.checkbox('comments_allowed', value=None)}
+</div>

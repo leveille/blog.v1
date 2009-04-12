@@ -1,21 +1,10 @@
 <%inherit file="/base/admin.html"/>
+<%namespace file="fields.html" name="fields" import="*"/>
 
 <%def name="title()">${parent.title()} &gt; Edit Page</%def>
 <h2>Edit Page</h2>
 
 ${h.form(h.url_for(action='save', controller='page', id=request.urlvars['id']), method='post')}
-    ${h.hidden('id')}
-    <div class="field">
-        <label for="title">Title</label>
-        ${h.text('title')}
-    </div>
-    <div class="field">
-        <label for="slug">Slug</label>
-        ${h.text('slug')}
-    </div>
-    <div class="field">
-        <label for="content">Content</label>
-        ${h.textarea('content')}
-    </div>
+    ${fields.body()}
     ${h.submit('edit', 'Edit Page')}
 ${h.end_form()}

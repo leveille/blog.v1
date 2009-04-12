@@ -1,16 +1,10 @@
 <%inherit file="/base/admin.html"/>
+<%namespace file="fields.html" name="fields" import="*"/>
 
 <%def name="title()">${parent.title()} &gt; Create a New Tag</%def>
 <h2>Create a New Tag</h2>
 
-${h.form(h.url_for(action='create', controller='tag'), method='post')}
-    <div class="field">
-        <label for="name">Name</label>
-        ${h.text('name')}
-    </div>
-    <div class="field">
-        <label for="slug">Slug</label>
-        ${h.text('slug')}
-    </div>
+${h.form(h.url_for(controller='tag', action='create'), method='post')}
+    ${fields.body()}
     ${h.submit('create', 'Create Tag')}
 ${h.end_form()}
