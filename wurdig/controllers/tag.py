@@ -27,48 +27,67 @@ class ConstructSlug(formencode.FancyValidator):
             tag_name = value['name'].lower()
             value['slug'] = re.compile(r'[^\w-]+', re.U).sub('-', tag_name).strip('-')
         return value
-    
-class UniqueTagNameSlug(formencode.FancyValidator):
+
+class UniqueName(formencode.FancyValidator):
     messages = {
-        'duplicate_name': 'Tag name already exists',
-        'duplicate_slug': 'Tag slug already exists'
+        'invalid': 'Tag name must be unique'
     }
     def _to_python(self, value, state):
-        query = meta.Session.query(model.Tag)
-        if value.has_key('id') and value['id'] is not None:
-            # we're editing an existing tag.
-            name = query.filter(and_(model.Tag.id!=value['id'], 
-                                     func.lower(model.Tag.name)==value['name'].lower())).first()
-            slug = query.filter(and_(model.Tag.id!=value['id'], 
-                                     model.Tag.slug==value['slug'])).first()
-        else:
-            # we're adding a new tag.
-            name = query.filter(func.lower(model.Tag.name)==value['name'].lower()).first()
-            slug = query.filter(model.Tag.slug==value['slug']).first()
+        # Ensure we have a valid string
+        value = formencode.validators.UnicodeString(max=30).to_python(value, state)
+        # validate that tag only contains letters, numbers, and spaces
+        result = re.compile("[^a-zA-Z0-9 ]").search(value)
+        if result:
+            raise formencode.Invalid("Tag name can only contain letters, numbers, and spaces", value, state)
+        
+        # Ensure slug is unique
+        tag_q = meta.Session.query(model.Tag).filter_by(name=value)
+        if request.urlvars['action'] == 'save':
+            # we're editing an existing tag
+            tag_q = tag_q.filter(model.Tag.id != int(request.urlvars['id']))
             
-        if name:
+        # Check if the tag name exists
+        name = tag_q.first()
+        if name is not None:
             raise formencode.Invalid(
-                self.message('duplicate_name', state),
+                self.message('invalid', state),
                 value, state)
-        elif slug:
+        
+        return value
+    
+class UniqueSlug(formencode.FancyValidator):
+    messages = {
+        'invalid': 'Tag slug must be unique'
+    }
+    def _to_python(self, value, state):
+        # Ensure we have a valid string
+        value = formencode.validators.UnicodeString(max=30).to_python(value, state)
+        # validate that slug only contains letters, numbers, and dashes
+        result = re.compile("[^\w-]").search(value)
+        if result:
+            raise formencode.Invalid("Slug can only contain letters, numbers, and dashes", value, state)
+        
+        # Ensure slug is unique
+        tag_q = meta.Session.query(model.Tag).filter_by(slug=value)
+        if request.urlvars['action'] == 'save':
+            # we're editing an existing post.
+            tag_q = tag_q.filter(model.Tag.id != int(request.urlvars['id']))
+            
+        # Check if the slug exists
+        slug = tag_q.first()
+        if slug is not None:
             raise formencode.Invalid(
-                self.message('duplicate_slug', state),
+                self.message('invalid', state),
                 value, state)
+        
         return value
 
 class NewTagForm(formencode.Schema):
     pre_validators = [ConstructSlug()]
     allow_extra_fields = True
     filter_extra_fields = True
-    name = formencode.validators.UnicodeString(
-        not_empty=True,
-        messages={
-            'empty':'Enter a tag name'
-        },
-        strip=True
-    )
-    slug = formencode.validators.UnicodeString(max=30, strip=True)
-    chained_validators = [UniqueTagNameSlug()]
+    name = UniqueName(not_empty=True, max=30, strip=True)
+    slug = UniqueSlug(not_empty=True, max=30, strip=True)
     
 class EditTagForm(NewTagForm):
     id = formencode.validators.Int()

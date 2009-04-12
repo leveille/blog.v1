@@ -27,25 +27,31 @@ class ConstructSlug(formencode.FancyValidator):
             value['slug'] = re.compile(r'[^\w-]+', re.U).sub('-', page_title).strip('-')
         return value
     
-class UniquePageSlug(formencode.FancyValidator):
+class UniqueSlug(formencode.FancyValidator):
     messages = {
         'invalid': 'Slug must be unique'
     }
     def _to_python(self, value, state):
-        if value.has_key('id') and value['id'] is not None:
-            # we're editing an existing page.
-            query = meta.Session.query(model.Page)
-            item = query.filter(and_(model.Page.id!=value['id'], model.Page.slug==value['slug'])).first()
-        else:
-            # we're adding a new page.
-            query = meta.Session.query(model.Page)
-            item = query.filter(model.Page.slug==value['slug']).first()
+        # Ensure we have a valid string
+        value = formencode.validators.UnicodeString(max=30).to_python(value, state)
+        # validate that slug only contains letters, numbers, and dashes
+        result = re.compile("[^\w-]").search(value)
+        if result:
+            raise formencode.Invalid("Slug can only contain letters, numbers, and dashes", value, state)
+        
+        # Ensure slug is unique
+        page_q = meta.Session.query(model.Page).filter_by(slug=value)
+        if request.urlvars['action'] == 'save':
+            # we're editing an existing post.
+            page_q = page_q.filter(model.Page.id != int(request.urlvars['id']))
             
-        if item:
+        # Check if the slug exists
+        slug = page_q.first()
+        if slug is not None:
             raise formencode.Invalid(
                 self.message('invalid', state),
                 value, state)
-            
+        
         return value
 
 
@@ -60,7 +66,7 @@ class NewPageForm(formencode.Schema):
         },
         strip=True
     )
-    slug = formencode.validators.UnicodeString(max=30, strip=True)
+    slug = UniqueSlug(not_empty=True, max=30, strip=True)
     content = formencode.validators.UnicodeString(
         not_empty=True,
         messages={
@@ -68,7 +74,6 @@ class NewPageForm(formencode.Schema):
         },
         strip=True
     )
-    chained_validators = [UniquePageSlug()]
     
 class EditPageForm(NewPageForm):
     id = formencode.validators.Int()

@@ -26,22 +26,27 @@ class ConstructSlug(formencode.FancyValidator):
             value['slug'] = re.compile(r'[^\w-]+', re.U).sub('-', post_title).strip('-')
         return value
 
-class UniquePostSlug(formencode.FancyValidator):
+class UniqueSlug(formencode.FancyValidator):
     messages = {
         'invalid': 'Slug must be unique'
     }
     def _to_python(self, value, state):
-        if value.has_key('id') and value['id'] is not None:
+        # Ensure we have a valid string
+        value = formencode.validators.UnicodeString(max=30).to_python(value, state)
+        # validate that slug only contains letters, numbers, and dashes
+        result = re.compile("[^\w-]").search(value)
+        if result:
+            raise formencode.Invalid("Slug can only contain letters, numbers, and dashes", value, state)
+        
+        # Ensure slug is unique
+        post_q = meta.Session.query(model.Post).filter_by(slug=value)
+        if request.urlvars['action'] == 'save':
             # we're editing an existing post.
-            query = meta.Session.query(model.Post)
-            item = query.filter(and_(model.Post.id!=value['id'], 
-                                     model.Post.slug==value['slug'])).first()
-        else:
-            # we're adding a new post.
-            query = meta.Session.query(model.Post)
-            item = query.filter(model.Post.slug==value['slug']).first()
+            post_q = post_q.filter(model.Post.id != int(request.urlvars['id']))
             
-        if item:
+        # Check if the slug exists
+        slug = post_q.first()
+        if slug is not None:
             raise formencode.Invalid(
                 self.message('invalid', state),
                 value, state)
@@ -59,7 +64,7 @@ class NewPostForm(formencode.Schema):
         },
         strip=True
     )
-    slug = formencode.validators.UnicodeString(max=30, strip=True)
+    slug = UniqueSlug(not_empty=True, max=30, strip=True)
     content = formencode.validators.UnicodeString(
         not_empty=True,
         messages={
@@ -69,7 +74,6 @@ class NewPostForm(formencode.Schema):
     )
     draft = formencode.validators.StringBool(if_missing=False)
     comments_allowed = formencode.validators.StringBool(if_missing=False)
-    chained_validators = [UniquePostSlug()]
     
 class EditPostForm(NewPostForm):
     id = formencode.validators.Int()
@@ -115,11 +119,14 @@ class PostController(BaseController):
                                  
         if c.post is None:
             abort(404)
+            
         c.post.content = h.literal(c.post.content)
         return render('/derived/post/view.html')
     
     @h.auth.authorize(h.auth.is_valid_user)
     def new(self):
+        tag_q = meta.Session.query(model.Tag)
+        c.available_tags = [(tag.id, tag.name) for tag in tag_q]
         return render('/derived/post/new.html')
     
     @h.auth.authorize(h.auth.is_valid_user)
