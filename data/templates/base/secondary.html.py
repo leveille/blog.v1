@@ -3,215 +3,96 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 5
-_modified_time = 1238878942.7598741
+_modified_time = 1239585158.172744
 _template_filename='/home/leveille/development/python/pylons/Wurdig/wurdig/templates/base/secondary.html'
 _template_uri='/base/secondary.html'
 _template_cache=cache.Cache(__name__, _modified_time)
 _source_encoding='utf-8'
 from webhelpers.html import escape
-_exports = ['footer', 'secondary_content', 'flash', 'development_stream', 'title', 'tags', 'primary_nav', 'header', 'recent_comments', 'twitter_updates', 'css', 'js', 'categories', 'archives']
+_exports = ['twitter_updates', 'tags', 'title', 'recent_comments', 'development_stream', 'categories', 'archives']
 
+
+def _mako_get_namespace(context, name):
+    try:
+        return context.namespaces[(__name__, name)]
+    except KeyError:
+        _mako_generate_namespaces(context)
+        return context.namespaces[(__name__, name)]
+def _mako_generate_namespaces(context):
+    # SOURCE LINE 2
+    ns = runtime.Namespace('wurdig', context._clean_inheritance_tokens(), templateuri='../elements/wurdig.html', callables=None, calling_uri=_template_uri, module=None)
+    context.namespaces[(__name__, 'wurdig')] = ns
 
 def render_body(context,**pageargs):
     context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        self = context.get('self', UNDEFINED)
-        next = context.get('next', UNDEFINED)
+        _import_ns = {}
+        _mako_get_namespace(context, 'wurdig')._populate(_import_ns, ['*'])
+        self = _import_ns.get('self', context.get('self', UNDEFINED))
+        wurdig = _mako_get_namespace(context, 'wurdig')
+        next = _import_ns.get('next', context.get('next', UNDEFINED))
         __M_writer = context.writer()
-        # SOURCE LINE 2
-        __M_writer(u'\n<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">\n<html>\n    <head>\n        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        \n        <meta http-equiv="Content-Language" content="en-us">\n        <meta name="author" content="Jason R. Leveille">\n        <meta name="copyright" content="http://jasonleveille.com">\n        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">\n        <meta name="ICBM" content="37.0625, -95.677068">\n        <meta name="geo.position" content="37.0625, -95.677068">\n        <meta name="geo.placename" content="Frederick, Maryland">\n        <meta name="geo.region" content="US-MD">\n        <meta name="geo.country" content="US">\n        \n        <title>')
-        # SOURCE LINE 17
+        __M_writer(u'\n\n')
+        # SOURCE LINE 4
+        __M_writer(escape(wurdig.doctype()))
+        __M_writer(u'\n<html>\n    <head>\n        ')
+        # SOURCE LINE 7
+        __M_writer(escape(wurdig.meta()))
+        __M_writer(u'\n        <title>')
+        # SOURCE LINE 8
         __M_writer(escape(self.title()))
         __M_writer(u'</title>\n        ')
-        # SOURCE LINE 18
-        __M_writer(escape(self.css()))
+        # SOURCE LINE 9
+        __M_writer(escape(wurdig.css()))
         __M_writer(u'\n    </head>\n    \n    <body id="home">\n        \n        <div class="container_16">\n            ')
-        # SOURCE LINE 24
-        __M_writer(escape(self.primary_nav()))
+        # SOURCE LINE 15
+        __M_writer(escape(wurdig.primary_nav()))
         __M_writer(u'\n        </div>\n        \n        ')
-        # SOURCE LINE 27
-        __M_writer(escape(self.header()))
+        # SOURCE LINE 18
+        __M_writer(escape(wurdig.header()))
         __M_writer(u'\n        \n        <div id="content">\n            <div class="container_16">\n                \n                <div id="primary-content" class="grid_11">\n                    ')
-        # SOURCE LINE 33
-        __M_writer(escape(self.flash()))
+        # SOURCE LINE 24
+        __M_writer(escape(wurdig.flash()))
         __M_writer(u'\n                    ')
-        # SOURCE LINE 34
+        # SOURCE LINE 25
         __M_writer(escape(next.body()))
         __M_writer(u'                    \n                </div>\n                \n                <div id="sidebar" class="grid_5">\n                    <div id="categories" class="grid_4 alpha">\n                        ')
-        # SOURCE LINE 39
+        # SOURCE LINE 30
         __M_writer(escape(self.categories()))
         __M_writer(u'\n                    </div>\n                    <div id="archives" class="grid_4 omega">\n                        ')
-        # SOURCE LINE 42
+        # SOURCE LINE 33
         __M_writer(escape(self.archives()))
         __M_writer(u'\n                    </div>\n                    <div id="tags" class="grid_4 alpha">\n                        ')
-        # SOURCE LINE 45
+        # SOURCE LINE 36
         __M_writer(escape(self.tags()))
         __M_writer(u'\n                    </div>\n                    <div id="recent-comments" class="grid_4 omega">\n                        ')
-        # SOURCE LINE 48
+        # SOURCE LINE 39
         __M_writer(escape(self.recent_comments()))
         __M_writer(u'\n                    </div>\n                </div>\n            </div>\n        </div>\n        ')
-        # SOURCE LINE 53
-        __M_writer(escape(self.secondary_content()))
+        # SOURCE LINE 44
+        __M_writer(escape(wurdig.secondary_content()))
         __M_writer(u'\n        ')
-        # SOURCE LINE 54
-        __M_writer(escape(self.footer()))
+        # SOURCE LINE 45
+        __M_writer(escape(wurdig.footer()))
         __M_writer(u'\n        ')
-        # SOURCE LINE 55
-        __M_writer(escape(self.js()))
+        # SOURCE LINE 46
+        __M_writer(escape(wurdig.js()))
         __M_writer(u'      \n    </body>\n</html>\n\n')
-        # SOURCE LINE 59
+        # SOURCE LINE 50
         __M_writer(u'\n\n')
-        # SOURCE LINE 67
+        # SOURCE LINE 60
         __M_writer(u'\n\n')
-        # SOURCE LINE 88
+        # SOURCE LINE 70
         __M_writer(u'\n\n')
-        # SOURCE LINE 113
+        # SOURCE LINE 80
         __M_writer(u'\n\n')
-        # SOURCE LINE 123
-        __M_writer(u'\n\n')
-        # SOURCE LINE 133
-        __M_writer(u'\n\n')
-        # SOURCE LINE 143
-        __M_writer(u'\n\n')
-        # SOURCE LINE 153
-        __M_writer(u'\n\n')
-        # SOURCE LINE 163
-        __M_writer(u'\n\n')
-        # SOURCE LINE 173
-        __M_writer(u'\n\n')
-        # SOURCE LINE 199
-        __M_writer(u'\n\n')
-        # SOURCE LINE 214
-        __M_writer(u'\n\n')
-        # SOURCE LINE 224
-        __M_writer(u'\n\n')
-        # SOURCE LINE 235
-        __M_writer(u'\n\n')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
-def render_footer(context):
-    context.caller_stack._push_frame()
-    try:
-        __M_writer = context.writer()
-        # SOURCE LINE 201
-        __M_writer(u'\n    <div id="footer">\n        <div class="container_12">\n            <div class="grid_12">\n                <div class="grid_6 alpha">\n                    <p>Content</p>\n                </div>\n                <div class="grid_6 omega">\n                    <p>Content</p>\n                </div>\n            </div>\n        </div>\n    </div>\n')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
-def render_secondary_content(context):
-    context.caller_stack._push_frame()
-    try:
-        __M_writer = context.writer()
-        # SOURCE LINE 175
-        __M_writer(u'\n    <div id="secondary-content">\n        <div class="container_12">\n            <div class=grid_12>\n                <div id="delicious-bookmarks" class="grid_4 alpha">\n                    <h4>Bookmarks</h4>\n                    <ul>\n                        <li>Bookmark</li>\n                        <li>Bookmark</li>\n                        <li>Bookmark</li>\n                        <li>Bookmark</li>\n                    </ul>\n                </div>\n                <div id="flickr-stream" class="grid_4">\n                    <h4>Public Flickr Stream</h4>\n                    <p>Content</p>\n                </div>\n                <div id="blogroll" class="grid_4 omega">\n                    <h4>Blogroll</h4>\n                    <p>Content</p>\n                </div>\n            </div>\n        </div>\n    </div>\n')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
-def render_flash(context):
-    context.caller_stack._push_frame()
-    try:
-        session = context.get('session', UNDEFINED)
-        __M_writer = context.writer()
-        # SOURCE LINE 216
-        __M_writer(u'\n')
-        # SOURCE LINE 217
-        if session.has_key('flash'):
-            # SOURCE LINE 218
-            __M_writer(u'    <div id="flash"><p>')
-            __M_writer(escape(session.get('flash')))
-            __M_writer(u'</p></div>\n    ')
-            # SOURCE LINE 219
-
-            del session['flash']
-            session.save()
-                
-            
-            # SOURCE LINE 222
-            __M_writer(u'\n')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
-def render_development_stream(context):
-    context.caller_stack._push_frame()
-    try:
-        __M_writer = context.writer()
-        # SOURCE LINE 165
-        __M_writer(u'\n    <h4>Development Stream</h4>\n    <ul>\n        <li>Link</li>\n        <li>Link</li>\n        <li>Link</li>\n        <li>Link</li>\n    </ul>\n')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
-def render_title(context):
-    context.caller_stack._push_frame()
-    try:
-        __M_writer = context.writer()
-        # SOURCE LINE 59
-        __M_writer(u"Jason Leveille's Blog")
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
-def render_tags(context):
-    context.caller_stack._push_frame()
-    try:
-        __M_writer = context.writer()
-        # SOURCE LINE 145
-        __M_writer(u'\n    <h4>Tags</h4>\n    <ul>\n        <li>Tag</li>\n        <li>Tag</li>\n        <li>Tag</li>\n        <li>Tag</li>\n    </ul>\n')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
-def render_primary_nav(context):
-    context.caller_stack._push_frame()
-    try:
-        h = context.get('h', UNDEFINED)
-        __M_writer = context.writer()
         # SOURCE LINE 90
-        __M_writer(u'\n    <div id="primary-nav" class="grid_16">\n        <ul>\n            <li class="grid_4 alpha">\n                <a href="')
-        # SOURCE LINE 94
-        __M_writer(escape(h.url_for(controller='page', action='home')))
-        __M_writer(u'" title="Home">\n                    Home <span>Some content here</span>\n                </a>\n            </li>\n            <li class="grid_4">\n                <a href="')
-        # SOURCE LINE 99
-        __M_writer(escape(h.url_for(controller='page', action='view', slug='about')))
-        __M_writer(u'" title="About">\n                    About <span>About me and this site</span>\n                </a>\n            </li>\n            <li class="grid_4">\n                <a href="')
-        # SOURCE LINE 104
-        __M_writer(escape(h.url_for(controller='page', action='view', slug='teaching')))
-        __M_writer(u'" title="Teaching">\n                    Teaching <span>My former life as a teacher</span>\n                </a>\n            </li>\n            <li class="grid_4 omega">\n                <a href="/lifestream" title="Lifestream">Lifestream <span>Some content here</span></a>\n            </li> \n        </ul>\n    </div>\n')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
-def render_header(context):
-    context.caller_stack._push_frame()
-    try:
-        __M_writer = context.writer()
-        # SOURCE LINE 69
-        __M_writer(u'\n    <div id="header">\n        <div class="container_16">\n            <div class="grid_16">\n                <div class="grid_8 alpha">\n                    <h1>Jason Leveille</h1>\n                    <p>Web Responsible, From Design Through Deployment</p>\n                </div>\n                <div class="grid_8 omega">\n                    <div id="subscribe" class="grid_4 alpha">\n                        <p>Subscribe</p>\n                    </div>\n                    <div id="search" class="grid_4 alpha">\n                        <p>Search</p>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n')
-        return ''
-    finally:
-        context.caller_stack._pop_frame()
-
-
-def render_recent_comments(context):
-    context.caller_stack._push_frame()
-    try:
-        __M_writer = context.writer()
-        # SOURCE LINE 155
-        __M_writer(u'\n    <h4>Recent Comments</h4>\n    <ul>\n        <li>Comment</li>\n        <li>Comment</li>\n        <li>Comment</li>\n        <li>Comment</li>\n    </ul>\n')
+        __M_writer(u'\n\n')
+        # SOURCE LINE 100
+        __M_writer(u'\n\n')
+        # SOURCE LINE 110
+        __M_writer(u'\n')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -220,51 +101,63 @@ def render_recent_comments(context):
 def render_twitter_updates(context):
     context.caller_stack._push_frame()
     try:
+        _import_ns = {}
+        _mako_get_namespace(context, 'wurdig')._populate(_import_ns, ['*'])
         __M_writer = context.writer()
-        # SOURCE LINE 115
+        # SOURCE LINE 52
         __M_writer(u'\n    <h4>Twitter Updates</h4>\n    <ul>\n        <li>Update</li>\n        <li>Update</li>\n        <li>Update</li>\n        <li>Update</li>\n    </ul>\n')
         return ''
     finally:
         context.caller_stack._pop_frame()
 
 
-def render_css(context):
+def render_tags(context):
     context.caller_stack._push_frame()
     try:
-        h = context.get('h', UNDEFINED)
+        _import_ns = {}
+        _mako_get_namespace(context, 'wurdig')._populate(_import_ns, ['*'])
         __M_writer = context.writer()
-        # SOURCE LINE 61
-        __M_writer(u'\n    ')
-        # SOURCE LINE 62
-        __M_writer(escape(h.stylesheet_link(h.url_for('/css/reset.css'), media="screen, projection")))
-        __M_writer(u'\n    ')
-        # SOURCE LINE 63
-        __M_writer(escape(h.stylesheet_link(h.url_for('/css/text.css'), media="screen, projection")))
-        __M_writer(u'\n    ')
-        # SOURCE LINE 64
-        __M_writer(escape(h.stylesheet_link(h.url_for('/css/960.css'), media="screen, projection")))
-        __M_writer(u'\n    ')
-        # SOURCE LINE 65
-        __M_writer(escape(h.stylesheet_link(h.url_for('/css/base.css'), media="screen, projection")))
-        __M_writer(u'\n    ')
-        # SOURCE LINE 66
-        __M_writer(escape(h.stylesheet_link(h.url_for('/css/print.css'), media="print")))
-        __M_writer(u'\n')
+        # SOURCE LINE 82
+        __M_writer(u'\n    <h4>Tags</h4>\n    <ul>\n        <li>Tag</li>\n        <li>Tag</li>\n        <li>Tag</li>\n        <li>Tag</li>\n    </ul>\n')
         return ''
     finally:
         context.caller_stack._pop_frame()
 
 
-def render_js(context):
+def render_title(context):
     context.caller_stack._push_frame()
     try:
-        h = context.get('h', UNDEFINED)
+        _import_ns = {}
+        _mako_get_namespace(context, 'wurdig')._populate(_import_ns, ['*'])
         __M_writer = context.writer()
-        # SOURCE LINE 226
-        __M_writer(u'\n    <script type="text/javascript">\n        var djConfig = {\n            isDebug:false, \n            parseOnLoad:true\n        };\n    </script>\n    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.2/dojo/dojo.xd.js"></script>\n    ')
-        # SOURCE LINE 234
-        __M_writer(escape(h.javascript_link(h.url_for('/javascripts/application.js'))))
-        __M_writer(u'\n')
+        # SOURCE LINE 50
+        __M_writer(u"Jason Leveille's Blog")
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
+def render_recent_comments(context):
+    context.caller_stack._push_frame()
+    try:
+        _import_ns = {}
+        _mako_get_namespace(context, 'wurdig')._populate(_import_ns, ['*'])
+        __M_writer = context.writer()
+        # SOURCE LINE 92
+        __M_writer(u'\n    <h4>Recent Comments</h4>\n    <ul>\n        <li>Comment</li>\n        <li>Comment</li>\n        <li>Comment</li>\n        <li>Comment</li>\n    </ul>\n')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
+def render_development_stream(context):
+    context.caller_stack._push_frame()
+    try:
+        _import_ns = {}
+        _mako_get_namespace(context, 'wurdig')._populate(_import_ns, ['*'])
+        __M_writer = context.writer()
+        # SOURCE LINE 102
+        __M_writer(u'\n    <h4>Development Stream</h4>\n    <ul>\n        <li>Link</li>\n        <li>Link</li>\n        <li>Link</li>\n        <li>Link</li>\n    </ul>\n')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -273,8 +166,10 @@ def render_js(context):
 def render_categories(context):
     context.caller_stack._push_frame()
     try:
+        _import_ns = {}
+        _mako_get_namespace(context, 'wurdig')._populate(_import_ns, ['*'])
         __M_writer = context.writer()
-        # SOURCE LINE 125
+        # SOURCE LINE 62
         __M_writer(u'\n    <h4>Categories</h4>\n    <ul>\n        <li>Category</li>\n        <li>Category</li>\n        <li>Category</li>\n        <li>Category</li>\n    </ul>\n')
         return ''
     finally:
@@ -284,8 +179,10 @@ def render_categories(context):
 def render_archives(context):
     context.caller_stack._push_frame()
     try:
+        _import_ns = {}
+        _mako_get_namespace(context, 'wurdig')._populate(_import_ns, ['*'])
         __M_writer = context.writer()
-        # SOURCE LINE 135
+        # SOURCE LINE 72
         __M_writer(u'\n    <h4>Archives</h4>\n    <ul>\n        <li>Archive</li>\n        <li>Archive</li>\n        <li>Archive</li>\n        <li>Archive</li>\n    </ul>\n')
         return ''
     finally:
