@@ -5,13 +5,6 @@
 <h2>Create a New Post</h2>
 
 ${h.form(h.url_for(action='create', controller='post'), method='post')}
-    ${fields.body()}
-    <h3>Tags</h3>
-    % for tag in c.available_tags:
-        <div class="multiple-checkbox field">
-            <label for="tags">${tag[1]}</label>
-            <input type="checkbox" name="tags" value="${tag[0]}">
-        </div>
-    % endfor
+    ${fields.body()}    
     ${h.submit('create', 'Create Post')}
 ${h.end_form()}

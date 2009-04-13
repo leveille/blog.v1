@@ -21,6 +21,16 @@
     % if request.urlvars['action'] == 'new':
         ${h.checkbox('comments_allowed', value=None, checked='checked')}
     % else:
-        ${h.checkbox('comments_allowed', value=None, checked='checked')}
+        ${h.checkbox('comments_allowed', value=None)}
     % endif
+</div>
+
+<h3>Tags</h3>
+<div class="multiple-checkboxes">
+    % for tag in c.available_tags:
+        <div class="multiple-checkbox field">
+            <label for="tags">${tag[1]}</label>
+            <input type="checkbox" name="tags" value="${tag[0]}">
+        </div>
+    % endfor
 </div>

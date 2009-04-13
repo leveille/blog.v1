@@ -5,25 +5,10 @@
 <h2>Edit Post</h2>
 
 <%def name="tags(available_tags)">
-    <h3>Tags</h3>
-    % for tag in available_tags:
-        <div class="multiple-checkbox field">
-            <label for="tags">${tag[1]}</label>
-            <input type="checkbox" name="tags" value="${tag[0]}">
-        </div>
-    % endfor
+
 </%def>
 
 ${h.form(h.url_for(controller='post', action='save', id=request.urlvars['id']), method='post')}
     ${fields.body()}
-    
-    <%!
-        from formencode import htmlfill
-        from webhelpers.html import literal
-    %>
-    % if c.available_tags:
-        ${literal(htmlfill.render(capture(self.tags, c.available_tags), c.selected_tags))}
-    % endif
-    
     ${h.submit('edit', 'Edit Post')}
 ${h.end_form()}

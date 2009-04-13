@@ -74,9 +74,6 @@ class NewPageForm(formencode.Schema):
         },
         strip=True
     )
-    
-class EditPageForm(NewPageForm):
-    id = formencode.validators.Int()
 
 class PageController(BaseController):
     # @todo: delete confirmation
@@ -133,7 +130,7 @@ class PageController(BaseController):
     
     @h.auth.authorize(h.auth.is_valid_user)
     @restrict('POST')
-    @validate(schema=EditPageForm(), form='edit')
+    @validate(schema=NewPageForm(), form='edit')
     def save(self, id=None):
         page_q = meta.Session.query(model.Page)
         page = page_q.filter_by(id=id).first()

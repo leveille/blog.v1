@@ -94,9 +94,6 @@ class NewPostForm(formencode.Schema):
     comments_allowed = formencode.validators.StringBool(if_missing=False)
     tags = formencode.foreach.ForEach(formencode.validators.Int())
     chained_validators = [ValidTags()]
-    
-class EditPostForm(NewPostForm):
-    id = formencode.validators.Int()
 
 class PostController(BaseController):
     # @todo: Assign tags to posts for add/edit
@@ -194,8 +191,7 @@ class PostController(BaseController):
         
         tag_q = meta.Session.query(model.Tag)
         c.available_tags = [(tag.id, tag.name) for tag in tag_q]
-        c.selected_tags = {'tags':[str(tag.id) for tag in c.post.tags]}
-        pprint.pprint(c.selected_tags)
+        c.selected_tags = [str(tag.id) for tag in c.post.tags]
         
         values = {
             'id':c.post.id,
@@ -203,28 +199,46 @@ class PostController(BaseController):
             'slug':c.post.slug,
             'content':c.post.content,
             'draft':c.post.draft,
-            'comments_allowed':c.post.comments_allowed
+            'comments_allowed':c.post.comments_allowed,
+            'tags':c.selected_tags
         }
         return htmlfill.render(render('/derived/post/edit.html'), values)
     
     @h.auth.authorize(h.auth.is_valid_user)
     @restrict('POST')
-    @validate(schema=EditPostForm(), form='edit')
+    @validate(schema=NewPostForm(), form='edit')
     def save(self, id=None):
         post_q = meta.Session.query(model.Post)
         post = post_q.filter_by(id=id).first()
         if post is None:
             abort(404)
             
+        posted_tags = self.form_result['tags']
+        del self.form_result['tags']
+            
         for k,v in self.form_result.items():
             if getattr(post, k) != v:
                 setattr(post, k, v)
-        
+                
+        # is this post marked draft or not
         if post.draft:
             post.posted_on = None
         # this check for not post.draft is not necessary, but it is more readable
         elif not post.draft and post.posted_on is None:
             post.posted_on = d.datetime.now()
+        
+        # remove existing tags which were not selected
+        # in the "posted" tags
+        for i, tag in enumerate(post.tags):
+            if tag.id not in posted_tags:
+                del post.tags[i]
+        
+        # let's add the new tags for this post
+        tagids = [tag.id for tag in post.tags]
+        for tag in posted_tags:
+            if tag not in tagids:
+                t = meta.Session.query(model.Tag).get(tag)
+                post.tags.append(t)
             
         meta.Session.commit()
         session['flash'] = 'Post successfully updated.'

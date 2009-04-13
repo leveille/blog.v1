@@ -88,9 +88,6 @@ class NewTagForm(formencode.Schema):
     filter_extra_fields = True
     name = UniqueName(not_empty=True, max=30, strip=True)
     slug = UniqueSlug(not_empty=True, max=30, strip=True)
-    
-class EditTagForm(NewTagForm):
-    id = formencode.validators.Int()
 
 class TagController(BaseController):
 
@@ -154,7 +151,7 @@ class TagController(BaseController):
     
     @h.auth.authorize(h.auth.is_valid_user)
     @restrict('POST')
-    @validate(schema=EditTagForm(), form='edit')
+    @validate(schema=NewTagForm(), form='edit')
     def save(self, id=None):
         tag_q = meta.Session.query(model.Tag)
         tag = tag_q.filter_by(id=id).first()
