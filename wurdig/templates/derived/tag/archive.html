@@ -11,9 +11,10 @@
     <h3>${post.title}</h3>
     <div class="entry">
         <div class="entry-content">
-            ${h.literal(post.content)}
-            <p>
-            </p>
+            <%!
+                from webhelpers.html import literal
+            %>
+            ${literal(post.content)}
         </div>
     </div>
 % endfor

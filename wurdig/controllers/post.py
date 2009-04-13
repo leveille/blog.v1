@@ -52,6 +52,24 @@ class UniqueSlug(formencode.FancyValidator):
                 value, state)
         
         return value
+    
+class ValidTags(formencode.FancyValidator):
+    messages = {
+        'invalid': 'One ore more selected tags could not ' +
+        'be found in the database'
+    }
+    def _to_python(self, values, state):
+        # Because this is a chained validator, values will contain
+        # a dictionary with a tags key associated with a list of
+        # integer values representing selected tags.
+        all_tag_ids = [tag.id for tag in meta.Session.query(model.Tag)]
+        for tag_id in values['tags']:
+            if tag_id not in all_tag_ids:
+                raise formencode.Invalid(
+                    self.message('invalid', state),
+                    values, state
+                )
+        return values
 
 class NewPostForm(formencode.Schema):
     pre_validators = [ConstructSlug()]
@@ -74,11 +92,13 @@ class NewPostForm(formencode.Schema):
     )
     draft = formencode.validators.StringBool(if_missing=False)
     comments_allowed = formencode.validators.StringBool(if_missing=False)
+    tags = formencode.foreach.ForEach(formencode.validators.Int())
+    chained_validators = [ValidTags()]
     
 class EditPostForm(NewPostForm):
     id = formencode.validators.Int()
 
-class PostController(BaseController):    
+class PostController(BaseController):
     # @todo: Assign tags to posts for add/edit
     # @todo: Enable commenting for posts
     def archive(self, year=None, month=None):   
@@ -120,7 +140,6 @@ class PostController(BaseController):
         if c.post is None:
             abort(404)
             
-        c.post.content = h.literal(c.post.content)
         return render('/derived/post/view.html')
     
     @h.auth.authorize(h.auth.is_valid_user)
@@ -135,13 +154,21 @@ class PostController(BaseController):
     def create(self):
         post = model.Post()
         
+        tags = self.form_result['tags']
+        del self.form_result['tags']
+        
         for k, v in self.form_result.items():
             setattr(post, k, v)
         
         if not post.draft:
             post.posted_on = d.datetime.now()
-            
+        
         meta.Session.add(post)
+
+        for tag in tags:
+            t = meta.Session.query(model.Tag).get(tag)
+            post.tags.append(t)
+            
         meta.Session.commit()
         session['flash'] = 'Post successfully added.'
         session.save()
@@ -160,16 +187,23 @@ class PostController(BaseController):
         if id is None:
             abort(404)
         post_q = meta.Session.query(model.Post)
-        post = post_q.filter_by(id=id).first()
-        if post is None:
+        c.post = post_q.filter_by(id=id).first()
+        if c.post is None:
             abort(404)
+        import pprint
+        
+        tag_q = meta.Session.query(model.Tag)
+        c.available_tags = [(tag.id, tag.name) for tag in tag_q]
+        c.selected_tags = {'tags':[str(tag.id) for tag in c.post.tags]}
+        pprint.pprint(c.selected_tags)
+        
         values = {
-            'id':post.id,
-            'title':post.title,
-            'slug':post.slug,
-            'content':post.content,
-            'draft':post.draft,
-            'comments_allowed':post.comments_allowed
+            'id':c.post.id,
+            'title':c.post.title,
+            'slug':c.post.slug,
+            'content':c.post.content,
+            'draft':c.post.draft,
+            'comments_allowed':c.post.comments_allowed
         }
         return htmlfill.render(render('/derived/post/edit.html'), values)
     

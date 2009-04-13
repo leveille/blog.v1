@@ -3,7 +3,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 5
-_modified_time = 1238421673.501338
+_modified_time = 1239594980.4813509
 _template_filename='/home/leveille/development/python/pylons/Wurdig/wurdig/templates/derived/page/view.html'
 _template_uri='/derived/page/view.html'
 _template_cache=cache.Cache(__name__, _modified_time)
@@ -11,6 +11,11 @@ _source_encoding='utf-8'
 from webhelpers.html import escape
 _exports = ['title']
 
+
+# SOURCE LINE 8
+
+from webhelpers.html import literal
+    
 
 def _mako_get_namespace(context, name):
     try:
@@ -36,8 +41,10 @@ def render_body(context,**pageargs):
         # SOURCE LINE 5
         __M_writer(escape(c.page.title))
         __M_writer(u'</h2>\n\n<div class="entry">\n    ')
-        # SOURCE LINE 8
-        __M_writer(escape(c.page.content))
+        # SOURCE LINE 10
+        __M_writer(u'\n    ')
+        # SOURCE LINE 11
+        __M_writer(escape(literal(c.page.content)))
         __M_writer(u'\n</div>')
         return ''
     finally:

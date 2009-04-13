@@ -5,15 +5,19 @@
 <h2>${c.post.title}</h2>
 
 <div class="entry">
-    ${c.post.content}
+    <%!
+        from webhelpers.html import literal
+    %>
     
-% if len(c.post.tags):
-    Tagged with : 
-    % for tag in c.post.tags:
-        ${h.link_to(
-            tag.name,
-            h.url_for(controller='tag', action='archive', slug=tag.slug)
-        )}
-    % endfor
-% endif
+    ${literal(c.post.content)}
+    
+    % if len(c.post.tags):
+        Tagged with : 
+        % for tag in c.post.tags:
+            ${h.link_to(
+                tag.name,
+                h.url_for(controller='tag', action='archive', slug=tag.slug)
+            )}
+        % endfor
+    % endif
 </div>

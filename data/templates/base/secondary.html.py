@@ -3,7 +3,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 5
-_modified_time = 1239585158.172744
+_modified_time = 1239589468.362103
 _template_filename='/home/leveille/development/python/pylons/Wurdig/wurdig/templates/base/secondary.html'
 _template_uri='/base/secondary.html'
 _template_cache=cache.Cache(__name__, _modified_time)
@@ -20,7 +20,7 @@ def _mako_get_namespace(context, name):
         return context.namespaces[(__name__, name)]
 def _mako_generate_namespaces(context):
     # SOURCE LINE 2
-    ns = runtime.Namespace('wurdig', context._clean_inheritance_tokens(), templateuri='../elements/wurdig.html', callables=None, calling_uri=_template_uri, module=None)
+    ns = runtime.Namespace('wurdig', context._clean_inheritance_tokens(), templateuri='../component/wurdig.html', callables=None, calling_uri=_template_uri, module=None)
     context.namespaces[(__name__, 'wurdig')] = ns
 
 def render_body(context,**pageargs):

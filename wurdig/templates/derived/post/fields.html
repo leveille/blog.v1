@@ -18,5 +18,9 @@
 </div>
 <div class="field">
     <label for="comments_allowed">Comments Allowed?</label>
-    ${h.checkbox('comments_allowed', value=None)}
+    % if request.urlvars['action'] == 'new':
+        ${h.checkbox('comments_allowed', value=None, checked='checked')}
+    % else:
+        ${h.checkbox('comments_allowed', value=None, checked='checked')}
+    % endif
 </div>
