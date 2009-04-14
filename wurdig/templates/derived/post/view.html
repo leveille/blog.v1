@@ -5,11 +5,7 @@
 <h2>${c.post.title}</h2>
 
 <div class="entry">
-    <%!
-        from webhelpers.html import literal
-    %>
-    
-    ${literal(c.post.content)}
+    ${h.literal(c.post.content)}
     
     % if len(c.post.tags):
         Tagged with : 
@@ -20,4 +16,18 @@
             )}
         % endfor
     % endif
+    
+    <div id="comments">
+        % if len(c.post.comments):
+            <h3>${h.plural(len(c.post.comments), 'Response', 'Responses')} to "${c.post.title}"</h3>
+
+            % for comment in c.post.comments:
+                <p>Comment: ${comment.content}</p><hr />
+            % endfor
+        % endif
+    </div>
+    
+    <div id="respond">
+        <p>Place comment form here</p>
+    </div>
 </div>

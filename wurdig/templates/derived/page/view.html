@@ -5,8 +5,5 @@
 <h2>${c.page.title}</h2>
 
 <div class="entry">
-    <%!
-        from webhelpers.html import literal
-    %>
-    ${literal(c.page.content)}
+    ${h.literal(c.page.content)}
 </div>

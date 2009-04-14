@@ -1,6 +1,5 @@
 <%inherit file="/base/secondary.html"/>
 
-
 <%def name="title()">${parent.title()} &gt; Archives for ${c.date}</%def>
 <h2>Archives for ${c.date}</h2>
 
@@ -8,11 +7,53 @@
 <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
 <div class="entries">
 % for post in c.paginator:
-    <h3>${post.title}</h3>
+    <h3>                    
+        ${h.link_to(
+            post.title,
+            h.url_for(controller='post', 
+                      action='view', 
+                      year=post.posted_on.strftime('%Y'), 
+                      month=post.posted_on.strftime('%m'), 
+                      slug=post.slug)
+        )}
+    </h3>
     <div class="entry">
         <div class="entry-content">
-            ${h.literal(post.content)}
+            ${h.literal(h.chop_at(post.content, '<!--more-->'))}
             <p>
+                % if len(post.tags):
+                    Tagged with : 
+                    % for tag in post.tags:
+                        ${h.link_to(
+                            tag.name,
+                            h.url_for(controller='tag', action='archive', slug=tag.slug)
+                        )}
+                    % endfor
+                % endif
+            </p>
+            
+            <p>
+                % if len(post.comments):
+                    ${h.link_to(
+                        h.plural(len(post.comments), 'Comment', 'Comments'),
+                        h.url_for(controller='post', 
+                                  action='view', 
+                                  year=post.posted_on.strftime('%Y'), 
+                                  month=post.posted_on.strftime('%m'), 
+                                  slug=post.slug, 
+                                  anchor=u'comments')
+                    )}
+                % else:
+                    ${h.link_to(
+                        'No Comments',
+                        h.url_for(controller='post', 
+                                  action='view', 
+                                  year=post.posted_on.strftime('%Y'), 
+                                  month=post.posted_on.strftime('%m'), 
+                                  slug=post.slug, 
+                                  anchor=u'respond')
+                    )}
+                % endif
             </p>
         </div>
     </div>
