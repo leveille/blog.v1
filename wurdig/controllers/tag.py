@@ -103,6 +103,12 @@ class TagController(BaseController):
             abort(404)
         tag_q = meta.Session.query(model.Tag)
         c.tag = tag_q.filter(model.Tag.slug==slug).first()
+        
+        if(c.tag is None):
+            c.tagname = slug
+        else:
+            c.tagname = c.tag.name
+            
         query = meta.Session.query(model.Post).filter(
             and_(
                  model.Post.tags.any(slug=slug), 

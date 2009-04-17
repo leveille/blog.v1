@@ -1,7 +1,7 @@
 <%inherit file="/base/secondary.html"/>
 <%namespace file="../../component/posts.html" name="posts" import="*"/>
 
-<%def name="title()">${parent.title()} &gt; Posts tagged with ${c.tag.name}</%def>
-<h2>Posts tagged with "${c.tag.name}"</h2>
+<%def name="title()">${parent.title()} &gt; Posts tagged with ${c.tagname}</%def>
+<h2>Posts tagged with "${c.tagname}"</h2>
 
 ${posts.paginated()}
