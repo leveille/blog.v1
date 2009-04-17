@@ -1,11 +1,10 @@
 """The application's model objects"""
 import sqlalchemy as sa
-from sqlalchemy import orm
-
+from sqlalchemy import orm, schema, types
+from sqlalchemy.sql import and_
 from wurdig.model import meta
 
 import datetime
-from sqlalchemy import schema, types
 
 def init_model(engine):
     """Call me before using any of the tables or classes in the model"""
@@ -87,6 +86,11 @@ orm.mapper(Comment, comments_table)
 orm.mapper(Tag, tags_table)
 orm.mapper(Page, pages_table)
 orm.mapper(Post, posts_table, polymorphic_identity='posts', properties={
-    'comments':orm.relation(Comment, backref='posts', cascade='all'),
+    'comments':orm.relation(Comment, backref='posts', cascade='all',order_by='created_on', 
+                            primaryjoin=and_(
+                                             posts_table.c.id==comments_table.c.post_id, 
+                                             comments_table.c.approved==True
+                                             )
+                            ),
     'tags':orm.relation(Tag, secondary=poststags_table)
 })
