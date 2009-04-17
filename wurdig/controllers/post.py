@@ -114,7 +114,7 @@ class PostController(BaseController):
                 model.Post.posted_on <= d.datetime(year_i, month_end, day_end), 
                 model.Post.draft == False
             )
-        ).order_by(model.Post.posted_on.desc())
+        )
         
         c.paginator = paginate.Page(
             posts_q,

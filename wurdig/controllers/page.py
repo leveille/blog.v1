@@ -151,7 +151,7 @@ class PageController(BaseController):
     
     @h.auth.authorize(h.auth.is_valid_user)
     def list(self):
-        pages_q = meta.Session.query(model.Page).order_by(model.Page.created_on.desc())
+        pages_q = meta.Session.query(model.Page)
         c.paginator = paginate.Page(
             pages_q,
             page=int(request.params.get('page', 1)),

@@ -92,7 +92,7 @@ class NewTagForm(formencode.Schema):
 class TagController(BaseController):
 
     def cloud(self):
-        tag_q = meta.Session.query(model.Tag).order_by(model.Tag.name.asc())
+        tag_q = meta.Session.query(model.Tag)
         c.tags = tag_q.all()
         if c.tags is None:
             abort(404)
@@ -108,7 +108,7 @@ class TagController(BaseController):
                  model.Post.tags.any(slug=slug), 
                  model.Post.posted_on != None
             )
-        ).all().order_by(model.Post.posted_on.desc())
+        ).all()
             
         c.paginator = paginate.Page(
             query,
@@ -175,7 +175,7 @@ class TagController(BaseController):
     
     @h.auth.authorize(h.auth.is_valid_user)
     def list(self):
-        tags_q = meta.Session.query(model.Tag).order_by(model.Tag.name.asc())
+        tags_q = meta.Session.query(model.Tag)
         c.paginator = paginate.Page(
             tags_q,
             page=int(request.params.get('page', 1)),

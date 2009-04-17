@@ -83,9 +83,9 @@ class Tag(object):
     pass
 
 orm.mapper(Comment, comments_table)
-orm.mapper(Tag, tags_table)
-orm.mapper(Page, pages_table)
-orm.mapper(Post, posts_table, polymorphic_identity='posts', properties={
+orm.mapper(Tag, tags_table, order_by='name')
+orm.mapper(Page, pages_table, order_by='title')
+orm.mapper(Post, posts_table, order_by='posted_on DESC', polymorphic_identity='posts', properties={
     'comments':orm.relation(Comment, backref='posts', cascade='all',order_by='created_on', 
                             primaryjoin=and_(
                                              posts_table.c.id==comments_table.c.post_id, 
