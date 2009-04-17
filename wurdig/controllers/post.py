@@ -96,7 +96,6 @@ class NewPostForm(formencode.Schema):
     chained_validators = [ValidTags()]
 
 class PostController(BaseController):
-    # @todo: Assign tags to posts for add/edit
     # @todo: Enable commenting for posts
     def archive(self, year=None, month=None):   
         if year is None:
@@ -108,13 +107,17 @@ class PostController(BaseController):
             c.date = calendar.month_name[month_start] + ', ' + year
             (month_start, month_end) = (int(month), int(month))
             day_end = calendar.monthrange(year_i, month_start)[1]
-            
-        posts_q = meta.Session.query(model.Post).order_by(model.Post.posted_on.desc())
-
+        
+        posts_q = meta.Session.query(model.Post).filter(
+            and_(
+                model.Post.posted_on >= d.datetime(year_i, month_start, 1), 
+                model.Post.posted_on <= d.datetime(year_i, month_end, day_end), 
+                model.Post.draft == False
+            )
+        ).order_by(model.Post.posted_on.desc())
+        
         c.paginator = paginate.Page(
-            posts_q.filter(and_(model.Post.posted_on >= d.datetime(year_i, month_start, 1), 
-                model.Post.posted_on <= d.datetime(year_i, month_end, day_end), model.Post.draft == False)
-            ),
+            posts_q,
             page=int(request.params.get('page', 1)),
             items_per_page = 1,
             controller='post',

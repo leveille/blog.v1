@@ -1,0 +1,57 @@
+<%!
+import wurdig.model as model
+%>
+<%def name="breadcrumbs()">
+    % if c.page and c.page.id != 1:
+    <div id="breadcrumbs"><p>${render_breadcrumbs(c.breadcrumbs)}</p></div>
+    % endif
+</%def>
+
+<%def name="tabs()">
+    % if c.tabs:
+    <div id="maintabs">
+        <ul class="draglist">
+            ${render_list(c.tabs, c.breadcrumbs[1].path, 
+                type_=c.breadcrumbs[1].type, id='li1_', class_='list2')}
+        </ul>
+    </div>
+    % endif
+</%def>
+
+<%def name="menu()">
+    % if len(c.breadcrumbs) > 2:
+        <div id="menu">
+            <h2>Section Links</h2>
+            <ul class="draglist">
+                ${render_list(c.menu, c.breadcrumbs[-1].path, 
+                    type_=c.breadcrumbs[1].type, id='li1_', class_='list2')}
+            </ul>
+        </div>
+    % endif
+</%def>
+
+<%def name="render_list(items, current, type_, id, class_)">
+% for item in items:
+    % if item.path == current and item.type == type_:
+<li class="${class_} active" id="${id}${str(item.id)}"><span class="current"><a
+    href="${item.path_info}" id="current">${item.name}</a></span></li>\
+    % else:
+<li class="${class_}" id="${id}${str(item.id)}"
+    onclick="document.location ='${item.path_info}'"
+><span><a href="${item.path_info}">${item.name}</a></span></li>\
+    % endif
+% endfor
+</%def>
+
+<%def name="render_breadcrumbs(breadcrumbs)">
+    % for i, item in enumerate(breadcrumbs):
+    % if i < len(breadcrumbs) - 1:
+        <a href="${item.path_info}">${item.name}</a> &gt;
+    % elif isinstance(c.breadcrumbs[-1], model.Section):
+        ${item.name} &gt;
+    % else:
+        ${item.name}
+    % endif
+    % endfor
+</%def>
+

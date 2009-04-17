@@ -7,7 +7,7 @@
 <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
 <div class="entries">
 % for post in c.paginator:
-    <h3>                    
+    <h3>
         ${h.link_to(
             post.title,
             h.url_for(controller='post', 

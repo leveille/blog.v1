@@ -103,9 +103,15 @@ class TagController(BaseController):
             abort(404)
         tag_q = meta.Session.query(model.Tag)
         c.tag = tag_q.filter(model.Tag.slug==slug).first()
-        query = meta.Session.query(model.Post).order_by(model.Post.posted_on.desc())
+        query = meta.Session.query(model.Post).filter(
+            and_(
+                 model.Post.tags.any(slug=slug), 
+                 model.Post.posted_on != None
+            )
+        ).all().order_by(model.Post.posted_on.desc())
+            
         c.paginator = paginate.Page(
-            query.filter(and_(model.Post.tags.any(slug=slug), model.Post.posted_on != None)).all(),
+            query,
             page=int(request.params.get('page', 1)),
             items_per_page = 2,
             controller='tag',
