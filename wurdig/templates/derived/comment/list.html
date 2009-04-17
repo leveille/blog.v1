@@ -1,0 +1,46 @@
+<%inherit file="/base/index.html" />
+
+<%def name="heading()"><h1>Comment List</h1></%def>
+
+<%def name="buildrow(comment, odd=True)">
+    <tr class="${odd and 'odd' or 'even'}">
+        <td valign="top">
+            ${h.link_to(
+                comment.id,
+                h.url_for(
+                    controller=u'comment',
+                    action='view',
+                    id=unicode(comment.id)
+                )
+            )}
+        </td>
+        <td valign="top">
+            ${h.link_to(
+                comment.name,
+                h.url_for(
+                    controller=u'comment',
+                    action='edit',
+                    id=unicode(comment.id)
+                )
+            )}
+        </td>
+        <td valign="top">${comment.created.strftime('%c')}</td>
+    </tr>
+</%def>
+% if len(c.paginator):
+<p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
+<table class="paginator"><tr><th>Comment ID</th><th>Comment Title</th> <th>Posted</th></tr>
+<% counter=0 %>
+% for item in c.paginator:
+    ${buildrow(item, counter%2)}
+    <% counter += 1 %>
+% endfor
+</table>
+<p>${ c.paginator.pager('~2~') }</p>
+% else:
+<p>
+    No comments have yet been created.
+    <a href="${h.url_for(controller='comment', action='new')}">Add one</a>.
+</p>
+% endif
+

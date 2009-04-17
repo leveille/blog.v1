@@ -1,0 +1,16 @@
+${h.field(
+    "Name",
+    h.text(name='name'),
+    required=True,
+)}
+${h.field(
+    "Email",
+    h.text(name='email'),
+    required=True,
+    field_desc = 'Use to help prevent spam but will not be published',
+)}
+${h.field(
+    "Comment",
+    h.textarea(name='content', rows=7, cols=40),
+    required=True,
+)}

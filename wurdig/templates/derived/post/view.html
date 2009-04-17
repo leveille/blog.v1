@@ -1,4 +1,5 @@
 <%inherit file="/base/secondary.html"/>
+<%namespace file="comment_fields.html" name="fields" import="*"/>
 
 <%def name="title()">${parent.title()} &gt; ${c.post.title}</%def>
 
@@ -28,6 +29,9 @@
     </div>
     
     <div id="respond">
-        <p>Place comment form here</p>
+        ${h.form(h.url_for(post_id=c.post.id, controller='comment', action='create'), method='post')}
+            ${fields.body()}
+            ${h.submit('create_comment', 'Create Comment')}
+        ${h.end_form()}
     </div>
 </div>

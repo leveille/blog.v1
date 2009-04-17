@@ -1,0 +1,20 @@
+<%inherit file="/base/index.html"/>
+
+<%def name="title()">Comment</%def>
+<%def name="heading()"><h1>Comment</h1></%def>
+
+${c.comment.content}
+
+<p><em>Posted by ${c.comment.name} on ${c.comment.created.strftime('%c')}.</em></p>
+<p><a href="${h.url_for('path', id=c.comment.pageid)}">Visit the page this comment was posted on.</a></p>
+
+<%def name="footer()">
+## Add our comment links
+<p>
+  <a href="${h.url_for(pageid=c.page.id, controller='comment', action='edit', id=c.comment.id)}">Edit Comment</a>
+| <a href="${h.url_for(pageid=c.page.id, controller='comment', action='delete', id=c.comment.id)}">Delete Comment</a>
+</p>
+## Include the parent footer too
+${parent.footer()}
+</%def>
+

@@ -21,6 +21,14 @@ def make_map():
     # CUSTOM ROUTES HERE
     map.connect('/', controller='page', action='home')
     
+    map.connect('/post/{post_id}/{controller}/{action}',
+                requirements = dict(page_id='\d+')
+    ) 
+    
+    map.connect('/post/{post_id}/{controller}/{action}/{id}',
+                requirements = dict(page_id='\d+', id='\d+')
+    )
+    
     map.connect('/{year}/{month}/{slug}', controller='post', 
                 action='view', 
                 requirements = {'year' : '\d{2,4}', 

@@ -1,0 +1,17 @@
+<div class="field required">
+    <label for="name">Name</label>
+    ${h.text('name')}
+</div>
+<div class="field required">
+    <label for="email">Email</label>
+    <span class="description">Use to help prevent spam but will not be published</span>
+    ${h.text('email')}
+</div>
+<div class="field">
+    <label for="url">Website</label>
+    ${h.text('url')}
+</div>
+<div class="field">
+    <label for="content">Content (markdown)</label>
+    ${h.textarea('content')}
+</div>

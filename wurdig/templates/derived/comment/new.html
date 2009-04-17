@@ -1,0 +1,12 @@
+<%inherit file="/base/index.html" />
+<%namespace file="fields.html" name="fields" import="*"/>
+
+<%def name="heading()">
+    <h1 class="main">Create a New Comment</h1>
+</%def>
+
+${h.form_start(h.url_for(pageid=c.pageid, controller='comment', action='create'), method="post")}
+    ${fields.body()}
+    ${h.field(field=h.submit(value="Create Comment", name='submit'))}
+${h.form_end()}
+
