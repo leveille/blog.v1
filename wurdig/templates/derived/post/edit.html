@@ -4,10 +4,6 @@
 <%def name="title()">${parent.title()} &gt; Edit Post</%def>
 <h2>Edit Post</h2>
 
-<%def name="tags(available_tags)">
-
-</%def>
-
 ${h.form(h.url_for(controller='post', action='save', id=request.urlvars['id']), method='post')}
     ${fields.body()}
     ${h.submit('edit', 'Edit Post')}

@@ -6,19 +6,19 @@
     <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
     
     <table class="paginator"><tr><th>Page ID</th><th>Page Title</th><th>Created</th><th>Posted</th></tr>
-    % for item in c.paginator:
+    % for post in c.paginator:
         <tr>
             <td>
                 ${h.link_to(
                     post.id,
-                    h.url_for('post', id=post.id)
+                    h.url_for('post', id=unicode(post.id))
                 )}
             </td>
-            <td valign="top">
+            <td>
                 ${post.title}
             </td>
-            <td valign="top">posted or not</td>
-            <td valign="top">${post.created_on.strftime('%c')}</td>
+            <td>posted or not</td>
+            <td>${post.created_on.strftime('%c')}</td>
         </tr>
     % endfor
     </table>

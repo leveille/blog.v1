@@ -6,12 +6,12 @@
     <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
     
     <table class="paginator"><tr><th>Tag Archive</th></tr>
-    % for item in c.paginator:
+    % for tag in c.paginator:
         <tr>
             <td>
                 ${h.link_to(
                     tag.name,
-                    h.url_for(controller='tag', action='archive', slug=tag.slug)
+                    h.url_for(controller='tag', action='archive', slug=unicode(tag.slug))
                 )}
             </td>
         </tr>

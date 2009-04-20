@@ -1,14 +1,10 @@
-<%inherit file="/base/index.html" />
+<%inherit file="/base/admin.html"/>
 <%namespace file="fields.html" name="fields" import="*"/>
 
-<%def name="heading()">
-    <h1 class="main">Editing ${c.title}</h1>
-</%def>
+<%def name="title()">${parent.title()} &gt; Edit Comment</%def>
+<h2>Edit Comment</h2>
 
-<p>Editing the source code for the ${c.title} comment:</p>
-${h.form_start(h.url_for(pageid=c.pageid, controller='comment', action='save',
-    id=request.urlvars['id']), method="post")}
+${h.form(h.url_for(action='save', controller='comment', id=request.urlvars['id']), method='post')}
     ${fields.body()}
-    ${h.field(field=h.submit(value="Save Changes", name='submit'))}
-${h.form_end()}
-
+    ${h.submit('edit', 'Edit Comment')}
+${h.end_form()}

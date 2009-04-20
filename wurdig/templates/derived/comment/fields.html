@@ -1,16 +1,7 @@
-${h.field(
-    "Name",
-    h.text(name='name'),
-    required=True,
-)}
-${h.field(
-    "Email",
-    h.text(name='email'),
-    required=True,
-    field_desc = 'Use to help prevent spam but will not be published',
-)}
-${h.field(
-    "Comment",
-    h.textarea(name='content', rows=7, cols=40),
-    required=True,
-)}
+<%namespace file="/derived/post/comment_fields.html" name="comment_fields" import="*"/>
+
+${comment_fields.body()}
+<div class="field">
+    <label for="approved">Approved?</label>
+    ${h.checkbox('approved', value=None)}
+</div>

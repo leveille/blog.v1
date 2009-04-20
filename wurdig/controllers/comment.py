@@ -30,22 +30,25 @@ class NewCommentForm(formencode.Schema):
             'empty':'Please enter a comment.'
         }
     )
+    approved = formencode.validators.StringBool(if_missing=False)
 
 class CommentController(BaseController):
 
-    def __before__(self, action, post_id=None):
+    def new(self, action, post_id=None):
         post_q = meta.Session.query(model.Post)
         c.post = post_id and post_q.filter_by(id=int(post_id)).first() or None
         if c.post is None:
             abort(404)
-
-    def new(self):
         return render('/derived/comment/new.html')
     
     @restrict('POST')
     @authenticate_form
     @validate(schema=NewCommentForm(), form='new')
-    def create(self):
+    def create(self, action, post_id=None):
+        post_q = meta.Session.query(model.Post)
+        c.post = post_id and post_q.filter_by(id=int(post_id)).first() or None
+        if c.post is None:
+            abort(404)
         comment = model.Comment()
         for k, v in self.form_result.items():
             setattr(comment, k, v)
@@ -66,13 +69,15 @@ class CommentController(BaseController):
         if id is None:
             abort(404)
         comment_q = meta.Session.query(model.Comment)
-        comment = comment_q.filter_by(post_id=c.post.id, id=id).first()
+        comment = comment_q.filter_by(id=id).first()
         if comment is None:
             abort(404)
         values = {
             'name': comment.name,
             'email': comment.email,
-            'content': comment.content
+            'url': comment.url,
+            'content': comment.content,
+            'approved' : comment.approved
         }
         return htmlfill.render(render('/derived/comment/edit.html'), values)
 
@@ -81,7 +86,7 @@ class CommentController(BaseController):
     @validate(schema=NewCommentForm(), form='edit')
     def save(self, id=None):
         comment_q = meta.Session.query(model.Comment)
-        comment = comment_q.filter_by(post_id=c.post.id, id=id).first()
+        comment = comment_q.filter_by(id=id).first()
         if comment is None:
             abort(404)
         for k,v in self.form_result.items():
@@ -90,17 +95,18 @@ class CommentController(BaseController):
         meta.Session.commit()
         session['flash'] = 'Comment successfully updated.'
         session.save()
-        return redirect_to(post_id=c.post.id, controller='comment', action='view', id=comment.id)
+        return redirect_to(controller='comment', action='list')
 
     @h.auth.authorize(h.auth.is_valid_user)
     def list(self):
-        comments_q = meta.Session.query(model.Comment).filter_by(post_id=c.post.id)
-        comments_q = comments_q.order_by(model.Comment.created.asc())
+        comments_q = meta.Session.query(model.Comment).order_by(
+                                                   model.Comment.approved
+                                                   ).order_by(model.Comment.created_on)
+        comments_q = comments_q.all()
         c.paginator = paginate.Page(
             comments_q,
             page=int(request.params.get('page', 1)),
-            items_per_page=10,
-            post_id=c.post_id,
+            items_per_page=20,
             controller='comment',
             action='list'
         )
@@ -111,10 +117,11 @@ class CommentController(BaseController):
         if id is None:
             abort(404)
         comment_q = meta.Session.query(model.Comment)
-        comment = comment_q.filter_by(post_id=c.post.id, id=id).first()
+        comment = comment_q.filter_by(id=id).first()
         if comment is None:
             abort(404)
         meta.Session.delete(comment)
         meta.Session.commit()
-        return render('/derived/comment/deleted.html')
-
+        session['flash'] = 'Comment successfully deleted.'
+        session.save()
+        return redirect_to(controller='comment', action='list')
