@@ -22,6 +22,7 @@ class NewCommentForm(formencode.Schema):
     filter_extra_fields = True
     name = formencode.validators.String(not_empty=True)
     email = formencode.validators.Email(not_empty=True)
+    url = formencode.validators.URL(not_empty=False, check_exists=True)
     content = formencode.validators.String(
         not_empty=True,
         messages={
@@ -31,24 +32,32 @@ class NewCommentForm(formencode.Schema):
 
 class CommentController(BaseController):
 
-    def __before__(self, action, pageid=None):
+    def __before__(self, action, post_id=None):
         post_q = meta.Session.query(model.Post)
         c.post = post_id and post_q.filter_by(id=int(post_id)).first() or None
         if c.post is None:
             abort(404)
 
+    def new(self):
+        return render('/derived/comment/new.html')
+    
     @restrict('POST')
     @validate(schema=NewCommentForm(), form='new')
     def create(self):
-        # Add the new comment to the database
         comment = model.Comment()
         for k, v in self.form_result.items():
             setattr(comment, k, v)
         comment.post_id = c.post.id
         meta.Session.add(comment)
         meta.Session.commit()
-        # Issue an HTTP redirect
-        return redirect_to(post_id=c.post.id, controller='comment', action='view', id=comment.id)
+        # @todo: email administrator w/ each new comment
+        return redirect_to(controller='post', 
+                           action='view', 
+                           year=c.post.posted_on.strftime('%Y'),
+                           month=c.post.posted_on.strftime('%m'),
+                           slug=c.post.slug,
+                           state='comment_moderated'
+                           )
 
     @h.auth.authorize(h.auth.is_valid_user)
     def edit(self, id=None):
@@ -79,13 +88,12 @@ class CommentController(BaseController):
         meta.Session.commit()
         session['flash'] = 'Comment successfully updated.'
         session.save()
-        # Issue an HTTP redirect
         return redirect_to(post_id=c.post.id, controller='comment', action='view', id=comment.id)
 
     @h.auth.authorize(h.auth.is_valid_user)
     def list(self):
         comments_q = meta.Session.query(model.Comment).filter_by(post_id=c.post.id)
-        comments_q = comments_q.order_by(model.comment_table.c.created.asc())
+        comments_q = comments_q.order_by(model.Comment.created.asc())
         c.paginator = paginate.Page(
             comments_q,
             page=int(request.params.get('page', 1)),

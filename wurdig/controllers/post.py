@@ -59,9 +59,6 @@ class ValidTags(formencode.FancyValidator):
         'be found in the database'
     }
     def _to_python(self, values, state):
-        # Because this is a chained validator, values will contain
-        # a dictionary with a tags key associated with a list of
-        # integer values representing selected tags.
         all_tag_ids = [tag.id for tag in meta.Session.query(model.Tag)]
         for tag_id in values['tags']:
             if tag_id not in all_tag_ids:

@@ -18,20 +18,32 @@
         % endfor
     % endif
     
-    <div id="comments">
-        % if len(c.post.comments):
+    % if request.params['state'] == 'comment_moderated':
+        <div id="moderated">
+            <p>Your comment is currently being held in moderation.</p>
+        </div>
+    % endif
+    
+    % if len(c.post.comments):
+        <div id="comments">
             <h3>${h.plural(len(c.post.comments), 'Response', 'Responses')} to "${c.post.title}"</h3>
 
             % for comment in c.post.comments:
                 <p>Comment: ${comment.content}</p><hr />
             % endfor
-        % endif
-    </div>
+        </div>
+    % endif
     
-    <div id="respond">
-        ${h.form(h.url_for(post_id=c.post.id, controller='comment', action='create'), method='post')}
-            ${fields.body()}
-            ${h.submit('create_comment', 'Create Comment')}
-        ${h.end_form()}
-    </div>
+    % if c.post.comments_allowed:
+        <div id="respond">
+            ${h.form(h.url_for(post_id=c.post.id, controller='comment', action='create'), method='post')}
+                ${fields.body()}
+                ${h.submit('create_comment', 'Create Comment')}
+            ${h.end_form()}
+        </div>
+    % else:
+        <div id="respond_disabled">
+            <p>Comments have been disabled for this post.
+        </div>
+    % endif
 </div>
