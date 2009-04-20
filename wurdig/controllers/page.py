@@ -77,9 +77,6 @@ class NewPageForm(formencode.Schema):
 
 class PageController(BaseController):
     # @todo: delete confirmation
-    
-    def home(self):
-        return render('/derived/page/home.html')
 
     def view(self, slug=None):
         if slug is None:

@@ -97,6 +97,21 @@ class NewPostForm(formencode.Schema):
 
 class PostController(BaseController):
     # @todo: Enable commenting for posts
+    def home(self):
+        posts_q = meta.Session.query(model.Post).filter(
+            model.Post.draft == False
+        )
+        
+        c.paginator = paginate.Page(
+            posts_q,
+            page=int(request.params.get('page', 1)),
+            items_per_page = 2,
+            controller='post',
+            action='home'
+        )
+                
+        return render('/derived/post/home.html')
+    
     def archive(self, year=None, month=None):   
         if year is None:
             abort(404)

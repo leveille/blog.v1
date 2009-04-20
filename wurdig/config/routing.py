@@ -19,7 +19,7 @@ def make_map():
     map.connect('/error/{action}/{id}', controller='error')
 
     # CUSTOM ROUTES HERE
-    map.connect('/', controller='page', action='home')
+    map.connect('/', controller='post', action='home')
     
     map.connect('/post/{post_id}/{controller}/{action}',
                 requirements = dict(page_id='\d+')
