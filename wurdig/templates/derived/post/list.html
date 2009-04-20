@@ -2,28 +2,26 @@
 
 <%def name="heading()"><h1>Post List</h1></%def>
 
-<%def name="buildrow(post)">
-    <tr>
-        <td valign="top">
-            ${h.link_to(
-                post.id,
-                h.url_for('post', id=post.id)
-            )}
-        </td>
-        <td valign="top">
-            ${post.title}
-        </td>
-        <td valign="top">posted or not</td>
-        <td valign="top">${post.created_on.strftime('%c')}</td>
-    </tr>
-</%def>
-
 % if len(c.paginator):
-<p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
-<table class="paginator"><tr><th>Page ID</th><th>Page Title</th><th>Created</th><th>Posted</th></tr>
-% for item in c.paginator:
-    ${buildrow(item)}
-% endfor
-</table>
-<p>${ c.paginator.pager('~2~') }</p>
+    <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
+    
+    <table class="paginator"><tr><th>Page ID</th><th>Page Title</th><th>Created</th><th>Posted</th></tr>
+    % for item in c.paginator:
+        <tr>
+            <td>
+                ${h.link_to(
+                    post.id,
+                    h.url_for('post', id=post.id)
+                )}
+            </td>
+            <td valign="top">
+                ${post.title}
+            </td>
+            <td valign="top">posted or not</td>
+            <td valign="top">${post.created_on.strftime('%c')}</td>
+        </tr>
+    % endfor
+    </table>
+    
+    <p>${ c.paginator.pager('~2~') }</p>
 % endif
