@@ -6,7 +6,7 @@
 <h2>${c.post.title} - New Comment Errors</h2>
 
 <div id="respond">
-    ${h.form(h.url_for(post_id=c.post.id, controller='comment', action='create'), method='post')}
+    ${h.secure_form(h.url_for(post_id=c.post.id, controller='comment', action='create'), method='post')}
         ${fields.body()}
         ${h.submit('create_comment', 'Create Comment')} or
         <!-- 

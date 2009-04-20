@@ -13,6 +13,7 @@ import formencode
 from formencode import htmlfill
 from pylons.decorators import validate
 from pylons.decorators.rest import restrict
+from pylons.decorators.secure import authenticate_form
 import webhelpers.paginate as paginate
 
 log = logging.getLogger(__name__)
@@ -42,6 +43,7 @@ class CommentController(BaseController):
         return render('/derived/comment/new.html')
     
     @restrict('POST')
+    @authenticate_form
     @validate(schema=NewCommentForm(), form='new')
     def create(self):
         comment = model.Comment()

@@ -18,7 +18,10 @@
         % endfor
     % endif
     
-    % if request.params['state'] == 'comment_moderated':
+    <%
+        post_state = request.params.get('state', False)
+    %>
+    % if post_state == 'comment_moderated':
         <div id="moderated">
             <p>Your comment is currently being held in moderation.</p>
         </div>
@@ -36,7 +39,7 @@
     
     % if c.post.comments_allowed:
         <div id="respond">
-            ${h.form(h.url_for(post_id=c.post.id, controller='comment', action='create'), method='post')}
+            ${h.secure_form(h.url_for(post_id=c.post.id, controller='comment', action='create'), method='post')}
                 ${fields.body()}
                 ${h.submit('create_comment', 'Create Comment')}
             ${h.end_form()}
