@@ -93,7 +93,7 @@ class NewPostForm(formencode.Schema):
     chained_validators = [ValidTags()]
 
 class PostController(BaseController):
-    # @todo: Enable commenting for posts
+    # @todo: Enable commenting for posts    
     def home(self):
         posts_q = meta.Session.query(model.Post).filter(
             model.Post.draft == False
@@ -102,7 +102,7 @@ class PostController(BaseController):
         c.paginator = paginate.Page(
             posts_q,
             page=int(request.params.get('page', 1)),
-            items_per_page = 2,
+            items_per_page = 10,
             controller='post',
             action='home'
         )
