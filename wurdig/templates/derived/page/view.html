@@ -6,4 +6,13 @@
 
 <div class="entry">
     ${h.literal(c.page.content)}
+    
+    <p>
+        % if h.auth.authorized(h.auth.is_valid_user):
+            ${h.link_to(
+                'Edit This Page',
+                h.url_for(controller='page', action='edit', id=unicode(c.page.id))
+            )}
+        % endif
+    </p>
 </div>

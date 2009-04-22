@@ -8,6 +8,15 @@
 <div class="entry">
     ${h.literal(c.post.content)}
     
+    <p>
+        % if h.auth.authorized(h.auth.is_valid_user):
+            ${h.link_to(
+                'Edit This Post',
+                h.url_for(controller='post', action='edit', id=unicode(c.post.id))
+            )}
+        % endif
+    </p>
+    
     % if len(c.post.tags):
         Tagged with : 
         % for tag in c.post.tags:
@@ -46,7 +55,7 @@
         </div>
     % else:
         <div id="respond_disabled">
-            <p>Comments have been disabled for this post.
+            <p>Comments have been disabled for this post.</p>
         </div>
     % endif
 </div>

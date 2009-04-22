@@ -19,6 +19,16 @@ import wurdig.model as model
             <div class="entry">
                 <div class="entry-content">
                     ${h.literal(h.chop_at(post.content, '<!--more-->'))}
+                    
+                    <p>
+                        % if h.auth.authorized(h.auth.is_valid_user):
+                            ${h.link_to(
+                                'Edit This Post',
+                                h.url_for(controller='post', action='edit', id=unicode(post.id))
+                            )}
+                        % endif
+                    <p>
+                    
                     <p>
                         % if len(post.tags):
                             Tagged with : 

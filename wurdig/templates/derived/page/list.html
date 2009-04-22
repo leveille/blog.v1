@@ -5,22 +5,38 @@
 % if len(c.paginator):
     <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
     
-    <table class="paginator"><tr><th>Page ID</th><th>Page Title</th><th>Created</th></tr>
-    % for page in c.paginator:
-        <tr>
-            <td>
-                ${h.link_to(
-                    page.id,
-                    h.url_for('page', id=unicode(page.id))
-                )}
-            </td>
-            <td valign="top">
-                ${page.title}
-            </td>
-            <td valign="top">${page.created_on.strftime('%c')}</td>
-        </tr>
-    % endfor
+    <table class="paginator">
+        <thead>
+            <tr>
+                <th>Page Title</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            % for page in c.paginator:
+                <tr>
+                    <td>
+                        ${h.link_to(
+                            h.truncate(page.title),
+                            h.url_for(controller='page', 
+                                  action='view', 
+                                  slug=unicode(page.slug))
+                        )}
+                    </td>
+                    <td>
+                        ${h.link_to(
+                            'Edit',
+                            h.url_for(controller='page', action='edit', id=unicode(page.id))
+                        )} | 
+                        ${h.link_to(
+                            'Delete',
+                            h.url_for(controller='page', action='delete', id=unicode(page.id))
+                        )}
+                    </td>
+                </tr>
+            % endfor
+        </tbody>
     </table>
-    
+
     <p>${ c.paginator.pager('~2~') }</p>
 % endif

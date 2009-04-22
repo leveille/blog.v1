@@ -1,26 +1,59 @@
 <%inherit file="/base/admin.html"/>
 
-<%def name="heading()"><h1>Post List</h1></%def>
+<%def name="title()">Post List</%def>
+
+<h1>Post List</h1>
 
 % if len(c.paginator):
     <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
     
-    <table class="paginator"><tr><th>Page ID</th><th>Page Title</th><th>Created</th><th>Posted</th></tr>
-    % for post in c.paginator:
-        <tr>
-            <td>
-                ${h.link_to(
-                    post.id,
-                    h.url_for('post', id=unicode(post.id))
-                )}
-            </td>
-            <td>
-                ${post.title}
-            </td>
-            <td>posted or not</td>
-            <td>${post.created_on.strftime('%c')}</td>
-        </tr>
-    % endfor
+    <table class="paginator">
+        <thead>
+            <tr>
+                <th>Post Title</th>
+                <th>Posted</th>
+                <th>Comments</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            % for post in c.paginator:
+                <tr>
+                    <td>
+                        % if not post.draft:
+                            ${h.link_to(
+                                h.truncate(post.title),
+                                h.url_for(controller='post', 
+                                      action='view', 
+                                      year=post.posted_on.strftime('%Y'), 
+                                      month=post.posted_on.strftime('%m'), 
+                                      slug=unicode(post.slug))
+                            )}
+                        % else:
+                            ${h.truncate(post.title)}
+                        % endif
+                    </td>
+                    <td>
+                        % if post.draft:
+                            Draft
+                        % else:
+                            ${post.posted_on.strftime('%c')}
+                        % endif
+                    </td>
+                    <td>${len(post.comments)}</td>
+                    <td>
+                        ${h.link_to(
+                            'Edit',
+                            h.url_for(controller='post', action='edit', id=unicode(post.id))
+                        )} | 
+                        ${h.link_to(
+                            'Delete',
+                            h.url_for(controller='post', action='delete', id=unicode(post.id))
+                        )}
+                    </td>
+                </tr>
+            % endfor
+        </tbody>
     </table>
     
     <p>${ c.paginator.pager('~2~') }</p>
