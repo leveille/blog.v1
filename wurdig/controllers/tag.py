@@ -177,7 +177,7 @@ class TagController(BaseController):
         meta.Session.commit()
         session['flash'] = 'Tag successfully updated.'
         session.save()
-        return redirect_to(controller='tag', action='archive', slug=tag.slug)
+        return redirect_to(controller='tag', action='list')
     
     @h.auth.authorize(h.auth.is_valid_user)
     def list(self):
@@ -185,7 +185,7 @@ class TagController(BaseController):
         c.paginator = paginate.Page(
             tags_q,
             page=int(request.params.get('page', 1)),
-            items_per_page = 10,
+            items_per_page = 50,
             controller='tag',
             action='list',
         )
@@ -205,4 +205,4 @@ class TagController(BaseController):
         meta.Session.commit()
         session['flash'] = 'Tag successfully deleted.'
         session.save()
-        return redirect_to(controller='tag', action='cloud')
+        return redirect_to(controller='tag', action='list')
