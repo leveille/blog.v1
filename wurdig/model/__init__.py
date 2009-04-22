@@ -38,7 +38,7 @@ posts_table = schema.Table('posts', meta.metadata,
     schema.Column('slug', types.Unicode(125), nullable=False, unique=True),
     schema.Column('content', types.Text(), nullable=False),
     schema.Column('comments_allowed', types.Boolean(), default=True),
-    schema.Column('created_on', types.TIMESTAMP(), default=now(), index=True),
+    schema.Column('created_on', types.TIMESTAMP(), default=now()),
     schema.Column('draft', types.Boolean(), default=True),
     schema.Column('posted_on', types.TIMESTAMP(), index=True),
 )
@@ -87,10 +87,10 @@ orm.mapper(Tag, tags_table, order_by='name')
 orm.mapper(Page, pages_table, order_by='title')
 orm.mapper(Post, posts_table, order_by='posted_on DESC', polymorphic_identity='posts', properties={
     'comments':orm.relation(Comment, backref='posts', cascade='all',order_by='created_on', 
-                            primaryjoin=and_(
-                                             posts_table.c.id==comments_table.c.post_id, 
-                                             comments_table.c.approved==True
-                                             )
-                            ),
+        primaryjoin=and_(
+                posts_table.c.id==comments_table.c.post_id, 
+                comments_table.c.approved==True
+        )
+    ),
     'tags':orm.relation(Tag, secondary=poststags_table)
 })

@@ -93,7 +93,7 @@ class NewPostForm(formencode.Schema):
     chained_validators = [ValidTags()]
 
 class PostController(BaseController):
-    # @todo: Enable commenting for posts    
+    # @todo: Enable commenting for posts        
     def home(self):
         posts_q = meta.Session.query(model.Post).filter(
             model.Post.draft == False
