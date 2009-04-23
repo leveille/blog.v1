@@ -32,7 +32,7 @@ class UniqueSlug(formencode.FancyValidator):
     }
     def _to_python(self, value, state):
         # Ensure we have a valid string
-        value = formencode.validators.UnicodeString(max=30).to_python(value, state)
+        value = formencode.validators.UnicodeString(max=100).to_python(value, state)
         # validate that slug only contains letters, numbers, and dashes
         result = re.compile("[^\w-]").search(value)
         if result:
@@ -74,12 +74,13 @@ class NewPostForm(formencode.Schema):
     filter_extra_fields = True
     title = formencode.validators.UnicodeString(
         not_empty=True,
+        max=100, 
         messages={
             'empty':'Enter a post title'
         },
         strip=True
     )
-    slug = UniqueSlug(not_empty=True, max=30, strip=True)
+    slug = UniqueSlug(not_empty=True, max=100, strip=True)
     content = formencode.validators.UnicodeString(
         not_empty=True,
         messages={
@@ -92,8 +93,8 @@ class NewPostForm(formencode.Schema):
     tags = formencode.foreach.ForEach(formencode.validators.Int())
     chained_validators = [ValidTags()]
 
-class PostController(BaseController):
-    # @todo: Enable commenting for posts        
+class PostController(BaseController): 
+     
     def home(self):
         posts_q = meta.Session.query(model.Post).filter(
             model.Post.draft == False
@@ -131,7 +132,7 @@ class PostController(BaseController):
         c.paginator = paginate.Page(
             posts_q,
             page=int(request.params.get('page', 1)),
-            items_per_page = 1,
+            items_per_page = 10,
             controller='post',
             action='archive',
             year=year,
@@ -209,10 +210,14 @@ class PostController(BaseController):
         c.selected_tags = [str(tag.id) for tag in c.post.tags]
         
         values = {
-            'id':c.post.id,
-            'title':c.post.title,
-            'slug':c.post.slug,
-            'content':c.post.content,
+            'id':unicode(c.post.id),
+            'title':unicode(c.post.title),
+            'slug':unicode(c.post.slug),
+            ## Setting errors to replace
+            ## App failing w/ content not properly encoded
+            ## post WP import.  This will hopefully only be
+            ## a temporary solution
+            'content':unicode(c.post.content, errors='replace'),
             'draft':c.post.draft,
             'comments_allowed':c.post.comments_allowed,
             'tags':c.selected_tags
@@ -270,11 +275,11 @@ class PostController(BaseController):
     
     @h.auth.authorize(h.auth.is_valid_user)
     def list(self):
-        posts_q = meta.Session.query(model.Post).order_by(model.Post.created_on.desc())
+        posts_q = meta.Session.query(model.Post).order_by([model.Post.draft.desc(),model.Post.posted_on.desc()])
         c.paginator = paginate.Page(
             posts_q,
             page=int(request.params.get('page', 1)),
-            items_per_page = 10,
+            items_per_page = 30,
             controller='post',
             action='list',
         )

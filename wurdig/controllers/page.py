@@ -61,12 +61,13 @@ class NewPageForm(formencode.Schema):
     filter_extra_fields = True
     title = formencode.validators.UnicodeString(
         not_empty=True,
+        max=100, 
         messages={
             'empty':'Enter a page title'
         },
         strip=True
     )
-    slug = UniqueSlug(not_empty=True, max=30, strip=True)
+    slug = UniqueSlug(not_empty=True, max=100, strip=True)
     content = formencode.validators.UnicodeString(
         not_empty=True,
         messages={

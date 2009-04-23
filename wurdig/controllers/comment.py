@@ -21,9 +21,9 @@ log = logging.getLogger(__name__)
 class NewCommentForm(formencode.Schema):
     allow_extra_fields = True
     filter_extra_fields = True
-    name = formencode.validators.String(not_empty=True)
-    email = formencode.validators.Email(not_empty=True)
-    url = formencode.validators.URL(not_empty=False, check_exists=True)
+    name = formencode.validators.String(not_empty=True, max=100)
+    email = formencode.validators.Email(not_empty=True, max=50)
+    url = formencode.validators.URL(not_empty=False, check_exists=True, max=125)
     content = formencode.validators.String(
         not_empty=True,
         messages={

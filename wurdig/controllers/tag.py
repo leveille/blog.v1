@@ -119,7 +119,7 @@ class TagController(BaseController):
         c.paginator = paginate.Page(
             query,
             page=int(request.params.get('page', 1)),
-            items_per_page = 2,
+            items_per_page = 10,
             controller='tag',
             action='archive',
             slug=slug
