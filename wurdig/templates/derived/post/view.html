@@ -6,34 +6,35 @@
 <h2>${c.post.title}</h2>
 
 <div class="entry">
+
     ${h.literal(c.post.content)}
     
-    <p>
-        % if h.auth.authorized(h.auth.is_valid_user):
+    % if h.auth.authorized(h.auth.is_valid_user):
+        <p>
             ${h.link_to(
                 'Edit This Post',
                 h.url_for(controller='post', action='edit', id=unicode(c.post.id))
             )}
-        % endif
-    </p>
+        </p>
+    % endif
     
     % if len(c.post.tags):
-        Tagged with : 
-        % for tag in c.post.tags:
-            ${h.link_to(
-                tag.name,
-                h.url_for(controller='tag', action='archive', slug=tag.slug)
-            )}
-        % endfor
+        <p id="tagged">
+            Tagged with : 
+            % for tag in c.post.tags:
+                ${h.link_to(
+                    tag.name,
+                    h.url_for(controller='tag', action='archive', slug=tag.slug)
+                )}
+            % endfor
+        </p>
     % endif
     
     <%
         post_state = request.params.get('state', False)
     %>
     % if post_state == 'comment_moderated':
-        <div id="moderated">
-            <p>Your comment is currently being held in moderation.</p>
-        </div>
+        <p id="moderated">Your comment is currently being held in moderation.</p>
     % endif
     
     % if len(c.post.comments):
@@ -54,8 +55,6 @@
             ${h.end_form()}
         </div>
     % else:
-        <div id="respond_disabled">
-            <p>Comments have been disabled for this post.</p>
-        </div>
+        <p id="respond_disabled">Comments have been disabled for this post.</p>
     % endif
 </div>

@@ -19,18 +19,18 @@ import wurdig.model as model
             <div class="entry">
                 <div class="entry-content">
                     ${h.literal(h.chop_at(post.content, '<!--more-->'))}
-                    
-                    <p>
-                        % if h.auth.authorized(h.auth.is_valid_user):
+
+                    % if h.auth.authorized(h.auth.is_valid_user):
+                        <p>
                             ${h.link_to(
                                 'Edit This Post',
                                 h.url_for(controller='post', action='edit', id=unicode(post.id))
                             )}
-                        % endif
-                    <p>
-                    
-                    <p>
-                        % if len(post.tags):
+                        </p>
+                    % endif
+
+                    % if len(post.tags):
+                        <p>
                             Tagged with : 
                             % for tag in post.tags:
                                 ${h.link_to(
@@ -38,8 +38,8 @@ import wurdig.model as model
                                     h.url_for(controller='tag', action='archive', slug=tag.slug)
                                 )}
                             % endfor
-                        % endif
-                    </p>
+                        </p>
+                    % endif
                     
                     <p>
                         % if len(post.comments):
@@ -70,8 +70,8 @@ import wurdig.model as model
         </div>
         <p>${ c.paginator.pager('~2~') }</p>
     % else:
-    <p>
-        No posts were found that matched your request.
-    </p>
+        <p>
+            No posts were found that matched your request.
+        </p>
     % endif
 </%def>
