@@ -1,19 +1,6 @@
-This file is for you to describe the Wurdig application. Typically
-you would include information such as the information below:
+# Wurdig: My Pylons Blog #
 
-Installation and Setup
-======================
+## Links ##
 
-Install ``Wurdig`` using easy_install::
-
-    easy_install Wurdig
-
-Make a config file as follows::
-
-    paster make-config Wurdig config.ini
-
-Tweak the config file as appropriate and then setup the application::
-
-    paster setup-app config.ini
-
-Then you are ready to go.
+* [Project Description](http://jasonleveille.com/2009/02/graduate-school-independent-study/ "Project Description")
+* [Issue Tracking](http://leveille.lighthouseapp.com/projects/28382-wurdig/overview "Issue Tracking") - Which I've been horrible about using
