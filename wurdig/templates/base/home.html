@@ -26,19 +26,16 @@ ${wurdig.doctype()}
                 </div>
                 
                 <div id="sidebar" class="grid_8">
+                    <div id="archives" class="grid_4 alpha">
+                        ${self.archives()}
+                    </div>
+                    <div id="tags" class="grid_4 omega">
+                        ${self.tags()}
+                    </div>
                     <div id="twitter-updates">
                         ${self.twitter_updates()}
                     </div>
-                    <div id="categories" class="grid_4 alpha">
-                        ${self.categories()}
-                    </div>
-                    <div id="archives" class="grid_4 omega">
-                        ${self.archives()}
-                    </div>
-                    <div id="tags" class="grid_4 alpha">
-                        ${self.tags()}
-                    </div>
-                    <div id="recent-comments" class="grid_4 omega">
+                    <div id="recent-comments">
                         ${self.recent_comments()}
                     </div> 
                     <div id="development-stream">
@@ -62,16 +59,6 @@ ${wurdig.doctype()}
         <li>Update</li>
         <li>Update</li>
         <li>Update</li>
-    </ul>
-</%def>
-
-<%def name="categories()">
-    <h4>Categories</h4>
-    <ul>
-        <li>Category</li>
-        <li>Category</li>
-        <li>Category</li>
-        <li>Category</li>
     </ul>
 </%def>
 
