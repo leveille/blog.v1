@@ -122,6 +122,8 @@ class CommentController(BaseController):
         for k,v in self.form_result.items():
             if getattr(comment, k) != v:
                 setattr(comment, k, v)
+        content, errors = h.tidy_fragment(comment.content)
+        comment.content = content
         meta.Session.commit()
         session['flash'] = 'Comment successfully updated.'
         session.save()

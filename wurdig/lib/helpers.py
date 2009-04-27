@@ -9,3 +9,6 @@ from webhelpers.html import literal
 from webhelpers.text import truncate, chop_at, plural
 from routes import url_for
 from wurdig.lib import auth
+
+from tidylib import tidy_fragment
+tidylib.BASE_OPTIONS = {"output-xhtml": 0}
