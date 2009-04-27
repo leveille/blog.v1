@@ -16,14 +16,15 @@ from sqlalchemy.sql import and_, delete
 from formencode import htmlfill
 from wurdig.lib.base import BaseController, render
 from authkit.authorize.pylons_adaptors import authorize
+from BeautifulSoup import BeautifulSoup
 
 log = logging.getLogger(__name__)
 
-class Tidy(formencode.FancyValidator):
+class Beautify(formencode.FancyValidator):
     def _to_python(self, value, state):
         if value['content'] not in ['', u'', None]:
-            content, errors = h.tidy_fragment(value['content'])
-            value['content'] = content
+            soup = BeautifulSoup(value['content'])
+            value['content'] = soup.prettify()
         return value
     
 class ConstructSlug(formencode.FancyValidator):
@@ -76,7 +77,7 @@ class ValidTags(formencode.FancyValidator):
         return values
 
 class NewPostForm(formencode.Schema):
-    pre_validators = [ConstructSlug(), Tidy()]
+    pre_validators = [ConstructSlug(), Beautify()]
     allow_extra_fields = True
     filter_extra_fields = True
     title = formencode.validators.UnicodeString(

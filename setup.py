@@ -17,7 +17,7 @@ setup(
         "SQLAlchemy>=0.5,<=0.5.99",
         "Mako>=0.2.2,<=0.2.99",
         "AuthKit>=0.4.3,<=0.4.99",
-        "pytidylib>=0.1.1,<=0.1.99",
+        "BeautifulSoup>=3.1.0.1,<=3.1.9.9",
     ],
     setup_requires=["PasteScript>=1.6.3"],
     packages=find_packages(exclude=['ez_setup']),
