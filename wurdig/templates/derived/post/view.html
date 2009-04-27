@@ -30,19 +30,12 @@
         </p>
     % endif
     
-    <%
-        post_state = request.params.get('state', False)
-    %>
-    % if post_state == 'comment_moderated':
-        <p id="moderated">Your comment is currently being held in moderation.</p>
-    % endif
-    
     % if len(c.post.comments):
         <div id="comments">
             <h3>${h.plural(len(c.post.comments), 'Response', 'Responses')} to "${c.post.title}"</h3>
 
             % for comment in c.post.comments:
-                <p>Comment: ${comment.content}</p><hr />
+                ${h.literal(comment.content)}
             % endfor
         </div>
     % endif

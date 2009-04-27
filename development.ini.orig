@@ -23,6 +23,8 @@ cache_dir = %(here)s/data
 beaker.session.key = wurdig
 beaker.session.secret = somesecret
 
+akismet.api_key=''
+
 # If you'd like to fine-tune the individual locations of the cache data dirs
 # for the Cache data, or the Session saves, un-comment the desired settings
 # here:
