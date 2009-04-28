@@ -6,7 +6,12 @@
 <h2>${c.post.title}</h2>
 
 <div class="entry">
-
+    <div>
+        ${h.link_to(
+            'Feed',
+            h.url_for(controller='comment', action='pfeed', post_id=unicode(c.post.id))
+        )}
+    </div>
     ${h.literal(c.post.content)}
     
     % if h.auth.authorized(h.auth.is_valid_user):
