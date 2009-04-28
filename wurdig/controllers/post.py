@@ -251,14 +251,14 @@ class PostController(BaseController):
         c.selected_tags = [str(tag.id) for tag in c.post.tags]
         
         values = {
-            'id':unicode(c.post.id),
-            'title':unicode(c.post.title),
-            'slug':unicode(c.post.slug),
+            'id':c.post.id,
+            'title':c.post.title,
+            'slug':c.post.slug,
             ## Setting errors to replace
             ## App failing w/ content not properly encoded
             ## post WP import.  This will hopefully only be
             ## a temporary solution
-            'content':unicode(c.post.content, errors='replace'),
+            'content':c.post.content,
             'draft':c.post.draft,
             'comments_allowed':c.post.comments_allowed,
             'tags':c.selected_tags
