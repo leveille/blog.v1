@@ -23,6 +23,8 @@ cache_dir = %(here)s/data
 beaker.session.key = wurdig
 beaker.session.secret = somesecret
 
+blog.title=
+blog.subtitle=
 akismet.api_key=
 
 # If you'd like to fine-tune the individual locations of the cache data dirs
