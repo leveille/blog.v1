@@ -4,8 +4,9 @@
 ${wurdig.doctype()}
 <html>
     <head>
-        ${wurdig.meta()}
         <title>${self.title()}</title>
+        ${wurdig.meta()}
+        ${self.ps_feeds()}
         ${wurdig.css()}
     </head>
     
@@ -45,6 +46,8 @@ ${wurdig.doctype()}
 </html>
 
 <%def name="title()">Jason Leveille's Blog</%def>
+
+<%def name="ps_feeds()"></%def>
 
 <%def name="archives()">
     <h4>Archives</h4>
