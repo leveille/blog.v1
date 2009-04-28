@@ -4,7 +4,7 @@ import wurdig.lib.helpers as h
 import formencode
 import webhelpers.paginate as paginate
 
-from pylons import request, response, session, tmpl_context as c
+from pylons import config, request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from wurdig import model
 from wurdig.lib.base import BaseController, render
@@ -13,7 +13,9 @@ from pylons.decorators import validate
 from pylons.decorators.rest import restrict
 from pylons.decorators.secure import authenticate_form
 from webhelpers.html.converters import markdown
+from webhelpers.feedgenerator import Atom1Feed
 from wurdig.lib.akismet import Akismet
+from sqlalchemy.sql import and_, delete
 
 log = logging.getLogger(__name__)
     
@@ -26,7 +28,6 @@ class SpamCheck(formencode.FancyValidator):
         if request.urlvars['action'] == 'save':
             return values
         
-        from pylons import config
         # Thanks for the help from http://soyrex.com/blog/akismet-django-stop-comment-spam/
         a = Akismet(config['akismet.api_key'], blog_url=request.server_name)
         akismet_data = {}
@@ -68,6 +69,98 @@ class CommentController(BaseController):
         if c.post is None:
             abort(404)
         return render('/derived/comment/new.html')
+    
+    def list(self):
+        comments_q = meta.Session.query(model.Comment).filter_by(pageid=c.page.id)
+        comments_q = comments_q.order_by(model.comment_table.c.created.asc())
+        c.paginator = paginate.Page(
+            comments_q,
+            page=int(request.params.get('page', 1)),
+            items_per_page=10,
+            pageid=c.pageid,
+            controller='comment',
+            action='list'
+        )
+        return render('/derived/comment/list.html')
+    
+    def feed(self):        
+        comments_q = meta.Session.query(model.Comment).filter(model.Comment.approved==True)
+        comments_q = comments_q.order_by(model.comments_table.c.created_on.desc()).limit(20)
+        
+        feed = Atom1Feed(
+            title=u"Comments for " + config['blog.title'],
+            subtitle=config['blog.subtitle'],
+            link=u"http://%s" % request.server_name,
+            description=config['blog.subtitle'],
+            language=u"en",
+        )
+        
+        for comment in comments_q:
+            post_q = meta.Session.query(model.Post)
+            c.post = comment.post_id and post_q.filter_by(id=int(comment.post_id)).first() or None
+            if c.post is not None:
+                feed.add_item(
+                    title=u"Comment on %s" % c.post.title,
+                    link=h.url_for(
+                        controller='post', 
+                        action='view', 
+                        year=c.post.posted_on.strftime('%Y'), 
+                        month=c.post.posted_on.strftime('%m'), 
+                        slug=c.post.slug,
+                        anchor=u"comment-" + str(comment.id)
+                    ),
+                    description=comment.content
+                )
+                
+        response.content_type = u'application/atom+xml'
+        return feed.writeString('utf-8')
+    
+    def pfeed(self, post_id=None, format='atom'):
+        if post_id is None:
+            abort(404)
+        
+        if format != 'atom':
+            abort(404)
+        
+        post_q = meta.Session.query(model.Post)
+        c.post = post_id and post_q.filter(and_(model.Post.id==int(post_id), 
+                                                model.Post.draft==False)).first() or None
+        if c.post is None:
+            abort(404)
+        comments_q = meta.Session.query(model.Comment).filter(and_(model.Comment.post_id==c.post.id, 
+                                                                   model.Comment.approved==True))
+        comments_q = comments_q.order_by(model.comments_table.c.created_on.desc()).limit(10)
+        
+        feed = Atom1Feed(
+            title=config['blog.title'] + u' - ' + c.post.title,
+            subtitle=u'Most Recent Comments',
+            link=h.url_for(
+                    controller='post', 
+                    action='view', 
+                    year=c.post.posted_on.strftime('%Y'), 
+                    month=c.post.posted_on.strftime('%m'), 
+                    slug=c.post.slug
+                ),
+            description=u"Most recent comments for %s" % c.post.title,
+            language=u"en",
+        )
+        
+        for comment in comments_q:
+            feed.add_item(
+                title=c.post.title + u" comment #%s" % comment.id,
+                link=h.url_for(
+                    controller='post', 
+                    action='view', 
+                    year=c.post.posted_on.strftime('%Y'), 
+                    month=c.post.posted_on.strftime('%m'), 
+                    slug=c.post.slug,
+                    anchor=u"comment-" + str(comment.id)
+                ),
+                description=comment.content
+            )
+                
+        response.content_type = 'application/%s+xml' % format
+        return feed.writeString('utf-8')
     
     @restrict('POST')
     @authenticate_form

@@ -8,10 +8,11 @@ import calendar
 import formencode
 import re
 
-from pylons import request, response, session, tmpl_context as c
+from pylons import config, request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
 from pylons.decorators.rest import restrict
+from webhelpers.feedgenerator import Atom1Feed
 from sqlalchemy.sql import and_, delete
 from formencode import htmlfill
 from wurdig.lib.base import BaseController, render
@@ -101,22 +102,54 @@ class NewPostForm(formencode.Schema):
     tags = formencode.foreach.ForEach(formencode.validators.Int())
     chained_validators = [ValidTags()]
 
-class PostController(BaseController): 
-     
+class PostController(BaseController):
+    
     def home(self):
         posts_q = meta.Session.query(model.Post).filter(
             model.Post.draft == False
         )
-        
         c.paginator = paginate.Page(
             posts_q,
             page=int(request.params.get('page', 1)),
             items_per_page = 10,
             controller='post',
             action='home'
-        )
-                
+        )      
         return render('/derived/post/home.html')
+        
+    def feed(self, format='atom'):
+        if format != 'atom':
+            abort(404)
+        
+        posts_q = meta.Session.query(model.Post).filter(
+            model.Post.draft == False
+        ).order_by([model.Post.posted_on.desc()]).limit(10)
+        
+        feed = Atom1Feed(
+            title=config['blog.title'],
+            subtitle=config['blog.subtitle'],
+            link=u"http://%s" % request.server_name,
+            description=u"Most recent posts for %s" % config['blog.title'],
+            language=u"en",
+        )
+        
+        for post in posts_q:
+            feed.add_item(
+                title=post.title,
+                link=h.url_for(
+                    controller='post', 
+                    action='view', 
+                    year=post.posted_on.strftime('%Y'), 
+                    month=post.posted_on.strftime('%m'), 
+                    slug=post.slug
+                ),
+                description=h.chop_at(post.content, '<!--more-->'),
+                # Why can't I do a tuple of post.tags here?
+                categories=tuple(post.tags)
+            )
+                
+        response.content_type = 'application/%s+xml' % format
+        return feed.writeString('utf-8')
     
     def archive(self, year=None, month=None):   
         if year is None:
