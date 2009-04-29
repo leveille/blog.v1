@@ -1,5 +1,6 @@
 <%inherit file="/base/secondary.html"/>
 <%namespace file="comment_fields.html" name="fields" import="*"/>
+<%namespace file="/component/tags.html" name="tags" import="*"/>
 
 <%def name="title()">${parent.title()} &gt; ${c.post.title}</%def>
 <%def name="ps_feeds()">
@@ -28,17 +29,7 @@
         </p>
     % endif
     
-    % if len(c.post.tags):
-        <p id="tagged">
-            Tagged with : 
-            % for tag in c.post.tags:
-                ${h.link_to(
-                    tag.name,
-                    h.url_for(controller='tag', action='archive', slug=tag.slug)
-                )}
-            % endfor
-        </p>
-    % endif
+    ${tags.tag_list(c.post.tags)}
     
     % if len(c.post.comments):
         <div id="comments">

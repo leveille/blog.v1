@@ -1,0 +1,17 @@
+<%def name="tag_list(tags)">
+    % if len(tags):
+        <p>
+            Tagged with : 
+            <% _tags = [] %>
+            % for tag in tags:
+                <%
+                    _tags.append(h.link_to(
+                        tag.name,
+                        h.url_for(controller='tag', action='archive', slug=tag.slug)
+                    ))
+                %>
+            % endfor
+            ${h.literal(', '.join(_tags))}
+        </p>
+    % endif
+</%def>
