@@ -4,13 +4,13 @@
 
 <h2>Tag Cloud</h2>
 
-<div class="tag-cloud">
-    <ul>
+<ul class="tag-cloud">
     % for tag in c.tags:
-        <li>${h.link_to(
+        <li>
+            ${h.link_to(
                 tag.name,
                 h.url_for(controller='tag', action='archive', slug=tag.slug)
-            )}</li>
+            )}
+        </li>
     % endfor
-    </ul>
-</div>
+</ul>

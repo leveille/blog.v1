@@ -11,8 +11,9 @@ ${wurdig.doctype()}
     </head>
     <%
         controller = request.urlvars['controller']
+        action = request.urlvars['action']
         slug = None
-        if request.urlvars['slug'] is not None:
+        if action == 'page':
         	slug = request.urlvars['slug']
     %>
     <body id="secondary" class="${controller} ${slug}">
@@ -32,14 +33,11 @@ ${wurdig.doctype()}
                 </div>
                 
                 <div id="sidebar" class="grid_5">
-                    <div id="archives">
-                        ${self.archives()}
-                    </div>
                     <div id="tags">
-                        ${self.tags()}
+                        ${wurdig.tags()}
                     </div>
                     <div id="recent-comments">
-                        ${self.recent_comments()}
+                        ${wurdig.recent_comments()}
                     </div>
                 </div>
             </div>
@@ -53,43 +51,3 @@ ${wurdig.doctype()}
 <%def name="title()">Jason Leveille's Blog</%def>
 
 <%def name="ps_feeds()"></%def>
-
-<%def name="archives()">
-    <h4>Archives</h4>
-    <ul>
-        <li>Archive</li>
-        <li>Archive</li>
-        <li>Archive</li>
-        <li>Archive</li>
-    </ul>
-</%def>
-
-<%def name="tags()">
-    <h4>Tags</h4>
-    <ul>
-        <li>Tag</li>
-        <li>Tag</li>
-        <li>Tag</li>
-        <li>Tag</li>
-    </ul>
-</%def>
-
-<%def name="recent_comments()">
-    <h4>Recent Comments</h4>
-    <ul>
-        <li>Comment</li>
-        <li>Comment</li>
-        <li>Comment</li>
-        <li>Comment</li>
-    </ul>
-</%def>
-
-<%def name="development_stream()">
-    <h4>Development Stream</h4>
-    <ul>
-        <li>Link</li>
-        <li>Link</li>
-        <li>Link</li>
-        <li>Link</li>
-    </ul>
-</%def>

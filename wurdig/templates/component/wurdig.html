@@ -1,3 +1,8 @@
+<%!
+import wurdig.model as model
+import wurdig.model.meta as meta
+%>
+
 <%def name="doctype()">
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 </%def>
@@ -107,6 +112,90 @@
             </div>
         </div>
     </div>
+</%def>
+
+<%def name="twitter_updates()">
+    <h4>Twitter Updates</h4>
+    <ul>
+        <li>Update</li>
+        <li>Update</li>
+        <li>Update</li>
+        <li>Update</li>
+    </ul>
+</%def>
+
+<%def name="tags()">
+    <%
+        tags = getattr(c, "tags", None)
+        if tags is None:
+            tag_q = meta.Session.query(model.Tag)
+            tags = tag_q.all()
+    %>
+    % if len(tags):
+        <h4>Tags</h4>
+        <ul class="tag-cloud">
+            % for tag in tags:
+                <li>
+                    ${h.link_to(
+                        tag.name,
+                        h.url_for(controller='tag', action='archive', slug=tag.slug)
+                    )}
+                </li>
+            % endfor
+        </ul>
+    % endif
+</%def>
+
+<%def name="recent_comments()">
+    <%
+        comments_q = meta.Session.query(model.Comment).filter(model.Comment.approved==True)
+        comments_q = comments_q.order_by(model.comments_table.c.created_on.desc()).limit(5)
+    %>
+    % if comments_q is not None:
+        <h4>Recent Comments</h4>
+        <ul>
+            % for comment in comments_q:
+                <%
+                    post_q = meta.Session.query(model.Post)
+                    post = comment.post_id and post_q.filter_by(id=int(comment.post_id)).first() or None
+                %>
+                % if post is not None:
+                    <li>
+                        % if comment.url is not None:
+                            ${h.link_to(
+                                h.literal(comment.name),
+                                h.literal(comment.url)
+                            )} 
+                        % else:
+                            h.literal(comment.name)
+                        % endif
+                        on 
+                        ${h.link_to(
+                            post.title,
+                            h.url_for(
+                                controller='post', 
+                                action='view', 
+                                year=post.posted_on.strftime('%Y'), 
+                                month=post.posted_on.strftime('%m'), 
+                                slug=post.slug,
+                                anchor=u"comment-" + str(comment.id)
+                            )
+                        )}
+                    </li>
+                % endif
+            % endfor
+        </ul>
+    % endif
+</%def>
+
+<%def name="development_stream()">
+    <h4>Development Stream</h4>
+    <ul>
+        <li>Link</li>
+        <li>Link</li>
+        <li>Link</li>
+        <li>Link</li>
+    </ul>
 </%def>
 
 <%def name="footer()">

@@ -61,7 +61,7 @@ def make_map():
     # but I'm unsure how to proceed otherwise in order to get
     # a nice clean url for the tag slug
     map.connect('/tag/{action}', controller='tag', 
-                requirements = {'action' : 'new|create|edit|save|list|delete'})
+                requirements = {'action' : 'cloud|new|create|edit|save|list|delete'})
     
     map.connect('/tag/{slug}', controller='tag', 
                 action='archive', 
