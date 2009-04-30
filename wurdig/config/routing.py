@@ -21,14 +21,19 @@ def make_map():
     # CUSTOM ROUTES HERE
     map.connect('/', controller='post', action='home')
     
-    map.connect('/feed/{format}', 
+    map.connect('/feeds/blog', 
                 controller='post', 
-                action='feed', 
-                requirements = dict(format='atom'))
+                action='feeds')
     
-    map.connect('/comments/feed', 
+    map.connect('/feeds/comments', 
                 controller='comment', 
-                action='feed')
+                action='feeds')
+    
+    map.connect('/feeds/comments/{post_id}',
+                controller='comment',
+                action='post_comment_feed',
+                requirements = dict(post_id='\d+')
+    )
     
     map.connect('/post/{post_id}/{controller}/{action}',
                 requirements = dict(post_id='\d+')
@@ -36,11 +41,6 @@ def make_map():
     
     map.connect('/post/{post_id}/{controller}/{action}/{id}',
                 requirements = dict(post_id='\d+', id='\d+')
-    )
-    
-    map.connect('/post/{post_id}/{controller}/pfeed/{format}',
-                action='pfeed',
-                requirements = dict(post_id='\d+', format='atom')
     )
     
     map.connect('/{year}/{month}/{slug}', controller='post', 

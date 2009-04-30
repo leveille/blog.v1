@@ -117,9 +117,7 @@ class PostController(BaseController):
         )      
         return render('/derived/post/home.html')
         
-    def feed(self, format='atom'):
-        if format != 'atom':
-            abort(404)
+    def feeds(self):
         
         posts_q = meta.Session.query(model.Post).filter(
             model.Post.draft == False
@@ -145,10 +143,11 @@ class PostController(BaseController):
                 ),
                 description=h.chop_at(post.content, '<!--more-->'),
                 # Why can't I do a tuple of post.tags here?
-                categories=tuple(post.tags)
+                # categories=tuple(post.tags)
+                categories=()
             )
                 
-        response.content_type = 'application/%s+xml' % format
+        response.content_type = 'application/atom+xml'
         return feed.writeString('utf-8')
     
     def archive(self, year=None, month=None):   

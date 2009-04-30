@@ -18,8 +18,8 @@ import wurdig.model.meta as meta
     <meta name="geo.placename" content="Frederick, Maryland">
     <meta name="geo.region" content="US-MD">
     <meta name="geo.country" content="US">
-    ${h.auto_discovery_link(h.url_for(controller='post', action='feed', format='atom'), feed_type='atom', title='Recent Posts')}
-    ${h.auto_discovery_link(h.url_for(controller='comment', action='feed'), feed_type='atom', title='Recent Comments')}
+    ${h.auto_discovery_link(h.url_for(controller='post', action='feeds'), feed_type='atom', title='Recent Posts')}
+    ${h.auto_discovery_link(h.url_for(controller='comment', action='feeds'), feed_type='atom', title='Recent Comments')}
 </%def>
 
 <%def name="css()">

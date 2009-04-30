@@ -7,7 +7,7 @@
     ${h.auto_discovery_link(
         h.url_for(
             controller='comment', 
-            action='pfeed', 
+            action='post_comment_feed', 
             post_id=unicode(c.post.id)
         ), 
         feed_type='atom', 

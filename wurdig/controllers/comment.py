@@ -83,7 +83,8 @@ class CommentController(BaseController):
         )
         return render('/derived/comment/list.html')
     
-    def feed(self):        
+    def feeds(self):  
+                
         comments_q = meta.Session.query(model.Comment).filter(model.Comment.approved==True)
         comments_q = comments_q.order_by(model.comments_table.c.created_on.desc()).limit(20)
         
@@ -115,11 +116,8 @@ class CommentController(BaseController):
         response.content_type = u'application/atom+xml'
         return feed.writeString('utf-8')
     
-    def pfeed(self, post_id=None, format='atom'):
+    def post_comment_feed(self, post_id=None):
         if post_id is None:
-            abort(404)
-        
-        if format != 'atom':
             abort(404)
         
         post_q = meta.Session.query(model.Post)
@@ -159,7 +157,7 @@ class CommentController(BaseController):
                 description=comment.content
             )
                 
-        response.content_type = 'application/%s+xml' % format
+        response.content_type = 'application/atom+xml'
         return feed.writeString('utf-8')
     
     @restrict('POST')
