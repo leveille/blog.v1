@@ -2,56 +2,75 @@
 
 <%def name="paginated()">
     % if len(c.paginator):
-        <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
+    
+        % if request.urlvars['action'] != 'home':
+            <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
+        % endif
+        
         <div class="entries">
         % for post in c.paginator:
-            <h3>
-                ${h.link_to(
-                    post.title,
-                    h.url_for(controller='post', 
-                              action='view', 
-                              year=post.posted_on.strftime('%Y'), 
-                              month=post.posted_on.strftime('%m'), 
-                              slug=post.slug)
-                )}
-            </h3>
+            <h2>
+                <%
+                    post_link = h.link_to(
+                                    '%s',
+                                    h.url_for(controller='post', 
+                                              action='view', 
+                                              year=post.posted_on.strftime('%Y'), 
+                                              month=post.posted_on.strftime('%m'), 
+                                              slug=post.slug)
+                                )
+                %>
+                ${post_link % post.title}
+            </h2>
+            <p class="post-date">${post.posted_on.strftime('%B %d, %Y')}</p>
             <div class="entry">
                 <div class="entry-content">
-                    ${h.literal(h.chop_at(post.content, '<!--more-->'))}
-
-                    % if h.auth.authorized(h.auth.is_valid_user):
-                        <p>
-                            ${h.link_to(
-                                'Edit This Post',
-                                h.url_for(controller='post', action='edit', id=unicode(post.id))
-                            )}
-                        </p>
-                    % endif
-
-                    ${tags.tag_list(post.tags)}
                     
-                    <p>
-                        % if len(post.comments):
-                            ${h.link_to(
-                                h.plural(len(post.comments), 'Comment', 'Comments'),
-                                h.url_for(controller='post', 
-                                          action='view', 
-                                          year=post.posted_on.strftime('%Y'), 
-                                          month=post.posted_on.strftime('%m'), 
-                                          slug=post.slug, 
-                                          anchor=u'comments')
-                            )}
-                        % else:
-                            ${h.link_to(
-                                'No Comments',
-                                h.url_for(controller='post', 
-                                          action='view', 
-                                          year=post.posted_on.strftime('%Y'), 
-                                          month=post.posted_on.strftime('%m'), 
-                                          slug=post.slug, 
-                                          anchor=u'respond')
-                            )}
+                    % if '<!--more-->' in post.content:
+                        ${h.literal(h.chop_at(post.content, '<!--more-->'))}
+                        <p>${post_link % '...Read More...'}</p>
+                    % else:
+                        ${h.literal(post.content)}
+                    % endif
+                    
+                    <p class="post-meta">
+                        ${tags.tag_list(post.tags)}
+                        
+                        <span class="post-comments">
+                            <strong>Comments</strong> :
+                            % if len(post.comments):
+                                ${h.link_to(
+                                    h.plural(len(post.comments), 'Comment', 'Comments'),
+                                    h.url_for(controller='post', 
+                                              action='view', 
+                                              year=post.posted_on.strftime('%Y'), 
+                                              month=post.posted_on.strftime('%m'), 
+                                              slug=post.slug, 
+                                              anchor=u'comments')
+                                )}
+                            % else:
+                                ${h.link_to(
+                                    'No Comments',
+                                    h.url_for(controller='post', 
+                                              action='view', 
+                                              year=post.posted_on.strftime('%Y'), 
+                                              month=post.posted_on.strftime('%m'), 
+                                              slug=post.slug, 
+                                              anchor=u'respond')
+                                )}
+                            % endif
+                        </span>
+                        
+                        % if h.auth.authorized(h.auth.is_valid_user):
+                            <span class="post-admin">
+                                <strong>Admin</strong> : 
+                                ${h.link_to(
+                                    'Edit This Post',
+                                    h.url_for(controller='post', action='edit', id=unicode(post.id))
+                                )}
+                            </span>
                         % endif
+                        
                     </p>
                 </div>
             </div>

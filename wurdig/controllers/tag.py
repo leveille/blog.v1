@@ -139,7 +139,8 @@ class TagController(BaseController):
         
         for k, v in self.form_result.items():
             setattr(tag, k, v)
-            
+        import pprint
+        pprint.pprint(tag)
         meta.Session.add(tag)
         meta.Session.commit()
         session['flash'] = 'Tag successfully added.'

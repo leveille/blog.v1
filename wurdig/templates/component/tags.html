@@ -1,7 +1,7 @@
 <%def name="tag_list(tags)">
     % if len(tags):
-        <p>
-            Tagged with : 
+        <span class="post-tags">
+            <strong>Tags</strong> : 
             <% _tags = [] %>
             % for tag in tags:
                 <%
@@ -12,6 +12,6 @@
                 %>
             % endfor
             ${h.literal(', '.join(_tags))}
-        </p>
+        </span>
     % endif
 </%def>

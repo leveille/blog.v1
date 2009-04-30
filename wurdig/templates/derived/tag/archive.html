@@ -2,6 +2,6 @@
 <%namespace file="/component/posts.html" name="posts" import="*"/>
 
 <%def name="title()">${parent.title()} &gt; Posts tagged with ${c.tagname}</%def>
-<h2>Posts tagged with "${c.tagname}"</h2>
+<p>Posts tagged with "<strong>${c.tagname}</strong>"</p>
 
 ${posts.paginated()}

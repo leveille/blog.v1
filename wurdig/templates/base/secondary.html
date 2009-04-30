@@ -9,11 +9,16 @@ ${wurdig.doctype()}
         ${self.ps_feeds()}
         ${wurdig.css()}
     </head>
-    
-    <body id="home">
+    <%
+        controller = request.urlvars['controller']
+        slug = None
+        if request.urlvars['slug'] is not None:
+        	slug = request.urlvars['slug']
+    %>
+    <body id="secondary" class="${controller} ${slug}">
         
         <div class="container_16">
-            ${wurdig.primary_nav()}
+            ${wurdig.primary_nav(slug)}
         </div>
         
         ${wurdig.header()}

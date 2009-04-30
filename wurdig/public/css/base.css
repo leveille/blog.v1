@@ -5,9 +5,11 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     color: #000;
-    font-family: Helvetica Neue,Helvetica LT,Helvetica CY,FreeSans,helvetica,arial,sans-serif;
+    /*font-family: Helvetica Neue,Helvetica LT,Helvetica CY,FreeSans,helvetica,arial,sans-serif;*/
+    font-family: "URW Gothic L","MgOpen Moderna","Lucida Sans",arial,sans-serif;
     font-weight: normal;
-    font-style: normal
+    font-style: normal;
+    line-height: 1.6em
 }
 
 a:focus,
@@ -97,11 +99,17 @@ div.container_16 {
     text-transform: uppercase;
     margin: 0;
     margin-bottom: 2px;
-    padding: 0
+    padding: 0;
+    line-height: 1.2em
 }
 
 #header h1 a {
-    text-decoration: none
+    text-decoration: none;
+    color: #CC0000
+}
+
+#header h1 a:hover {
+    color: #000
 }
 
 #header p {
@@ -137,13 +145,8 @@ div.container_16 {
 }
 
 #primary-content p.post-date {
-    color: #999
-}
-
-body#home #primary-content h3,
-body#sub-page #primary-content h2 {
-    margin-bottom: 0;
-    padding-bottom: 0
+    color: #999;
+    margin-top: -19px
 }
 
 body#home #primary-content p.post-meta {
@@ -152,9 +155,8 @@ body#home #primary-content p.post-meta {
     border-bottom: solid .1em #D0D0D0
 }
 
-body#home #primary-content p.post-meta:last-child {
-    margin-bottom: 0;
-    border-bottom: none
+#primary-content ul li ul {
+    margin: 15px 0
 }
 
 /*_SIDEBAR*/

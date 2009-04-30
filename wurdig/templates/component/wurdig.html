@@ -30,7 +30,7 @@
         <div class="container_16">
             <div class="grid_16">
                 <div class="grid_8 alpha">
-                    <h1><a href="${h.url_for(controller='post', action='home')}" title="Home">Jason Leveille</a></h1>
+                    <h1><a href="${h.url_for(controller='post', action='home')}" title="Home">Jason Leveille's Blog</a></h1>
                     <p>Something witty here</p>
                 </div>
                 <div class="grid_8 omega">
@@ -46,21 +46,33 @@
     </div>
 </%def>
 
-<%def name="primary_nav()">
+<%def name="primary_nav(loc=None)">
     <div id="primary-nav" class="grid_16">
         <ul>
-            <li class="grid_4 alpha">
-                <a href="${h.url_for(controller='post', action='home')}" title="Home">
+            <%
+                (n_home, n_about, n_teaching) = (None, None, None)
+                if loc == 'home':
+                    n_home = 'active'
+                elif loc == 'about':
+                    n_about = 'active'
+                elif loc == 'teaching':
+                    n_teaching = 'active'
+            %>
+            <li class="grid_4 alpha ${n_home}">
+                <a href="${h.url_for(controller='post', action='home')}" 
+                    title="Home">
                     Home <span>Some content here</span>
                 </a>
             </li>
-            <li class="grid_4">
-                <a href="${h.url_for(controller='page', action='view', slug='about')}" title="About">
+            <li class="grid_4 ${n_about}">
+                <a href="${h.url_for(controller='page', action='view', slug='about')}" 
+                    title="About">
                     About <span>About me and this site</span>
                 </a>
             </li>
-            <li class="grid_4">
-                <a href="${h.url_for(controller='page', action='view', slug='teaching')}" title="Teaching">
+            <li class="grid_4 ${n_teaching}">
+                <a href="${h.url_for(controller='page', action='view', slug='teaching')}" 
+                    title="Teaching">
                     Teaching <span>My former life as a teacher</span>
                 </a>
             </li>
@@ -129,6 +141,6 @@
             parseOnLoad:true
         };
     </script>
-    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.2/dojo/dojo.xd.js"></script>
-    ${h.javascript_link(h.url_for('/javascripts/application.js'))}
+    ${h.javascript_link('http://ajax.googleapis.com/ajax/libs/dojo/1.2/dojo/dojo.xd.js', 
+                         h.url_for('/javascripts/application.js'))}
 </%def>

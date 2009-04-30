@@ -8,11 +8,11 @@ ${wurdig.doctype()}
         <title>${self.title()}</title>
         ${wurdig.css()}
     </head>
-    
+
     <body id="home">
         
         <div class="container_16">
-            ${wurdig.primary_nav()}
+            ${wurdig.primary_nav('home')}
         </div>
         
         ${wurdig.header()}
@@ -20,30 +20,31 @@ ${wurdig.doctype()}
         <div id="content">
             <div class="container_16">
                 
-                <div id="primary-content" class="grid_8">
+                <div id="primary-content" class="grid_11">
                     ${wurdig.flash()}
                     ${next.body()}                    
                 </div>
                 
-                <div id="sidebar" class="grid_8">
-                    <div id="archives" class="grid_4 alpha">
+                <div id="sidebar" class="grid_5">
+                    <div id="archives">
                         ${self.archives()}
                     </div>
-                    <div id="tags" class="grid_4 omega">
+                    <div id="tags">
                         ${self.tags()}
+                    </div>
+                    <div id="recent-comments">
+                        ${self.recent_comments()}
                     </div>
                     <div id="twitter-updates">
                         ${self.twitter_updates()}
                     </div>
-                    <div id="recent-comments">
-                        ${self.recent_comments()}
-                    </div> 
                     <div id="development-stream">
                         ${self.development_stream()}
                     </div>
                 </div>
             </div>
         </div>
+
         ${wurdig.secondary_content()}
         ${wurdig.footer()}
         ${wurdig.js()}      

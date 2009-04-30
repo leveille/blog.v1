@@ -57,7 +57,13 @@ def make_map():
                 action='archive', 
                 requirements = {'year' : '\d{2,4}'})
     
-    map.connect('/tag/archive/{slug}', controller='tag', 
+    # Not a big fan of hardcoding in these actions,
+    # but I'm unsure how to proceed otherwise in order to get
+    # a nice clean url for the tag slug
+    map.connect('/tag/{action}', controller='tag', 
+                requirements = {'action' : 'new|create|edit|save|list|delete'})
+    
+    map.connect('/tag/{slug}', controller='tag', 
                 action='archive', 
                 requirements = {'slug' : '[-\w]+'})
     

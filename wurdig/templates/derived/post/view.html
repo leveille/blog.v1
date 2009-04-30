@@ -19,17 +19,23 @@
 
 <div class="entry">
     ${h.literal(c.post.content)}
+        
+    <p class="post-meta">
+        ${tags.tag_list(c.post.tags)}
+        % if h.auth.authorized(h.auth.is_valid_user):
+            <span class="post-admin">
+                <strong>Admin</strong> : 
+                ${h.link_to(
+                    'Edit This Post',
+                    h.url_for(controller='post', action='edit', id=unicode(c.post.id))
+                )}
+            </span>
+        % endif
+    </p>
     
-    % if h.auth.authorized(h.auth.is_valid_user):
-        <p>
-            ${h.link_to(
-                'Edit This Post',
-                h.url_for(controller='post', action='edit', id=unicode(c.post.id))
-            )}
-        </p>
+    % if not c.post.comments_allowed and len(c.post.comments) > 20:
+        <p class="notice">Comments have been disabled for this post.</p>
     % endif
-    
-    ${tags.tag_list(c.post.tags)}
     
     % if len(c.post.comments):
         <div id="comments">
@@ -49,6 +55,6 @@
             ${h.end_form()}
         </div>
     % else:
-        <p id="respond_disabled">Comments have been disabled for this post.</p>
+        <p class="notice">Comments have been disabled for this post.</p>
     % endif
 </div>
