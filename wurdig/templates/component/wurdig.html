@@ -136,13 +136,15 @@ import wurdig.model.meta as meta
     % if len(tags):
         <div class="tags">
             <h4>Tags</h4>
-            <ul class="tag-cloud">
+            <ol class="tag-cloud">
                 % for tag in tags:
-                    <li class="tag-link-${str(tag.post_count)}">
-                        ${h.link_to(
-                            tag.name,
-                            h.url_for(controller='tag', action='archive', slug=tag.slug)
-                        )}
+                    <%
+                        # @todo: calculate tag size
+                        tag_size = 1
+                    %>
+                    <li class="tag-link-${str(tag.post_count)}" style="font-size: ${str(tag_size)}em">
+                        <span>${h.plural(tag.post_count, 'post is', 'posts are')} tagged with </span>
+                        <a rel="tag" href="${h.url_for(controller='tag', action='archive', slug=tag.slug)}">${tag.name}</a>
                     </li>
                 % endfor
             </ul>

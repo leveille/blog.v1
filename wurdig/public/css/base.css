@@ -180,11 +180,16 @@ body#home #primary-content p.post-meta {
 
 /*_TAG_CLOUD*/
 
-div.tags ul.tag-cloud li {
+div.tags ol.tag-cloud li {
     display: inline;
     margin: 0 5px 0 0;
     padding: 0;
     list-style: none
+}
+
+div.tags ol.tag-cloud li span {
+    position: absolute;
+    left: -999em
 }
 
 /*_SIDEBAR*/
