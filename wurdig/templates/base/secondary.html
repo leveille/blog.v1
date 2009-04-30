@@ -1,5 +1,5 @@
 ## -*- coding: utf-8 -*-
-<%namespace file="../component/wurdig.html" name="wurdig" import="*"/>
+<%namespace file="/component/wurdig.html" name="wurdig" import="*"/>
 
 ${wurdig.doctype()}
 <html>
@@ -33,12 +33,8 @@ ${wurdig.doctype()}
                 </div>
                 
                 <div id="sidebar" class="grid_5">
-                    <div id="tags">
-                        ${wurdig.tags()}
-                    </div>
-                    <div id="recent-comments">
-                        ${wurdig.recent_comments()}
-                    </div>
+                    ${wurdig.tags()}
+                    ${wurdig.recent_comments()}
                 </div>
             </div>
         </div>

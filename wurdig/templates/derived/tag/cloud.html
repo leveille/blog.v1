@@ -1,16 +1,8 @@
 <%inherit file="/base/secondary.html"/>
+<%namespace file="/component/wurdig.html" name="wurdig" import="tags"/>
 
 <%def name="title()">${parent.title()} &gt; Tag Cloud</%def>
 
 <h2>Tag Cloud</h2>
 
-<ul class="tag-cloud">
-    % for tag in c.tags:
-        <li>
-            ${h.link_to(
-                tag.name,
-                h.url_for(controller='tag', action='archive', slug=tag.slug)
-            )}
-        </li>
-    % endfor
-</ul>
+${wurdig.tags()}

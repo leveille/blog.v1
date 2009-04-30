@@ -1,7 +1,8 @@
 """The application's model objects"""
 import sqlalchemy as sa
-from sqlalchemy import orm, schema, types
-from sqlalchemy.sql import and_
+from sqlalchemy import orm, schema, types, func
+from sqlalchemy.orm import column_property
+from sqlalchemy.sql import and_, select
 from wurdig.model import meta
 
 import datetime
@@ -83,7 +84,17 @@ class Tag(object):
     pass
 
 orm.mapper(Comment, comments_table)
-orm.mapper(Tag, tags_table, order_by='name')
+orm.mapper(Tag, tags_table, order_by='name', properties={
+    'post_count': column_property(
+        select(
+            [func.count(posts_table.c.id)],
+            and_(
+                 poststags_table.c.post_id==posts_table.c.id,
+                 poststags_table.c.tag_id==tags_table.c.id
+            )
+        ).label('post_count')
+    )
+})
 orm.mapper(Page, pages_table, order_by='title')
 orm.mapper(Post, posts_table, order_by='posted_on DESC', polymorphic_identity='posts', properties={
     'comments':orm.relation(Comment, backref='posts', cascade='all',order_by='created_on', 
