@@ -92,8 +92,6 @@ class NewTagForm(formencode.Schema):
 class TagController(BaseController):
 
     def cloud(self):
-        tag_q = meta.Session.query(model.Tag)
-        c.tags = tag_q.all()
         if c.tags is None:
             abort(404)
         return render('/derived/tag/cloud.html')

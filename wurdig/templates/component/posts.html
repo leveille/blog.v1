@@ -1,4 +1,8 @@
-<%namespace file="/component/tags.html" name="tags" import="*"/>
+<%def name="tag_list(tags)">
+    % if len(tags):
+        ${h.literal(h.post_tags(tags))}
+    % endif
+</%def>
 
 <%def name="paginated()">
     % if len(c.paginator):
@@ -34,7 +38,7 @@
                     % endif
                     
                     <p class="post-meta">
-                        ${tags.tag_list(post.tags)}
+                        ${tag_list(post.tags)}
                         
                         <span class="post-comments">
                             <strong>Comments</strong> :

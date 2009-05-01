@@ -1,6 +1,6 @@
 <%inherit file="/base/secondary.html"/>
 <%namespace file="comment_fields.html" name="fields" import="*"/>
-<%namespace file="/component/tags.html" name="tags" import="*"/>
+<%namespace file="/component/posts.html" name="posts" import="*"/>
 
 <%def name="title()">${parent.title()} &gt; ${c.post.title}</%def>
 <%def name="ps_feeds()">
@@ -21,7 +21,7 @@
     ${h.literal(c.post.content)}
         
     <p class="post-meta">
-        ${tags.tag_list(c.post.tags)}
+        ${posts.tag_list(c.post.tags)}
         % if h.auth.authorized(h.auth.is_valid_user):
             <span class="post-admin">
                 <strong>Admin</strong> : 

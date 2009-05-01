@@ -9,4 +9,5 @@ from webhelpers.html import literal
 from webhelpers.text import truncate, chop_at, plural
 from routes import url_for
 from wurdig.lib import auth
+from wurdig.lib.tag import cloud, post_tags
 from webob.exc import strip_tags
