@@ -180,17 +180,24 @@ body#home #primary-content p.post-meta {
 
 /*_TAG_CLOUD*/
 
-div.tags ol.tag-cloud li {
+div.hTagCloud ul.popularity li {
     display: inline;
     margin: 0 5px 0 0;
     padding: 0;
     list-style: none
 }
 
-div.tags ol.tag-cloud li span {
+div.hTagCloud ul.popularity li span {
     position: absolute;
     left: -999em
 }
+
+div.hTagCloud ul.popularity li { font-size: 1em; font-weight: 100; }
+div.hTagCloud ul.popularity li.popular { font-size: 1.1em; font-weight: 200; }
+div.hTagCloud ul.popularity li.v-popular { font-size: 1.3em; font-weight: 400; }
+div.hTagCloud ul.popularity li.vv-popular { font-size: 1.6em; font-weight: 600; }
+div.hTagCloud ul.popularity li.vvv-popular { font-size: 2em; font-weight: 800; }
+div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em; font-weight: 900; }
 
 /*_SIDEBAR*/
 #sidebar {
