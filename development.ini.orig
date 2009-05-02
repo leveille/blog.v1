@@ -26,6 +26,9 @@ beaker.session.secret = somesecret
 blog.title=
 blog.subtitle=
 akismet.api_key=
+twitter.user.screen_name=
+delicious.username=
+flickr.id=
 
 # If you'd like to fine-tune the individual locations of the cache data dirs
 # for the Cache data, or the Session saves, un-comment the desired settings

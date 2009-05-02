@@ -87,19 +87,42 @@
     <div id="secondary-content">
         <div class="container_12">
             <div class=grid_12>
-                <div id="delicious-bookmarks" class="grid_4 alpha">
-                    <h4>Bookmarks</h4>
-                    <ul>
-                        <li>Bookmark</li>
-                        <li>Bookmark</li>
-                        <li>Bookmark</li>
-                        <li>Bookmark</li>
-                    </ul>
-                </div>
-                <div id="flickr-stream" class="grid_4">
-                    <h4>Public Flickr Stream</h4>
-                    <p>Content</p>
-                </div>
+                % if len(c.delicious_feed.entries):
+                    <div id="delicious-bookmarks" class="grid_4 alpha">
+                        <h4>Bookmarks</h4>
+                        <ul>
+                            % for item in c.delicious_feed.entries[:5]:
+                                <li>
+                                    ${h.literal(h.auto_link(item['title']))}
+                                    <span>
+                                        ${h.link_to(
+                                            item.updated[:14],
+                                            item['guid']
+                                        )}
+                                    </span>
+                                </li>
+                            % endfor
+                        </ul>
+                    </div>
+                % endif
+                % if len(c.flickr_feed.entries):
+                    <div id="delicious-bookmarks" class="grid_4">
+                        <h4>Public Flickr Stream</h4>
+                        <ul>
+                            % for item in c.flickr_feed.entries[:5]:
+                                <li>
+                                    ${h.literal(h.auto_link(item['title']))}
+                                    <span>
+                                        ${h.link_to(
+                                            item.updated[:14],
+                                            item['guid']
+                                        )}
+                                    </span>
+                                </li>
+                            % endfor
+                        </ul>
+                    </div>
+                % endif
                 <div id="blogroll" class="grid_4 omega">
                     <h4>Blogroll</h4>
                     <p>Content</p>
@@ -110,15 +133,24 @@
 </%def>
 
 <%def name="twitter_updates()">
-    <div class="twitter-updates">
-        <h4>Twitter Updates</h4>
-        <ul>
-            <li>Update</li>
-            <li>Update</li>
-            <li>Update</li>
-            <li>Update</li>
-        </ul>
-    </div>
+    % if len(c.twitter_feed.entries):
+        <div class="twitter-statuses">
+            <h4>Twitter Updates</h4>
+            <ul>
+                % for item in c.twitter_feed.entries[:5]:
+                    <li>
+                        ${h.literal(h.auto_link(item['description']))}
+                        <span>
+                            ${h.link_to(
+                                item.updated[:14],
+                                item['guid']
+                            )}
+                        </span>
+                    </li>
+                % endfor
+            </ul>
+        </div>
+    % endif
 </%def>
 
 <%def name="tags()">
