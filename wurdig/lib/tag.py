@@ -23,8 +23,20 @@ def cloud(tags):
     return '\n'.join(parts)
     
 def post_tags(tags):
-    
-    return 'tags'
+    if len(tags):
+        parts, _tags = [], []
+        parts.append('<span class="post-tags">')
+        parts.append('<strong>Tags</strong> : ')
+        for tag in tags:
+            _tags.append(h.link_to(
+                        tag.name,
+                        h.url_for(controller='tag', action='archive', slug=tag.slug)
+                        ))
+        tags = ', '.join(_tags)
+        parts.append(tags)
+        parts.append('</span>')
+
+    return '\n'.join(parts)
 
 def tag_weight(count):
     classes = {'level_1' : 'popular', 
@@ -32,13 +44,13 @@ def tag_weight(count):
                'level_3' : 'vv-popular',
                'level_4' : 'vvv-popular',
                'level_5' : 'vvvv-popular'}
-    if count in range(0,1):
+    if count in range(1,7):
         return classes['level_1']
-    elif count in range(2,3):
+    elif count in range(8,15):
         return classes['level_2']
-    elif count in range(16,20):
+    elif count in range(16,22):
         return classes['level_3']
-    elif count in range(21,30):
+    elif count in range(23,30):
         return classes['level_4']
     elif count > 31:
         return classes['level_5']

@@ -191,13 +191,18 @@ div.hTagCloud ul.popularity li span {
     position: absolute;
     left: -999em
 }
-
-div.hTagCloud ul.popularity li { font-size: 1em; font-weight: 100; }
+div.hTagCloud ul.popularity li { font-size: .9em; font-weight: 100; }
 div.hTagCloud ul.popularity li.popular { font-size: 1.1em; font-weight: 200; }
 div.hTagCloud ul.popularity li.v-popular { font-size: 1.3em; font-weight: 400; }
 div.hTagCloud ul.popularity li.vv-popular { font-size: 1.6em; font-weight: 600; }
 div.hTagCloud ul.popularity li.vvv-popular { font-size: 2em; font-weight: 800; }
 div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em; font-weight: 900; }
+#primary-content div.hTagCloud ul.popularity li { font-size: 1.1em; }
+#primary-content div.hTagCloud ul.popularity li.popular { font-size: 1.3em; }
+#primary-content div.hTagCloud ul.popularity li.v-popular { font-size: 1.8em; }
+#primary-content div.hTagCloud ul.popularity li.vv-popular { font-size: 2em; }
+#primary-content div.hTagCloud ul.popularity li.vvv-popular { font-size: 2.5em; }
+#primary-content div.hTagCloud ul.popularity li.vvvv-popular { font-size: 3em; }
 
 /*_SIDEBAR*/
 #sidebar {
