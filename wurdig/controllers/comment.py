@@ -224,7 +224,7 @@ class CommentController(BaseController):
     def list(self):
         comments_q = meta.Session.query(model.Comment).order_by(
                                                    model.Comment.approved
-                                                   ).order_by(model.Comment.created_on)
+                                                   ).order_by(model.Comment.created_on.desc())
         comments_q = comments_q.all()
         c.paginator = paginate.Page(
             comments_q,
