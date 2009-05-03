@@ -94,7 +94,7 @@ class PageController(BaseController):
         if c.page is None:
             abort(404)
         return render('/derived/page/view.html')
-    
+
     @h.auth.authorize(h.auth.is_valid_user)
     def new(self):
         return render('/derived/page/new.html')

@@ -13,7 +13,7 @@ ${wurdig.doctype()}
         controller = request.urlvars['controller']
         action = request.urlvars['action']
         slug = None
-        if action == 'page':
+        if controller == 'page':
         	slug = request.urlvars['slug']
     %>
     <body id="secondary" class="${controller} ${slug}">
@@ -33,7 +33,9 @@ ${wurdig.doctype()}
                 </div>
                 
                 <div id="sidebar" class="grid_5">
-                    ${wurdig.tags()}
+                    % if request.urlvars['action'] != 'cloud':
+                        ${wurdig.tags()}
+                    % endif
                     ${wurdig.recent_comments()}
                 </div>
             </div>

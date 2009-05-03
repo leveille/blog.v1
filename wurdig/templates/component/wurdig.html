@@ -91,15 +91,11 @@
                     <div id="delicious-bookmarks" class="grid_4 alpha">
                         <h4>Bookmarks</h4>
                         <ul>
-                            % for item in c.delicious_feed.entries[:5]:
+                            % for item in c.delicious_feed.entries[:6]:
                                 <li>
-                                    ${h.literal(h.auto_link(item['title']))}
-                                    <span>
-                                        ${h.link_to(
-                                            item.updated[:14],
-                                            item['guid']
-                                        )}
-                                    </span>
+                                    <a href="${item['guid']}" title="${item['title']}">
+                                        ${item['title']}
+                                    </a> (${item.updated[:14]})
                                 </li>
                             % endfor
                         </ul>
@@ -109,15 +105,16 @@
                     <div id="delicious-bookmarks" class="grid_4">
                         <h4>Public Flickr Stream</h4>
                         <ul>
-                            % for item in c.flickr_feed.entries[:5]:
+                            % for item in c.flickr_feed.entries[:8]:
                                 <li>
-                                    ${h.literal(h.auto_link(item['title']))}
-                                    <span>
-                                        ${h.link_to(
-                                            item.updated[:14],
-                                            item['guid']
-                                        )}
-                                    </span>
+                                    <%
+                                        image = item['enclosures'][0]['href']
+                                        image = image.replace('m.jpg', 's.jpg')
+                                    %>
+                                    ${h.link_to(
+                                        h.literal('<img src="%s" title="%s">' % (image, item['title'])),
+                                        item['link']
+                                    )}
                                 </li>
                             % endfor
                         </ul>
@@ -125,7 +122,12 @@
                 % endif
                 <div id="blogroll" class="grid_4 omega">
                     <h4>Blogroll</h4>
-                    <p>Content</p>
+                    <ul>
+                        <li><a href="http://teachmetheweb.org/" rel="external" title="Teach Me the Web">Teach Me the Web</a></li>
+                        <li><a href="http://benramsey.com/" rel="external" title="Ben Ramsey">Ben Ramsey</a></li>
+                        <li><a href="http://shiflett.org/" rel="external" title="Chris Shiflett">Chris Shiflett</a></li>
+                        <li><a href="http://zgordon.org/" rel="external" title="Zac Gordon">Zac Gordon</a></li>
+                    </ul>
                 </div>
             </div>
         </div>

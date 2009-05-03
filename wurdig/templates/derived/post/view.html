@@ -17,7 +17,7 @@
 
 <h2>${c.post.title}</h2>
 
-<div class="entry">
+<div class="post">
     ${h.literal(c.post.content)}
         
     <p class="post-meta">
@@ -34,27 +34,50 @@
     </p>
     
     % if not c.post.comments_allowed and len(c.post.comments) > 20:
-        <p class="notice">Comments have been disabled for this post.</p>
+        <p class="comment-notice">Comments have been disabled for this post.</p>
     % endif
     
     % if len(c.post.comments):
         <div id="comments">
-            <h3>${h.plural(len(c.post.comments), 'Response', 'Responses')} to "${c.post.title}"</h3>
-
-            % for comment in c.post.comments:
-                ${h.literal(comment.content)}
+            <h3>${h.plural(len(c.post.comments), 'Comment', 'Comments')} for "${c.post.title}"</h3>
+            
+            <%
+                import hashlib
+            %>
+            
+            % for k,comment in enumerate(c.post.comments):
+                <div id="comment-${comment.id}">
+                    <h4>
+                        <strong>${str(k+1)}</strong>
+                        <em><img src="http://www.gravatar.com/avatar/${hashlib.md5(comment.email).hexdigest()}?s=80" alt="${comment.name} - Gravatar"></em>
+                        <cite>
+                            % if comment.url not in ['', u'', None]:
+                                <a href="${comment.url}">${comment.name}</a>
+                            % else:
+                                ${comment.name}
+                            % endif
+                        </cite>
+                    </h4>
+                    <blockquote>
+                        ${h.literal(comment.content)}
+                        <p class="comment-posted">
+                            ${comment.created_on}
+                            <a href="#comment-${comment.id}">Link</a>
+                        </p>
+                    </blockquote>
+                </div>
             % endfor
         </div>
     % endif
     
     % if c.post.comments_allowed:
-        <div id="respond">
+        <div id="comment-form">
             ${h.secure_form(h.url_for(post_id=c.post.id, controller='comment', action='create'), method='post')}
                 ${fields.body()}
                 ${h.submit('create_comment', 'Create Comment')}
             ${h.end_form()}
         </div>
     % else:
-        <p class="notice">Comments have been disabled for this post.</p>
+        <p class="comment-notice">Comments have been disabled for this post.</p>
     % endif
 </div>

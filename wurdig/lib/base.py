@@ -22,7 +22,7 @@ class BaseController(WSGIController):
         
         c.twitter_feed = feedparser.parse("http://twitter.com/statuses/user_timeline/%s.rss" % config['twitter.user.screen_name'])
         c.delicious_feed = feedparser.parse('http://feeds.delicious.com/v2/rss/%s?count=10' % config['delicious.username']) 
-        c.flickr_feed = feedparser.parse('http://api.flickr.com/services/feeds/photos_public.gne?id=%s@N00&lang=en-us&format=rss_200' % config['flickr.id'])
+        c.flickr_feed = feedparser.parse('http://api.flickr.com/services/feeds/photos_public.gne?id=%s@N00&lang=en-us&format=atom' % config['flickr.id'])
     
     def __call__(self, environ, start_response):
         """Invoke the Controller"""

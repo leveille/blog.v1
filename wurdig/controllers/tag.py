@@ -96,6 +96,18 @@ class TagController(BaseController):
             abort(404)
         return render('/derived/tag/cloud.html')
     
+    def category(self, slug=None):   
+        if slug is None:
+            abort(404)
+            
+        tag_q = meta.Session.query(model.Tag)
+        c.tag = tag_q.filter(model.Tag.slug==slug).count()
+        
+        if(c.tag in [0, None]):
+            abort(404)
+            
+        return redirect_to(controller='tag', action='archive', slug=slug, _code=301)
+    
     def archive(self, slug=None):   
         if slug is None:
             abort(404)
