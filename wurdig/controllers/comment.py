@@ -12,7 +12,6 @@ from formencode import htmlfill
 from pylons.decorators import validate
 from pylons.decorators.rest import restrict
 from pylons.decorators.secure import authenticate_form
-from webhelpers.html.converters import markdown
 from webhelpers.feedgenerator import Atom1Feed
 from wurdig.lib.akismet import Akismet
 from sqlalchemy.sql import and_, delete
@@ -172,8 +171,7 @@ class CommentController(BaseController):
         for k, v in self.form_result.items():
             setattr(comment, k, v)
         comment.post_id = c.post.id
-        
-        comment.content = markdown(comment.content, safe_mode="remove")        
+
         comment.content = h.tidy(comment.content)
         comment.content = h.comment_filter(comment.content)
         

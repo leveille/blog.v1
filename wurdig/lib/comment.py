@@ -5,7 +5,7 @@ from wurdig.model import meta
 __all__ = ['comment_filter', 'recent_comments']
 
 def comment_filter(comment):
-    return comment
+    return h.sanitize_html(comment)
 
 def recent_comments():
     comments_q = meta.Session.query(model.Comment).filter(model.Comment.approved==True)
