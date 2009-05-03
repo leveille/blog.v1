@@ -21,7 +21,7 @@ log = logging.getLogger(__name__)
     
 class SpamCheck(formencode.FancyValidator):
     messages = {
-        'invalid': 'Your comment has been identified as spam.  Please modify your comment.'
+        'invalid': 'Your comment has been identified as spam.  Are you a spammer?'
     }
     def _to_python(self, values, state):
         # we're in the administrator
@@ -62,14 +62,7 @@ class NewCommentForm(formencode.Schema):
     chained_validators = [SpamCheck()]
 
 class CommentController(BaseController):
-
-    def new(self, action, post_id=None):
-        post_q = meta.Session.query(model.Post)
-        c.post = post_id and post_q.filter_by(id=int(post_id)).first() or None
-        if c.post is None:
-            abort(404)
-        return render('/derived/comment/new.html')
-    
+        
     def list(self):
         comments_q = meta.Session.query(model.Comment).filter_by(pageid=c.page.id)
         comments_q = comments_q.order_by(model.comment_table.c.created.asc())
@@ -160,6 +153,13 @@ class CommentController(BaseController):
         response.content_type = 'application/atom+xml'
         return feed.writeString('utf-8')
     
+    def new(self, action, post_id=None):
+        post_q = meta.Session.query(model.Post)
+        c.post = post_id and post_q.filter_by(id=int(post_id)).first() or None
+        if c.post is None:
+            abort(404)
+        return render('/derived/comment/new.html')
+    
     @restrict('POST')
     @authenticate_form
     @validate(schema=NewCommentForm(), form='new')
@@ -172,7 +172,11 @@ class CommentController(BaseController):
         for k, v in self.form_result.items():
             setattr(comment, k, v)
         comment.post_id = c.post.id
+        
         comment.content = markdown(comment.content, safe_mode="remove")        
+        comment.content = h.tidy(comment.content)
+        comment.content = h.comment_filter(comment.content)
+        
         meta.Session.add(comment)
         meta.Session.commit()
         # @todo: email administrator w/ each new comment

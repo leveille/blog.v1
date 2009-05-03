@@ -87,39 +87,8 @@
     <div id="secondary-content">
         <div class="container_12">
             <div class=grid_12>
-                % if len(c.delicious_feed.entries):
-                    <div id="delicious-bookmarks" class="grid_4 alpha">
-                        <h4>Bookmarks</h4>
-                        <ul>
-                            % for item in c.delicious_feed.entries[:6]:
-                                <li>
-                                    <a href="${item['guid']}" title="${item['title']}">
-                                        ${item['title']}
-                                    </a> (${item.updated[:14]})
-                                </li>
-                            % endfor
-                        </ul>
-                    </div>
-                % endif
-                % if len(c.flickr_feed.entries):
-                    <div id="delicious-bookmarks" class="grid_4">
-                        <h4>Public Flickr Stream</h4>
-                        <ul>
-                            % for item in c.flickr_feed.entries[:8]:
-                                <li>
-                                    <%
-                                        image = item['enclosures'][0]['href']
-                                        image = image.replace('m.jpg', 's.jpg')
-                                    %>
-                                    ${h.link_to(
-                                        h.literal('<img src="%s" title="%s">' % (image, item['title'])),
-                                        item['link']
-                                    )}
-                                </li>
-                            % endfor
-                        </ul>
-                    </div>
-                % endif
+                ${h.literal(h.delicious())}
+                ${h.literal(h.flickr())}
                 <div id="blogroll" class="grid_4 omega">
                     <h4>Blogroll</h4>
                     <ul>
@@ -135,87 +104,15 @@
 </%def>
 
 <%def name="twitter_updates()">
-    % if len(c.twitter_feed.entries):
-        <div class="twitter-statuses">
-            <h4>Twitter Updates</h4>
-            <ul>
-                % for item in c.twitter_feed.entries[:5]:
-                    <li>
-                        ${h.literal(h.auto_link(item['description']))}
-                        <span>
-                            ${h.link_to(
-                                item.updated[:14],
-                                item['guid']
-                            )}
-                        </span>
-                    </li>
-                % endfor
-            </ul>
-        </div>
-    % endif
+    ${h.literal(h.twitter())}
 </%def>
 
 <%def name="tags()">
-    % if len(c.tags):
-        <div class="tags">
-            <h4>Tags</h4>
-            ${h.literal(h.cloud(c.tags))}
-        </div>
-    % endif
+    ${h.literal(h.cloud())}
 </%def>
 
 <%def name="recent_comments()">
-    % if c.recent_comments is not None:
-        <div class="recent-comments">
-            <h4>Recent Comments</h4>
-            <ul>
-                % for comment in c.recent_comments:
-                    <li>
-                        <span>
-                            % if comment.url is not None:
-                                ${h.link_to(
-                                    h.literal(comment.name),
-                                    h.literal(comment.url)
-                                )} 
-                            % else:
-                                h.literal(comment.name)
-                            % endif
-                            wrote:  
-                        </span>
-                        <span>
-                            ${h.truncate(h.strip_tags(comment.content), 80)}
-                        </span>
-                        <span>
-                            Posted in: 
-                            ${h.link_to(
-                                comment.posts.title,
-                                h.url_for(
-                                    controller='post', 
-                                    action='view', 
-                                    year=comment.posts.posted_on.strftime('%Y'), 
-                                    month=comment.posts.posted_on.strftime('%m'), 
-                                    slug=comment.posts.slug,
-                                    anchor=u"comment-" + str(comment.id)
-                                )
-                            )}
-                        </span>
-                    </li>
-                % endfor
-            </ul>
-        </div>
-    % endif
-</%def>
-
-<%def name="development_stream()">
-    <div class="development-stream">
-        <h4>Development Stream</h4>
-        <ul>
-            <li>Link</li>
-            <li>Link</li>
-            <li>Link</li>
-            <li>Link</li>
-        </ul>
-    </div>
+    ${h.literal(h.recent_comments())}
 </%def>
 
 <%def name="footer()">
@@ -223,10 +120,13 @@
         <div class="container_12">
             <div class="grid_12">
                 <div class="grid_6 alpha">
-                    <p>Content</p>
+                    <p>Powered by <a href="http://github.com/leveille/wurdig" title="Wurdig">Wurdig</a></p>
                 </div>
                 <div class="grid_6 omega">
-                    <p>Content</p>
+                    <ul>
+                        <li><a href="${h.url_for(controller='post', action='feeds')}">Entries (atom)</a></li>
+                        <li><a href="${h.url_for(controller='comment', action='feeds')}">Comments (atom)</a></li>
+                    </ul>
                 </div>
             </div>
         </div>

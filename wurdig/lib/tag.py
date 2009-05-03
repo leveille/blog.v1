@@ -1,12 +1,18 @@
 import helpers as h
+from pylons import tmpl_context as c
+from wurdig import model
+from wurdig.model import meta
 
 __all__ = ['cloud', 'post_tags']
 
-def cloud(tags):
-    if len(tags):
+def cloud():
+    # grab tag list and x recent comments for display in sidebar
+    tags_q = meta.Session.query(model.Tag)
+    c.tags = tags_q.all()
+    if len(c.tags):
         parts = []
-        parts.append('<div class="hTagCloud"><ul class="popularity">')
-        for tag in tags:
+        parts.append('<div class="hTagCloud"><h4>Tags</h4><ul class="popularity">')
+        for tag in c.tags:
             parts.append('<li class="%s">' % tag_weight(tag.post_count));
             link_pattern = '<a href="%s" title="%s tagged with %s">%s</a>'
             url = h.url_for(controller='tag', 
