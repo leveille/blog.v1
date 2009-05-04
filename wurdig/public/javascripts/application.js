@@ -1,5 +1,5 @@
-JRL = {};
-JRL.app = function()
+WURDIG = {};
+WURDIG.app = function()
 {
     return {
         init: function()
@@ -7,9 +7,9 @@ JRL.app = function()
             
         }
     };
-    
 }();
 
-dojo.addOnLoad(function() {
-	JRL.app.init();
+jQuery.noConflict();
+jQuery(document).ready(function() {
+    WURDIG.app.init();
 });

@@ -70,15 +70,12 @@
                     About <span>About me and this site</span>
                 </a>
             </li>
-            <li class="grid_4 ${n_teaching}">
+            <li class="grid_4 ${n_teaching} omega">
                 <a href="${h.url_for(controller='page', action='view', slug='teaching')}" 
                     title="Teaching">
                     Teaching <span>My former life as a teacher</span>
                 </a>
             </li>
-            <li class="grid_4 omega">
-                <a href="/lifestream" title="Lifestream">Lifestream <span>Some content here</span></a>
-            </li> 
         </ul>
     </div>
 </%def>
@@ -120,12 +117,23 @@
         <div class="container_12">
             <div class="grid_12">
                 <div class="grid_6 alpha">
-                    <p>Powered by <a href="http://github.com/leveille/wurdig" title="Wurdig">Wurdig</a></p>
+                    <p>
+                        Powered by 
+                        <a href="http://github.com/leveille/wurdig" title="Wurdig">Wurdig</a>
+                    </p>
                 </div>
                 <div class="grid_6 omega">
                     <ul>
-                        <li><a href="${h.url_for(controller='post', action='feeds')}">Entries (atom)</a></li>
-                        <li><a href="${h.url_for(controller='comment', action='feeds')}">Comments (atom)</a></li>
+                        <li>
+                            <a href="${h.url_for(controller='post', action='feeds')}">
+                                Entries (atom)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="${h.url_for(controller='comment', action='feeds')}">
+                                Comments (atom)
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -135,21 +143,17 @@
 
 <%def name="flash()">
     % if session.has_key('flash'):
-    <div id="flash"><p>${session.get('flash')}</p></div>
-    <%
-        del session['flash']
-        session.save()
-    %>
+        <div id="flash">
+            <p>${session.get('flash')}</p>
+        </div>
+        <%
+            del session['flash']
+            session.save()
+        %>
     % endif
 </%def>
 
 <%def name="js()">
-    <script type="text/javascript">
-        var djConfig = {
-            isDebug:false, 
-            parseOnLoad:true
-        };
-    </script>
-    ${h.javascript_link('http://ajax.googleapis.com/ajax/libs/dojo/1.2/dojo/dojo.xd.js', 
-                         h.url_for('/javascripts/application.js'))}
+    ${h.javascript_link(h.url_for('/javascripts/jquery/jquery.min.js'), 
+                        h.url_for('/javascripts/application.js'))}
 </%def>
