@@ -9,32 +9,40 @@ ${wurdig.doctype()}
         ${wurdig.css()}
     </head>
 
-    <body id="home">
-        
-        <div class="container_16">
+    <body id="home">    
+        <div id="doc4" class="yui-t5">
             ${wurdig.primary_nav('home')}
-        </div>
-        
-        ${wurdig.header()}
-        
-        <div id="content">
-            <div class="container_16">
-                
-                <div id="primary-content" class="grid_11">
-                    ${wurdig.flash()}
-                    ${next.body()}                    
+            <div id="hd" role="banner">
+                ${wurdig.header()}
+            </div>
+            <div id="bd">
+                <div id="yui-main">
+                    <div class="yui-b" role="main">
+                        ${wurdig.flash()}
+                        ${next.body()}  
+                    </div>
                 </div>
-                
-                <div id="sidebar" class="grid_5">
+                <div class="yui-b" role="complementary">
                     ${wurdig.recent_comments()}
                     ${wurdig.twitter_updates()}
                     ${wurdig.tags()}
                 </div>
             </div>
+            <div class="yui-gb">
+                <div class="yui-u first">
+                    ${h.literal(h.delicious())}
+                </div>
+                <div class="yui-u">
+                    ${h.literal(h.flickr())}
+                </div>
+                <div class="yui-u">
+                    ${wurdig.blogroll()}
+                </div>
+            </div>
+            <div id="ft" role="contentinfo">
+                ${wurdig.footer()}
+            </div>
         </div>
-
-        ${wurdig.secondary_content()}
-        ${wurdig.footer()}
         ${wurdig.js()}      
     </body>
 </html>

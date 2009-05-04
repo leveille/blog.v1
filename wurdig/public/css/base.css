@@ -37,8 +37,8 @@ blockquote p {
     /* @todo: add background quote image */
 }
 
-div.container_12, 
-div.container_16 {
+div.yui-gb, 
+div#ft {
     clear: both
 }
 
@@ -109,7 +109,7 @@ div.container_16 {
     width: 100%;
 }
 
-#header h1 {
+#hd h1 {
     font-size: 2.2em;
     text-transform: uppercase;
     margin: 0;
@@ -118,26 +118,18 @@ div.container_16 {
     line-height: 1.2em
 }
 
-#header h1 a {
+#hd h1 a {
     text-decoration: none;
     color: #CC0000
 }
 
-#header h1 a:hover {
+#hd h1 a:hover {
     color: #000
 }
 
-#header p {
+#hd p {
     margin: 0;
     padding: 0
-}
-
-#header div.omega {
-    font-style: italic
-}
-
-#header div.alpha p {
-    margin-left: 3px
 }
 
 /*_CONTENT*/
@@ -146,35 +138,28 @@ div.container_16 {
     width: 100%
 }
 
-#content div.container_16 {
-    background: white;
-    overflow: auto;
-    height: 1%;
-    padding-top: 2em
-}
-
 /*_PRIMARY_CONTENT*/
 
-#primary-content p.post-meta span {
+#yui-main p.post-meta span {
     display: block
 }
 
-#primary-content p.post-date {
+#yui-main p.post-date {
     color: #999;
     margin-top: -19px
 }
 
-body#home #primary-content p.post-meta {
+body#home #yui-main p.post-meta {
     margin-bottom: 2em;
     padding-bottom: 2em;
     border-bottom: solid .1em #D0D0D0
 }
 
-#primary-content ul li ul {
+#yui-main ul li ul {
     margin: 15px 0
 }
 
-#primary-content div.tags h4 {
+#yui-main div.tags h4 {
     display: none
 }
 
@@ -219,7 +204,7 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
 }
 
 /*_FOOTER*/
-#footer {
+#ft {
     border-top: dotted .1em #D0D0D0;
     font-size: .9em;
     clear: both;
@@ -228,16 +213,8 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
     padding: 2em 0 2em 0
 }
 
-#footer div.grid_12 {
-
-}
-
-#footer p {
+#ft p {
     padding: .5em .5em 0 .5em
-}
-
-#footer div.omega {
-    text-align: right
 }
 
 /*_DEFAULTS*/

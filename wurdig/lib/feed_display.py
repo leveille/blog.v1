@@ -9,7 +9,7 @@ def delicious():
     if len(delicious_feed.entries):
         items = []
         template = """
-        <div id="delicious-bookmarks" class="grid_4 alpha">
+        <div id="delicious-bookmarks">
             <h4>Bookmarks</h4>
             <ul>
                 %s
@@ -30,7 +30,7 @@ def flickr():
     if len(flickr_feed.entries):
         items = []
         template = """
-        <div id="flickr-images" class="grid_4">
+        <div id="flickr-images">
             <h4>Public Flickr Stream</h4>
             <ul>
                 %s
@@ -54,7 +54,7 @@ def twitter():
     if len(twitter_feed.entries):
         items = []
         template = """
-        <div class="twitter-statuses">
+        <div id="twitter-statuses">
             <h4>Twitter Updates</h4>
             <ul>
                 %s

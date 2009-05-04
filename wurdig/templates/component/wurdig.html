@@ -18,37 +18,24 @@
 </%def>
 
 <%def name="css()">
-    ${h.stylesheet_link(h.url_for('/css/reset.css'), media="screen, projection")}
-    ${h.stylesheet_link(h.url_for('/css/text.css'), media="screen, projection")}
-    ${h.stylesheet_link(h.url_for('/css/960.css'), media="screen, projection")}
+    ${h.stylesheet_link(h.url_for('http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css'), media="screen, projection")}
+    ${h.stylesheet_link(h.url_for('http://yui.yahooapis.com/2.7.0/build/base/base-min.css'), media="screen, projection")}
     ${h.stylesheet_link(h.url_for('/css/base.css'), media="screen, projection")}
     ${h.stylesheet_link(h.url_for('/css/print.css'), media="print")}
 </%def>
 
 <%def name="header()">
-    <div id="header">
-        <div class="container_16">
-            <div class="grid_16">
-                <div class="grid_8 alpha">
-                    <h1><a href="${h.url_for(controller='post', action='home')}" title="Home">Jason Leveille's Blog</a></h1>
-                    <p>Something witty here</p>
-                </div>
-                <div class="grid_8 omega">
-                    <div id="subscribe" class="grid_4 alpha">
-                        <p>Subscribe</p>
-                    </div>
-                    <div id="search" class="grid_4 alpha">
-                        <p>Search</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div>
+        <h1><a href="${h.url_for(controller='post', action='home')}" title="Home">Jason Leveille's Blog</a></h1>
+        <p class="wurdig-tagline>Something witty here</p>
+        <p class="wurdig-subscribe">Subscribe</p>
+        <p class="wurdig-search>Search</p>
     </div>
 </%def>
 
 <%def name="primary_nav(loc=None)">
-    <div id="primary-nav" class="grid_16">
-        <ul>
+    <div id="primary-nav">
+        <ul role="navigation">
             <%
                 (n_home, n_about, n_teaching) = (None, None, None)
                 if loc == 'home':
@@ -58,19 +45,19 @@
                 elif loc == 'teaching':
                     n_teaching = 'active'
             %>
-            <li class="grid_4 alpha ${n_home}">
+            <li class="${n_home}">
                 <a href="${h.url_for(controller='post', action='home')}" 
                     title="Home">
                     Home <span>Some content here</span>
                 </a>
             </li>
-            <li class="grid_4 ${n_about}">
+            <li class="${n_about}">
                 <a href="${h.url_for(controller='page', action='view', slug='about')}" 
                     title="About">
                     About <span>About me and this site</span>
                 </a>
             </li>
-            <li class="grid_4 ${n_teaching} omega">
+            <li class="${n_teaching}">
                 <a href="${h.url_for(controller='page', action='view', slug='teaching')}" 
                     title="Teaching">
                     Teaching <span>My former life as a teacher</span>
@@ -80,23 +67,15 @@
     </div>
 </%def>
 
-<%def name="secondary_content()">
-    <div id="secondary-content">
-        <div class="container_12">
-            <div class=grid_12>
-                ${h.literal(h.delicious())}
-                ${h.literal(h.flickr())}
-                <div id="blogroll" class="grid_4 omega">
-                    <h4>Blogroll</h4>
-                    <ul>
-                        <li><a href="http://teachmetheweb.org/" rel="external" title="Teach Me the Web">Teach Me the Web</a></li>
-                        <li><a href="http://benramsey.com/" rel="external" title="Ben Ramsey">Ben Ramsey</a></li>
-                        <li><a href="http://shiflett.org/" rel="external" title="Chris Shiflett">Chris Shiflett</a></li>
-                        <li><a href="http://zgordon.org/" rel="external" title="Zac Gordon">Zac Gordon</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+<%def name="blogroll()">
+    <div id="blogroll">
+        <h4>Blogroll</h4>
+        <ul>
+            <li><a href="http://teachmetheweb.org/" rel="external" title="Teach Me the Web">Teach Me the Web</a></li>
+            <li><a href="http://benramsey.com/" rel="external" title="Ben Ramsey">Ben Ramsey</a></li>
+            <li><a href="http://shiflett.org/" rel="external" title="Chris Shiflett">Chris Shiflett</a></li>
+            <li><a href="http://zgordon.org/" rel="external" title="Zac Gordon">Zac Gordon</a></li>
+        </ul>
     </div>
 </%def>
 
@@ -113,32 +92,22 @@
 </%def>
 
 <%def name="footer()">
-    <div id="footer">
-        <div class="container_12">
-            <div class="grid_12">
-                <div class="grid_6 alpha">
-                    <p>
-                        Powered by 
-                        <a href="http://github.com/leveille/wurdig" title="Wurdig">Wurdig</a>
-                    </p>
-                </div>
-                <div class="grid_6 omega">
-                    <ul>
-                        <li>
-                            <a href="${h.url_for(controller='post', action='feeds')}">
-                                Entries (atom)
-                            </a>
-                        </li>
-                        <li>
-                            <a href="${h.url_for(controller='comment', action='feeds')}">
-                                Comments (atom)
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+    <p>
+        Powered by 
+        <a href="http://github.com/leveille/wurdig" title="Wurdig">Wurdig</a>
+    </p>
+    <ul>
+        <li>
+            <a href="${h.url_for(controller='post', action='feeds')}">
+                Entries (atom)
+            </a>
+        </li>
+        <li>
+            <a href="${h.url_for(controller='comment', action='feeds')}">
+                Comments (atom)
+            </a>
+        </li>
+    </ul>
 </%def>
 
 <%def name="flash()">

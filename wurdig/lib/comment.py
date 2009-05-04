@@ -16,7 +16,7 @@ def recent_comments():
     else:
         comments= []
         template = """
-        <div class="recent-comments">
+        <div id="recent-comments">
             <h4>Recent Comments</h4>
             <ul>
                 %s
