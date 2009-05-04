@@ -25,6 +25,7 @@ beaker.session.secret = somesecret
 
 blog.title=
 blog.subtitle=
+akismet.use=
 akismet.api_key=
 twitter.user.screen_name=
 delicious.username=

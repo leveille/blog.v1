@@ -13,36 +13,45 @@ from pylons.decorators import validate
 from pylons.decorators.rest import restrict
 from pylons.decorators.secure import authenticate_form
 from webhelpers.feedgenerator import Atom1Feed
-from wurdig.lib.akismet import Akismet
 from sqlalchemy.sql import and_, delete
 
 log = logging.getLogger(__name__)
     
 class SpamCheck(formencode.FancyValidator):
     messages = {
-        'invalid': 'Your comment has been identified as spam.  Are you a spammer?'
+        'invalid-akismet': 'Your comment has been identified as spam.  Are you a spammer?',
+        'invalid-wurdig': 'Invalid question/answer response.  Please try again.'
     }
     def _to_python(self, values, state):
         # we're in the administrator
         if request.urlvars['action'] == 'save':
             return values
         
-        # Thanks for the help from http://soyrex.com/blog/akismet-django-stop-comment-spam/
-        a = Akismet(config['akismet.api_key'], blog_url=request.server_name)
-        akismet_data = {}
-        akismet_data['user_ip'] = request.remote_addr
-        akismet_data['user_agent'] = request.user_agent
-        akismet_data['comment_author'] = values['name']
-        akismet_data['comment_author_email'] = values['email']
-        akismet_data['comment_author_url'] = values['url']
-        akismet_data['comment_type'] = 'comment'
-    
-        spam = a.comment_check(values['content'], akismet_data)
+        if config['akismet.use']:
+            from wurdig.lib.akismet import Akismet
+            # Thanks for the help from http://soyrex.com/blog/akismet-django-stop-comment-spam/
+            a = Akismet(config['akismet.api_key'], blog_url=request.server_name)
+            akismet_data = {}
+            akismet_data['user_ip'] = request.remote_addr
+            akismet_data['user_agent'] = request.user_agent
+            akismet_data['comment_author'] = values['name']
+            akismet_data['comment_author_email'] = values['email']
+            akismet_data['comment_author_url'] = values['url']
+            akismet_data['comment_type'] = 'comment'
+            spam = a.comment_check(values['content'], akismet_data)
+            m = 'invalid-akismet'
+        else:
+            # This is temporary
+            # Need to offer a simple question/answer spam check
+            spam = False
+            m = 'invalid-wurdig'
+            
         if spam:
             raise formencode.Invalid(
-                self.message('invalid', state),
+                self.message(m, state),
                 values, state
             )
+            
         return values
 
 class NewCommentForm(formencode.Schema):
