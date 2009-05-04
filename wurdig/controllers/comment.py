@@ -1,26 +1,25 @@
-import logging
-import wurdig.model.meta as meta
-import wurdig.lib.helpers as h
 import formencode
+import logging
+import wurdig.lib.helpers as h
+import wurdig.model.meta as meta
 import webhelpers.paginate as paginate
 
+from formencode import htmlfill
 from pylons import config, request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
-from wurdig import model
-from wurdig.lib.base import BaseController, render
-from formencode import htmlfill
 from pylons.decorators import validate
 from pylons.decorators.rest import restrict
 from pylons.decorators.secure import authenticate_form
-from webhelpers.feedgenerator import Atom1Feed
 from sqlalchemy.sql import and_, delete
+from webhelpers.feedgenerator import Atom1Feed
+from wurdig import model
+from wurdig.lib.base import BaseController, render
 
 log = logging.getLogger(__name__)
     
-class SpamCheck(formencode.FancyValidator):
+class AkismetSpamCheck(formencode.FancyValidator):
     messages = {
-        'invalid-akismet': 'Your comment has been identified as spam.  Are you a spammer?',
-        'invalid-wurdig': 'Invalid question/answer response.  Please try again.'
+        'invalid-akismet': 'Your comment has been identified as spam.  Are you a spammer?'
     }
     def _to_python(self, values, state):
         # we're in the administrator
@@ -39,35 +38,40 @@ class SpamCheck(formencode.FancyValidator):
             akismet_data['comment_author_url'] = values['url']
             akismet_data['comment_type'] = 'comment'
             spam = a.comment_check(values['content'], akismet_data)
-            m = 'invalid-akismet'
-        else:
-            # This is temporary
-            # Need to offer a simple question/answer spam check
-            spam = False
-            m = 'invalid-wurdig'
-            
-        if spam:
-            raise formencode.Invalid(
-                self.message(m, state),
-                values, state
-            )
-            
+            if spam:
+                raise formencode.Invalid(
+                    self.message('invalid-akismet', state),
+                    values, state
+                )
         return values
+    
+class PrimitiveSpamCheck(formencode.FancyValidator):
+    def _to_python(self, value, state):
+        # Ensure we have a valid string
+        value = formencode.validators.UnicodeString(max=10).to_python(value, state)
+        eq = u'wurdig' == value.lower()
+        if not eq:
+            raise formencode.Invalid("Double check your answer to the spam prevention question and resubmit.", value, state)
+        return value
 
 class NewCommentForm(formencode.Schema):
     allow_extra_fields = True
     filter_extra_fields = True
-    name = formencode.validators.UnicodeString(not_empty=True, max=100)
-    email = formencode.validators.Email(not_empty=True, max=50)
-    url = formencode.validators.URL(not_empty=False, check_exists=True, max=125)
+    name = formencode.validators.UnicodeString(not_empty=True, max=100, strip=True)
+    email = formencode.validators.Email(not_empty=True, max=50, strip=True)
+    url = formencode.validators.URL(not_empty=False, check_exists=True, max=125, strip=True)
     content = formencode.validators.UnicodeString(
         not_empty=True,
+        strip=True,
         messages={
             'empty':'Please enter a comment.'
         }
     )
     approved = formencode.validators.StringBool(if_missing=False)
-    chained_validators = [SpamCheck()]
+    if config['akismet.use']:
+        chained_validators = [AkismetSpamCheck()]
+    else:
+        wurdig_comment_question = PrimitiveSpamCheck(not_empty=True, max=10, strip=True)
 
 class CommentController(BaseController):
         
