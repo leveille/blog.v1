@@ -1,15 +1,26 @@
 ## -*- coding: utf-8 -*-
-<%namespace file="../component/wurdig.html" name="wurdig" import="*"/>
+<%namespace file="/component/wurdig.html" name="wurdig" import="*"/>
 
 ${wurdig.doctype()}
 <html>
     <head>
         ${wurdig.meta()}
         <title>${self.title()}</title>
+        ${self.ps_feeds()}
         ${wurdig.css()}
     </head>
-
-    <body id="home">    
+    <%
+        controller = request.urlvars['controller']
+        action = request.urlvars['action']
+        slug = None
+        if controller == 'page':
+        	slug = request.urlvars['slug']
+        
+        body_id = 'home'
+        if action != 'home':
+            body_id = 'secondary'
+    %>
+    <body id="${body_id}" class="${controller} ${slug}">    
         <div id="doc4" class="yui-t5">
             ${wurdig.primary_nav('home')}
             <div id="hd" role="banner">
@@ -25,7 +36,9 @@ ${wurdig.doctype()}
                 <div class="yui-b" role="complementary">
                     ${wurdig.recent_comments()}
                     ${wurdig.twitter_updates()}
-                    ${wurdig.tags()}
+                    % if request.urlvars['action'] != 'cloud':
+                        ${wurdig.tags()}
+                    % endif
                 </div>
             </div>
             <div class="yui-gb">
@@ -48,3 +61,4 @@ ${wurdig.doctype()}
 </html>
 
 <%def name="title()">Jason Leveille's Blog</%def>
+<%def name="ps_feeds()"></%def>

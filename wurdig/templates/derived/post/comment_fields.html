@@ -15,7 +15,7 @@
 <%
     from pylons import config
 %>
-% if not config['akismet.use']:
+% if config['akismet.use'] == 'False':
     <div class="field required">
         <p>Please enter Wurdig (the power behind this blog) below. I apologize for the inconvenience of this spam prevention method.</p>
         <label for="wurdig_comment_question">Blog Power</label>

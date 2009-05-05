@@ -26,7 +26,7 @@ class AkismetSpamCheck(formencode.FancyValidator):
         if request.urlvars['action'] == 'save':
             return values
         
-        if config['akismet.use']:
+        if config['akismet.use'] == 'True':
             from wurdig.lib.akismet import Akismet
             # Thanks for the help from http://soyrex.com/blog/akismet-django-stop-comment-spam/
             a = Akismet(config['akismet.api_key'], blog_url=request.server_name)
@@ -46,7 +46,7 @@ class AkismetSpamCheck(formencode.FancyValidator):
         return values
     
 class PrimitiveSpamCheck(formencode.FancyValidator):
-    def _to_python(self, value, state):
+    def _to_python(self, value, state):        
         # Ensure we have a valid string
         value = formencode.validators.UnicodeString(max=10).to_python(value, state)
         eq = u'wurdig' == value.lower()
@@ -68,7 +68,8 @@ class NewCommentForm(formencode.Schema):
         }
     )
     approved = formencode.validators.StringBool(if_missing=False)
-    if config['akismet.use']:
+    
+    if config['akismet.use'] == 'True':
         chained_validators = [AkismetSpamCheck()]
     else:
         wurdig_comment_question = PrimitiveSpamCheck(not_empty=True, max=10, strip=True)
@@ -180,6 +181,8 @@ class CommentController(BaseController):
         c.post = post_id and post_q.filter_by(id=int(post_id)).first() or None
         if c.post is None:
             abort(404)
+        if self.form_result['wurdig_comment_question'] is not None:
+            del self.form_result['wurdig_comment_question']
         comment = model.Comment()
         for k, v in self.form_result.items():
             setattr(comment, k, v)
@@ -225,6 +228,8 @@ class CommentController(BaseController):
         comment = comment_q.filter_by(id=id).first()
         if comment is None:
             abort(404)
+        if self.form_result['wurdig_comment_question'] is not None:
+            del self.form_result['wurdig_comment_question']
         for k,v in self.form_result.items():
             if getattr(comment, k) != v:
                 setattr(comment, k, v)
