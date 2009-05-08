@@ -5,7 +5,7 @@ import wurdig.model.meta as meta
 import webhelpers.paginate as paginate
 
 from formencode import htmlfill
-from pylons import config, request, response, session, tmpl_context as c
+from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
 from pylons.decorators.rest import restrict
@@ -26,10 +26,10 @@ class AkismetSpamCheck(formencode.FancyValidator):
         if request.urlvars['action'] == 'save':
             return values
         
-        if config['akismet.api_key'] not in ['', None, u'']:
+        if h.wurdig_use_akismet():
             from wurdig.lib.akismet import Akismet
             # Thanks for the help from http://soyrex.com/blog/akismet-django-stop-comment-spam/
-            a = Akismet(config['akismet.api_key'], blog_url=request.server_name)
+            a = Akismet(h.wurdig_get_akismet_key(), wurdig_url=request.server_name)
             akismet_data = {}
             akismet_data['user_ip'] = request.remote_addr
             akismet_data['user_agent'] = request.user_agent
@@ -49,7 +49,7 @@ class PrimitiveSpamCheck(formencode.FancyValidator):
     def _to_python(self, value, state):        
         # Ensure we have a valid string
         value = formencode.validators.UnicodeString(max=10).to_python(value, state)
-        eq = u'wurdig' == value.lower()
+        eq = h.wurdig_spamword() == value.lower()
         if not eq:
             raise formencode.Invalid("Double check your answer to the spam prevention question and resubmit.", value, state)
         return value
@@ -69,7 +69,7 @@ class NewCommentForm(formencode.Schema):
     )
     approved = formencode.validators.StringBool(if_missing=False)
     
-    if config['akismet.api_key'] not in ['', None, u'']:
+    if h.wurdig_use_akismet():
         chained_validators = [AkismetSpamCheck()]
     else:
         wurdig_comment_question = PrimitiveSpamCheck(not_empty=True, max=10, strip=True)
@@ -95,10 +95,10 @@ class CommentController(BaseController):
         comments_q = comments_q.order_by(model.comments_table.c.created_on.desc()).limit(20)
         
         feed = Atom1Feed(
-            title=u"Comments for " + config['blog.title'],
-            subtitle=config['blog.subtitle'],
+            title=u"Comments for " + h.wurdig_title(),
+            subtitle=h.wurdig_subtitle(),
             link=u"http://%s" % request.server_name,
-            description=config['blog.subtitle'],
+            description=h.wurdig_subtitle(),
             language=u"en",
         )
         
@@ -136,7 +136,7 @@ class CommentController(BaseController):
         comments_q = comments_q.order_by(model.comments_table.c.created_on.desc()).limit(10)
         
         feed = Atom1Feed(
-            title=config['blog.title'] + u' - ' + c.post.title,
+            title=h.wurdig_title() + u' - ' + c.post.title,
             subtitle=u'Most Recent Comments',
             link=h.url_for(
                     controller='post', 

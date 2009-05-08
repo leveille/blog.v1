@@ -1,7 +1,3 @@
-<%
-    from pylons import config
-%>
-
 <%def name="doctype()">
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 </%def>
@@ -31,32 +27,16 @@
 <%def name="header()">
     <div>
         <h1><a href="${h.url_for(controller='post', action='home')}" title="Home">${title()}</a></h1>
-        <p class="wurdig-tagline">${subtitle()}</p>
+        % if h.wurdig_use_subtitle():
+            <p class="wurdig-tagline">${h.wurdig_subtitle()}</p>
+        % endif
         <p class="wurdig-subscribe">Subscribe</p>
         <p class="wurdig-search">Search</p>
     </div>
 </%def>
 
 <%def name="title()">
-    <%
-        wurdig_blog_title = ''
-        try:
-            wurdig_blog_title = config['blog.title']
-        except Exception, e:
-            wurdig_blog_title = u'Blog Title'
-    %>
-    ${wurdig_blog_title}
-</%def>
-
-<%def name="subtitle()">
-    <%
-        wurdig_blog_subtitle = ''
-        try:
-            wurdig_blog_subtitle = config['blog.subtitle']
-        except Exception, e:
-            wurdig_blog_subtitle = u'Blog Subtitle'
-    %>
-    ${wurdig_blog_subtitle}
+    ${h.wurdig_title()}
 </%def>
 
 <%def name="primary_nav(loc=None)">
