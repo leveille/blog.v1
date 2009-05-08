@@ -26,7 +26,7 @@ class AkismetSpamCheck(formencode.FancyValidator):
         if request.urlvars['action'] == 'save':
             return values
         
-        if config['akismet.use'] == 'True':
+        if config['akismet.api_key'] not in ['', None, u'']:
             from wurdig.lib.akismet import Akismet
             # Thanks for the help from http://soyrex.com/blog/akismet-django-stop-comment-spam/
             a = Akismet(config['akismet.api_key'], blog_url=request.server_name)
@@ -69,7 +69,7 @@ class NewCommentForm(formencode.Schema):
     )
     approved = formencode.validators.StringBool(if_missing=False)
     
-    if config['akismet.use'] == 'True':
+    if config['akismet.api_key'] not in ['', None, u'']:
         chained_validators = [AkismetSpamCheck()]
     else:
         wurdig_comment_question = PrimitiveSpamCheck(not_empty=True, max=10, strip=True)

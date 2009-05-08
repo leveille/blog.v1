@@ -25,9 +25,8 @@ beaker.session.secret = somesecret
 
 blog.title=
 blog.subtitle=
-akismet.use=
-akismet.api_key=
-twitter.user.screen_name=
+# leave blank to ignore akismet spam detection (akismet.api_key=)
+akismet.api_key=twitter.user.screen_name=
 delicious.username=
 flickr.id=
 
