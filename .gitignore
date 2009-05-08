@@ -5,6 +5,5 @@ development.ini
 test.ini
 *.tmp*
 data
-data/*
 test.db
 Wurdig.egg-info
