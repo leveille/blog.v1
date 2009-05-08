@@ -23,10 +23,19 @@ cache_dir = %(here)s/data
 beaker.session.key = wurdig
 beaker.session.secret = somesecret
 
+#blog title
 blog.title=
+
+#blog subtitle
 blog.subtitle=
+
+#primitive spam prevention keyword
+wurdig.spamword=wurdig
+
 # leave blank to ignore akismet spam detection (akismet.api_key=)
-akismet.api_key=twitter.user.screen_name=
+akismet.api_key=
+
+twitter.user.screen_name=
 delicious.username=
 flickr.id=
 
