@@ -2,9 +2,26 @@
 
 Provides the BaseController class for subclassing.
 """
+import formencode
+import re
+import wurdig.lib.helpers as h
+
 from pylons.controllers import WSGIController
 from pylons.templating import render_mako as render
 from wurdig.model import meta
+
+class Cleanup(formencode.FancyValidator):
+    def _to_python(self, value, state):
+        if value['content'] not in ['', u'', None]:
+            value['content'] = h.tidy(value['content'])
+        return value
+    
+class ConstructSlug(formencode.FancyValidator):
+    def _to_python(self, value, state):
+        if value['slug'] in ['', u'', None]:
+            title = value['title'].lower()
+            value['slug'] = re.compile(r'[^\w-]+', re.U).sub('-', title).strip('-')
+        return value
 
 class BaseController(WSGIController):     
     

@@ -1,36 +1,22 @@
-import logging
-import wurdig.model as model
-import wurdig.model.meta as meta
-import wurdig.lib.helpers as h
-import webhelpers.paginate as paginate
 import datetime as d
 import formencode
+import logging
 import re
+import wurdig.lib.helpers as h
+import wurdig.model as model
+import wurdig.model.meta as meta
+import webhelpers.paginate as paginate
 
+from authkit.authorize.pylons_adaptors import authorize
+from formencode import htmlfill
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
 from pylons.decorators.rest import restrict
 from sqlalchemy.sql import and_, delete
-from formencode import htmlfill
-from wurdig.lib.base import BaseController, render
-from authkit.authorize.pylons_adaptors import authorize
-from wurdig.lib.base import BaseController, render
+from wurdig.lib.base import BaseController, Cleanup, ConstructSlug, render
 
 log = logging.getLogger(__name__)
-
-class Cleanup(formencode.FancyValidator):
-    def _to_python(self, value, state):
-        if value['content'] not in ['', u'', None]:
-            value['content'] = h.tidy(value['content'])
-        return value
-
-class ConstructSlug(formencode.FancyValidator):
-    def _to_python(self, value, state):
-        if value['slug'] in ['', u'', None]:
-            page_title = value['title'].lower()
-            value['slug'] = re.compile(r'[^\w-]+', re.U).sub('-', page_title).strip('-')
-        return value
     
 class UniqueSlug(formencode.FancyValidator):
     messages = {
