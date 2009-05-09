@@ -12,10 +12,10 @@
     ${h.text('url')}
 </div>
 
-% if not h.blog_use_akismet():
+% if not h.wurdig_use_akismet():
     <div class="field required">
-        <p>Please enter ${h.blog_spamword()} below. I apologize for the inconvenience of this spam prevention method.</p>
-        <label for="wurdig_comment_question">Spam Word</label>
+        <p>Please enter ${h.wurdig_spamword()} below. I apologize for the inconvenience of this spam prevention method.</p>
+        <label for="wurdig_comment_question">Super Secret Word</label>
         ${h.text('wurdig_comment_question')}
     </div>
 % endif

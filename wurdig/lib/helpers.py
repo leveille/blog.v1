@@ -11,7 +11,7 @@ from webhelpers.html.tools import auto_link
 from webhelpers.text import truncate, chop_at, plural
 from webob.exc import strip_tags
 
-import wurdig.lib.auth as auth
+from wurdig.lib import auth
 from wurdig.lib.comment import *
 from wurdig.lib.feed_display import *
 from wurdig.lib.html import *

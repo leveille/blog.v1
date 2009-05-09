@@ -17,13 +17,13 @@
 
 <h2>${c.post.title}</h2>
 
-<div class="post">
+<div class="wurdig-entry">
     ${h.literal(c.post.content)}
         
-    <p class="post-meta">
+    <p class="wurdig-entry-meta">
         ${posts.tag_list(c.post.tags)}
         % if h.auth.authorized(h.auth.is_valid_user):
-            <span class="post-admin">
+            <span class="wurdig-admin">
                 <strong>Admin</strong> : 
                 ${h.link_to(
                     'Edit This Post',
@@ -34,11 +34,11 @@
     </p>
     
     % if not c.post.comments_allowed and len(c.post.comments) > 20:
-        <p class="comment-notice">Comments have been disabled for this post.</p>
+        <p class="wurdig-comment-notice">Comments have been disabled for this post.</p>
     % endif
     
     % if len(c.post.comments):
-        <div id="comments">
+        <div id="wurdig-comments">
             <h3>${h.plural(len(c.post.comments), 'Comment', 'Comments')} for "${c.post.title}"</h3>
             
             <%
@@ -46,7 +46,7 @@
             %>
             
             % for k,comment in enumerate(c.post.comments):
-                <div id="comment-${comment.id}">
+                <div id="wurdig-comment-${comment.id}">
                     <h4>
                         <strong>${str(k+1)}</strong>
                         <em><img src="http://www.gravatar.com/avatar/${hashlib.md5(comment.email).hexdigest()}?s=80" alt="${comment.name} - Gravatar"></em>
@@ -60,7 +60,7 @@
                     </h4>
                     <blockquote>
                         ${h.literal(comment.content)}
-                        <p class="comment-posted">
+                        <p class="wurdig-comment-posted">
                             ${comment.created_on}
                             <a href="#comment-${comment.id}">Link</a>
                         </p>
@@ -71,13 +71,13 @@
     % endif
     
     % if c.post.comments_allowed:
-        <div id="comment-form">
+        <div id="wurdig-comment-form">
             ${h.secure_form(h.url_for(post_id=c.post.id, controller='comment', action='create'), method='post')}
                 ${fields.body()}
                 ${h.submit('create_comment', 'Create Comment')}
             ${h.end_form()}
         </div>
     % else:
-        <p class="comment-notice">Comments have been disabled for this post.</p>
+        <p class="wurdig-comment-notice">Comments have been disabled for this post.</p>
     % endif
 </div>

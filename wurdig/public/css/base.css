@@ -1,15 +1,40 @@
 body {
     color:#444;
-    background:#FFF
+    background:#FFF;
+    font-family: 'Lucida Grande',Geneva,Arial,Verdana,sans-serif;
+    line-height: 1.5em
 }
 
 h1, h2, h3, h4, h5, h6 {
     color: #000;
-    /*font-family: Helvetica Neue,Helvetica LT,Helvetica CY,FreeSans,helvetica,arial,sans-serif;*/
     font-family: "URW Gothic L","MgOpen Moderna","Lucida Sans",arial,sans-serif;
     font-weight: normal;
     font-style: normal;
     line-height: 1.6em
+}
+
+h1 {
+    font-size: 197%
+}
+
+h2 {
+    font-size: 167%
+}
+
+h3 {
+    font-size: 153.9%
+}
+
+h4 {
+    font-size: 131%
+}
+
+h5 {
+    font-size: 123.1%
+}
+
+h6 {
+    font-size: 100%
 }
 
 a:focus,
@@ -38,79 +63,20 @@ blockquote p {
 }
 
 div.yui-gb, 
-div#ft {
+#ft {
     clear: both
 }
 
-/*_NAV*/
-#primary-nav ul {
-    overflow: hidden;
-    margin: 0;
-    margin-top: -1px;
-    padding: 0;
-    height: 1%;
-    position: relative;
-    bottom: -1px
-}
-
-#primary-nav li {
-    border-top: solid .4em #D0D0D0;
-    border-bottom: dotted .1em transparent
-}
-
-#primary-nav li:hover {
-    border-color: #000;
-    border-bottom: dotted .1em #000
-}
-
-#primary-nav li.active {
-    border-color: #000
-}
-
-#primary-nav li.active:hover {
-    border-color: #000
-}
-
-#primary-nav a {
-    display: block;
-    font-size: .9em;
-    font-weight: bold;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: #000;
-    padding: .2em;
-    padding-bottom: .1em
-}
-
-#primary-nav a span {
-    display: block;
-    font-weight: normal;
-    text-transform: lowercase;
-    color: #999;
-    position: relative;
-    top: -2px
-}
-
-#primary-nav li.active a span {
-    color: #000
-}
-
-#primary-nav li:hover span {
-    color: #000
-}
-
 /*_LOGO*/
-#header {
+#hd {
     border-bottom: dotted .1em #D0D0D0;
-    border-top: dotted .1em #D0D0D0;
-    background: #F0F0F0;
-    padding: 2.5em 0 2em 0;
+    padding: 1em 0 1em 0;
     float: left;
     width: 100%;
+    position: relative
 }
 
 #hd h1 {
-    font-size: 2.2em;
     text-transform: uppercase;
     margin: 0;
     margin-bottom: 2px;
@@ -132,35 +98,95 @@ div#ft {
     padding: 0
 }
 
-/*_CONTENT*/
-#content {
+#hd p.wurdig-search,
+#hd p.wurdig-subscribe {
+    display: none
+}
+
+/*_NAV*/
+#wurdig-primary-nav ul {
+    position: absolute;
+    bottom: 0;
+    right: 0
+}
+
+#wurdig-primary-nav li {
     float: left;
-    width: 100%
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-right: 6px;
+    background: url('../images/bg/wurdig-nav-divider.gif') no-repeat left 8px
+}
+
+#wurdig-primary-nav li a {
+    display: block;
+    padding: 0 6px 0 6px;
+    margin-left: 7px;
+    border: solid 1px transparent;
+}
+
+#wurdig-primary-nav li.wurdig-nav-first {
+    background-image: none
+}
+
+#wurdig-primary-nav li.wurdig-nav-last {
+    padding-right: 0
+}
+
+#wurdig-primary-nav li a:hover,
+#wurdig-primary-nav li a.wurdig-active {
+    background: #F8F8F8;
+    border: solid 1px #D8D8D8;
+    color: #CC0000
 }
 
 /*_PRIMARY_CONTENT*/
 
-#yui-main p.post-meta span {
+#yui-main {
+    margin-top: 1em
+}
+
+#yui-main h2:first-child,
+#yui-main h2.wurdig-first {
+    margin-top: .3em;
+    padding-top: 0
+}
+
+#yui-main p.wurdig-entries-tagged {
+    margin: 0;
+    padding: 0;
+    font-size: 85%
+}
+
+#yui-main p.wurdig-entry-meta span {
     display: block
 }
 
-#yui-main p.post-date {
+#yui-main p.wurdig-entry-date {
     color: #999;
     margin-top: -19px
 }
 
-body#home #yui-main p.post-meta {
+body.home #yui-main p.wurdig-entry-meta {
     margin-bottom: 2em;
     padding-bottom: 2em;
-    border-bottom: solid .1em #D0D0D0
+    border-bottom: dotted .1em #D0D0D0;
 }
 
 #yui-main ul li ul {
     margin: 15px 0
 }
 
-#yui-main div.tags h4 {
+#yui-main div.hTagCloud h4 {
     display: none
+}
+
+/* Sidebar */
+
+#wurdig-sidebar {
+    font-size: 93%;
+    margin-top: 2em
 }
 
 /*_TAG_CLOUD*/
@@ -189,24 +215,46 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
 #primary-content div.hTagCloud ul.popularity li.vvv-popular { font-size: 2.5em }
 #primary-content div.hTagCloud ul.popularity li.vvvv-popular { font-size: 3em }
 
-/*_SIDEBAR*/
-#sidebar {
-    padding-top: 1em
-}
-
 /*_SECONDARY_CONTENT*/
-#secondary-content {
+#wurdig-secondary-content {
     border-top: dotted .1em #D0D0D0;
     background-color: #F0F0F0;
+    margin-top: 1em;
     padding: 2em 0 2em 0;
     float: left;
-    width: 100%
+    width: 100%;
+    font-size: 93%
+}
+
+#wurdig-secondary-content #wurdig-delicious-feed {
+    padding-left: 2em
+}
+
+#wurdig-secondary-content #wurdig-blogroll {
+    padding-right: 2em
+}
+
+#wurdig-secondary-content #wurdig-flickr-feed ul li {
+    list-style: none;
+    float: left;
+    margin: 0 5px 0 0;
+    padding: 0
+}
+
+#wurdig-secondary-content #wurdig-flickr-feed ul li img {
+    background: #FFF;
+    border: 2px solid #D0D0D0;
+    padding: 3px
+}
+
+#wurdig-secondary-content #wurdig-flickr-feed ul li a:hover img {
+    border: 2px solid #000
 }
 
 /*_FOOTER*/
 #ft {
     border-top: dotted .1em #D0D0D0;
-    font-size: .9em;
+    font-size: 93%;
     clear: both;
     float: left;
     width: 100%;
@@ -236,12 +284,12 @@ p img.right {
     margin:1.5em 0 1.5em 1.5em
 }
 .clear{clear:both;}
-.error, .notice, .success, .highlight{padding:.8em;margin-bottom:1em;border:2px solid #ddd;}
+.error, .flash, .success, .highlight{padding:.8em;margin-bottom:1em;border:2px solid #ddd;}
 .error {background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;}
-.notice {background:#FFF6BF;color:#514721;border-color:#FFD324;}
+.flash {background:#FFF6BF;color:#514721;border-color:#FFD324;}
 .success {background:#E6EFC2;color:#264409;border-color:#C6D880;}
 .error a {color:#8a1f11;}
-.notice a {color:#514721;}
+.flash a {color:#514721;}
 .success a {color:#264409;}
 .small {font-size:85%;margin-bottom:1.875em}
 .large {font-size:116%;margin-bottom:1.25em;}

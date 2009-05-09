@@ -11,7 +11,7 @@
             <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
         % endif
         
-        <div class="entries">
+        <div class="wurdig-entries">
         % for post in c.paginator:
             <h2>
                 <%
@@ -26,9 +26,9 @@
                 %>
                 ${post_link % post.title}
             </h2>
-            <p class="post-date">${post.posted_on.strftime('%B %d, %Y')}</p>
-            <div class="entry">
-                <div class="entry-content">
+            <p class="wurdig-entry-date">${post.posted_on.strftime('%B %d, %Y')}</p>
+            <div class="wurdig-entry">
+                <div class="wurdig-entry-content">
                     
                     % if '<!--more-->' in post.content:
                         ${h.literal(h.chop_at(post.content, '<!--more-->'))}
@@ -37,10 +37,10 @@
                         ${h.literal(post.content)}
                     % endif
                     
-                    <p class="post-meta">
+                    <p class="wurdig-entry-meta">
                         ${tag_list(post.tags)}
                         
-                        <span class="post-comments">
+                        <span class="wurdig-entry-comments">
                             <strong>Comments</strong> :
                             % if len(post.comments):
                                 ${h.link_to(
@@ -50,7 +50,7 @@
                                               year=post.posted_on.strftime('%Y'), 
                                               month=post.posted_on.strftime('%m'), 
                                               slug=post.slug, 
-                                              anchor=u'comments')
+                                              anchor=u'wurdig-comments')
                                 )}
                             % else:
                                 ${h.link_to(
@@ -60,13 +60,13 @@
                                               year=post.posted_on.strftime('%Y'), 
                                               month=post.posted_on.strftime('%m'), 
                                               slug=post.slug, 
-                                              anchor=u'respond')
+                                              anchor=u'wurdig-comment-form')
                                 )}
                             % endif
                         </span>
                         
                         % if h.auth.authorized(h.auth.is_valid_user):
-                            <span class="post-admin">
+                            <span class="wurdig-admin">
                                 <strong>Admin</strong> : 
                                 ${h.link_to(
                                     'Edit This Post',

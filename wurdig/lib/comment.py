@@ -10,13 +10,13 @@ def comment_filter(comment):
 def recent_comments():
     comments_q = meta.Session.query(model.Comment).filter(model.Comment.approved==True)
     comments_q = comments_q.order_by(model.comments_table.c.created_on.desc())
-    recent_comments = comments_q.join(model.Post).limit(5)
+    recent_comments = comments_q.join(model.Post).limit(4)
     if recent_comments is None:
         return ''
     else:
         comments= []
         template = """
-        <div id="recent-comments">
+        <div id="wurdig-recent-comments">
             <h4>Recent Comments</h4>
             <ul>
                 %s
@@ -49,7 +49,7 @@ def recent_comments():
                     year=comment.posts.posted_on.strftime('%Y'), 
                     month=comment.posts.posted_on.strftime('%m'), 
                     slug=comment.posts.slug,
-                    anchor=u"comment-" + str(comment.id)
+                    anchor=u"wurdig-comment-" + str(comment.id)
                 )
             )
             comments.append(i % (name, content, link))

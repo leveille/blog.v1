@@ -15,15 +15,13 @@ ${wurdig.doctype()}
         slug = None
         if controller == 'page':
         	slug = request.urlvars['slug']
-        
-        body_id = 'home'
-        if action != 'home':
-            body_id = 'secondary'
+        elif controller == 'post' and action == 'home':
+            slug = action
     %>
-    <body id="${body_id}" class="${controller} ${slug}">    
-        <div id="doc4" class="yui-t5">
-            ${wurdig.primary_nav('home')}
-            <div id="hd" role="banner">
+    <body class="${controller} ${slug}">    
+        <div id="doc4" class="yui-t6">
+            <div id="hd" role="banner" class="${controller}">
+                ${wurdig.primary_nav(slug)}
                 ${wurdig.header()}
             </div>
             <div id="bd">
@@ -33,7 +31,7 @@ ${wurdig.doctype()}
                         ${next.body()}  
                     </div>
                 </div>
-                <div class="yui-b" role="complementary">
+                <div class="yui-b" id="wurdig-sidebar" role="complementary">
                     ${wurdig.recent_comments()}
                     ${wurdig.twitter_updates()}
                     % if request.urlvars['action'] != 'cloud':
@@ -41,7 +39,7 @@ ${wurdig.doctype()}
                     % endif
                 </div>
             </div>
-            <div class="yui-gb">
+            <div class="yui-gb" id="wurdig-secondary-content">
                 <div class="yui-u first">
                     ${h.literal(h.delicious())}
                 </div>

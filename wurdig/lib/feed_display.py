@@ -9,7 +9,7 @@ def delicious():
     if len(delicious_feed.entries):
         items = []
         template = """
-        <div id="delicious-bookmarks">
+        <div id="wurdig-delicious-feed">
             <h4>Bookmarks</h4>
             <ul>
                 %s
@@ -19,7 +19,7 @@ def delicious():
         for entry in delicious_feed.entries[:6]:
             i = '<li>%s</li>'
             link = '<a href="%s" title="%s">%s</a> (%s)'
-            link = link % (entry['guid'], entry['title'], entry['title'], entry.updated[:14])
+            link = link % (entry['guid'], entry['title'], entry['title'], entry.updated[:11])
             items.append(i % link)
         return template % '\n'.join(items)
     else:
@@ -30,14 +30,14 @@ def flickr():
     if len(flickr_feed.entries):
         items = []
         template = """
-        <div id="flickr-images">
+        <div id="wurdig-flickr-feed">
             <h4>Public Flickr Stream</h4>
             <ul>
                 %s
             </ul>
         </div>
         """
-        for entry in flickr_feed.entries[:5]:
+        for entry in flickr_feed.entries[:9]:
             image = entry['enclosures'][0]['href']
             image = image.replace('m.jpg', 's.jpg')
             i = '<li>%s</li>' % h.link_to(
@@ -54,7 +54,7 @@ def twitter():
     if len(twitter_feed.entries):
         items = []
         template = """
-        <div id="twitter-statuses">
+        <div id="wurdig-twitter-feed">
             <h4>Twitter Updates</h4>
             <ul>
                 %s

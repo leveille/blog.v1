@@ -31,7 +31,7 @@ def cloud():
 def post_tags(tags):
     if len(tags):
         parts, _tags = [], []
-        parts.append('<span class="post-tags">')
+        parts.append('<span class="wurdig-entry-tags">')
         parts.append('<strong>Tags</strong> : ')
         for tag in tags:
             _tags.append(h.link_to(

@@ -114,7 +114,7 @@ class CommentController(BaseController):
                         year=c.post.posted_on.strftime('%Y'), 
                         month=c.post.posted_on.strftime('%m'), 
                         slug=c.post.slug,
-                        anchor=u"comment-" + str(comment.id)
+                        anchor=u"wurdig-comment-" + str(comment.id)
                     ),
                     description=comment.content
                 )
@@ -158,7 +158,7 @@ class CommentController(BaseController):
                     year=c.post.posted_on.strftime('%Y'), 
                     month=c.post.posted_on.strftime('%m'), 
                     slug=c.post.slug,
-                    anchor=u"comment-" + str(comment.id)
+                    anchor=u"wurdig-comment-" + str(comment.id)
                 ),
                 description=comment.content
             )

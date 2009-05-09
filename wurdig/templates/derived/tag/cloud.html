@@ -1,8 +1,9 @@
 <%inherit file="/base/master.html"/>
 <%namespace file="/component/wurdig.html" name="wurdig" import="tags"/>
 
-<%def name="title()">${parent.title()} &gt; Tag Cloud</%def>
+<%def name="title()">
+    ${parent.title()} &gt; Tag Cloud
+</%def>
 
 <h2>Tag Cloud</h2>
-
 ${wurdig.tags()}

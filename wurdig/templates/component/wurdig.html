@@ -25,14 +25,12 @@
 </%def>
 
 <%def name="header()">
-    <div>
-        <h1><a href="${h.url_for(controller='post', action='home')}" title="Home">${title()}</a></h1>
-        % if h.wurdig_use_subtitle():
-            <p class="wurdig-tagline">${h.wurdig_subtitle()}</p>
-        % endif
-        <p class="wurdig-subscribe">Subscribe</p>
-        <p class="wurdig-search">Search</p>
-    </div>
+    <h1><a href="${h.url_for(controller='post', action='home')}" title="Home">${title()}</a></h1>
+    % if h.wurdig_use_subtitle():
+        <p class="wurdig-tagline">${h.wurdig_subtitle()}</p>
+    % endif
+    <p class="wurdig-subscribe">Subscribe</p>
+    <p class="wurdig-search">Search</p>
 </%def>
 
 <%def name="title()">
@@ -40,33 +38,33 @@
 </%def>
 
 <%def name="primary_nav(loc=None)">
-    <div id="primary-nav">
+    <div id="wurdig-primary-nav">
         <ul role="navigation">
             <%
-                (n_home, n_about, n_teaching) = (None, None, None)
+                (n_home, n_about, n_teaching, wurdig_active) = (None, None, None, 'wurdig-active')
                 if loc == 'home':
-                    n_home = 'active'
+                    n_home = wurdig_active
                 elif loc == 'about':
-                    n_about = 'active'
+                    n_about = wurdig_active
                 elif loc == 'teaching':
-                    n_teaching = 'active'
+                    n_teaching = wurdig_active
             %>
-            <li class="${n_home}">
+            <li class="${n_home} wurdig-nav-first">
                 <a href="${h.url_for(controller='post', action='home')}" 
-                    title="Home">
-                    Home <span>Some content here</span>
+                    title="Home" class="${n_home}">
+                    Home
                 </a>
             </li>
-            <li class="${n_about}">
+            <li>
                 <a href="${h.url_for(controller='page', action='view', slug='about')}" 
-                    title="About">
-                    About <span>About me and this site</span>
+                    title="About" class="${n_about}">
+                    About
                 </a>
             </li>
-            <li class="${n_teaching}">
+            <li class="${n_teaching} wurdig-nav-last">
                 <a href="${h.url_for(controller='page', action='view', slug='teaching')}" 
-                    title="Teaching">
-                    Teaching <span>My former life as a teacher</span>
+                    title="Teaching" class="${n_teaching}">
+                    Teaching
                 </a>
             </li>
         </ul>
@@ -74,7 +72,7 @@
 </%def>
 
 <%def name="blogroll()">
-    <div id="blogroll">
+    <div id="wurdig-blogroll">
         <h4>Blogroll</h4>
         <ul>
             <li><a href="http://teachmetheweb.org/" rel="external" title="Teach Me the Web">Teach Me the Web</a></li>
@@ -98,10 +96,6 @@
 </%def>
 
 <%def name="footer()">
-    <p>
-        Powered by 
-        <a href="http://github.com/leveille/wurdig" title="Wurdig">Wurdig</a>
-    </p>
     <ul>
         <li>
             <a href="${h.url_for(controller='post', action='feeds')}">
@@ -114,12 +108,16 @@
             </a>
         </li>
     </ul>
+    <p>
+        Powered by 
+        <a href="http://github.com/leveille/wurdig" title="Wurdig">Wurdig</a>
+    </p>
 </%def>
 
 <%def name="flash()">
     % if session.has_key('flash'):
         <div id="flash">
-            <p>${session.get('flash')}</p>
+            <p class="flash">${session.get('flash')}</p>
         </div>
         <%
             del session['flash']
