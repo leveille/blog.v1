@@ -75,19 +75,6 @@ class NewCommentForm(formencode.Schema):
         wurdig_comment_question = PrimitiveSpamCheck(not_empty=True, max=10, strip=True)
 
 class CommentController(BaseController):
-        
-    def list(self):
-        comments_q = meta.Session.query(model.Comment).filter_by(pageid=c.page.id)
-        comments_q = comments_q.order_by(model.comment_table.c.created.asc())
-        c.paginator = paginate.Page(
-            comments_q,
-            page=int(request.params.get('page', 1)),
-            items_per_page=10,
-            pageid=c.pageid,
-            controller='comment',
-            action='list'
-        )
-        return render('/derived/comment/list.html')
     
     def feeds(self):  
                 
@@ -114,7 +101,7 @@ class CommentController(BaseController):
                         year=c.post.posted_on.strftime('%Y'), 
                         month=c.post.posted_on.strftime('%m'), 
                         slug=c.post.slug,
-                        anchor=u"wurdig-comment-" + str(comment.id)
+                        anchor=u"comment-" + str(comment.id)
                     ),
                     description=comment.content
                 )
@@ -158,7 +145,7 @@ class CommentController(BaseController):
                     year=c.post.posted_on.strftime('%Y'), 
                     month=c.post.posted_on.strftime('%m'), 
                     slug=c.post.slug,
-                    anchor=u"wurdig-comment-" + str(comment.id)
+                    anchor=u'comment-' + str(comment.id)
                 ),
                 description=comment.content
             )

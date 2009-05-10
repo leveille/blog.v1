@@ -69,8 +69,9 @@ div.yui-gb,
 
 /*_LOGO*/
 #hd {
+    border-top: dotted .1em #D0D0D0;
     border-bottom: dotted .1em #D0D0D0;
-    padding: 1em 0 1em 0;
+    padding: 2em 0 2em 0;
     float: left;
     width: 100%;
     position: relative
@@ -95,19 +96,22 @@ div.yui-gb,
 
 #hd p {
     margin: 0;
-    padding: 0
+    padding: 0;
+    font-size: 93%
 }
 
-#hd p.wurdig-search,
-#hd p.wurdig-subscribe {
-    display: none
+#hd p.wurdig-tagline {
+    font-style: italic
 }
 
 /*_NAV*/
 #wurdig-primary-nav ul {
     position: absolute;
-    bottom: 0;
-    right: 0
+    bottom: 1em;
+    right: 0;
+    font-size: 93%;
+    margin: 0;
+    padding: 0
 }
 
 #wurdig-primary-nav li {
@@ -145,6 +149,10 @@ div.yui-gb,
 
 #yui-main {
     margin-top: 1em
+}
+
+#yui-main h2 {
+    text-transform: capitalize
 }
 
 #yui-main h2:first-child,
@@ -261,8 +269,41 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
     padding: 2em 0 2em 0
 }
 
+#ft ul {
+    text-align: right;
+    margin: 0 0 3px 0;
+    padding: 0;
+    float: right
+}
+
+#ft li {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 6px;
+    background: url('../images/bg/wurdig-nav-divider.gif') no-repeat left 8px
+}
+
+#ft li.wurdig-nav-first {
+    background-image: none
+}
+
+#ft li a {
+    margin-right: 6px
+}
+
+#ft li.wurdig-nav-last a {
+    margin-right: 0
+}
+
 #ft p {
-    padding: .5em .5em 0 .5em
+    clear: both;
+    text-align: right;
+    margin: 0;
+    padding: 0
 }
 
 /*_DEFAULTS*/

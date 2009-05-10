@@ -49,7 +49,7 @@ def recent_comments():
                     year=comment.posts.posted_on.strftime('%Y'), 
                     month=comment.posts.posted_on.strftime('%m'), 
                     slug=comment.posts.slug,
-                    anchor=u"wurdig-comment-" + str(comment.id)
+                    anchor=u"comment-" + str(comment.id)
                 )
             )
             comments.append(i % (name, content, link))

@@ -38,7 +38,7 @@
     % endif
     
     % if len(c.post.comments):
-        <div id="wurdig-comments">
+        <div id="comments">
             <h3>${h.plural(len(c.post.comments), 'Comment', 'Comments')} for "${c.post.title}"</h3>
             
             <%
@@ -46,7 +46,7 @@
             %>
             
             % for k,comment in enumerate(c.post.comments):
-                <div id="wurdig-comment-${comment.id}">
+                <div id="comment-${comment.id}">
                     <h4>
                         <strong>${str(k+1)}</strong>
                         <em><img src="http://www.gravatar.com/avatar/${hashlib.md5(comment.email).hexdigest()}?s=80" alt="${comment.name} - Gravatar"></em>
@@ -71,7 +71,7 @@
     % endif
     
     % if c.post.comments_allowed:
-        <div id="wurdig-comment-form">
+        <div id="leave-comment">
             ${h.secure_form(h.url_for(post_id=c.post.id, controller='comment', action='create'), method='post')}
                 ${fields.body()}
                 ${h.submit('create_comment', 'Create Comment')}

@@ -7,9 +7,7 @@
 <%def name="paginated()">
     % if len(c.paginator):
     
-        % if request.urlvars['action'] != 'home':
-            <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
-        % endif
+        <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
         
         <div class="wurdig-entries">
         % for post in c.paginator:
@@ -50,7 +48,7 @@
                                               year=post.posted_on.strftime('%Y'), 
                                               month=post.posted_on.strftime('%m'), 
                                               slug=post.slug, 
-                                              anchor=u'wurdig-comments')
+                                              anchor=u'comments')
                                 )}
                             % else:
                                 ${h.link_to(
@@ -60,7 +58,7 @@
                                               year=post.posted_on.strftime('%Y'), 
                                               month=post.posted_on.strftime('%m'), 
                                               slug=post.slug, 
-                                              anchor=u'wurdig-comment-form')
+                                              anchor=u'leave-comment')
                                 )}
                             % endif
                         </span>

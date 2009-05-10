@@ -29,8 +29,6 @@
     % if h.wurdig_use_subtitle():
         <p class="wurdig-tagline">${h.wurdig_subtitle()}</p>
     % endif
-    <p class="wurdig-subscribe">Subscribe</p>
-    <p class="wurdig-search">Search</p>
 </%def>
 
 <%def name="title()">
@@ -41,29 +39,21 @@
     <div id="wurdig-primary-nav">
         <ul role="navigation">
             <%
-                (n_home, n_about, n_teaching, wurdig_active) = (None, None, None, 'wurdig-active')
-                if loc == 'home':
-                    n_home = wurdig_active
-                elif loc == 'about':
+                (n_about, n_teaching, wurdig_active) = (None, None, 'wurdig-active')
+                if loc == 'about':
                     n_about = wurdig_active
                 elif loc == 'teaching':
                     n_teaching = wurdig_active
             %>
-            <li class="${n_home} wurdig-nav-first">
-                <a href="${h.url_for(controller='post', action='home')}" 
-                    title="Home" class="${n_home}">
-                    Home
-                </a>
-            </li>
-            <li>
+            <li class="${n_about} wurdig-nav-first">
                 <a href="${h.url_for(controller='page', action='view', slug='about')}" 
-                    title="About" class="${n_about}">
+                    title="About This Site" class="${n_about}">
                     About
                 </a>
             </li>
             <li class="${n_teaching} wurdig-nav-last">
                 <a href="${h.url_for(controller='page', action='view', slug='teaching')}" 
-                    title="Teaching" class="${n_teaching}">
+                    title="My Former Teaching Life" class="${n_teaching}">
                     Teaching
                 </a>
             </li>
@@ -75,9 +65,9 @@
     <div id="wurdig-blogroll">
         <h4>Blogroll</h4>
         <ul>
-            <li><a href="http://teachmetheweb.org/" rel="external" title="Teach Me the Web">Teach Me the Web</a></li>
             <li><a href="http://benramsey.com/" rel="external" title="Ben Ramsey">Ben Ramsey</a></li>
             <li><a href="http://shiflett.org/" rel="external" title="Chris Shiflett">Chris Shiflett</a></li>
+            <li><a href="http://teachmetheweb.org/" rel="external" title="Teach Me the Web">Teach Me the Web</a></li>
             <li><a href="http://zgordon.org/" rel="external" title="Zac Gordon">Zac Gordon</a></li>
         </ul>
     </div>
@@ -97,20 +87,30 @@
 
 <%def name="footer()">
     <ul>
-        <li>
-            <a href="${h.url_for(controller='post', action='feeds')}">
+        <li class="wurdig-nav-first">
+            <a href="${h.url_for(controller='post', action='feeds')}"
+                title="Entries (atom)">
                 Entries (atom)
             </a>
         </li>
         <li>
-            <a href="${h.url_for(controller='comment', action='feeds')}">
+            <a href="${h.url_for(controller='comment', action='feeds')}"
+                title="Comments (atom)">
                 Comments (atom)
+            </a>
+        </li>
+        <li class="wurdig-nav-last">
+            <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fjasonleveille.com"
+                title="HTML 4.01">
+                HTML 4.01
             </a>
         </li>
     </ul>
     <p>
         Powered by 
-        <a href="http://github.com/leveille/wurdig" title="Wurdig">Wurdig</a>
+        <a href="http://github.com/leveille/wurdig" title="Wurdig">Wurdig</a>, Handcrafted using 
+        <a href="http://www.pylonshq.com" title="Pylons">Pylons</a> | 
+        <a href="/2009/02/graduate-school-independent-study">Full Story</a>
     </p>
 </%def>
 
