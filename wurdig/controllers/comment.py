@@ -1,8 +1,8 @@
 import formencode
 import logging
+import webhelpers.paginate as paginate
 import wurdig.lib.helpers as h
 import wurdig.model.meta as meta
-import webhelpers.paginate as paginate
 
 from formencode import htmlfill
 from pylons import request, response, session, tmpl_context as c
@@ -49,7 +49,7 @@ class PrimitiveSpamCheck(formencode.FancyValidator):
     def _to_python(self, value, state):        
         # Ensure we have a valid string
         value = formencode.validators.UnicodeString(max=10).to_python(value, state)
-        eq = h.wurdig_spamword() == value.lower()
+        eq = h.wurdig_spamword().lower() == value.lower()
         if not eq:
             raise formencode.Invalid("Double check your answer to the spam prevention question and resubmit.", value, state)
         return value
@@ -154,6 +154,8 @@ class CommentController(BaseController):
         return feed.writeString('utf-8')
     
     def new(self, action, post_id=None):
+        if post_id is None:
+            abort(404)
         post_q = meta.Session.query(model.Post)
         c.post = post_id and post_q.filter_by(id=int(post_id)).first() or None
         if c.post is None:
@@ -164,6 +166,8 @@ class CommentController(BaseController):
     @authenticate_form
     @validate(schema=NewCommentForm(), form='new')
     def create(self, action, post_id=None):
+        if post_id is None:
+            abort(404)
         post_q = meta.Session.query(model.Post)
         c.post = post_id and post_q.filter_by(id=int(post_id)).first() or None
         if c.post is None:
@@ -211,6 +215,8 @@ class CommentController(BaseController):
     @restrict('POST')
     @validate(schema=NewCommentForm(), form='edit')
     def save(self, id=None):
+        if id is None:
+            abort(404)
         comment_q = meta.Session.query(model.Comment)
         comment = comment_q.filter_by(id=id).first()
         if comment is None:
