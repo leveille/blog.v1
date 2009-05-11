@@ -71,7 +71,7 @@ div.yui-gb,
 #hd {
     border-top: dotted .1em #D0D0D0;
     border-bottom: dotted .1em #D0D0D0;
-    padding: 2em 0 2em 0;
+    padding: 1em 0 1em 0;
     float: left;
     width: 100%;
     position: relative
@@ -128,6 +128,7 @@ div.yui-gb,
     padding: 0 6px 0 6px;
     margin-left: 7px;
     border: solid 1px transparent;
+    text-transform: lowercase
 }
 
 #wurdig-primary-nav li.wurdig-nav-first {
@@ -190,11 +191,112 @@ body.home #yui-main p.wurdig-entry-meta {
     display: none
 }
 
+#yui-main #cse-search-results iframe {
+    width: 100%
+}
+
 /* Sidebar */
 
 #wurdig-sidebar {
-    font-size: 93%;
+    font-size: 85%;
     margin-top: 2em
+}
+
+#wurdig-sidebar h4 {
+    font-weight: bold
+}
+
+#wurdig-sidebar #cse-search-q {
+    width: 195px
+}
+
+#wurdig-sidebar #cse-search-box {
+    margin-bottom: 1.5em
+}
+
+#wurdig-sidebar #wurdig-subscribe {
+    padding: .5em;
+    margin-bottom: 1em;
+    border-top: dotted 1px #D0D0D0;
+    border-bottom: dotted 1px #D0D0D0;
+    background: #F6F6F5
+}
+
+#wurdig-sidebar #wurdig-subscribe h4 {
+    display: none
+}
+
+#wurdig-sidebar #wurdig-subscribe ul {
+    margin: 0;
+    padding: 0
+}
+
+#wurdig-sidebar #wurdig-subscribe ul li {
+    list-style: none;
+    margin-left: .5em;
+    padding-left: 2em;
+    background: url('../images/feed-icon-14x14.png') no-repeat left 4px
+}
+
+#wurdig-sidebar #wurdig-subscribe a {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#wurdig-sidebar #wurdig-subscribe a:hover {
+    color: #DD6600
+}
+
+/*_COMMENTS*/
+
+#leave-comment {
+    border-top: dotted 1px #e0e0e0;
+    background: #F6F6F5;
+    padding: 2em;
+    margin-top: 1em;
+    float: left;
+    width: 100%
+}
+
+#leave-comment h4 {
+    margin-bottom: 1em
+}
+
+#leave-comment .field {
+    float: left;
+    width: 100%;
+    margin-bottom: .5em;
+    clear: both
+}
+
+#leave-comment .field label {
+    float: left;
+    width: 100px;
+    text-align: right
+}
+
+#leave-comment .input {
+    float: right;
+    width: 550px
+}
+
+#leave-comment span.description {
+    margin: .5em 0 0 113px;
+    padding: 5px;
+    width: 290px;
+    font-size: 85%;
+    display: block;
+    clear: both;
+    border-top: solid 1px #E0E0E0;
+    background: url('../images/bg/arrow-up-gray.png') no-repeat bottom center
+}
+
+#leave-comment .field input {
+    width: 300px
+}
+
+#leave-comment #create_comment {
+    margin-top: 1em
 }
 
 /*_TAG_CLOUD*/
@@ -293,6 +395,10 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
 
 #ft li a {
     margin-right: 6px
+}
+
+#ft li img {
+    margin-bottom: -3px
 }
 
 #ft li.wurdig-nav-last a {

@@ -19,26 +19,15 @@ ${wurdig.doctype()}
             slug = action
     %>
     <body class="${controller} ${slug}">    
-        <div id="doc4" class="yui-t6">
+        <div id="doc4" class="yui-t4">
             <div id="hd" role="banner" class="${controller}">
                 ${wurdig.primary_nav(slug)}
                 ${wurdig.header()}
             </div>
             <div id="bd">
-                <div id="yui-main">
-                    <div class="yui-b" role="main">
-                        ${wurdig.flash()}
-                        ${next.body()}  
-                    </div>
-                </div>
-                <div class="yui-b" id="wurdig-sidebar" role="complementary">
-                    ${wurdig.search_form()}
-                    ${wurdig.subscribe()}
-                    ${wurdig.recent_comments()}
-                    ${wurdig.twitter_updates()}
-                    % if request.urlvars['action'] != 'cloud':
-                        ${wurdig.tags()}
-                    % endif
+                <div id="yui-main" role="main">
+                    ${wurdig.flash()}
+                    ${next.body()} 
                 </div>
             </div>
             <div class="yui-gb" id="wurdig-secondary-content">

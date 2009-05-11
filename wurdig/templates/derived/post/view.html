@@ -16,7 +16,7 @@
 </%def>
 
 <h2>${c.post.title}</h2>
-
+<p class="wurdig-entry-date">${c.post.posted_on.strftime('%B %d, %Y')}</p>
 <div class="wurdig-entry">
     ${h.literal(c.post.content)}
         
@@ -71,10 +71,13 @@
     % endif
     
     % if c.post.comments_allowed:
+        <h4>Leave a Comment</h4>
         <div id="leave-comment">
             ${h.secure_form(h.url_for(post_id=c.post.id, controller='comment', action='create'), method='post')}
                 ${fields.body()}
-                ${h.submit('create_comment', 'Create Comment')}
+                <div class="input">
+                    ${h.submit('create_comment', 'Create Comment')}
+                </div>
             ${h.end_form()}
         </div>
     % else:

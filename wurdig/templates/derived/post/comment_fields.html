@@ -1,26 +1,39 @@
 <div class="field required">
     <label for="name">Name</label>
-    ${h.text('name')}
+    <div class="input">
+        ${h.text('name')}
+    </div>
 </div>
 <div class="field required">
+    <span class="description"><strong>Email</strong> used to help prevent spam and will not be published.  Associates with <a href="http://gravatar.com/">Gravatars</a>.</span>
     <label for="email">Email</label>
-    <span class="description">Use to help prevent spam but will not be published</span>
-    ${h.text('email')}
+    <div class="input">
+        ${h.text('email')}
+    </div>
 </div>
 <div class="field">
     <label for="url">Website</label>
-    ${h.text('url')}
+    <div class="input">
+        ${h.text('url')}
+    </div>
+</div>
+
+<div class="field required">
+    <span class="description">
+        Follow my <a href="/comment-styleguide">guide</a> for leaving comments.  Some HTML allowed.
+    </span>
+    <label for="content">Comment</label>
+    <div class="input">
+        ${h.textarea('content', cols=25, rows=10)}
+    </div>
 </div>
 
 % if not h.wurdig_use_akismet():
     <div class="field required">
-        <p>Please enter ${h.wurdig_spamword()} below. I apologize for the inconvenience of this spam prevention method.</p>
-        <label for="wurdig_comment_question">Super Secret Word</label>
-        ${h.text('wurdig_comment_question')}
+        <span class="description">Please enter <strong>${h.wurdig_spamword()}</strong> below. I apologize for the inconvenience of this spam prevention method.</span>
+        <label for="wurdig_comment_question">Secret Word!</label>
+        <div class="input">
+            ${h.text('wurdig_comment_question')}
+        </div>
     </div>
 % endif
-
-<div class="field required">
-    <label for="content">Content</label>
-    ${h.textarea('content', cols=25, rows=10)}
-</div>

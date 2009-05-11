@@ -61,6 +61,41 @@
     </div>
 </%def>
 
+<%def name="search_form()">
+    <div id="wurdig-search">
+        <form action="/search" id="cse-search-box">
+            <div>
+                <input type="hidden" name="cx" value="008016997409029644224:zvp0d30hv8g" />
+                <input type="hidden" name="cof" value="FORID:9" />
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="text" name="q" id="cse-search-q" size="31" />
+                <input type="submit" name="sa" value="Search" />
+            </div>
+        </form>
+        <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+    </div>
+</%def>
+
+<%def name="subscribe()">
+    <div id="wurdig-subscribe">
+        <h4>Feeds</h4>
+        <ul>
+            <li>
+                <a href="${h.url_for(controller='post', action='feeds')}"
+                    title="Blog">
+                    Blog
+                </a>
+            </li>
+            <li>
+                <a href="${h.url_for(controller='comment', action='feeds')}"
+                    title="Comments">
+                    Comments
+                </a>
+            </li>
+        </ul>
+    </div>
+</%def>
+
 <%def name="blogroll()">
     <div id="wurdig-blogroll">
         <h4>Blogroll</h4>
@@ -88,15 +123,17 @@
 <%def name="footer()">
     <ul>
         <li class="wurdig-nav-first">
+            <img src="/images/feed-icon-14x14.png" alt="Blog Atom Feed">
             <a href="${h.url_for(controller='post', action='feeds')}"
-                title="Entries (atom)">
-                Entries (atom)
+                title="Blog">
+                Blog Feed
             </a>
         </li>
         <li>
+            <img src="/images/feed-icon-14x14.png" alt="Comments Atom Feed">
             <a href="${h.url_for(controller='comment', action='feeds')}"
                 title="Comments (atom)">
-                Comments (atom)
+                Comments Feed
             </a>
         </li>
         <li class="wurdig-nav-last">
@@ -108,7 +145,7 @@
     </ul>
     <p>
         Powered by 
-        <a href="http://github.com/leveille/wurdig" title="Wurdig">Wurdig</a>, Handcrafted using 
+        <a href="http://github.com/leveille/wurdig" title="Wurdig">Wurdig</a>, handcrafted using 
         <a href="http://www.pylonshq.com" title="Pylons">Pylons</a> | 
         <a href="/2009/02/graduate-school-independent-study">Full Story</a>
     </p>

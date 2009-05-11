@@ -77,6 +77,8 @@ class PageController(BaseController):
         c.page = page_q.filter_by(slug=slug).first()
         if c.page is None:
             abort(404)
+        if c.page.slug == 'search':
+            return render('/derived/page/search.html')
         return render('/derived/page/view.html')
 
     @h.auth.authorize(h.auth.is_valid_user)
