@@ -1,22 +1,20 @@
+import datetime as d
+import formencode
 import logging
+import re
 import wurdig.model as model
 import wurdig.model.meta as meta
 import wurdig.lib.helpers as h
 import webhelpers.paginate as paginate
-import datetime as d
-import formencode
-import re
 
+from authkit.authorize.pylons_adaptors import authorize
+from formencode import htmlfill
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
 from pylons.decorators.rest import restrict
 from sqlalchemy import func
 from sqlalchemy.sql import and_, delete
-from formencode import htmlfill
-from wurdig.lib.base import BaseController, render
-from authkit.authorize.pylons_adaptors import authorize
-
 from wurdig.lib.base import BaseController, render
 
 log = logging.getLogger(__name__)
@@ -40,7 +38,7 @@ class UniqueName(formencode.FancyValidator):
         if result:
             raise formencode.Invalid("Tag name can only contain letters, numbers, and spaces", value, state)
         
-        # Ensure slug is unique
+        # Ensure tag name is unique
         tag_q = meta.Session.query(model.Tag).filter_by(name=value)
         if request.urlvars['action'] == 'save':
             # we're editing an existing tag
@@ -67,7 +65,7 @@ class UniqueSlug(formencode.FancyValidator):
         if result:
             raise formencode.Invalid("Slug can only contain letters, numbers, and dashes", value, state)
         
-        # Ensure slug is unique
+        # Ensure tag slug is unique
         tag_q = meta.Session.query(model.Tag).filter_by(slug=value)
         if request.urlvars['action'] == 'save':
             # we're editing an existing post.
@@ -176,6 +174,8 @@ class TagController(BaseController):
     @restrict('POST')
     @validate(schema=NewTagForm(), form='edit')
     def save(self, id=None):
+        if id is None:
+            abort(404)
         tag_q = meta.Session.query(model.Tag)
         tag = tag_q.filter_by(id=id).first()
         if tag is None:

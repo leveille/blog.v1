@@ -253,6 +253,8 @@ class PostController(BaseController):
     @restrict('POST')
     @validate(schema=NewPostForm(), form='edit')
     def save(self, id=None):
+        if id is None:
+            abort(404)
         post_q = meta.Session.query(model.Post)
         post = post_q.filter_by(id=id).first()
         if post is None:

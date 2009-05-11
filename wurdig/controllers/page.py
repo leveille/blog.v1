@@ -123,6 +123,8 @@ class PageController(BaseController):
     @restrict('POST')
     @validate(schema=NewPageForm(), form='edit')
     def save(self, id=None):
+        if id is None:
+            abort(404)
         page_q = meta.Session.query(model.Page)
         page = page_q.filter_by(id=id).first()
         if page is None:

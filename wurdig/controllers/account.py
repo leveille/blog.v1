@@ -1,10 +1,9 @@
 import logging
+import wurdig.lib.helpers as h
 
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
-
 from wurdig.lib.base import BaseController, renderl
-import wurdig.lib.helpers as h
 
 log = logging.getLogger(__name__)
 
