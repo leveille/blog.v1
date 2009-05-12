@@ -327,3 +327,54 @@ class PostController(BaseController):
         session['flash'] = 'Post successfully deleted.'
         session.save()
         return redirect_to(controller='post', action='list')
+    
+    @h.auth.authorize(h.auth.is_valid_user)
+    def scrape(self):
+        from BeautifulSoup import BeautifulSoup
+        import re, urllib2, sys
+        """
+        Used to scrape post markup from wp site
+        This is post wp xml import.  Used really only for the purpose
+        of gathering markup
+        """
+        posts_q = meta.Session.query(model.Post).filter(
+            model.Post.draft == False
+        ).all()
+        
+        # for debugging, write to file
+        f = open('/home/leveille/development/python/pylons/Wurdig/posts.txt', 'a')
+        for post in posts_q:
+            f.write('\n++++++++++++++++++++++++++++++++\n')
+            try:
+                year = str(post.posted_on.strftime('%Y'))
+                month = str(post.posted_on.strftime('%m'))
+                slug = post.slug
+                url = 'http://jasonleveille.com/%s/%s/%s' % (year, month, slug)
+                response = urllib2.urlopen(url)
+                html = response.read()
+                soup = BeautifulSoup(html)
+                
+                subtree = soup.find('div', { "class" : "entry" }).findAll('p')[-1]
+                subtree.extract()
+
+                text = soup.find('div', { "class" : "entry" })
+                text = text.encode('utf-8')
+                text = h.mytidy(text)
+                
+                f.write(text)
+                
+                # if all seems fine, uncomment and write to database
+                post.content = text
+                meta.Session.add(post)
+                meta.Session.commit()
+            except Exception, e:
+                print '\nFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF\n';
+                import pprint
+                pprint.pprint(e)
+                f.write('Exception: ')
+                print '\nFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF\n';
+            
+            f.write('\n++++++++++++++++++++++++++++++++\n')
+        f.close()
+        response.content_type = 'text/plain'
+        return 'done'
