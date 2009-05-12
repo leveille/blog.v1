@@ -1,8 +1,8 @@
 from tidylib import tidy_fragment
 
-__all__ = ['tidy']
+__all__ = ['mytidy']
 
-def tidy(content):
+def mytidy(content):
     BASE_OPTIONS = {
         "output-xhtml": 0,     # XHTML instead of HTML4
         "indent": 1,           # Pretty; not too much of a performance hit

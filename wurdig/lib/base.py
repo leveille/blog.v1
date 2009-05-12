@@ -13,7 +13,7 @@ from wurdig.model import meta
 class Cleanup(formencode.FancyValidator):
     def _to_python(self, value, state):
         if value['content'] not in ['', u'', None]:
-            value['content'] = h.tidy(value['content'])
+            value['content'] = h.mytidy(value['content'])
         return value
     
 class ConstructSlug(formencode.FancyValidator):

@@ -16,5 +16,5 @@ from wurdig.lib.comment import *
 from wurdig.lib.feed_display import *
 from wurdig.lib.html import *
 from wurdig.lib.tag import cloud, post_tags
-from wurdig.lib.tidy import *
+from wurdig.lib.tidy_helper import *
 from wurdig.lib.conf_helper import *

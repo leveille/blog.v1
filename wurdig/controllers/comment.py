@@ -179,7 +179,7 @@ class CommentController(BaseController):
             setattr(comment, k, v)
         comment.post_id = c.post.id
 
-        comment.content = h.tidy(comment.content)
+        comment.content = h.mytidy(comment.content)
         comment.content = h.comment_filter(comment.content)
         
         meta.Session.add(comment)
