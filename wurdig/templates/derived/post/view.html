@@ -18,7 +18,9 @@
 <h2>${c.post.title}</h2>
 <p class="wurdig-entry-date">${c.post.posted_on.strftime('%B %d, %Y')}</p>
 <div class="wurdig-entry">
-    ${h.literal(c.post.content)}
+    <div class="wurdig-entry-content">
+        ${h.literal(c.post.content)}
+    </div>
         
     <p class="wurdig-entry-meta">
         ${posts.tag_list(c.post.tags)}
@@ -48,7 +50,7 @@
             % for k,comment in enumerate(c.post.comments):
                 <%
                     author_class = ''
-                    if 'leveille' in comment.name.lower():
+                    if h.wurdig_comment_adminname().lower() in comment.name.lower():
                         author_class = 'is_author'
                 %>
                 <div id="comment-${comment.id}" class="${author_class}">

@@ -181,16 +181,14 @@ body.home #yui-main p.wurdig-entry-meta {
     width: 100%
 }
 
-div.wurdig-entry-content blockquote,
-div.wurdig-entry blockquote {
+div.wurdig-entry-content blockquote {
     background: #F3F3F3 url('../images/bg/quotes.png') no-repeat 10px 10px;
     border-left: solid 4px #CCC;
     border-right: solid 1px #CCC;
     margin: 2em
 }
 
-div.wurdig-entry-content blockquote p,
-div.wurdig-entry blockquote p {
+div.wurdig-entry-content blockquote p {
     margin: 0;
     padding: 1.5em 1.5em 1.5em 3em;
     border-left: solid 3px #FFF;

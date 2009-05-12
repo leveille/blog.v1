@@ -29,6 +29,9 @@ blog.title=
 #blog subtitle
 blog.subtitle=
 
+#What will your name be comment as admin
+blog.comment.admin=
+
 #primitive spam prevention keyword
 wurdig.spamword=wurdig
 
