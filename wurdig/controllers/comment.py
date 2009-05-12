@@ -178,7 +178,8 @@ class CommentController(BaseController):
         for k, v in self.form_result.items():
             setattr(comment, k, v)
         comment.post_id = c.post.id
-
+        
+        comment.content = h.nl2br(comment.content)
         comment.content = h.mytidy(comment.content)
         comment.content = h.comment_filter(comment.content)
         
@@ -217,15 +218,22 @@ class CommentController(BaseController):
     def save(self, id=None):
         if id is None:
             abort(404)
+            
         comment_q = meta.Session.query(model.Comment)
         comment = comment_q.filter_by(id=id).first()
+        
         if comment is None:
             abort(404)
+            
         if self.form_result['wurdig_comment_question'] is not None:
             del self.form_result['wurdig_comment_question']
+            
         for k,v in self.form_result.items():
             if getattr(comment, k) != v:
                 setattr(comment, k, v)
+        
+        comment.content = h.mytidy(comment.content)
+        
         meta.Session.commit()
         session['flash'] = 'Comment successfully updated.'
         session.save()
@@ -259,3 +267,31 @@ class CommentController(BaseController):
         session['flash'] = 'Comment successfully deleted.'
         session.save()
         return redirect_to(controller='comment', action='list')
+    
+    @h.auth.authorize(h.auth.is_valid_user)
+    def clean(self):
+        """
+        Used to clean up comments (ensure they have tags and are tidy)
+        CAREFUL: Running this more than once may cause undesired formatting to
+        comments (such as double br tags for newlines)
+        """
+        comments_q = meta.Session.query(model.Comment).all()
+        
+        # for debugging, write to file
+        f = open('/home/leveille/development/python/pylons/Wurdig/temp.txt', 'a')
+        for comment in comments_q:
+            f.write('\n++++++++++++++++++++++++++++++++\n')
+            try:
+                # comment.content = h.nl2br(comment.content)
+                # comment.content = h.mytidy(comment.content)
+                f.write(comment.content)
+                # if all seems fine, uncomment and write to database
+                # meta.Session.add(comment)
+                # meta.Session.commit()
+            except Exception, e:
+                f.write('Exception: ')
+            f.write('\n++++++++++++++++++++++++++++++++\n')
+        f.close()
+        
+        response.content_type = 'text/plain'
+        return 'done'
