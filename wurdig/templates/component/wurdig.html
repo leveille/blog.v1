@@ -39,24 +39,37 @@
     <div id="wurdig-primary-nav">
         <ul role="navigation">
             <%
-                (n_about, n_teaching, wurdig_active) = (None, None, 'wurdig-active')
+                (n_home, n_about, n_teaching, wurdig_active) = (None, None, None, 'wurdig-active')
+                if loc == 'home':
+                    n_home = wurdig_active
                 if loc == 'about':
                     n_about = wurdig_active
                 elif loc == 'teaching':
                     n_teaching = wurdig_active
             %>
-            <li class="${n_about} wurdig-nav-first">
+            <li class="${n_home} wurdig-nav-first">
+                <a href="${h.url_for(controller='post', action='view', slug='home')}" 
+                    title="Home" class="${n_home}">
+                    Home
+                </a>
+            </li>
+            <li class="${n_about}">
                 <a href="${h.url_for(controller='page', action='view', slug='about')}" 
                     title="About This Site" class="${n_about}">
                     About
                 </a>
             </li>
-            <li class="${n_teaching} wurdig-nav-last">
+            <li class="${n_teaching}">
                 <a href="${h.url_for(controller='page', action='view', slug='teaching')}" 
                     title="My Former Teaching Life" class="${n_teaching}">
                     Teaching
                 </a>
             </li>
+            % if h.wurdig_display_contact_email():
+                <li class="wurdig-nav-last">
+                    ${h.mail_to(h.wurdig_contact_email(), "Contact", encode = "hex")}
+                </li>
+            % endif
         </ul>
     </div>
 </%def>

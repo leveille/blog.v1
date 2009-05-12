@@ -7,7 +7,7 @@ from routes import url_for
 from webhelpers.html import literal
 from webhelpers.html.secure_form import secure_form
 from webhelpers.html.tags import *
-from webhelpers.html.tools import auto_link
+from webhelpers.html.tools import auto_link, mail_to
 from webhelpers.text import truncate, chop_at, plural
 from webob.exc import strip_tags
 

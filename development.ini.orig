@@ -29,6 +29,13 @@ blog.title=
 #blog subtitle
 blog.subtitle=
 
+#blog contact email
+blog.contact=
+
+#blog display contact (display contact information publicly)
+#leave blank for no, True for yes
+blog.display.contact=
+
 #What will your name be comment as admin
 blog.comment.admin=
 

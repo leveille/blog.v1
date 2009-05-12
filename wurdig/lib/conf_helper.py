@@ -7,6 +7,8 @@ __all__ = ['wurdig_use_akismet',
            'wurdig_subtitle',
            'wurdig_use_subtitle',
            'wurdig_comment_adminname',
+           'wurdig_contact_email',
+           'wurdig_display_contact_email',
            ]
 
 def wurdig_use_akismet():
@@ -44,7 +46,7 @@ def wurdig_subtitle():
     return wurdig_subtitle
 
 def wurdig_use_subtitle():
-    return wurdig_subtitle() is not None
+    return wurdig_subtitle() not in ['', None, u'']
 
 def wurdig_comment_adminname():
     try:
@@ -52,3 +54,17 @@ def wurdig_comment_adminname():
     except Exception, e:
         wurdig_comment_adminname = None
     return wurdig_comment_adminname
+
+def wurdig_contact_email():
+    try:
+        wurdig_contact = config['blog.contact']
+    except Exception, e:
+        wurdig_contact = None
+    return wurdig_contact
+
+def wurdig_display_contact_email():
+    try:
+        wurdig_display_contact = config['blog.display.contact']
+    except Exception, e:
+        wurdig_display_contact = None
+    return wurdig_display_contact not in ['', None, u'']
