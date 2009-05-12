@@ -9,7 +9,7 @@ def delicious():
     if len(delicious_feed.entries):
         items = []
         template = """
-        <div id="wurdig-delicious-feed">
+        <div id="wurdig-delicious-feed" class="wurdig-secondary-list">
             <h4>Bookmarks</h4>
             <ul>
                 %s
@@ -18,7 +18,7 @@ def delicious():
         """
         for entry in delicious_feed.entries[:6]:
             i = '<li>%s</li>'
-            link = '<a href="%s" title="%s">%s</a> (%s)'
+            link = '<a href="%s" title="%s">%s (%s)</a>'
             link = link % (entry['guid'], entry['title'], entry['title'], entry.updated[:11])
             items.append(i % link)
         return template % '\n'.join(items)
@@ -54,20 +54,22 @@ def twitter():
     if len(twitter_feed.entries):
         items = []
         template = """
-        <div id="wurdig-twitter-feed">
-            <h4>Twitter Updates</h4>
+        <div id="wurdig-twitter-feed" class="wurdig-sidebar-list">
+            <h4>Twitter Updates (<a href="http://twitter.com/%s">Follow</a>)</h4>
             <ul>
                 %s
             </ul>
         </div>
         """
+
         for entry in twitter_feed.entries[:5]:
-            i = '<li>%s<span>%s</span></li>' % (h.auto_link(entry['description']),
+            description = entry['description'].split(':', 1)[1]
+            i = '<li>%s <span>%s</span></li>' % (h.auto_link(description),
                                                 h.link_to(
                                                 entry.updated[:14],
                                                 entry['guid'])
                                                 )
             items.append(i)
-        return template % '\n'.join(items)
+        return template % (config['twitter.user.screen_name'], '\n'.join(items))
     else:
         return ''

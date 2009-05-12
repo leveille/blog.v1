@@ -63,6 +63,20 @@ def setup_app(command, conf, vars):
     meta.Session.add(page2)
     meta.Session.flush()
     
+    log.info("Adding comment styleguide page...")
+    styleguide = model.Page()
+    styleguide.title = u'Comment Styleguide'
+    styleguide.slug = u'comment-styleguide'
+    styleguide.content = u"""
+    <h5>Supported Comment HTML</h5>
+    <p>In addition to line breaks being converted to paragraphs:</p>
+    <ul>
+        <li>&lt;a href=&quot;&quot title=&quot;&quot&gt;link&lt;/a&gt;</li>
+    </ul>
+    """
+    meta.Session.add(styleguide)
+    meta.Session.flush()
+    
     log.info("Adding first post...")
     post1 = model.Post()
     post1.title = u'First test post'

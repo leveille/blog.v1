@@ -34,7 +34,7 @@
     </p>
     
     % if not c.post.comments_allowed and len(c.post.comments) > 20:
-        <p class="wurdig-comment-notice">Comments have been disabled for this post.</p>
+        <p class="flash">Comments have been disabled for this post.</p>
     % endif
     
     % if len(c.post.comments):
@@ -46,7 +46,12 @@
             %>
             
             % for k,comment in enumerate(c.post.comments):
-                <div id="comment-${comment.id}">
+                <%
+                    author_class = ''
+                    if 'leveille' in comment.name.lower():
+                        author_class = 'is_author'
+                %>
+                <div id="comment-${comment.id}" class="${author_class}">
                     <h4>
                         <strong>${str(k+1)}</strong>
                         <em><img src="http://www.gravatar.com/avatar/${hashlib.md5(comment.email).hexdigest()}?s=80" alt="${comment.name} - Gravatar"></em>
@@ -71,7 +76,7 @@
     % endif
     
     % if c.post.comments_allowed:
-        <h4>Leave a Comment</h4>
+        <h4>Leave a Comment (<span class="error-message">*</span> = required)</h4>
         <div id="leave-comment">
             ${h.secure_form(h.url_for(post_id=c.post.id, controller='comment', action='create'), method='post')}
                 ${fields.body()}
@@ -81,6 +86,6 @@
             ${h.end_form()}
         </div>
     % else:
-        <p class="wurdig-comment-notice">Comments have been disabled for this post.</p>
+        <p class="flash">Comments have been disabled for this post.</p>
     % endif
 </div>

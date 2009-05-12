@@ -16,7 +16,7 @@ def recent_comments():
     else:
         comments= []
         template = """
-        <div id="wurdig-recent-comments">
+        <div id="wurdig-recent-comments" class="wurdig-sidebar-list">
             <h4>Newest Comments</h4>
             <ul>
                 %s
@@ -27,9 +27,9 @@ def recent_comments():
         for comment in recent_comments:
             i = """
                 <li>
-                    <span>%s wrote: </span>
+                    <span>%s shared: </span>
                     <span>%s</span>
-                    <span>Posted in: %s</span>
+                    <span>Shared in: %s</span>
                 </li>
             """
             name = comment.name

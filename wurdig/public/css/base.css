@@ -1,13 +1,13 @@
 body {
-    color:#444;
+    color:#000;
     background:#FFF;
     font-family: 'Lucida Grande',Geneva,Arial,Verdana,sans-serif;
-    line-height: 1.5em
+    line-height: 1.6em
 }
 
 h1, h2, h3, h4, h5, h6 {
     color: #000;
-    font-family: "URW Gothic L","MgOpen Moderna","Lucida Sans",arial,sans-serif;
+    font-family: "URW Gothic L","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Helvetica,Arial,sans-serif;
     font-weight: normal;
     font-style: normal;
     line-height: 1.6em
@@ -47,30 +47,21 @@ a{
     text-decoration:underline
 }
 
-blockquote {
-    background: #F3F3F3;
-    margin-bottom: 20px;
-    border-left: solid 4px #CCC;
-    border-right: solid 1px #CCC
-}
-
-blockquote p {
-    margin: 0;
-    padding: 10px 10px 10px 30px;
-    border-left: solid 3px #FFF;
-    border-right: solid 1px #FFF;
-    /* @todo: add background quote image */
-}
-
 div.yui-gb, 
 #ft {
     clear: both
 }
 
+ul ul {
+    padding-left: 2em;
+    margin: 0
+}
+
 /*_LOGO*/
 #hd {
-    border-top: dotted .1em #D0D0D0;
-    border-bottom: dotted .1em #D0D0D0;
+    border-top: dotted 1px #D0D0D0;
+    border-bottom: dotted 1px #D0D0D0;
+    background: #F6F6F5;
     padding: 1em 0 1em 0;
     float: left;
     width: 100%;
@@ -79,8 +70,7 @@ div.yui-gb,
 
 #hd h1 {
     text-transform: uppercase;
-    margin: 0;
-    margin-bottom: 2px;
+    margin: 0 0 0 10px;
     padding: 0;
     line-height: 1.2em
 }
@@ -95,7 +85,7 @@ div.yui-gb,
 }
 
 #hd p {
-    margin: 0;
+    margin: 0 0 0 10px;
     padding: 0;
     font-size: 93%
 }
@@ -108,7 +98,7 @@ div.yui-gb,
 #wurdig-primary-nav ul {
     position: absolute;
     bottom: 1em;
-    right: 0;
+    right: 10px;
     font-size: 93%;
     margin: 0;
     padding: 0
@@ -119,15 +109,12 @@ div.yui-gb,
     list-style: none;
     margin: 0;
     padding: 0;
-    padding-right: 6px;
-    background: url('../images/bg/wurdig-nav-divider.gif') no-repeat left 8px
+    padding-right: 8px;
+    background: url('../images/bg/wurdig-nav-divider.gif') no-repeat left 7px
 }
 
 #wurdig-primary-nav li a {
-    display: block;
-    padding: 0 6px 0 6px;
-    margin-left: 7px;
-    border: solid 1px transparent;
+    margin-left: 8px;
     text-transform: lowercase
 }
 
@@ -141,8 +128,7 @@ div.yui-gb,
 
 #wurdig-primary-nav li a:hover,
 #wurdig-primary-nav li a.wurdig-active {
-    background: #F8F8F8;
-    border: solid 1px #D8D8D8;
+    text-decoration: underline;
     color: #CC0000
 }
 
@@ -195,11 +181,29 @@ body.home #yui-main p.wurdig-entry-meta {
     width: 100%
 }
 
+div.wurdig-entry-content blockquote,
+div.wurdig-entry blockquote {
+    background: #F3F3F3 url('../images/bg/quotes.png') no-repeat 10px 10px;
+    border-left: solid 4px #CCC;
+    border-right: solid 1px #CCC;
+    margin: 2em
+}
+
+div.wurdig-entry-content blockquote p,
+div.wurdig-entry blockquote p {
+    margin: 0;
+    padding: 1.5em 1.5em 1.5em 3em;
+    border-left: solid 3px #FFF;
+    border-right: solid 1px #FFF;
+    font-size: 123.1%
+}
+
 /* Sidebar */
 
 #wurdig-sidebar {
     font-size: 85%;
-    margin-top: 2em
+    margin-top: 2em;
+    color: #444
 }
 
 #wurdig-sidebar h4 {
@@ -247,15 +251,68 @@ body.home #yui-main p.wurdig-entry-meta {
     color: #DD6600
 }
 
+#wurdig-sidebar h4 {
+    margin: 0 0 -6px 0;
+    padding: 0
+}
+
+#wurdig-sidebar ul {
+    border-top: solid 1px #000;
+    margin: 0 0 1.5em 0
+}
+
+#wurdig-sidebar #wurdig-subscribe ul {
+    border-top: none
+}
+
+#wurdig-sidebar .wurdig-sidebar-list li {
+    border-bottom: solid 1px #D0D0D0;
+    padding: .4em 0 .4em 0;
+    margin: .4em 0 .4em 0;
+    list-style: none
+}
+
+#wurdig-sidebar #wurdig-recent-comments li {
+    padding-left: 22px;
+    background: url('../images/bg/comment.png') no-repeat left 8px
+}
+
+#wurdig-sidebar #wurdig-recent-comments li span {
+    display: block;
+    margin-bottom: .6em
+}
+
+#wurdig-sidebar #wurdig-twitter-feed li {
+    padding-left: 22px;
+    background: url('../images/bg/bullet_blue.png') no-repeat left 7px
+}
+
+#wurdig-sidebar #wurdig-twitter-feed h4 a {
+    text-decoration: none;
+    color: #CC0000
+}
+
+#wurdig-sidebar #wurdig-twitter-feed h4 a:hover {
+    text-decoration: underline
+}
+
+#wurdig-sidebar div.hTagCloud h4 {
+    margin-bottom: -7px
+}
+
+#wurdig-sidebar div.hTagCloud ul {
+    padding-top: 1em
+}
+
 /*_COMMENTS*/
 
 #leave-comment {
     border-top: dotted 1px #e0e0e0;
     background: #F6F6F5;
-    padding: 2em;
+    padding: 1.5em;
     margin-top: 1em;
     float: left;
-    width: 100%
+    width: 600px
 }
 
 #leave-comment h4 {
@@ -277,13 +334,17 @@ body.home #yui-main p.wurdig-entry-meta {
 
 #leave-comment .input {
     float: right;
-    width: 550px
+    width: 488px
 }
 
-#leave-comment span.description {
+#leave-comment .input input {
+    width: 300px
+}
+
+#leave-comment div.description,
+#leave-comment div.description-textarea {
     margin: .5em 0 0 113px;
-    padding: 5px;
-    width: 290px;
+    padding: 5px 0 5px 0;
     font-size: 85%;
     display: block;
     clear: both;
@@ -291,12 +352,106 @@ body.home #yui-main p.wurdig-entry-meta {
     background: url('../images/bg/arrow-up-gray.png') no-repeat bottom center
 }
 
-#leave-comment .field input {
-    width: 300px
+#leave-comment div.description {
+    width: 290px
+}
+
+#leave-comment div.description-textarea {
+    width: 450px
+}
+
+#leave-comment .input textarea {
+    margin: 1px 0 0 0;
+    width: 450px;
+    height: 250px
 }
 
 #leave-comment #create_comment {
-    margin-top: 1em
+    margin-top: 1em;
+    width: 150px
+}
+
+#leave-comment #comment-styleguide div {
+    display: none
+}
+
+#leave-comment div.entry {
+    padding-left: 1em
+}
+
+#leave-comment div.entry h5 {
+    margin: 1.2em 0 .3em 0
+}
+
+#leave-comment div.entry li {
+    color: green
+}
+
+#comments {
+    border-top: dotted 1px #D0D0D0;
+    float: left;
+    width: 100%;
+    margin: 1em 0 2em 0
+}
+
+#comments div.is_author h4 img {
+    border-color: #000
+}
+
+#comments div.is_author h4 strong {
+    color: #CC0000
+}
+
+#comments h3 {
+    border-bottom: dotted 1px #D0D0D0;
+    margin: 0;
+    padding: 1em 0 2em 0
+}
+
+#comments div {
+    float: left;
+    width: 100%;
+    padding: 1.5em 0 1.5em 0;
+    border-bottom: dotted 1px #D0D0D0;
+    position: relative
+}
+
+#comments h4 {
+    float: right;
+    width: 150px;
+    font-size: 100%;
+    text-align: center
+}
+
+#comments h4 strong {
+    display: block;
+    margin-bottom: 4px
+}
+
+#comments h4 img {
+    border: solid 1px #D0D0D0;
+    padding: 2px;
+    background: #F9F9F9
+}
+
+#comments h4 cite {
+    display: block
+}
+
+#comments blockquote.bq-parent {
+    float: left;
+    width: 485px;
+    margin: 1.6em 0 0 0;
+    padding: 0
+}
+
+#comments blockquote p.wurdig-comment-posted {
+    position: absolute;
+    padding-right: 5px;
+    background:#FFF;
+    top: -10px;
+    left: 0;
+    font-size: 83%
 }
 
 /*_TAG_CLOUD*/
@@ -333,15 +488,49 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
     padding: 2em 0 2em 0;
     float: left;
     width: 100%;
-    font-size: 93%
+    font-size: 93%;
+    color: #444
+}
+
+#wurdig-secondary-content div.wurdig-secondary-list ul {
+    margin: 0;
+    padding: 0;
+    margin-top: 1em;
+    border-top: solid 1px #CCC
+}
+
+#wurdig-secondary-content div.wurdig-secondary-list ul li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: solid 1px #CCC
+}
+
+#wurdig-secondary-content div.wurdig-secondary-list ul li a {
+    display: block;
+    padding: .5em 0 .5em 0
+}
+
+#wurdig-secondary-content div.wurdig-secondary-list ul li a:hover {
+    background: #F6F6F5
 }
 
 #wurdig-secondary-content #wurdig-delicious-feed {
     padding-left: 2em
 }
 
+#wurdig-secondary-content #wurdig-delicious-feed h4 {
+    padding-left: 24px;
+    background: url('../images/bg/delicious_16x16.png') no-repeat left 6px
+}
+
 #wurdig-secondary-content #wurdig-blogroll {
     padding-right: 2em
+}
+
+#wurdig-secondary-content #wurdig-flickr-feed h4 {
+    padding-left: 24px;
+    background: url('../images/bg/photo.png') no-repeat left 6px
 }
 
 #wurdig-secondary-content #wurdig-flickr-feed ul li {
@@ -359,6 +548,11 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
 
 #wurdig-secondary-content #wurdig-flickr-feed ul li a:hover img {
     border: 2px solid #000
+}
+
+#wurdig-secondary-content #wurdig-blogroll h4 {
+    padding-left: 24px;
+    background: url('../images/bg/page_white_stack.png') no-repeat left 6px
 }
 
 /*_FOOTER*/
@@ -431,11 +625,10 @@ p img.right {
     margin:1.5em 0 1.5em 1.5em
 }
 .clear{clear:both;}
-.error, .flash, .success, .highlight{padding:.8em;margin-bottom:1em;border:2px solid #ddd;}
-.error {background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;}
-.flash {background:#FFF6BF;color:#514721;border-color:#FFD324;}
+.flash, .success, .highlight{padding:.8em;margin-bottom:1em;border:1px solid #ddd;}
+.error-message {color: red;font-size: 85%}
+.flash {clear: both;background:#FFF6BF;color:#514721;border-color:#FFD324;}
 .success {background:#E6EFC2;color:#264409;border-color:#C6D880;}
-.error a {color:#8a1f11;}
 .flash a {color:#514721;}
 .success a {color:#264409;}
 .small {font-size:85%;margin-bottom:1.875em}
