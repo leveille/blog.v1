@@ -2,7 +2,9 @@
 <%namespace file="comment_fields.html" name="fields" import="*"/>
 <%namespace file="/component/posts.html" name="posts" import="*"/>
 
-<%def name="title()">${parent.title()} &gt; ${c.post.title}</%def>
+<%def name="title()">
+    ${parent.title()} &gt; ${c.post.title}
+</%def>
 <%def name="ps_feeds()">
     ${h.auto_discovery_link(
         h.url_for(

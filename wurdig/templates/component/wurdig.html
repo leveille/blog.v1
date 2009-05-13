@@ -107,7 +107,8 @@
                     Comments
                 </a>
             </li>
-            % if request.urlvars['controller'] == 'post' and request.urlvars['action'] == 'view':
+            % if request.urlvars['controller'] == 'post' and \
+                 request.urlvars['action'] == 'view':
                 % if c.post.comments_allowed:
                     <li>
                         <a href="${h.url_for(
