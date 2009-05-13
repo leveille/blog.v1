@@ -311,23 +311,6 @@ class PostController(BaseController):
             action='list',
         )
         return render('/derived/post/list.html')
-
-    @h.auth.authorize(h.auth.is_valid_user)
-    @restrict('POST')
-    def delete(self, id=None):
-        # @todo: delete confirmation
-        if id is None:
-            abort(404)
-        post_q = meta.Session.query(model.Post)
-        post = post_q.filter_by(id=id).first()
-        if post is None:
-            abort(404)
-        meta.Session.execute(delete(model.poststags_table, model.poststags_table.c.post_id==post.id))
-        meta.Session.delete(post)
-        meta.Session.commit()
-        session['flash'] = 'Post successfully deleted.'
-        session.save()
-        return redirect_to(controller='post', action='list')
     
     @h.auth.authorize(h.auth.is_valid_user)
     def delete_confirm(self, id=None):
@@ -347,6 +330,9 @@ class PostController(BaseController):
         post = post_q.filter_by(id=id).first()
         if post is None:
             abort(404)
+        # delete tags and comments associated with post
+        meta.Session.execute(delete(model.poststags_table, model.poststags_table.c.post_id==post.id))
+        meta.Session.execute(delete(model.comments_table, model.comments_table.c.post_id==post.id))
         meta.Session.delete(post)
         meta.Session.commit()
         if request.is_xhr:

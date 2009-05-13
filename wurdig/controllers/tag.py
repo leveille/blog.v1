@@ -199,23 +199,6 @@ class TagController(BaseController):
             action='list',
         )
         return render('/derived/tag/list.html')
-
-    @h.auth.authorize(h.auth.is_valid_user)
-    @restrict('POST')
-    def delete(self, id=None):
-        # @todo: delete confirmation
-        if id is None:
-            abort(404)
-        tag_q = meta.Session.query(model.Tag)
-        tag = tag_q.filter_by(id=id).first()
-        if tag is None:
-            abort(404)
-        meta.Session.execute(delete(model.poststags_table, model.poststags_table.c.tag_id==tag.id))
-        meta.Session.delete(tag)
-        meta.Session.commit()
-        session['flash'] = 'Tag successfully deleted.'
-        session.save()
-        return redirect_to(controller='tag', action='list')
     
     @h.auth.authorize(h.auth.is_valid_user)
     def delete_confirm(self, id=None):
@@ -235,6 +218,8 @@ class TagController(BaseController):
         tag = tag_q.filter_by(id=id).first()
         if tag is None:
             abort(404)
+        # delete post/tag associations
+        meta.Session.execute(delete(model.poststags_table, model.poststags_table.c.tag_id==tag.id))
         meta.Session.delete(tag)
         meta.Session.commit()
         if request.is_xhr:

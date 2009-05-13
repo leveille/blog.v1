@@ -6,7 +6,7 @@
 
 <h2>Delete Post</h2>
 
-<p>Are you sure you want to delete the post titled <strong>${c.post.title}</strong></p>
+<p>Are you sure you want to delete the post titled <strong>${c.post.title}</strong>.  This will also delete any tag associations and comments for this post.</p>
 
 ${h.form(h.url_for(controller='post', action='delete'), method='post')}
     ${h.hidden('id', value=c.post.id)}
