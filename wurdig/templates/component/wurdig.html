@@ -108,16 +108,18 @@
                 </a>
             </li>
             % if request.urlvars['controller'] == 'post' and request.urlvars['action'] == 'view':
-                <li>
-                    <a href="${h.url_for(
-                                controller='comment', 
-                                action='post_comment_feed', 
-                                post_id=unicode(c.post.id)
-                            )}"
-                        title="${c.post.title} Comments Feed">
-                        Post Comment Feed
-                    </a>
-                </li>
+                % if c.post.comments_allowed:
+                    <li>
+                        <a href="${h.url_for(
+                                    controller='comment', 
+                                    action='post_comment_feed', 
+                                    post_id=unicode(c.post.id)
+                                )}"
+                            title="${c.post.title} Comments Feed">
+                            Post Comment Feed
+                        </a>
+                    </li>
+                % endif
             % endif
         </ul>
     </div>
