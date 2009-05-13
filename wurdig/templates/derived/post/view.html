@@ -43,7 +43,7 @@
     
     % if len(c.post.comments):
         <div id="comments">
-            <h3>${h.plural(len(c.post.comments), 'Comment', 'Comments')} for "${c.post.title}"</h3>
+            <h3>Comments for "${c.post.title}"</h3>
             
             <%
                 import hashlib
@@ -52,10 +52,10 @@
             % for k,comment in enumerate(c.post.comments):
                 <%
                     author_class = ''
-                    if h.wurdig_comment_adminname().lower() in comment.name.lower():
+                    if request.environ['SERVER_NAME'] in comment.url:
                         author_class = 'is_author'
                 %>
-                <div id="comment-${comment.id}" class="${author_class}">
+                <div id="comment-${comment.id}" class="${author_class} ${comment.id}">
                     % if h.auth.authorized(h.auth.is_valid_user):
                         <div class="comment-admin">
                             <ul>
@@ -66,7 +66,7 @@
                                     </a>
                                 </li>
                                <li>
-                                    <a href="${h.url_for(controller='comment', action='_delete', id=comment.id)}"
+                                    <a href="${h.url_for(controller='comment', action='delete_confirm', id=comment.id)}"
                                        title="Delete Comment From ${comment.name}">
                                         Delete
                                     </a>
@@ -103,7 +103,7 @@
             ${h.secure_form(h.url_for(post_id=c.post.id, controller='comment', action='create'), method='post')}
                 ${fields.body()}
                 <div class="input">
-                    ${h.submit('create_comment', 'Create Comment')}
+                    ${h.submit('create_comment', 'Create Comment', tabindex=6)}
                 </div>
             ${h.end_form()}
             <p class="leave-comment-subscribe">

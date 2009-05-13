@@ -313,6 +313,7 @@ class PostController(BaseController):
         return render('/derived/post/list.html')
 
     @h.auth.authorize(h.auth.is_valid_user)
+    @restrict('POST')
     def delete(self, id=None):
         # @todo: delete confirmation
         if id is None:
@@ -327,6 +328,34 @@ class PostController(BaseController):
         session['flash'] = 'Post successfully deleted.'
         session.save()
         return redirect_to(controller='post', action='list')
+    
+    @h.auth.authorize(h.auth.is_valid_user)
+    def delete_confirm(self, id=None):
+        if id is None:
+            abort(404)
+        post_q = meta.Session.query(model.Post)
+        c.post = post_q.filter_by(id=id).first()
+        if c.post is None:
+            abort(404)
+        return render('/derived/post/delete_confirm.html')
+
+    @h.auth.authorize(h.auth.is_valid_user)
+    @restrict('POST')
+    def delete(self, id=None):
+        id = request.params.getone('id')
+        post_q = meta.Session.query(model.Post)
+        post = post_q.filter_by(id=id).first()
+        if post is None:
+            abort(404)
+        meta.Session.delete(post)
+        meta.Session.commit()
+        if request.is_xhr:
+            response.content_type = 'application/json'
+            return "{'success':true,'msg':'The post has been deleted'}"
+        else:
+            session['flash'] = 'Post successfully deleted.'
+            session.save()
+            return redirect_to(controller='post', action='list')
     
     @h.auth.authorize(h.auth.is_valid_user)
     def scrape(self):

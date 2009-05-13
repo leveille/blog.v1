@@ -6,7 +6,6 @@ __all__ = ['wurdig_use_akismet',
            'wurdig_title',
            'wurdig_subtitle',
            'wurdig_use_subtitle',
-           'wurdig_comment_adminname',
            'wurdig_contact_email',
            'wurdig_display_contact_email',
            'wurdig_googlesearch_key',
@@ -46,13 +45,6 @@ def wurdig_subtitle():
 
 def wurdig_use_subtitle():
     return wurdig_subtitle() not in ['', None, u'']
-
-def wurdig_comment_adminname():
-    try:
-        wurdig_comment_adminname = config['blog.comment.admin']
-    except Exception, e:
-        wurdig_comment_adminname = None
-    return wurdig_comment_adminname
 
 def wurdig_contact_email():
     try:

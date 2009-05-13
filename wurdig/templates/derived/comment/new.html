@@ -9,10 +9,6 @@
     ${h.secure_form(h.url_for(post_id=c.post.id, controller='comment', action='create'), method='post')}
         ${fields.body()}
         ${h.submit('create_comment', 'Create Comment')} or
-        <!-- 
-            For some reason I can't use the link_to helper here
-            Getting an obscure "Undefined" error, with c.post.slug highlighted
-         -->
         <a href="${h.url_for(controller='post', 
                       action='view', 
                       year=c.post.posted_on.strftime('%Y'), 

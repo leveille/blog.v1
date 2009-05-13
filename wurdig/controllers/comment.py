@@ -180,9 +180,9 @@ class CommentController(BaseController):
         comment.post_id = c.post.id
         
         comment.content = h.nl2br(comment.content)
-        comment.content = h.auto_link(comment.content)
         comment.content = h.mytidy(comment.content)
         comment.content = h.comment_filter(comment.content)
+        comment.content = h.auto_link(comment.content)
         
         meta.Session.add(comment)
         meta.Session.commit()
@@ -233,8 +233,8 @@ class CommentController(BaseController):
             if getattr(comment, k) != v:
                 setattr(comment, k, v)
         
-        comment.content = h.auto_link(comment.content)
         comment.content = h.mytidy(comment.content)
+        comment.content = h.auto_link(comment.content)
         
         meta.Session.commit()
         session['flash'] = 'Comment successfully updated.'
@@ -257,18 +257,36 @@ class CommentController(BaseController):
         return render('/derived/comment/list.html')
 
     @h.auth.authorize(h.auth.is_valid_user)
-    def delete(self, id=None):
+    def delete_confirm(self, id=None):
         if id is None:
             abort(404)
+        comment_q = meta.Session.query(model.Comment)
+        c.comment = comment_q.filter_by(id=id).first()
+        if c.comment is None:
+            abort(404)
+        post_q = meta.Session.query(model.Post)
+        c.post = c.comment.post_id and post_q.filter_by(id=int(c.comment.post_id)).first() or None
+        if c.post is None:
+            abort(404)
+        return render('/derived/comment/delete_confirm.html')
+
+    @h.auth.authorize(h.auth.is_valid_user)
+    @restrict('POST')
+    def delete(self, id=None):
+        id = request.params.getone('id')
         comment_q = meta.Session.query(model.Comment)
         comment = comment_q.filter_by(id=id).first()
         if comment is None:
             abort(404)
         meta.Session.delete(comment)
         meta.Session.commit()
-        session['flash'] = 'Comment successfully deleted.'
-        session.save()
-        return redirect_to(controller='comment', action='list')
+        if request.is_xhr:
+            response.content_type = 'application/json'
+            return "{'success':true,'msg':'The comment has been deleted'}"
+        else:
+            session['flash'] = 'Comment successfully deleted.'
+            session.save()
+            return redirect_to(controller='comment', action='list')
     
     @h.auth.authorize(h.auth.is_valid_user)
     def clean(self):

@@ -1,0 +1,16 @@
+<%inherit file="/base/master.html"/>
+
+<%def name="title()">
+    ${parent.title()} &gt; Delete Confirmation
+</%def>
+
+<h2>Delete Post</h2>
+
+<p>Are you sure you want to delete the post titled <strong>${c.post.title}</strong></p>
+
+${h.form(h.url_for(controller='post', action='delete'), method='post')}
+    ${h.hidden('id', value=c.post.id)}
+    ${h.submit('edit', 'Yes, Delete Page')}  or
+        <a href="${h.url_for(controller='post', 
+                      action='list')}">Cancel</a>
+${h.end_form()}

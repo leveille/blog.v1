@@ -201,6 +201,7 @@ class TagController(BaseController):
         return render('/derived/tag/list.html')
 
     @h.auth.authorize(h.auth.is_valid_user)
+    @restrict('POST')
     def delete(self, id=None):
         # @todo: delete confirmation
         if id is None:
@@ -215,3 +216,31 @@ class TagController(BaseController):
         session['flash'] = 'Tag successfully deleted.'
         session.save()
         return redirect_to(controller='tag', action='list')
+    
+    @h.auth.authorize(h.auth.is_valid_user)
+    def delete_confirm(self, id=None):
+        if id is None:
+            abort(404)
+        tag_q = meta.Session.query(model.Tag)
+        c.tag = tag_q.filter_by(id=id).first()
+        if c.tag is None:
+            abort(404)
+        return render('/derived/tag/delete_confirm.html')
+
+    @h.auth.authorize(h.auth.is_valid_user)
+    @restrict('POST')
+    def delete(self, id=None):
+        id = request.params.getone('id')
+        tag_q = meta.Session.query(model.Tag)
+        tag = tag_q.filter_by(id=id).first()
+        if tag is None:
+            abort(404)
+        meta.Session.delete(tag)
+        meta.Session.commit()
+        if request.is_xhr:
+            response.content_type = 'application/json'
+            return "{'success':true,'msg':'The tag has been deleted'}"
+        else:
+            session['flash'] = 'Tag successfully deleted.'
+            session.save()
+            return redirect_to(controller='page', action='list')

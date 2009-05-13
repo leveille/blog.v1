@@ -21,6 +21,7 @@
     ${h.stylesheet_link(h.url_for('http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css'), media="screen, projection")}
     ${h.stylesheet_link(h.url_for('http://yui.yahooapis.com/2.7.0/build/base/base-min.css'), media="screen, projection")}
     ${h.stylesheet_link(h.url_for('/css/base.css'), media="screen, projection")}
+    ${h.stylesheet_link(h.url_for('/css/utils.css'), media="screen, projection")}
     ${h.stylesheet_link(h.url_for('/css/print.css'), media="print")}
 </%def>
 
@@ -195,5 +196,6 @@
 
 <%def name="js()">
     ${h.javascript_link(h.url_for('/javascripts/jquery/jquery.min.js'), 
-                        h.url_for('/javascripts/application.js'))}
+                        h.url_for('/javascripts/application.js'),
+                        h.url_for('/javascripts/utils.js'))}
 </%def>

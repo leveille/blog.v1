@@ -1,4 +1,5 @@
 ## -*- coding: utf-8 -*-
+<%namespace file="/component/admin.html" name="admin" import="*"/>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -10,10 +11,17 @@
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         
         <title>${self.title()}</title>
+        ${admin.css()}
     </head>
     
     <body id="admin">
+        <div class="js succ">
+        </div>
+        <div class="js err">
+        </div>
+        ${admin.flash()}
         ${next.body()}
+        ${admin.js()}
     </body>
 </html>
 

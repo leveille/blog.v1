@@ -1,0 +1,21 @@
+.js {
+    display: none
+}
+div.succ,
+div.err {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 20000;
+    color:#FFF;
+    font-weight: bold
+}
+div.succ p.message {
+    background:green;
+    padding:.8em
+}
+div.err p.message {
+    background: red;
+    padding:.8em
+}

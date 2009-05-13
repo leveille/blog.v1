@@ -1,7 +1,7 @@
 <div class="field required">
     <label for="name">Name</label>
     <div class="input">
-        ${h.text('name')}
+        ${h.text('name', tabindex=1)}
     </div>
 </div>
 <div class="field required">
@@ -14,13 +14,13 @@
     </div>
     <label for="email">Email</label>
     <div class="input">
-        ${h.text('email')}
+        ${h.text('email', tabindex=2)}
     </div>
 </div>
 <div class="field">
     <label for="url">Website</label>
     <div class="input">
-        ${h.text('url')}
+        ${h.text('url', tabindex=3)}
     </div>
 </div>
 
@@ -31,7 +31,7 @@
     </div>
     <label for="content">Comment</label>
     <div class="input">
-        ${h.textarea('content', cols=25, rows=10)}
+        ${h.textarea('content', cols=25, rows=10, tabindex=4)}
     </div>
 </div>
 
@@ -44,7 +44,7 @@
         </div>
         <label for="wurdig_comment_question">Spamword</label>
         <div class="input">
-            ${h.text('wurdig_comment_question')}
+            ${h.text('wurdig_comment_question', tabindex=5)}
         </div>
     </div>
 % endif

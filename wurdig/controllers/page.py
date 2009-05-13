@@ -153,19 +153,31 @@ class PageController(BaseController):
             action='list',
         )
         return render('/derived/page/list.html')
-
+    
     @h.auth.authorize(h.auth.is_valid_user)
-    def delete(self, id=None):
-        # @todo: delete confirmation
+    def delete_confirm(self, id=None):
         if id is None:
             abort(404)
+        page_q = meta.Session.query(model.Page)
+        c.page = page_q.filter_by(id=id).first()
+        if c.page is None:
+            abort(404)
+        return render('/derived/page/delete_confirm.html')
+
+    @h.auth.authorize(h.auth.is_valid_user)
+    @restrict('POST')
+    def delete(self, id=None):
+        id = request.params.getone('id')
         page_q = meta.Session.query(model.Page)
         page = page_q.filter_by(id=id).first()
         if page is None:
             abort(404)
         meta.Session.delete(page)
         meta.Session.commit()
-        meta.Session.commit()
-        session['flash'] = 'Page successfully deleted.'
-        session.save()
-        return redirect_to(controller='page', action='list')
+        if request.is_xhr:
+            response.content_type = 'application/json'
+            return "{'success':true,'msg':'The page has been deleted'}"
+        else:
+            session['flash'] = 'Page successfully deleted.'
+            session.save()
+            return redirect_to(controller='page', action='list')

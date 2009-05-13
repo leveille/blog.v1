@@ -668,12 +668,8 @@ p img.right {
     margin:1.5em 0 1.5em 1.5em
 }
 .clear{clear:both;}
-.flash, .success, .highlight{padding:.8em;margin-bottom:1em;border:1px solid #ddd;}
 .error-message {color: red;font-size: 85%}
-.flash {clear: both;background:#FFF6BF;color:#514721;border-color:#FFD324;}
-.success {background:#E6EFC2;color:#264409;border-color:#C6D880;}
-.flash a {color:#514721;}
-.success a {color:#264409;}
+.flash {clear: both; color: green; margin: .5em; padding: .5em; border: solid 1px green}
 .small {font-size:85%;margin-bottom:1.875em}
 .large {font-size:116%;margin-bottom:1.25em;}
 .hide {display:none;}

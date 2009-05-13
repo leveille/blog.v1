@@ -36,9 +36,6 @@ blog.contact=
 #leave blank for no, True for yes
 blog.display.contact=
 
-#What will your name be comment as admin
-blog.comment.admin=
-
 #primitive spam prevention keyword
 wurdig.spamword=wurdig
 

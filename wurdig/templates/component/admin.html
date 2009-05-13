@@ -1,0 +1,21 @@
+<%def name="css()">
+    ${h.stylesheet_link(h.url_for('/css/utils.css'), media="screen, projection")}
+</%def>
+
+<%def name="flash()">
+    % if session.has_key('flash'):
+        <div id="flash">
+            <p class="flash">${session.get('flash')}</p>
+        </div>
+        <%
+            del session['flash']
+            session.save()
+        %>
+    % endif
+</%def>
+
+<%def name="js()">
+    ${h.javascript_link(h.url_for('/javascripts/jquery/jquery.min.js'), 
+                        h.url_for('/javascripts/admin.js'),
+                        h.url_for('/javascripts/utils.js'))}
+</%def>

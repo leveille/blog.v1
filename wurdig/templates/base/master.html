@@ -13,7 +13,7 @@ ${wurdig.doctype()}
         controller = request.urlvars['controller']
         action = request.urlvars['action']
         slug = None
-        if controller == 'page':
+        if controller == 'page' and action == 'view':
         	slug = request.urlvars['slug']
         elif controller == 'post' and action == 'home':
             slug = action
@@ -23,6 +23,10 @@ ${wurdig.doctype()}
             <div id="hd" role="banner" class="${controller}">
                 ${wurdig.primary_nav(slug)}
                 ${wurdig.header()}
+            </div>
+            <div class="js succ">
+            </div>
+            <div class="js err">
             </div>
             <div id="bd">
                 <div id="yui-main">

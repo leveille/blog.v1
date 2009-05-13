@@ -14,7 +14,7 @@
         </thead>
         <tbody>
             % for page in c.paginator:
-                <tr>
+                <tr class="${page.id}">
                     <td>
                         ${h.link_to(
                             h.truncate(page.title),
@@ -30,7 +30,7 @@
                         )} | 
                         ${h.link_to(
                             'Delete',
-                            h.url_for(controller='page', action='delete', id=unicode(page.id))
+                            h.url_for(controller='page', action='delete_confirm', id=unicode(page.id))
                         )}
                     </td>
                 </tr>
