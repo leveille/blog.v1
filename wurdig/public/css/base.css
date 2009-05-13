@@ -177,6 +177,10 @@ body.home #yui-main p.wurdig-entry-meta {
     display: none
 }
 
+#yui-main #cse-search-results {
+    padding-bottom: 2em
+}
+
 #yui-main #cse-search-results iframe {
     width: 100%
 }
@@ -383,6 +387,12 @@ div.wurdig-entry-content blockquote p {
 
 #leave-comment div.entry li {
     color: green
+}
+
+#leave-comment p.leave-comment-subscribe {
+    clear: both;
+    margin: 0 0 0 113px;
+    padding-top: 1em
 }
 
 #comments {

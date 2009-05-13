@@ -9,20 +9,19 @@ __all__ = ['wurdig_use_akismet',
            'wurdig_comment_adminname',
            'wurdig_contact_email',
            'wurdig_display_contact_email',
+           'wurdig_googlesearch_key',
+           'wurdig_use_googlesearch',
            ]
 
-def wurdig_use_akismet():
+def wurdig_get_akismet_key():
     try:
         akistmet_key = config['akismet.api_key']
     except Exception, e:
         akistmet_key = None
-    return config['akismet.api_key'] not in ['', None, u'']
+    return akistmet_key
 
-def wurdig_get_akismet_key():
-    if wurdig_use_akismet():
-        return config['akismet.api_key']
-        # should I rais an exception here?
-    return u'' 
+def wurdig_use_akismet():
+    return wurdig_get_akismet_key() not in ['', None, u'']
 
 def wurdig_spamword():
     try:
@@ -63,8 +62,14 @@ def wurdig_contact_email():
     return wurdig_contact
 
 def wurdig_display_contact_email():
+    return wurdig_contact_email() not in ['', None, u'']
+
+def wurdig_googlesearch_key():
     try:
-        wurdig_display_contact = config['blog.display.contact']
+        wurdig_googlesearch_key = config['wurdig.googlesearch.key']
     except Exception, e:
-        wurdig_display_contact = None
-    return wurdig_display_contact not in ['', None, u'']
+        wurdig_googlesearch_key = None
+    return wurdig_googlesearch_key
+
+def wurdig_use_googlesearch():
+    return wurdig_googlesearch_key() not in ['', None, u'']

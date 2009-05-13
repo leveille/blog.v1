@@ -18,6 +18,10 @@ WURDIG.app = function()
             });
             jQuery('div.required label').append(' <span class="error-message">*</span>');
             jQuery("div[id^='comment-'] h4").next('blockquote').addClass('bq-parent');
+            jQuery("a[rel='external'], a._blank").bind('click', function(){
+                window.open(this.href);
+                return false;
+            });
         }
     };
 }();

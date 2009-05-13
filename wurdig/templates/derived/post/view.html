@@ -104,6 +104,18 @@
                     ${h.submit('create_comment', 'Create Comment')}
                 </div>
             ${h.end_form()}
+            <p class="leave-comment-subscribe">
+                <a href="${h.url_for(
+                            controller='comment', 
+                            action='post_comment_feed', 
+                            post_id=unicode(c.post.id)
+                        )}"
+                    class="_blank"
+                    title="${c.post.title} Comments Feed">
+                    <img src="/images/feed-icon-14x14.png" alt="Subscribe to post comments"> 
+                    Subscribe to comments for "${c.post.title}"
+                </a>
+            </p>
         </div>
     % else:
         <p class="flash">Comments have been disabled for this post.</p>

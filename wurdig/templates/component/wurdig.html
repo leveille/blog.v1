@@ -76,16 +76,18 @@
 
 <%def name="search_form()">
     <div id="wurdig-search">
-        <form action="/search" id="cse-search-box">
-            <div>
-                <input type="hidden" name="cx" value="008016997409029644224:zvp0d30hv8g" />
-                <input type="hidden" name="cof" value="FORID:9" />
-                <input type="hidden" name="ie" value="UTF-8" />
-                <input type="text" name="q" id="cse-search-q" size="31" />
-                <input type="submit" name="sa" value="Search" />
-            </div>
-        </form>
-        <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+        % if h.wurdig_use_googlesearch():
+            <form action="/search" id="cse-search-box">
+                <div>
+                    <input type="hidden" name="cx" value="${h.wurdig_googlesearch_key()}" />
+                    <input type="hidden" name="cof" value="FORID:9" />
+                    <input type="hidden" name="ie" value="UTF-8" />
+                    <input type="text" name="q" id="cse-search-q" size="31" />
+                    <input type="submit" name="sa" value="Search" />
+                </div>
+            </form>
+            <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+        % endif
     </div>
 </%def>
 
@@ -105,6 +107,18 @@
                     Comments
                 </a>
             </li>
+            % if request.urlvars['controller'] == 'post' and request.urlvars['action'] == 'view':
+                <li>
+                    <a href="${h.url_for(
+                                controller='comment', 
+                                action='post_comment_feed', 
+                                post_id=unicode(c.post.id)
+                            )}"
+                        title="${c.post.title} Comments Feed">
+                        Post Comment Feed
+                    </a>
+                </li>
+            % endif
         </ul>
     </div>
 </%def>

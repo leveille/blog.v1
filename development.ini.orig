@@ -42,6 +42,11 @@ blog.comment.admin=
 #primitive spam prevention keyword
 wurdig.spamword=wurdig
 
+#google search key
+#http://www.google.com/coop/cse/
+#leave blank if not using (and either delete or modify /search page)
+wurdig.googlesearch.key=
+
 # leave blank to ignore akismet spam detection (akismet.api_key=)
 akismet.api_key=
 

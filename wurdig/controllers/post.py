@@ -378,3 +378,18 @@ class PostController(BaseController):
         f.close()
         response.content_type = 'text/plain'
         return 'done'
+    
+    @h.auth.authorize(h.auth.is_valid_user)
+    def replace(self):
+        posts_q = meta.Session.query(model.Post).all()
+        
+        for post in posts_q:
+            try:
+                post.content = post.content.replace('wp-caption','wurdig-caption')
+                meta.Session.add(post)
+                meta.Session.commit()
+            except Exception, e:
+                pass
+        
+        response.content_type = 'text/plain'
+        return 'done'
