@@ -26,7 +26,7 @@ def recent_comments():
 
         for comment in recent_comments:
             i = """
-                <li>
+                <li class="%s">
                     <span>%s shared: </span>
                     <span>%s</span>
                     <span>Shared in: %s</span>
@@ -34,10 +34,7 @@ def recent_comments():
             """
             name = comment.name
             if comment.url is not None:
-                name = h.link_to(
-                    comment.name,
-                    comment.url
-                    )
+                name = h.link_to(comment.name, comment.url)
             
             content = h.truncate(h.strip_tags(comment.content), 80)
                              
@@ -52,6 +49,6 @@ def recent_comments():
                     anchor=u"comment-" + str(comment.id)
                 )
             )
-            comments.append(i % (name, content, link))
+            comments.append(i % (comment.id, name, content, link))
         return template % '\n'.join(comments)
     
