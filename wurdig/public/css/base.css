@@ -1,8 +1,18 @@
+html, body {
+    background:#E8EDF0
+}
+
 body {
     color:#000;
-    background:#FFF;
     font-family: 'Lucida Grande',Geneva,Arial,Verdana,sans-serif;
-    line-height: 1.6em
+    line-height: 1.6em;
+    margin: 0;
+    padding: 0
+}
+
+#doc4 {
+    background: #FFF;
+    padding-bottom: 20px
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -59,18 +69,15 @@ ul ul {
 
 /*_LOGO*/
 #hd {
-    border-top: dotted 1px #D0D0D0;
-    border-bottom: dotted 1px #D0D0D0;
-    background: #F6F6F5;
-    padding: 1em 0 1em 0;
+    padding: 15px 20px 15px 20px;
     float: left;
-    width: 100%;
+    width: 933px;
     position: relative
 }
 
 #hd h1 {
     text-transform: uppercase;
-    margin: 0 0 0 10px;
+    margin: 0;
     padding: 0;
     line-height: 1.2em
 }
@@ -85,7 +92,7 @@ ul ul {
 }
 
 #hd p {
-    margin: 0 0 0 10px;
+    margin: 0;
     padding: 0;
     font-size: 93%
 }
@@ -94,11 +101,22 @@ ul ul {
     font-style: italic
 }
 
+/*_HEADER IMG*/
+#wurdig-header-img {
+    clear: both;
+    margin-left: 20px;
+    height: 107px;
+    width: 933px;
+    background: url('../images/header.jpg') no-repeat center center;
+    border-top: solid 2px #D0D0D0;
+    border-bottom: solid 2px #D0D0D0
+}
+
 /*_NAV*/
 #wurdig-primary-nav ul {
     position: absolute;
-    bottom: 1em;
-    right: 10px;
+    bottom: 15px;
+    right: 20px;
     font-size: 93%;
     margin: 0;
     padding: 0
@@ -135,6 +153,10 @@ ul ul {
 
 #yui-main {
     margin-top: 1em
+}
+
+#yui-main .in-main {
+    padding: 0 0 0 20px
 }
 
 #yui-main h2 {
@@ -208,12 +230,16 @@ div.wurdig-entry-content blockquote p {
     color: #444
 }
 
+#wurdig-sidebar .in-sidebar {
+    padding: 0 20px 0 0
+}
+
 #wurdig-sidebar h4 {
     font-weight: bold
 }
 
 #wurdig-sidebar #cse-search-q {
-    width: 195px
+    width: 175px
 }
 
 #wurdig-sidebar #cse-search-box {
@@ -449,8 +475,9 @@ div.wurdig-entry-content blockquote p {
 #comments blockquote.bq-parent {
     float: right;
     width: 485px;
-    margin: 1.6em 0 0 0;
-    padding: 0
+    margin: 0;
+    padding: 0;
+    clear: right
 }
 
 #comments blockquote p.wurdig-comment-posted {
@@ -465,16 +492,18 @@ div.wurdig-entry-content blockquote p {
 #comments div.comment-admin {
     margin: 0;
     padding: 0;
+    float: right;
+    width: 487px;
     border: none
 }
 
 #comments div.comment-admin ul {
     margin: 0;
     padding: 0;
-    position: absolute;
+    float: left;
+    border: none;
+    position: relative;
     top: -7px;
-    left: 173px;
-    border: none
 }
 
 #comments div.comment-admin ul li {
@@ -526,7 +555,7 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
 /*_SECONDARY_CONTENT*/
 #wurdig-secondary-content {
     border-top: dotted .1em #D0D0D0;
-    background-color: #F0F0F0;
+    background-color: #DFE6EA;
     margin-top: 1em;
     padding: 2em 0 2em 0;
     float: left;
@@ -605,12 +634,13 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
     clear: both;
     float: left;
     width: 100%;
-    padding: 2em 0 2em 0
+    padding: 2em 0 2em 0;
+    background-color: #FFF
 }
 
 #ft ul {
     text-align: right;
-    margin: 0 0 3px 0;
+    margin: 0 20px 3px 0;
     padding: 0;
     float: right
 }
@@ -645,7 +675,7 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
 #ft p {
     clear: both;
     text-align: right;
-    margin: 0;
+    margin: 0 20px 0 0;
     padding: 0
 }
 
@@ -676,3 +706,4 @@ p img.right {
 .quiet {color:#666;}
 .loud {color:#000;}
 .highlight {background:#ff0; border:0;}
+.in {padding: 1em}

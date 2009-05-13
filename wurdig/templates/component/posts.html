@@ -7,7 +7,9 @@
 <%def name="paginated()">
     % if len(c.paginator):
     
+        % if request.urlvars['action'] != 'home':
         <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
+        % endif
         
         <div class="wurdig-entries">
         % for post in c.paginator:
