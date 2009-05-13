@@ -108,8 +108,7 @@ ul ul {
     float: left;
     list-style: none;
     margin: 0;
-    padding: 0;
-    padding-right: 8px;
+    padding: 0 8px 0 0;
     background: url('../images/bg/wurdig-nav-divider.gif') no-repeat left 7px
 }
 
@@ -139,7 +138,8 @@ ul ul {
 }
 
 #yui-main h2 {
-    text-transform: capitalize
+    text-transform: capitalize;
+    margin-bottom: .7em;
 }
 
 #yui-main h2:first-child,
@@ -415,7 +415,7 @@ div.wurdig-entry-content blockquote p {
 }
 
 #comments h4 {
-    float: right;
+    float: left;
     width: 150px;
     font-size: 100%;
     text-align: center
@@ -437,7 +437,7 @@ div.wurdig-entry-content blockquote p {
 }
 
 #comments blockquote.bq-parent {
-    float: left;
+    float: right;
     width: 485px;
     margin: 1.6em 0 0 0;
     padding: 0
@@ -445,11 +445,46 @@ div.wurdig-entry-content blockquote p {
 
 #comments blockquote p.wurdig-comment-posted {
     position: absolute;
-    padding-right: 5px;
+    padding-left: 5px;
     background:#FFF;
     top: -10px;
-    left: 0;
+    right: 0;
     font-size: 83%
+}
+
+#comments div.comment-admin {
+    margin: 0;
+    padding: 0;
+    border: none
+}
+
+#comments div.comment-admin ul {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: -7px;
+    left: 173px;
+    border: none
+}
+
+#comments div.comment-admin ul li {
+    float: left;
+    padding-right: 6px;
+    font-size: 77%;
+    list-style: none
+}
+
+#comments div.comment-admin ul li:first-child {
+    background: url('../images/bg/wurdig-nav-divider.gif') no-repeat right 7px
+}
+
+#comments div.comment-admin ul li a {
+    color: #CC0000;
+    margin-left: 4px;
+}
+
+#comments div.comment-admin ul li a:hover {
+    color: #000
 }
 
 /*_TAG_CLOUD*/

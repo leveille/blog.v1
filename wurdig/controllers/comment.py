@@ -180,6 +180,7 @@ class CommentController(BaseController):
         comment.post_id = c.post.id
         
         comment.content = h.nl2br(comment.content)
+        comment.content = h.auto_link(comment.content)
         comment.content = h.mytidy(comment.content)
         comment.content = h.comment_filter(comment.content)
         
@@ -232,6 +233,7 @@ class CommentController(BaseController):
             if getattr(comment, k) != v:
                 setattr(comment, k, v)
         
+        comment.content = h.auto_link(comment.content)
         comment.content = h.mytidy(comment.content)
         
         meta.Session.commit()
@@ -292,6 +294,21 @@ class CommentController(BaseController):
                 f.write('Exception: ')
             f.write('\n++++++++++++++++++++++++++++++++\n')
         f.close()
+        
+        response.content_type = 'text/plain'
+        return 'done'
+    
+    @h.auth.authorize(h.auth.is_valid_user)
+    def linkify(self):
+        comments_q = meta.Session.query(model.Comment).all()
+        
+        for comment in comments_q:
+            try:
+                comment.content = h.auto_link(comment.content)
+                meta.Session.add(comment)
+                meta.Session.commit()
+            except Exception, e:
+                pass
         
         response.content_type = 'text/plain'
         return 'done'

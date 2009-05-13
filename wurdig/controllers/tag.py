@@ -90,8 +90,6 @@ class NewTagForm(formencode.Schema):
 class TagController(BaseController):
 
     def cloud(self):
-        if c.tags is None:
-            abort(404)
         return render('/derived/tag/cloud.html')
     
     def category(self, slug=None):   

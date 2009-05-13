@@ -14,7 +14,7 @@ def cloud():
         parts.append('<div class="hTagCloud"><h4>Tags</h4><ul class="popularity">')
         for tag in c.tags:
             parts.append('<li class="%s">' % tag_weight(tag.post_count));
-            link_pattern = '<a href="%s" title="%s tagged with %s">%s</a>'
+            link_pattern = '<a href="%s" rel="tag" title="%s tagged with %s">%s</a>'
             url = h.url_for(controller='tag', 
                              action='archive', 
                              slug=tag.slug)
@@ -34,10 +34,10 @@ def post_tags(tags):
         parts.append('<span class="wurdig-entry-tags">')
         parts.append('<strong>Tags</strong> : ')
         for tag in tags:
-            _tags.append(h.link_to(
-                        tag.name,
-                        h.url_for(controller='tag', action='archive', slug=tag.slug)
-                        ))
+            link_pattern = '<a href="%s" rel="tag">%s</a>'
+            _tags.append(link_pattern % (h.url_for(controller='tag', action='archive', slug=tag.slug),
+                                         tag.name
+                                         ))
         tags = ', '.join(_tags)
         parts.append(tags)
         parts.append('</span>')
@@ -50,9 +50,9 @@ def tag_weight(count):
                'level_3' : 'vv-popular',
                'level_4' : 'vvv-popular',
                'level_5' : 'vvvv-popular'}
-    if count in range(1,7):
+    if count in range(1,6):
         return classes['level_1']
-    elif count in range(8,15):
+    elif count in range(7,15):
         return classes['level_2']
     elif count in range(16,22):
         return classes['level_3']

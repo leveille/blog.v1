@@ -54,6 +54,24 @@
                         author_class = 'is_author'
                 %>
                 <div id="comment-${comment.id}" class="${author_class}">
+                    % if h.auth.authorized(h.auth.is_valid_user):
+                        <div class="comment-admin">
+                            <ul>
+                                <li>
+                                    <a href="${h.url_for(controller='comment', action='edit', id=comment.id)}"
+                                       title="Edit Comment From ${comment.name}">
+                                        Edit
+                                    </a>
+                                </li>
+                               <li>
+                                    <a href="${h.url_for(controller='comment', action='_delete', id=comment.id)}"
+                                       title="Delete Comment From ${comment.name}">
+                                        Delete
+                                    </a>
+                                </li>
+                            </ul>    
+                        </div>
+                    % endif
                     <h4>
                         <strong>${str(k+1)}</strong>
                         <em><img src="http://www.gravatar.com/avatar/${hashlib.md5(comment.email).hexdigest()}?s=80" alt="${comment.name} - Gravatar"></em>
