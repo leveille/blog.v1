@@ -6,10 +6,10 @@
 </%def>
 
 <%def name="content_header()">
-    <h3>Errors!</h3>
+    <h1>Comment Errors!</h1>
 </%def>
 
-<h2>Comment Errors for ${c.post.title}</h2>
+<h2>Errors for ${c.post.title}</h2>
 
 <div id="leave-comment">
     ${h.secure_form(h.url_for(post_id=c.post.id, controller='comment', action='create'), method='post')}

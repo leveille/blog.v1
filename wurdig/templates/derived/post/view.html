@@ -7,7 +7,7 @@
 </%def>
 
 <%def name="content_header()">
-    <h3>Now Viewing</h3>
+    <p>Now Viewing</p>
 </%def>
 
 <%def name="ps_feeds()">
@@ -57,7 +57,7 @@
                         </div>
                     % endif
                     <h4>
-                        <strong>${str(k+1)}</strong>
+                        <strong>Comment ${str(k+1)}</strong>
                         <em><img src="http://www.gravatar.com/avatar/${hashlib.md5(comment.email).hexdigest()}?s=80" alt="${comment.name} - Gravatar"></em>
                         <cite>
                             % if comment.url not in ['', u'', None]:
@@ -134,5 +134,4 @@
     
     ${post_comments(c.post.comments)}
     ${comment_form(c)}   
-
 </div>

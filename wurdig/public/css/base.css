@@ -15,7 +15,7 @@ body {
     padding-bottom: 20px
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, #wurdig-header-img p {
     color: #000;
     font-family: "URW Gothic L","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Helvetica,Arial,sans-serif;
     font-weight: normal;
@@ -112,6 +112,9 @@ ul ul {
     position: relative
 }
 
+#wurdig-header-img p,
+#wurdig-header-img h1,
+#wurdig-header-img h2,
 #wurdig-header-img h3 {
     margin: 0;
     padding: 0 10px;
@@ -181,7 +184,7 @@ ul ul {
     padding-top: 0
 }
 
-#yui-main p.wurdig-entries-tagged {
+#yui-main h2.wurdig-entries-tagged {
     margin: 0;
     padding: 0;
     font-size: 85%
