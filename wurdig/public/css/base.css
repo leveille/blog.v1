@@ -107,9 +107,20 @@ ul ul {
     margin-left: 20px;
     height: 107px;
     width: 933px;
-    background: url('../images/header.jpg') no-repeat center center;
-    border-top: solid 2px #D0D0D0;
-    border-bottom: solid 2px #D0D0D0
+    border-top: dotted 1px #D0D0D0;
+    border-bottom: dotted 1px #D0D0D0;
+    position: relative
+}
+
+#wurdig-header-img h3 {
+    margin: 0;
+    padding: 0 10px;
+    background: #000;
+    color: #FFF;
+    text-transform: lowercase;
+    font-size: 116%;
+    position: absolute;
+    bottom: 5px
 }
 
 /*_NAV*/

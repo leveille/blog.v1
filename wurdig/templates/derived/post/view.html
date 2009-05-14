@@ -5,6 +5,11 @@
 <%def name="title()">
     ${parent.title()} &gt; ${c.post.title}
 </%def>
+
+<%def name="content_header()">
+    <h3>Now Viewing</h3>
+</%def>
+
 <%def name="ps_feeds()">
     ${h.auto_discovery_link(
         h.url_for(

@@ -1,9 +1,15 @@
 <%inherit file="/base/master.html"/>
 <%namespace file="/derived/post/comment_fields.html" name="fields" import="*"/>
 
-<%def name="title()">${parent.title()} &gt; Comment for ${c.post.title}</%def>
+<%def name="title()">
+    ${parent.title()} &gt; Comment for ${c.post.title}
+</%def>
 
-<h2>${c.post.title} - New Comment Errors</h2>
+<%def name="content_header()">
+    <h3>Errors!</h3>
+</%def>
+
+<h2>Comment Errors for ${c.post.title}</h2>
 
 <div id="leave-comment">
     ${h.secure_form(h.url_for(post_id=c.post.id, controller='comment', action='create'), method='post')}

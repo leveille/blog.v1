@@ -24,10 +24,15 @@ ${wurdig.doctype()}
                 ${wurdig.primary_nav(slug)}
                 ${wurdig.header()}
             </div>
+            <div id="wurdig-header-img" style="${wurdig.random_header_img()}">
+                ${self.content_header()}
+            </div>
             <div id="bd">
                 <div id="yui-main" role="main">
-                    ${wurdig.flash()}
-                    ${next.body()} 
+                    <div class="yui-b in in-main" role="main">
+                        ${wurdig.flash()}
+                        ${next.body()}  
+                    </div>
                 </div>
             </div>
             <div class="yui-gb" id="wurdig-secondary-content">
@@ -51,4 +56,5 @@ ${wurdig.doctype()}
 <%def name="title()">
     ${wurdig.title()}
 </%def>
+<%def name="content_header()"></%def>
 <%def name="ps_feeds()"></%def>

@@ -1,7 +1,14 @@
 <%inherit file="/base/master.html"/>
 <%namespace file="/component/posts.html" name="posts" import="*"/>
 
-<%def name="title()">${parent.title()} &gt; Entries tagged ${c.tagname}</%def>
+<%def name="title()">
+    ${parent.title()} &gt; Entries tagged ${c.tagname}
+</%def>
+
+<%def name="content_header()">
+    <h3>Tag, you're it</h3>
+</%def>
+
 <p class="wurdig-entries-tagged">Entries tagged "<strong>${c.tagname}</strong>"</p>
 
 ${posts.paginated()}

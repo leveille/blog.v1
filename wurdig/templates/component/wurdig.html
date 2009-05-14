@@ -32,6 +32,10 @@
     % endif
 </%def>
 
+<%def name="random_header_img()">
+    background: url('/images/headers/${h.random_header()}') no-repeat center center
+</%def>
+
 <%def name="title()">
     ${h.wurdig_title()}
 </%def>
