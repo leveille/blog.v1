@@ -193,7 +193,8 @@ ul ul {
 
 #yui-main p.wurdig-entry-date {
     color: #999;
-    margin-top: -19px
+    margin-top: -19px;
+    font-size: 85%
 }
 
 body.home #yui-main p.wurdig-entry-meta {
