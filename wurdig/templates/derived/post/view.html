@@ -22,31 +22,8 @@
     )}
 </%def>
 
-<h2>${c.post.title}</h2>
-<p class="wurdig-entry-date">${c.post.posted_on.strftime('%B %d, %Y')}</p>
-<div class="wurdig-entry">
-    <div class="wurdig-entry-content">
-        ${h.literal(c.post.content)}
-    </div>
-        
-    <p class="wurdig-entry-meta">
-        ${posts.tag_list(c.post.tags)}
-        % if h.auth.authorized(h.auth.is_valid_user):
-            <span class="wurdig-admin">
-                <strong>Admin</strong> : 
-                ${h.link_to(
-                    'Edit This Post',
-                    h.url_for(controller='post', action='edit', id=unicode(c.post.id))
-                )}
-            </span>
-        % endif
-    </p>
-    
-    % if not c.post.comments_allowed and len(c.post.comments) > 20:
-        <p class="flash">Comments have been disabled for this post.</p>
-    % endif
-    
-    % if len(c.post.comments):
+<%def name="post_comments(comments)">
+    % if len(comments):
         <div id="comments">
             <h3>Comments for "${c.post.title}"</h3>
             
@@ -54,7 +31,7 @@
                 import hashlib
             %>
             
-            % for k,comment in enumerate(c.post.comments):
+            % for k,comment in enumerate(comments):
                 <%
                     author_class = ''
                     if request.environ['SERVER_NAME'] in comment.url:
@@ -101,7 +78,9 @@
             % endfor
         </div>
     % endif
-    
+</%def>
+
+<%def name="comment_form(c)">
     % if c.post.comments_allowed:
         <h4>Leave a Comment (<span class="error-message">*</span> = required)</h4>
         <div id="leave-comment">
@@ -127,4 +106,33 @@
     % else:
         <p class="flash">Comments have been disabled for this post.</p>
     % endif
+</%def>
+
+<h2>${c.post.title}</h2>
+<p class="wurdig-entry-date">${c.post.posted_on.strftime('%B %d, %Y')}</p>
+<div class="wurdig-entry">
+    <div class="wurdig-entry-content">
+        ${h.literal(c.post.content)}
+    </div>
+        
+    <p class="wurdig-entry-meta">
+        ${posts.tag_list(c.post.tags)}
+        % if h.auth.authorized(h.auth.is_valid_user):
+            <span class="wurdig-admin">
+                <strong>Admin</strong> : 
+                ${h.link_to(
+                    'Edit This Post',
+                    h.url_for(controller='post', action='edit', id=unicode(c.post.id))
+                )}
+            </span>
+        % endif
+    </p>
+    
+    % if not c.post.comments_allowed and len(c.post.comments) > 20:
+        <p class="flash">Comments have been disabled for this post.</p>
+    % endif
+    
+    ${post_comments(c.post.comments)}
+    ${comment_form(c)}   
+
 </div>

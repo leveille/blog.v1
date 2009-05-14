@@ -2,9 +2,11 @@ import helpers as h
 from pylons import tmpl_context as c
 from wurdig import model
 from wurdig.model import meta
+from pylons.decorators.cache import beaker_cache
 
 __all__ = ['cloud', 'post_tags']
 
+@beaker_cache(expire=43200, cache_response=False)
 def cloud():
     # grab tag list and x recent comments for display in sidebar
     tags_q = meta.Session.query(model.Tag)
@@ -27,7 +29,8 @@ def cloud():
         parts.append('</ul></div>')
 
     return '\n'.join(parts)
-    
+
+@beaker_cache(expire=43200, cache_response=False)
 def post_tags(tags):
     if len(tags):
         parts, _tags = [], []

@@ -5,9 +5,10 @@ import wurdig.lib.helpers as h
 import wurdig.model.meta as meta
 
 from formencode import htmlfill
-from pylons import request, response, session, tmpl_context as c
+from pylons import cache, request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
+from pylons.decorators.cache import beaker_cache
 from pylons.decorators.rest import restrict
 from pylons.decorators.secure import authenticate_form
 from sqlalchemy.sql import and_, delete
@@ -76,6 +77,7 @@ class NewCommentForm(formencode.Schema):
 
 class CommentController(BaseController):
     
+    @beaker_cache(expire=1200, type='memory', cache_key='b_comment_feeds')
     def feeds(self):  
                 
         comments_q = meta.Session.query(model.Comment).filter(model.Comment.approved==True)
@@ -109,6 +111,7 @@ class CommentController(BaseController):
         response.content_type = u'application/atom+xml'
         return feed.writeString('utf-8')
     
+    @beaker_cache(expire=1200, type='memory', cache_key='b_comment_post_comment_feed')
     def post_comment_feed(self, post_id=None):
         if post_id is None:
             abort(404)

@@ -10,9 +10,10 @@ import wurdig.model.meta as meta
 
 from authkit.authorize.pylons_adaptors import authorize
 from formencode import htmlfill
-from pylons import config, request, response, session, tmpl_context as c
+from pylons import cache, config, request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
+from pylons.decorators.cache import beaker_cache
 from pylons.decorators.rest import restrict
 from sqlalchemy.sql import and_, delete
 from webhelpers.feedgenerator import Atom1Feed
@@ -99,9 +100,10 @@ class PostController(BaseController):
             items_per_page = 10,
             controller='post',
             action='home'
-        )      
+        )
         return render('/derived/post/home.html')
         
+    @beaker_cache(expire=1200, type='memory', cache_key='b_post_feeds')
     def feeds(self):
         
         posts_q = meta.Session.query(model.Post).filter(
@@ -207,7 +209,7 @@ class PostController(BaseController):
             t = meta.Session.query(model.Tag).get(tag)
             post.tags.append(t)
             
-        meta.Session.commit()
+        meta.Session.commit()        
         session['flash'] = 'Post successfully added.'
         session.save()
         # Issue an HTTP redirect
@@ -292,6 +294,9 @@ class PostController(BaseController):
         session.save()
 
         if not post.draft:
+            # grab and clear cache
+            post_cache = cache.get_cache('b_post_home', type="memory")
+            post_cache.remove_value('b_post_home')
             return redirect_to(controller='post', 
                                action='view', 
                                year=post.posted_on.strftime('%Y'), 

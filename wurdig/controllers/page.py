@@ -9,9 +9,10 @@ import webhelpers.paginate as paginate
 
 from authkit.authorize.pylons_adaptors import authorize
 from formencode import htmlfill
-from pylons import request, response, session, tmpl_context as c
+from pylons import cache, request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
+from pylons.decorators.cache import beaker_cache
 from pylons.decorators.rest import restrict
 from sqlalchemy.sql import and_, delete
 from wurdig.lib.base import BaseController, Cleanup, ConstructSlug, render
@@ -68,8 +69,7 @@ class NewPageForm(formencode.Schema):
     )
 
 class PageController(BaseController):
-    # @todo: delete confirmation
-
+    
     def view(self, slug=None):
         if slug is None:
             abort(404)
@@ -79,7 +79,10 @@ class PageController(BaseController):
             abort(404)
         if c.page.slug == 'search':
             return render('/derived/page/search.html')
-        return render('/derived/page/view.html')
+        return render('/derived/page/view.html', 
+                      cache_key=slug, 
+                      cache_type='memory', 
+                      cache_expire=1800)
 
     @h.auth.authorize(h.auth.is_valid_user)
     def new(self):

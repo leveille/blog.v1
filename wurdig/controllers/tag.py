@@ -9,9 +9,10 @@ import webhelpers.paginate as paginate
 
 from authkit.authorize.pylons_adaptors import authorize
 from formencode import htmlfill
-from pylons import request, response, session, tmpl_context as c
+from pylons import cache, request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
+from pylons.decorators.cache import beaker_cache
 from pylons.decorators.rest import restrict
 from sqlalchemy import func
 from sqlalchemy.sql import and_, delete
@@ -105,6 +106,9 @@ class TagController(BaseController):
         return redirect_to(controller='tag', action='archive', slug=slug, _code=301)
     
     def archive(self, slug=None):   
+        """
+        @todo: purge cache for tag_archive on post add and post delete for post_home
+        """
         if slug is None:
             abort(404)
         tag_q = meta.Session.query(model.Tag)
