@@ -22,62 +22,46 @@
     )}
 </%def>
 
-<%def name="post_comments(comments)">
-    % if len(comments):
-        <div id="comments">
-            <h3>Comments for "${c.post.title}"</h3>
-            
-            <%
-                import hashlib
-            %>
-            
-            % for k,comment in enumerate(comments):
-                <%
-                    author_class = ''
-                    if request.environ['SERVER_NAME'] in comment.url:
-                        author_class = 'is_author'
-                %>
-                <div id="comment-${comment.id}" class="${author_class} ${comment.id}">
-                    % if h.auth.authorized(h.auth.is_valid_user):
-                        <div class="comment-admin">
-                            <ul>
-                                <li>
-                                    <a href="${h.url_for(controller='comment', action='edit', id=comment.id)}"
-                                       title="Edit Comment From ${comment.name}">
-                                        Edit
-                                    </a>
-                                </li>
-                               <li>
-                                    <a href="${h.url_for(controller='comment', action='delete_confirm', id=comment.id)}"
-                                       title="Delete Comment From ${comment.name}">
-                                        Delete
-                                    </a>
-                                </li>
-                            </ul>    
-                        </div>
+<%def name="post_data(post)" cached="True" cache_timeout="14400" cache_key="post_${post.id}" cache_type="memory">
+    <div class="wurdig-entry-content">
+        ${h.literal(post.content)}
+    </div> 
+    <p class="wurdig-entry-meta">
+        ${posts.tag_list(post.tags)}
+    </p>
+</%def>
+
+<%def name="comments(post)" cached="True" cache_timeout="14400" cache_key="comments_${post.id}" cache_type="memory">
+    <%
+        import hashlib
+    %>
+    % for k,comment in enumerate(post.comments):
+        <%
+            author_class = ''
+            if request.environ['SERVER_NAME'] in comment.url:
+                author_class = 'is_author'
+        %>
+        <div id="comment-${comment.id}" class="${author_class} ${comment.id}">                    
+            <h4>
+                <strong>Comment ${str(k+1)}</strong>
+                <em><img src="http://www.gravatar.com/avatar/${hashlib.md5(comment.email).hexdigest()}?s=80" alt="${comment.name} - Gravatar"></em>
+                <cite>
+                    % if comment.url not in ['', u'', None]:
+                        <a href="${comment.url}">${comment.name}</a>
+                    % else:
+                        ${comment.name}
                     % endif
-                    <h4>
-                        <strong>Comment ${str(k+1)}</strong>
-                        <em><img src="http://www.gravatar.com/avatar/${hashlib.md5(comment.email).hexdigest()}?s=80" alt="${comment.name} - Gravatar"></em>
-                        <cite>
-                            % if comment.url not in ['', u'', None]:
-                                <a href="${comment.url}">${comment.name}</a>
-                            % else:
-                                ${comment.name}
-                            % endif
-                        </cite>
-                    </h4>
-                    <blockquote>
-                        ${h.literal(comment.content)}
-                        <p class="wurdig-comment-posted">
-                            ${comment.created_on}
-                            <a href="#comment-${comment.id}">Link</a>
-                        </p>
-                    </blockquote>
-                </div>
-            % endfor
+                </cite>
+            </h4>
+            <blockquote>
+                ${h.literal(comment.content)}
+                <p class="wurdig-comment-posted">
+                    ${comment.created_on}
+                    <a href="#comment-${comment.id}">Link</a>
+                </p>
+            </blockquote>
         </div>
-    % endif
+    % endfor
 </%def>
 
 <%def name="comment_form(c)">
@@ -109,29 +93,29 @@
 </%def>
 
 <h2>${c.post.title}</h2>
-<p class="wurdig-entry-date">${c.post.posted_on.strftime('%B %d, %Y')}</p>
+<p class="wurdig-entry-date">
+    ${c.post.posted_on.strftime('%B %d, %Y')}
+</p>
 <div class="wurdig-entry">
-    <div class="wurdig-entry-content">
-        ${h.literal(c.post.content)}
-    </div>
-        
-    <p class="wurdig-entry-meta">
-        ${posts.tag_list(c.post.tags)}
-        % if h.auth.authorized(h.auth.is_valid_user):
-            <span class="wurdig-admin">
-                <strong>Admin</strong> : 
-                ${h.link_to(
-                    'Edit This Post',
-                    h.url_for(controller='post', action='edit', id=unicode(c.post.id))
-                )}
-            </span>
-        % endif
-    </p>
-    
+    ${post_data(c.post)}
+    % if h.auth.authorized(h.auth.is_valid_user):
+        <div class="wurdig-admin">
+            <strong>Admin</strong> : 
+            ${h.link_to(
+                'Edit This Post',
+                h.url_for(controller='post', action='edit', id=unicode(c.post.id))
+            )}
+        </div>
+    % endif
     % if not c.post.comments_allowed and len(c.post.comments) > 20:
         <p class="flash">Comments have been disabled for this post.</p>
     % endif
     
-    ${post_comments(c.post.comments)}
+    % if len(c.post.comments):
+        <div id="comments">
+            <h3>Comments for "${c.post.title}"</h3>
+            ${comments(c.post)}
+        </div>        
+    % endif
     ${comment_form(c)}   
 </div>

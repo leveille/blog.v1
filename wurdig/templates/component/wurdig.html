@@ -143,16 +143,24 @@
     </div>
 </%def>
 
-<%def name="twitter_updates()">
+<%def name="twitter_updates()" cached="True" cache_timeout="3600" cache_key="twitter_feed" cache_type="memory">
     ${h.literal(h.twitter())}
 </%def>
 
-<%def name="tags()">
+<%def name="tags()" cached="True" cache_timeout="43200" cache_key="tag_cloud" cache_type="memory">
     ${h.literal(h.cloud())}
 </%def>
 
-<%def name="recent_comments()">
+<%def name="recent_comments()" cached="True" cache_timeout="3600" cache_key="recent_comments" cache_type="memory">
     ${h.literal(h.recent_comments())}
+</%def>
+
+<%def name="delicious()" cached="True" cache_timeout="43200" cache_key="delicious_feed" cache_type="memory">
+    ${h.literal(h.delicious())}
+</%def>
+
+<%def name="flickr()" cached="True" cache_timeout="43200" cache_key="flickr_feed" cache_type="memory">
+    ${h.literal(h.flickr())}
 </%def>
 
 <%def name="footer()">

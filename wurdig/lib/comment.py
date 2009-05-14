@@ -1,14 +1,12 @@
 import helpers as h
 from wurdig import model
 from wurdig.model import meta
-from pylons.decorators.cache import beaker_cache
 
 __all__ = ['comment_filter', 'recent_comments']
 
 def comment_filter(comment):
     return h.sanitize_html(comment)
 
-@beaker_cache(expire=1200, cache_response=False)
 def recent_comments():
     comments_q = meta.Session.query(model.Comment).filter(model.Comment.approved==True)
     comments_q = comments_q.order_by(model.comments_table.c.created_on.desc())

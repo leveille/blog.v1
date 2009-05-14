@@ -1,12 +1,9 @@
 import feedparser
 import helpers as h
 from pylons import config
-from pylons.decorators.cache import beaker_cache
-
 
 __all__ = ['delicious', 'flickr', 'twitter']
 
-@beaker_cache(expire=43200, cache_response=False)
 def delicious():
     delicious_feed = feedparser.parse('http://feeds.delicious.com/v2/rss/%s?count=10' % config['delicious.username'])
     if len(delicious_feed.entries):
@@ -28,7 +25,6 @@ def delicious():
     else:
         return ''
 
-@beaker_cache(expire=43200, cache_response=False)
 def flickr():
     flickr_feed = feedparser.parse('http://api.flickr.com/services/feeds/photos_public.gne?id=%s@N00&lang=en-us&format=atom' % config['flickr.id'])
     if len(flickr_feed.entries):
@@ -53,7 +49,6 @@ def flickr():
     else:
         return ''
 
-@beaker_cache(expire=3600, cache_response=False)
 def twitter():
     twitter_feed = feedparser.parse("http://twitter.com/statuses/user_timeline/%s.rss" % config['twitter.user.screen_name'])
     if len(twitter_feed.entries):
