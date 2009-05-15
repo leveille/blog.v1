@@ -75,7 +75,7 @@
                     ${h.mail_to(h.wurdig_contact_email(), "Contact", encode = "hex")}
                 </li>
             % endif
-            % if h.auth.authorized(h.auth.is_valid_user):
+            % if h.auth.authorized(h.auth.is_valid_user) and request.urlvars['action'] != 'signout':
                 <li class="wurdig-nav-last">
                     <a href="${h.url_for(controller='account', action='signout')}" 
                         title="Sign Out">
