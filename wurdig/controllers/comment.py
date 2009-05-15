@@ -77,7 +77,7 @@ class NewCommentForm(formencode.Schema):
 
 class CommentController(BaseController):
     
-    @beaker_cache(expire=1200, type='memory', cache_key='b_comment_feeds')
+    @beaker_cache(expire=3600, type='memory', cache_key='comment_feeds')
     def feeds(self):  
                 
         comments_q = meta.Session.query(model.Comment).filter(model.Comment.approved==True)
@@ -111,7 +111,7 @@ class CommentController(BaseController):
         response.content_type = u'application/atom+xml'
         return feed.writeString('utf-8')
     
-    @beaker_cache(expire=1200, type='memory', cache_key='b_comment_post_comment_feed')
+    @beaker_cache(expire=14400, type='memory', cache_key='comment_post_comment_feed')
     def post_comment_feed(self, post_id=None):
         if post_id is None:
             abort(404)
@@ -290,46 +290,3 @@ class CommentController(BaseController):
             session['flash'] = 'Comment successfully deleted.'
             session.save()
             return redirect_to(controller='comment', action='list')
-    
-    @h.auth.authorize(h.auth.is_valid_user)
-    def clean(self):
-        """
-        Used to clean up comments (ensure they have tags and are tidy)
-        CAREFUL: Running this more than once may cause undesired formatting to
-        comments (such as double br tags for newlines)
-        """
-        comments_q = meta.Session.query(model.Comment).all()
-        
-        # for debugging, write to file
-        f = open('/home/leveille/development/python/pylons/Wurdig/temp.txt', 'a')
-        for comment in comments_q:
-            f.write('\n++++++++++++++++++++++++++++++++\n')
-            try:
-                # comment.content = h.nl2br(comment.content)
-                # comment.content = h.mytidy(comment.content)
-                f.write(comment.content)
-                # if all seems fine, uncomment and write to database
-                # meta.Session.add(comment)
-                # meta.Session.commit()
-            except Exception, e:
-                f.write('Exception: ')
-            f.write('\n++++++++++++++++++++++++++++++++\n')
-        f.close()
-        
-        response.content_type = 'text/plain'
-        return 'done'
-    
-    @h.auth.authorize(h.auth.is_valid_user)
-    def linkify(self):
-        comments_q = meta.Session.query(model.Comment).all()
-        
-        for comment in comments_q:
-            try:
-                comment.content = h.auto_link(comment.content)
-                meta.Session.add(comment)
-                meta.Session.commit()
-            except Exception, e:
-                pass
-        
-        response.content_type = 'text/plain'
-        return 'done'

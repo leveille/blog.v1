@@ -8,7 +8,7 @@
     <p>Now Viewing</p>
 </%def>
 
-<%def name="page_view(page)" cached="True" cache_timeout="14400" cache_key="page_${page.id}" cache_type="memory">
+<%def name="page_view(page)">
     <h2>${page.title}</h2>
     ${h.literal(page.content)}
 </%def>

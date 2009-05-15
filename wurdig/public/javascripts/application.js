@@ -20,7 +20,7 @@ WURDIG.app = function(){
                 window.open(this.href);
                 return false;
             });
-            jQuery('#wurdig-header-img h3').fadeTo("slow", 0.5);
+            jQuery('#wurdig-header-img h1, #wurdig-header-img h2, #wurdig-header-img h3, #wurdig-header-img p').fadeTo("slow", 0.5);
         }
     };
 }();

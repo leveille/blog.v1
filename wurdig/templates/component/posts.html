@@ -14,15 +14,6 @@
         <div class="wurdig-entries">
             % for post in c.paginator:
                 ${display_post(post)}
-                % if h.auth.authorized(h.auth.is_valid_user):
-                    <div class="wurdig-admin">
-                        <strong>Admin</strong> : 
-                        ${h.link_to(
-                            'Edit This Post',
-                            h.url_for(controller='post', action='edit', id=unicode(post.id))
-                        )}
-                    </div>
-                % endif
             % endfor
         </div>
         <p>${ c.paginator.pager('~2~') }</p>
@@ -33,7 +24,7 @@
     % endif
 </%def>
 
-<%def name="display_post(post)" cached="True" cache_timeout="1200" cache_key="paginated_${post.id}" cache_type="memory">
+<%def name="display_post(post)">
     <h2>
         <%
             post_link = h.link_to(
@@ -85,7 +76,16 @@
                         )}
                     % endif
                 </span>
-                                
+                
+                % if h.auth.authorized(h.auth.is_valid_user):
+                    <span class="wurdig-admin">
+                        <strong>Admin</strong> : 
+                        ${h.link_to(
+                            'Edit This Post',
+                            h.url_for(controller='post', action='edit', id=unicode(post.id))
+                        )}
+                    </span>
+                % endif            
             </p>
         </div>
     </div>

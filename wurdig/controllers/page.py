@@ -79,10 +79,7 @@ class PageController(BaseController):
             abort(404)
         if c.page.slug == 'search':
             return render('/derived/page/search.html')
-        return render('/derived/page/view.html', 
-                      cache_key=slug, 
-                      cache_type='memory', 
-                      cache_expire=1800)
+        return render('/derived/page/view.html')
 
     @h.auth.authorize(h.auth.is_valid_user)
     def new(self):

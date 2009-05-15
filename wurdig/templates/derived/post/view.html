@@ -22,16 +22,25 @@
     )}
 </%def>
 
-<%def name="post_data(post)" cached="True" cache_timeout="14400" cache_key="post_${post.id}" cache_type="memory">
+<%def name="post_data(post)">
     <div class="wurdig-entry-content">
         ${h.literal(post.content)}
     </div> 
     <p class="wurdig-entry-meta">
         ${posts.tag_list(post.tags)}
+        % if h.auth.authorized(h.auth.is_valid_user):
+            <span class="wurdig-admin">
+                <strong>Admin</strong> : 
+                ${h.link_to(
+                    'Edit This Post',
+                    h.url_for(controller='post', action='edit', id=unicode(c.post.id))
+                )}
+            </span>
+        % endif
     </p>
 </%def>
 
-<%def name="comments(post)" cached="True" cache_timeout="14400" cache_key="comments_${post.id}" cache_type="memory">
+<%def name="comments(post)">
     <%
         import hashlib
     %>
@@ -42,6 +51,24 @@
                 author_class = 'is_author'
         %>
         <div id="comment-${comment.id}" class="${author_class} ${comment.id}">                    
+            % if h.auth.authorized(h.auth.is_valid_user):
+                <div class="comment-admin">
+                    <ul>
+                        <li>
+                            <a href="${h.url_for(controller='comment', action='edit', id=comment.id)}"
+                               title="Edit Comment From ${comment.name}">
+                                Edit
+                            </a>
+                        </li>
+                       <li>
+                            <a href="${h.url_for(controller='comment', action='delete_confirm', id=comment.id)}"
+                               title="Delete Comment From ${comment.name}">
+                                Delete
+                            </a>
+                        </li>
+                    </ul>    
+                </div>
+            % endif
             <h4>
                 <strong>Comment ${str(k+1)}</strong>
                 <em><img src="http://www.gravatar.com/avatar/${hashlib.md5(comment.email).hexdigest()}?s=80" alt="${comment.name} - Gravatar"></em>
@@ -98,15 +125,7 @@
 </p>
 <div class="wurdig-entry">
     ${post_data(c.post)}
-    % if h.auth.authorized(h.auth.is_valid_user):
-        <div class="wurdig-admin">
-            <strong>Admin</strong> : 
-            ${h.link_to(
-                'Edit This Post',
-                h.url_for(controller='post', action='edit', id=unicode(c.post.id))
-            )}
-        </div>
-    % endif
+
     % if not c.post.comments_allowed and len(c.post.comments) > 20:
         <p class="flash">Comments have been disabled for this post.</p>
     % endif
