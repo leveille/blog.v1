@@ -1,7 +1,14 @@
-<%inherit file="/base/admin.html"/>
+<%inherit file="/base/master.html"/>
 
-<%def name="title()">Signed In</%def>
-<%def name="heading()"><h1>Signed In</h1></%def>
+<%def name="title()">
+    ${parent.title()} &gt; Sign In
+</%def>
+
+<%def name="content_header()">
+    <p>admin</p>
+</%def>
+
+<h2>Signed In</h2>
 
 <p>You are signed in as ${request.environ['REMOTE_USER']}.
 <a href="${h.url_for(controller='account', action='signout')}">Sign out</a></p>

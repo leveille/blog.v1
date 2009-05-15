@@ -1,6 +1,13 @@
-<%inherit file="/base/admin.html"/>
+<%inherit file="/base/master.html"/>
 
-<%def name="title()">Signed Out</%def>
-<%def name="heading()"><h1>Signed Out</h1></%def>
+<%def name="title()">
+    ${parent.title()} &gt; Signed Out
+</%def>
+
+<%def name="content_header()">
+    <p>admin</p>
+</%def>
+
+<h2>Signed Out</h2>
 
 <p>You have been signed out.</p>

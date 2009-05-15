@@ -71,8 +71,23 @@
                 </a>
             </li>
             % if h.wurdig_display_contact_email():
-                <li class="wurdig-nav-last">
+                <li>
                     ${h.mail_to(h.wurdig_contact_email(), "Contact", encode = "hex")}
+                </li>
+            % endif
+            % if h.auth.authorized(h.auth.is_valid_user):
+                <li class="wurdig-nav-last">
+                    <a href="${h.url_for(controller='account', action='signout')}" 
+                        title="Sign Out">
+                        Sign Out
+                    </a>
+                </li>
+            % else:
+                <li class="wurdig-nav-last">
+                    <a href="${h.url_for(controller='account', action='signin')}" 
+                        title="Sign In">
+                        Sign In
+                    </a>
                 </li>
             % endif
         </ul>

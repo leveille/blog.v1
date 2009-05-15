@@ -71,7 +71,7 @@ authkit.form.authenticate.user.type = authkit.users.sqlalchemy_driver:UsersFromD
 authkit.form.authenticate.user.data = wurdig.model
 authkit.form.authenticate.user.encrypt = authkit.users:md5
 authkit.cookie.secret = secret string
-authkit.cookie.signoutpath = /signout
+authkit.cookie.signoutpath = /account/signout
 authkit.form.template.obj = wurdig.lib.auth:render_signin
 
 # Logging configuration

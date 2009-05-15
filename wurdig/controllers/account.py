@@ -3,7 +3,7 @@ import wurdig.lib.helpers as h
 
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
-from wurdig.lib.base import BaseController, renderl
+from wurdig.lib.base import BaseController, render
 
 log = logging.getLogger(__name__)
 
