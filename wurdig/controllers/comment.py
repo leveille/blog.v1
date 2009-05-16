@@ -78,15 +78,14 @@ class NewCommentForm(formencode.Schema):
 class CommentController(BaseController):
     
     @beaker_cache(expire=3600, type='memory', cache_key='comment_feeds')
-    def feeds(self):  
-                
+    def feeds(self):   
         comments_q = meta.Session.query(model.Comment).filter(model.Comment.approved==True)
         comments_q = comments_q.order_by(model.comments_table.c.created_on.desc()).limit(20)
         
         feed = Atom1Feed(
             title=u"Comments for " + h.wurdig_title(),
             subtitle=h.wurdig_subtitle(),
-            link=u"http://%s" % request.server_name,
+            link=u"http://%s" % request.environ['SERVER_NAME'],
             description=h.wurdig_subtitle(),
             language=u"en",
         )
