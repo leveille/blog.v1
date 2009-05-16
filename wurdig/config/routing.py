@@ -53,6 +53,8 @@ def make_map():
                                 'month' : '\d{1,2}', 
                                 'slug' : '[-\w]+'})
     
+    map.redirect('/{year}/{month}/{slug}/', '/{year}/{month}/{slug}', _redirect_code='301 Moved Permanently')
+    
     map.connect('/{year}/{month}', controller='post', 
                 action='archive', 
                 requirements = {'year' : '\d{2,4}', 'month' : '\d{1,2}'})
@@ -78,6 +80,8 @@ def make_map():
     map.connect('/{slug}', controller='page', 
                 action='view', 
                 requirements = {'slug' : '[-\w]+'})
+    
+    map.redirect('/{slug}/', '/{slug}', _redirect_code='301 Moved Permanently')
 
     map.connect('/{controller}/{action}')
     map.connect('/{controller}/{action}/{id}')
