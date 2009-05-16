@@ -25,6 +25,10 @@ def make_map():
                 controller='post', 
                 action='redirect_wp_feeds')
     
+    map.connect('/feeds/blog', 
+                controller='post', 
+                action='feeds')
+    
     map.connect('/feeds/comments', 
                 controller='comment', 
                 action='feeds')
