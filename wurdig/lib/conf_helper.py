@@ -10,6 +10,8 @@ __all__ = ['wurdig_use_akismet',
            'wurdig_display_contact_email',
            'wurdig_googlesearch_key',
            'wurdig_use_googlesearch',
+           'wurdig_googleanalytics_key',
+           'wurdig_use_googleanalytics',
            ]
 
 def wurdig_get_akismet_key():
@@ -65,3 +67,13 @@ def wurdig_googlesearch_key():
 
 def wurdig_use_googlesearch():
     return wurdig_googlesearch_key() not in ['', None, u'']
+
+def wurdig_googleanalytics_key():
+    try:
+        wurdig_googleanalytics_key = config['wurdig.googleanalytics.key']
+    except Exception, e:
+        wurdig_googleanalytics_key = None
+    return wurdig_googleanalytics_key
+
+def wurdig_use_googleanalytics():
+    return wurdig_googleanalytics_key() not in ['', None, u'']

@@ -45,6 +45,10 @@ wurdig.spamword=wurdig
 #leave blank if not using (and either delete or modify /search page)
 wurdig.googlesearch.key=
 
+#google analytics key
+#leave blank if not using (and either delete or modify /search page)
+wurdig.googleanalytics.key=
+
 # leave blank to ignore akismet spam detection (akismet.api_key=)
 akismet.api_key=
 
