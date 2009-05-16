@@ -77,7 +77,7 @@ class NewCommentForm(formencode.Schema):
 
 class CommentController(BaseController):
     
-    @beaker_cache(expire=3600, type='memory', cache_key='comment_feeds')
+    # @beaker_cache(expire=3600, type='memory', cache_key='comment_feeds')
     def feeds(self):  
                 
         comments_q = meta.Session.query(model.Comment).filter(model.Comment.approved==True)
@@ -111,7 +111,7 @@ class CommentController(BaseController):
         response.content_type = u'application/atom+xml'
         return feed.writeString('utf-8')
     
-    @beaker_cache(expire=14400, type='memory', cache_key='comment_post_comment_feed')
+    # @beaker_cache(expire=14400, type='memory', cache_key='comment_post_comment_feed')
     def post_comment_feed(self, post_id=None):
         if post_id is None:
             abort(404)
