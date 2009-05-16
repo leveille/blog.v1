@@ -13,7 +13,13 @@
     <meta name="geo.placename" content="Frederick, Maryland">
     <meta name="geo.region" content="US-MD">
     <meta name="geo.country" content="US">
-    ${h.auto_discovery_link(h.url_for(controller='post', action='feeds'), feed_type='atom', title='Recent Posts')}
+    
+    % if h.wurdig_use_externalposts_feed():
+        <link href="${h.wurdig_external_posts_feed()}" rel="alternate" title="Recent Posts" type="application/atom+xml">
+    % else:
+        ${h.auto_discovery_link(h.url_for(controller='post', action='feeds'), feed_type='atom', title='Recent Posts')}
+    % endif
+    
     ${h.auto_discovery_link(h.url_for(controller='comment', action='feeds'), feed_type='atom', title='Recent Comments')}
 </%def>
 
@@ -116,10 +122,17 @@
         <h4>Feeds</h4>
         <ul>
             <li>
-                <a href="${h.url_for(controller='post', action='feeds')}"
-                    title="Blog">
-                    Blog
-                </a>
+                % if h.wurdig_use_externalposts_feed():
+                    <a href="${h.wurdig_external_posts_feed()}"
+                        title="Blog">
+                        Blog
+                    </a>
+                % else:
+                    <a href="${h.url_for(controller='post', action='feeds')}"
+                        title="Blog">
+                        Blog
+                    </a>
+                % endif
             </li>
             <li>
                 <a href="${h.url_for(controller='comment', action='feeds')}"
@@ -182,10 +195,17 @@
     <ul>
         <li class="wurdig-nav-first">
             <img src="/images/feed-icon-14x14.png" alt="Blog Atom Feed">
-            <a href="${h.url_for(controller='post', action='feeds')}"
-                title="Blog">
-                Blog Feed
-            </a>
+            % if h.wurdig_use_externalposts_feed():
+                <a href="${h.wurdig_external_posts_feed()}"
+                    title="Blog">
+                    Blog Feed
+                </a>
+            % else:
+                <a href="${h.url_for(controller='post', action='feeds')}"
+                    title="Blog">
+                    Blog Feed
+                </a>
+            % endif
         </li>
         <li>
             <img src="/images/feed-icon-14x14.png" alt="Comments Atom Feed">

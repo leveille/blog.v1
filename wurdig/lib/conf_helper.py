@@ -12,6 +12,8 @@ __all__ = ['wurdig_use_akismet',
            'wurdig_use_googlesearch',
            'wurdig_googleanalytics_key',
            'wurdig_use_googleanalytics',
+           'wurdig_external_posts_feed',
+           'wurdig_use_externalposts_feed',
            ]
 
 def wurdig_get_akismet_key():
@@ -77,3 +79,13 @@ def wurdig_googleanalytics_key():
 
 def wurdig_use_googleanalytics():
     return wurdig_googleanalytics_key() not in ['', None, u'']
+
+def wurdig_external_posts_feed():
+    try:
+        wurdig_external_posts_feed = config['wurdig.externalposts.feed']
+    except Exception, e:
+        wurdig_external_posts_feed = None
+    return wurdig_external_posts_feed
+
+def wurdig_use_externalposts_feed():
+    return wurdig_external_posts_feed() not in ['', None, u'']
