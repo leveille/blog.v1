@@ -21,9 +21,9 @@ def make_map():
     # CUSTOM ROUTES HERE
     map.connect('/', controller='post', action='home')
     
-    map.connect('/feeds/blog', 
+    map.connect('/feeds/', 
                 controller='post', 
-                action='feeds')
+                action='redirect_wp_feeds')
     
     map.connect('/feeds/comments', 
                 controller='comment', 

@@ -102,6 +102,9 @@ class PostController(BaseController):
             action='home'
         )
         return render('/derived/post/home.html')
+    
+    def redirect_wp_feeds(self):
+        return redirect_to(controller='post', action='feeds', _code=301)
         
     @beaker_cache(expire=28800, type='memory', cache_key='post_feeds')
     def feeds(self):
