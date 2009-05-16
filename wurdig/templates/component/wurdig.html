@@ -24,10 +24,8 @@
 </%def>
 
 <%def name="css()">
-    ${h.stylesheet_link(h.url_for('http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css'), media="screen, projection")}
-    ${h.stylesheet_link(h.url_for('http://yui.yahooapis.com/2.7.0/build/base/base-min.css'), media="screen, projection")}
+    ${h.stylesheet_link(h.url_for('/css/yui-2.7.0.css'), media="screen, projection")}
     ${h.stylesheet_link(h.url_for('/css/base.css'), media="screen, projection")}
-    ${h.stylesheet_link(h.url_for('/css/utils.css'), media="screen, projection")}
     ${h.stylesheet_link(h.url_for('/css/print.css'), media="print")}
 </%def>
 
@@ -179,7 +177,7 @@
     ${h.literal(h.cloud())}
 </%def>
 
-<%def name="recent_comments()">
+<%def name="recent_comments()" cached="True" cache_timeout="3600" cache_key="recent_comments" cache_type="memory">
     ${h.literal(h.recent_comments())}
 </%def>
 
