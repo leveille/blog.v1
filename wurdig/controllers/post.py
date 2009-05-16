@@ -122,6 +122,7 @@ class PostController(BaseController):
         )
         
         for post in posts_q:
+            tags = [tag.name for tag in post.tags]
             feed.add_item(
                 title=post.title,
                 link=h.url_for(
@@ -131,10 +132,10 @@ class PostController(BaseController):
                     month=post.posted_on.strftime('%m'), 
                     slug=post.slug
                 ),
-                description=h.chop_at(post.content, '<!--more-->'),
+                description=post.content,
                 # Why can't I do a tuple of post.tags here?
                 # categories=tuple(post.tags)
-                categories=()
+                categories=tuple(tags)
             )
                 
         response.content_type = 'application/atom+xml'
