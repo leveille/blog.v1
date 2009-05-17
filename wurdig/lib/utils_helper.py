@@ -8,7 +8,6 @@ def random_header():
         path = os.getcwd() + os.sep + 'wurdig' + os.sep + 'public' \
                 + os.sep + 'images' + os.sep + 'headers' + os.sep
         images = glob.glob(path + '*.jpg')
-        import pprint
         image = images.pop(random.randrange(len(images)))
         image = os.path.basename(image)        
     except Exception, e:
