@@ -2,6 +2,7 @@
 .pydevproject
 *.pyc
 development.ini
+production.ini
 test.ini
 *.tmp*
 data
@@ -9,3 +10,5 @@ test.db
 Wurdig.egg-info
 temp.txt*
 posts.txt*
+*.egg
+egg-cache
