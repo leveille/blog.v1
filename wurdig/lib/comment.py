@@ -27,7 +27,7 @@ def recent_comments():
         for comment in recent_comments:
             i = """
                 <li class="%s">
-                    <span>%s shared: </span>
+                    <span class="lone">%s shared: </span>
                     <span>%s</span>
                     <span>Shared in: %s</span>
                 </li>

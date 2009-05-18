@@ -141,7 +141,7 @@ ul ul {
     list-style: none;
     margin: 0;
     padding: 0 8px 0 0;
-    background: url('../images/bg/wurdig-nav-divider.gif') no-repeat left 7px
+    background: url('../images/sprite.png') no-repeat 0 -329px
 }
 
 #wurdig-primary-nav li a {
@@ -223,7 +223,7 @@ body.home #yui-main p.wurdig-entry-meta {
 }
 
 div.wurdig-entry-content blockquote {
-    background: #F3F3F3 url('../images/bg/quotes.png') no-repeat 10px 10px;
+    background: #F3F3F3 url('../images/sprite.png') no-repeat 10px -422px;
     border-left: solid 4px #CCC;
     border-right: solid 1px #CCC;
     margin: 2em
@@ -282,7 +282,7 @@ div.wurdig-entry-content blockquote p {
     list-style: none;
     margin-left: .5em;
     padding-left: 2em;
-    background: url('../images/feed-icon-14x14.png') no-repeat left 4px
+    background: url('../images/sprite.png') no-repeat left -199px
 }
 
 #wurdig-sidebar #wurdig-subscribe a {
@@ -315,19 +315,23 @@ div.wurdig-entry-content blockquote p {
     list-style: none
 }
 
-#wurdig-sidebar #wurdig-recent-comments li {
-    padding-left: 22px;
-    background: url('../images/bg/comment.png') no-repeat left 8px
+#wurdig-sidebar #wurdig-recent-comments li span.lone {
+    background: url('../images/sprite.png') no-repeat left -105px
 }
 
 #wurdig-sidebar #wurdig-recent-comments li span {
     display: block;
-    margin-bottom: .6em
+    margin-bottom: .6em;
+    padding-left: 22px
 }
 
-#wurdig-sidebar #wurdig-twitter-feed li {
+#wurdig-sidebar #wurdig-twitter-feed li span {
     padding-left: 22px;
-    background: url('../images/bg/bullet_blue.png') no-repeat left 7px
+    display: block
+}
+
+#wurdig-sidebar #wurdig-twitter-feed li span.lone {
+    background: url('../images/sprite.png') no-repeat left -61px
 }
 
 #wurdig-sidebar #wurdig-twitter-feed h4 a {
@@ -391,8 +395,7 @@ div.wurdig-entry-content blockquote p {
     font-size: 85%;
     display: block;
     clear: both;
-    border-top: solid 1px #E0E0E0;
-    background: url('../images/bg/arrow-up-gray.png') no-repeat bottom center
+    border-top: solid 1px #E0E0E0
 }
 
 #leave-comment div.description {
@@ -529,7 +532,7 @@ div.wurdig-entry-content blockquote p {
 }
 
 #comments div.comment-admin ul li:first-child {
-    background: url('../images/bg/wurdig-nav-divider.gif') no-repeat right 7px
+    background: url('../images/sprite.png') no-repeat right -329px
 }
 
 #comments div.comment-admin ul li a {
@@ -608,7 +611,7 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
 
 #wurdig-secondary-content #wurdig-delicious-feed h4 {
     padding-left: 24px;
-    background: url('../images/bg/delicious_16x16.png') no-repeat left 6px
+    background: url('../images/sprite.png') no-repeat left -152px
 }
 
 #wurdig-secondary-content #wurdig-blogroll {
@@ -617,7 +620,7 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
 
 #wurdig-secondary-content #wurdig-flickr-feed h4 {
     padding-left: 24px;
-    background: url('../images/bg/photo.png') no-repeat left 6px
+    background: url('../images/sprite.png') no-repeat left -288px
 }
 
 #wurdig-secondary-content #wurdig-flickr-feed ul li {
@@ -639,7 +642,7 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
 
 #wurdig-secondary-content #wurdig-blogroll h4 {
     padding-left: 24px;
-    background: url('../images/bg/page_white_stack.png') no-repeat left 6px
+    background: url('../images/sprite.png') no-repeat left -242px
 }
 
 /*_FOOTER*/

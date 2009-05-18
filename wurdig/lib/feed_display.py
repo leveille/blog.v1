@@ -64,10 +64,10 @@ def twitter():
 
         for entry in twitter_feed.entries[:5]:
             description = entry['description'].split(':', 1)[1]
-            i = '<li>%s <span>%s</span></li>' % (h.auto_link(description),
-                                                h.link_to(
+            i = '<li><span class="lone">%s</span> <span>%s</span></li>' % (h.link_to(
                                                 entry.updated[:14],
-                                                entry['guid'])
+                                                entry['guid']),
+                                                h.auto_link(description)
                                                 )
             items.append(i)
         return template % (config['twitter.user.screen_name'], '\n'.join(items))
