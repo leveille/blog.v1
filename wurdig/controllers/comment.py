@@ -85,7 +85,7 @@ class CommentController(BaseController):
         feed = Atom1Feed(
             title=u"Comments for " + h.wurdig_title(),
             subtitle=h.wurdig_subtitle(),
-            link=u"http://%s" % request.environ['SERVER_NAME'],
+            link=u'http://%s' % request.server_name,
             description=h.wurdig_subtitle(),
             language=u"en",
         )
@@ -107,7 +107,7 @@ class CommentController(BaseController):
                     description=comment.content
                 )
                 
-        response.content_type = u'application/atom+xml'
+        response.content_type = 'application/atom+xml'
         return feed.writeString('utf-8')
     
     @beaker_cache(expire=14400, type='memory', cache_key='comment_post_comment_feed')
