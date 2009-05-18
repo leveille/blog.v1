@@ -19,6 +19,8 @@
     % else:
         ${h.auto_discovery_link(h.url_for(controller='post', action='feeds'), feed_type='atom', title='Recent Posts')}
     % endif
+
+    ${h.auto_discovery_link(h.url_for(controller='comment', action='feeds'), feed_type='atom', title='Recent Comments')}
 </%def>
 
 <%def name="css()">
@@ -130,6 +132,12 @@
                     </a>
                 % endif
             </li>
+            <li>
+                <a href="${h.url_for(controller='comment', action='feeds')}"
+                    title="Comments">
+                    Comments
+                </a>
+            </li>
             % if request.urlvars['controller'] == 'post' and \
                  request.urlvars['action'] == 'view':
                 % if c.post.comments_allowed:
@@ -196,6 +204,13 @@
                     Blog Feed
                 </a>
             % endif
+            </li>
+        <li>
+            <img src="/images/feed-icon-14x14.png" alt="Comments Atom Feed">
+            <a href="${h.url_for(controller='comment', action='feeds')}"
+                title="Comments (atom)">
+                Comments Feed
+            </a>
         </li>
         <li class="wurdig-nav-last">
             <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fjasonleveille.com"
