@@ -1,5 +1,5 @@
 html, body {
-    background:#E8EDF0
+    background:#333
 }
 
 body {
@@ -69,9 +69,9 @@ ul ul {
 
 /*_LOGO*/
 #hd {
-    padding: 15px 20px 15px 20px;
+    padding: 20px 30px 15px 30px;
     float: left;
-    width: 933px;
+    width: 913px;
     position: relative
 }
 
@@ -104,9 +104,9 @@ ul ul {
 /*_HEADER IMG*/
 #wurdig-header-img {
     clear: both;
-    margin-left: 20px;
+    margin-left: 30px;
     height: 107px;
-    width: 933px;
+    width: 913px;
     border-top: dotted 1px #D0D0D0;
     border-bottom: dotted 1px #D0D0D0;
     position: relative
@@ -130,7 +130,7 @@ ul ul {
 #wurdig-primary-nav ul {
     position: absolute;
     bottom: 15px;
-    right: 20px;
+    right: 30px;
     font-size: 93%;
     margin: 0;
     padding: 0
@@ -170,7 +170,7 @@ ul ul {
 }
 
 #yui-main .in-main {
-    padding: 0 0 0 20px
+    padding: 0 0 0 30px
 }
 
 #yui-main h2 {
@@ -246,7 +246,7 @@ div.wurdig-entry-content blockquote p {
 }
 
 #wurdig-sidebar .in-sidebar {
-    padding: 0 20px 0 0
+    padding: 0 30px 0 0
 }
 
 #wurdig-sidebar h4 {
@@ -254,7 +254,7 @@ div.wurdig-entry-content blockquote p {
 }
 
 #wurdig-sidebar #cse-search-q {
-    width: 175px
+    width: 163px
 }
 
 #wurdig-sidebar #cse-search-box {
@@ -573,7 +573,7 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
 /*_SECONDARY_CONTENT*/
 #wurdig-secondary-content {
     border-top: dotted .1em #D0D0D0;
-    background-color: #DFE6EA;
+    background-color: #EAEAEA;
     margin-top: 1em;
     padding: 2em 0 2em 0;
     float: left;
@@ -703,7 +703,7 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
 }
 
 /*_DEFAULTS*/
-strong{font-weight:bold}dfn{font-style:italic;font-weight:bold}sup,sub{line-height:0}abbr,acronym{border-bottom:1px dotted #666}address{margin:0 0 1.5em;font-style:italic}
+strong{font-weight:bold}dfn{font-style:italic;font-weight:bold}sup,sub{line-height:0}
 del{color:#666}pre,code{margin:1.5em 0;white-space:pre}
 table{margin-bottom:1.4em;width:100%}th{font-weight:bold;background:#C3D9FF}th,td{padding:4px 10px 4px 5px}tr.even td{background:#E5ECF9}tfoot{font-style:italic}caption{background:#eee}
 label{font-weight:bold}fieldset{padding:1.4em;margin:0 0 1.5em 0;border:1px solid #ccc}legend{font-weight:bold;font-size:1.2em}input.text,input.title,textarea,select{margin:0.5em 0;border:1px solid #bbb}
@@ -755,4 +755,3 @@ div.err p.message {
     background: red;
     padding:.8em
 }
- */
