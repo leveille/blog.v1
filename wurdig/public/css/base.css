@@ -490,9 +490,10 @@ div.wurdig-entry-content blockquote p {
     display: block
 }
 
+#comments > div > blockquote,
 #comments blockquote.bq-parent {
     float: right;
-    width: 485px;
+    width: 465px;
     margin: 0;
     padding: 0;
     clear: right
