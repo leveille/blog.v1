@@ -678,6 +678,11 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
     background-image: none
 }
 
+#ft li.feed a {
+    padding-left: 20px;
+    background: url('../images/sprite.png') no-repeat left -201px
+}
+
 #ft li a {
     margin-right: 6px
 }
