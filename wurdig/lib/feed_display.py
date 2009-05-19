@@ -16,7 +16,7 @@ def delicious():
             </ul>
         </div>
         """
-        for entry in delicious_feed.entries[:6]:
+        for entry in delicious_feed.entries[:7]:
             i = '<li>%s</li>'
             link = '<a href="%s" title="%s">%s (%s)</a>'
             link = link % (entry['guid'], entry['title'], entry['title'], entry.updated[:11])
@@ -37,7 +37,7 @@ def flickr():
             </ul>
         </div>
         """
-        for entry in flickr_feed.entries[:9]:
+        for entry in flickr_feed.entries[:12]:
             image = entry['enclosures'][0]['href']
             image = image.replace('m.jpg', 's.jpg')
             i = '<li>%s</li>' % h.link_to(
@@ -62,7 +62,7 @@ def twitter():
         </div>
         """
 
-        for entry in twitter_feed.entries[:5]:
+        for entry in twitter_feed.entries[:4]:
             description = entry['description'].split(':', 1)[1]
             i = '<li><span class="lone">%s</span> <span>%s</span></li>' % (h.link_to(
                                                 entry.updated[:14],
