@@ -32,7 +32,7 @@ def post_tags(tags):
     if len(tags):
         parts, _tags = [], []
         parts.append('<span class="wurdig-entry-tags">')
-        parts.append('<strong>Tags</strong> : ')
+        parts.append('<strong>Tagged in</strong> : ')
         for tag in tags:
             link_pattern = '<a href="%s" rel="tag">%s</a>'
             _tags.append(link_pattern % (h.url_for(controller='tag', action='archive', slug=tag.slug),

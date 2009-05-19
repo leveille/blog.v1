@@ -38,45 +38,45 @@
         %>
         ${post_link % post.title}
     </h2>
-    <p class="wurdig-entry-date">${post.posted_on.strftime('%B %d, %Y')}</p>
+    <p class="wurdig-entry-date">
+        ${post.posted_on.strftime('%B %d, %Y')},
+        <span class="wurdig-entry-comments">
+            % if len(post.comments):
+                ${h.link_to(
+                    h.plural(len(post.comments), 'Comment', 'Comments'),
+                    h.url_for(controller='post', 
+                              action='view', 
+                              year=post.posted_on.strftime('%Y'), 
+                              month=post.posted_on.strftime('%m'), 
+                              slug=post.slug, 
+                              anchor=u'comments')
+                )}
+            % else:
+                ${h.link_to(
+                    'No Comments',
+                    h.url_for(controller='post', 
+                              action='view', 
+                              year=post.posted_on.strftime('%Y'), 
+                              month=post.posted_on.strftime('%m'), 
+                              slug=post.slug, 
+                              anchor=u'leave-comment')
+                )}
+            % endif
+        </span>
+    </p>
     <div class="wurdig-entry">
         <div class="wurdig-entry-content">
             
             % if '<!--more-->' in post.content:
                 ${h.literal(h.chop_at(post.content, '<!--more-->'))}
-                <p>${post_link % '...Read More...'}</p>
+                <p>${post_link % 'more'}</p>
             % else:
                 ${h.literal(post.content)}
             % endif
             
             <p class="wurdig-entry-meta">
                 ${tag_list(post.tags)}
-                
-                <span class="wurdig-entry-comments">
-                    <strong>Comments</strong> :
-                    % if len(post.comments):
-                        ${h.link_to(
-                            h.plural(len(post.comments), 'Comment', 'Comments'),
-                            h.url_for(controller='post', 
-                                      action='view', 
-                                      year=post.posted_on.strftime('%Y'), 
-                                      month=post.posted_on.strftime('%m'), 
-                                      slug=post.slug, 
-                                      anchor=u'comments')
-                        )}
-                    % else:
-                        ${h.link_to(
-                            'No Comments',
-                            h.url_for(controller='post', 
-                                      action='view', 
-                                      year=post.posted_on.strftime('%Y'), 
-                                      month=post.posted_on.strftime('%m'), 
-                                      slug=post.slug, 
-                                      anchor=u'leave-comment')
-                        )}
-                    % endif
-                </span>
-                
+                                
                 % if h.auth.authorized(h.auth.is_valid_user):
                     <span class="wurdig-admin">
                         <strong>Admin</strong> : 
