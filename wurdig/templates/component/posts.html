@@ -69,7 +69,7 @@
             
             % if '<!--more-->' in post.content:
                 ${h.literal(h.chop_at(post.content, '<!--more-->'))}
-                <p>${post_link % 'more'}</p>
+                <p class="more">${post_link % '+ more'}</p>
             % else:
                 ${h.literal(post.content)}
             % endif
