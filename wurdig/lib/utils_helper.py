@@ -3,7 +3,7 @@ import glob, os, random
 __all__ = ['random_header']
 
 def random_header():
-    image = 'header1.jpg'
+    image = 'header2.jpg'
     try:
         path = os.getcwd() + os.sep + 'wurdig' + os.sep + 'public' \
                 + os.sep + 'images' + os.sep + 'headers' + os.sep
