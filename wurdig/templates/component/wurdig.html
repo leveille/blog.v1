@@ -17,10 +17,10 @@
     % if h.wurdig_use_externalposts_feed():
         <link href="${h.wurdig_external_posts_feed()}" rel="alternate" title="Recent Posts" type="application/atom+xml">
     % else:
-        ${h.auto_discovery_link(h.url_for(controller='post', action='feeds'), feed_type='atom', title='Recent Posts')}
+        <link href="${h.url_for(controller='post', action='feeds')}" rel="alternate" title="Recent Posts" type="application/atom+xml">
     % endif
 
-    ${h.auto_discovery_link(h.url_for(controller='comment', action='feeds'), feed_type='atom', title='Recent Comments')}
+    <link href="${h.url_for(controller='comment', action='feeds')}" rel="alternate" title="Recent Comments" type="application/atom+xml">
 </%def>
 
 <%def name="css()">
@@ -103,11 +103,11 @@
         % if h.wurdig_use_googlesearch():
             <form action="/search" id="cse-search-box">
                 <div>
-                    <input type="hidden" name="cx" value="${h.wurdig_googlesearch_key()}" />
-                    <input type="hidden" name="cof" value="FORID:9" />
-                    <input type="hidden" name="ie" value="UTF-8" />
-                    <input type="text" name="q" id="cse-search-q" size="31" />
-                    <input type="submit" name="sa" value="Search" />
+                    <input type="hidden" name="cx" value="${h.wurdig_googlesearch_key()}">
+                    <input type="hidden" name="cof" value="FORID:9">
+                    <input type="hidden" name="ie" value="UTF-8">
+                    <input type="text" name="q" id="cse-search-q" size="31">
+                    <input type="submit" name="sa" value="Search">
                 </div>
             </form>
             <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
