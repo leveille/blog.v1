@@ -75,6 +75,21 @@ ul ul {
     position: relative
 }
 
+#hd a#skip {
+    position: absolute;
+    display: block;
+    width: 913px;
+    left: 30px;
+    text-align: center;
+    color: #FFF;
+    text-decoration: none
+}
+
+#hd a#skip:hover {
+    color: #000;
+    background: #F6F6F5
+}
+
 #hd h1 {
     text-transform: uppercase;
     margin: 0;

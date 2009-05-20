@@ -30,6 +30,7 @@
 </%def>
 
 <%def name="header()">
+    <div><a id="skip" href="#yui-main">Jump to Content</a></div>
     <h1><a href="${h.url_for(controller='post', action='home')}" title="Home">${title()}</a></h1>
     % if h.wurdig_use_subtitle():
         <p class="wurdig-tagline">${h.wurdig_subtitle()}</p>
