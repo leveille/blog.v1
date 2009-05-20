@@ -69,7 +69,7 @@ ul ul {
 
 /*_LOGO*/
 #hd {
-    padding: 20px 30px 15px 30px;
+    padding: 30px 30px 15px 30px;
     float: left;
     width: 913px;
     position: relative
@@ -80,9 +80,11 @@ ul ul {
     display: block;
     width: 913px;
     left: 30px;
+    top: 0;
     text-align: center;
     color: #FFF;
-    text-decoration: none
+    text-decoration: none;
+    text-transform: uppercase
 }
 
 #hd a#skip:hover {
