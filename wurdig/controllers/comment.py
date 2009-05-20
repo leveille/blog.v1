@@ -96,14 +96,14 @@ class CommentController(BaseController):
             if c.post is not None:
                 feed.add_item(
                     title=u"Comment on %s" % c.post.title,
-                    link=h.url_for(
+                    link=u'http://%s%s' % (request.server_name, h.url_for(
                         controller='post', 
                         action='view', 
                         year=c.post.posted_on.strftime('%Y'), 
                         month=c.post.posted_on.strftime('%m'), 
                         slug=c.post.slug,
                         anchor=u"comment-" + str(comment.id)
-                    ),
+                    )),
                     description=comment.content
                 )
                 
@@ -127,13 +127,13 @@ class CommentController(BaseController):
         feed = Atom1Feed(
             title=h.wurdig_title() + u' - ' + c.post.title,
             subtitle=u'Most Recent Comments',
-            link=h.url_for(
+            link=u'http://%s%s' % (request.server_name, h.url_for(
                     controller='post', 
                     action='view', 
                     year=c.post.posted_on.strftime('%Y'), 
                     month=c.post.posted_on.strftime('%m'), 
                     slug=c.post.slug
-                ),
+                )),
             description=u"Most recent comments for %s" % c.post.title,
             language=u"en",
         )
@@ -141,14 +141,14 @@ class CommentController(BaseController):
         for comment in comments_q:
             feed.add_item(
                 title=c.post.title + u" comment #%s" % comment.id,
-                link=h.url_for(
+                link=u'http://%s%s' % (request.server_name, h.url_for(
                     controller='post', 
                     action='view', 
                     year=c.post.posted_on.strftime('%Y'), 
                     month=c.post.posted_on.strftime('%m'), 
                     slug=c.post.slug,
                     anchor=u'comment-' + str(comment.id)
-                ),
+                )),
                 description=comment.content
             )
                 

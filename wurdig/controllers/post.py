@@ -125,13 +125,13 @@ class PostController(BaseController):
             tags = [tag.name for tag in post.tags]
             feed.add_item(
                 title=post.title,
-                link=h.url_for(
+                link=u'http://%s%s' % (request.server_name, h.url_for(
                     controller='post', 
                     action='view', 
                     year=post.posted_on.strftime('%Y'), 
                     month=post.posted_on.strftime('%m'), 
                     slug=post.slug
-                ),
+                )),
                 description=post.content,
                 # Why can't I do a tuple of post.tags here?
                 # categories=tuple(post.tags)
