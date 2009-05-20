@@ -237,6 +237,21 @@ div.wurdig-entry-content blockquote p {
     font-size: 123.1%
 }
 
+.wurdig-entry-gallery {
+    text-align: center
+}
+
+.wurdig-entry-gallery img {
+    border: solid 5px #F0F0F0;
+    padding: 2px;
+    background: #FFF;
+    margin-left: 8px
+}
+
+.wurdig-entry-gallery a:hover img {
+    border: solid 5px #DDD
+}
+
 /* Sidebar */
 
 #wurdig-sidebar {
