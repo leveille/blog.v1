@@ -24,9 +24,9 @@
 </%def>
 
 <%def name="css()">
-    ${h.stylesheet_link(h.url_for('/css/yui-2.7.0.css'), media="screen, projection")}
-    ${h.stylesheet_link(h.url_for('/css/base.css'), media="screen, projection")}
-    ${h.stylesheet_link(h.url_for('/css/print.css'), media="print")}
+    <link href="${h.url_for('/css/yui-2.7.0.css')}" media="screen, projection" rel="stylesheet" type="text/css">
+    <link href="${h.url_for('/css/base.css')}" media="screen, projection" rel="stylesheet" type="text/css">
+    <link href="${h.url_for('/css/print.css')}" media="print" rel="stylesheet" type="text/css">
 </%def>
 
 <%def name="header()">

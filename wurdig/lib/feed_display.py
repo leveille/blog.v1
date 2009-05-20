@@ -41,7 +41,7 @@ def flickr():
             image = entry['enclosures'][0]['href']
             image = image.replace('m.jpg', 's.jpg')
             i = '<li>%s</li>' % h.link_to(
-                                        h.literal('<img src="%s" title="%s">' % (image, entry['title'])),
+                                        h.literal('<img src="%s" title="%s" alt="%s">' % (image, entry['title'], entry['title'])),
                                         entry['link']
                                         )
             items.append(i)
