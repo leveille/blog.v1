@@ -9,7 +9,11 @@
     
     <table class="paginator"><tr><th>Comment ID</th><th>Comment Title</th> <th>Posted</th></tr>
     % for comment in c.paginator:
+        % if not comment.approved:
+        <tr class="action">
+        % else:
         <tr>
+        % endif
             <td>
                 ${h.link_to(
                     comment.id,

@@ -121,7 +121,30 @@
 
 <h2>${c.post.title}</h2>
 <p class="wurdig-entry-date">
-    ${c.post.posted_on.strftime('%B %d, %Y')}
+    ${c.post.posted_on.strftime('%B %d, %Y')}, 
+    <span class="wurdig-entry-comments">
+        % if len(c.post.comments):
+            ${h.link_to(
+                h.plural(len(c.post.comments), 'Comment', 'Comments'),
+                h.url_for(controller='post', 
+                          action='view', 
+                          year=c.post.posted_on.strftime('%Y'), 
+                          month=c.post.posted_on.strftime('%m'), 
+                          slug=c.post.slug, 
+                          anchor=u'comments')
+            )}
+        % else:
+            ${h.link_to(
+                'No Comments',
+                h.url_for(controller='post', 
+                          action='view', 
+                          year=c.post.posted_on.strftime('%Y'), 
+                          month=c.post.posted_on.strftime('%m'), 
+                          slug=c.post.slug, 
+                          anchor=u'leave-comment')
+            )}
+        % endif
+    </span>
 </p>
 <div class="wurdig-entry">
     ${post_data(c.post)}
@@ -132,7 +155,7 @@
     
     % if len(c.post.comments):
         <div id="comments">
-            <h3>Comments for "${c.post.title}"</h3>
+            <h3>${h.plural(len(c.post.comments), 'Comment', 'Comments')} for "${c.post.title}"</h3>
             ${comments(c.post)}
         </div>        
     % endif

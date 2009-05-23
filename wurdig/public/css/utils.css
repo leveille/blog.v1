@@ -19,3 +19,6 @@ div.err p.message {
     background: red;
     padding:.8em
 }
+tr.action {background: yellow}
+
+

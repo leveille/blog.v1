@@ -1,3 +1,4 @@
+import datetime
 import formencode
 import logging
 import webhelpers.paginate as paginate
@@ -180,6 +181,8 @@ class CommentController(BaseController):
         for k, v in self.form_result.items():
             setattr(comment, k, v)
         comment.post_id = c.post.id
+
+        comment.created = datetime.datetime.now()
         
         comment.content = h.nl2br(comment.content)
         comment.content = h.mytidy(comment.content)
