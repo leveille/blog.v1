@@ -94,6 +94,8 @@ class PageController(BaseController):
         for k, v in self.form_result.items():
             setattr(page, k, v)
             
+        page.created_on = d.datetime.now()
+        
         meta.Session.add(page)
         meta.Session.commit()
         session['flash'] = 'Page successfully added.'

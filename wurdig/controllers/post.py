@@ -205,12 +205,14 @@ class PostController(BaseController):
         if not post.draft:
             post.posted_on = d.datetime.now()
         
+        post.created_on = d.datetime.now()
+        
         meta.Session.add(post)
 
         for tag in tags:
             t = meta.Session.query(model.Tag).get(tag)
             post.tags.append(t)
-            
+        
         meta.Session.commit()        
         session['flash'] = 'Post successfully added.'
         session.save()
