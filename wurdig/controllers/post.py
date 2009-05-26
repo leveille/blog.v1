@@ -133,8 +133,6 @@ class PostController(BaseController):
                     slug=post.slug
                 )),
                 description=post.content,
-                # Why can't I do a tuple of post.tags here?
-                # categories=tuple(post.tags)
                 categories=tuple(tags)
             )
                 

@@ -29,7 +29,7 @@ pages_table = schema.Table('pages', meta.metadata,
     schema.Column('title', types.Unicode(100), default=u'Untitled Page'),
     schema.Column('slug', types.Unicode(100), nullable=False, unique=True),
     schema.Column('content', types.UnicodeText(), nullable=False),
-    schema.Column('created_on', types.TIMESTAMP(), default=now()),
+    schema.Column('created_on', types.TIMESTAMP(), default=now),
 )
 
 posts_table = schema.Table('posts', meta.metadata,
@@ -39,7 +39,7 @@ posts_table = schema.Table('posts', meta.metadata,
     schema.Column('slug', types.Unicode(100), nullable=False, unique=True),
     schema.Column('content', types.UnicodeText(), nullable=False),
     schema.Column('comments_allowed', types.Boolean(), default=True),
-    schema.Column('created_on', types.TIMESTAMP(), default=now()),
+    schema.Column('created_on', types.TIMESTAMP(), default=now),
     schema.Column('draft', types.Boolean(), default=True),
     schema.Column('posted_on', types.TIMESTAMP(), index=True),
 )
@@ -53,7 +53,7 @@ comments_table = schema.Table('comments', meta.metadata,
     schema.Column('name', types.Unicode(100), nullable=False),
     schema.Column('email', types.Unicode(50), nullable=False),
     schema.Column('url', types.Unicode(125), default=u''),
-    schema.Column('created_on', types.TIMESTAMP(), default=now()),
+    schema.Column('created_on', types.TIMESTAMP(), default=now),
     schema.Column('approved', types.Boolean(), default=False),
 )
 
