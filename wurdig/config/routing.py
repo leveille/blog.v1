@@ -38,6 +38,12 @@ def make_map():
                 action='post_comment_feed',
                 requirements = dict(post_id='\d+')
     )
+
+    map.connect('/feeds/tag/{slug}',
+                controller='tag',
+                action='tag_feed',
+                requirements = dict(slug='[-\w]+')
+    )
     
     map.connect('/post/{post_id}/{controller}/{action}',
                 requirements = dict(post_id='\d+')

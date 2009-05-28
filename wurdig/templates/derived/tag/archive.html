@@ -9,6 +9,18 @@
     <p>Tag, you're it</p>
 </%def>
 
+<%def name="ps_feeds()">
+    ${h.auto_discovery_link(
+        h.url_for(
+            controller='tag', 
+            action='tag_feed', 
+            slug=unicode(c.tag.slug)
+        ), 
+        feed_type='atom', 
+        title='Posts tagged "%s"' % c.tagname
+    )}
+</%def>
+
 <h2 class="wurdig-entries-tagged">Entries tagged "<strong>${c.tagname}</strong>"</h2>
 
 ${posts.paginated()}
