@@ -1,40 +1,61 @@
 <%inherit file="/base/admin.html"/>
 
-<%def name="heading()">
-    <h1>Comment List</h1>
+<%def name="title()">
+    Comment List
 </%def>
+
+<h1>Comment List</h1>
 
 % if len(c.paginator):
     <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
     
-    <table class="paginator"><tr><th>Comment ID</th><th>Comment Title</th> <th>Posted</th></tr>
+    <table class="paginator">
+        <tr>
+            <th>Name</th> 
+            <th>Content</th>
+            <th>Posted</th>
+            <th>Action</th>
+        </tr>
     % for comment in c.paginator:
         % if not comment.approved:
-        <tr class="action">
+        <tr class="action ${comment.id}">
         % else:
-        <tr>
+        <tr class="${comment.id}">
         % endif
             <td>
-                ${h.link_to(
-                    comment.id,
-                    h.url_for(
-                        controller=u'comment',
-                        action='view',
-                        id=unicode(comment.id)
-                    )
-                )}
+                ${comment.name}
             </td>
             <td>
+                ${h.strip_tags(comment.content)}
+            </td>
+            <td>${comment.created_on.strftime('%c')}</td>
+            <td>
                 ${h.link_to(
-                    comment.name,
+                    u'Approve',
+                    h.url_for(
+                        controller=u'comment',
+                        action='approve_confirm',
+                        id=unicode(comment.id)
+                    )
+                )} |  
+                ${h.link_to(
+                    u'Edit',
                     h.url_for(
                         controller=u'comment',
                         action='edit',
                         id=unicode(comment.id)
                     )
-                )}
+                )} | 
+                ${h.link_to(
+                    u'Delete',
+                    h.url_for(
+                        controller=u'comment',
+                        action='delete_confirm',
+                        id=unicode(comment.id)
+                    )
+                )}  
             </td>
-            <td>${comment.created_on.strftime('%c')}</td>
+
         </tr>
     % endfor
     </table>
@@ -45,4 +66,3 @@
         No comments have yet been created.
     </p>
 % endif
-
