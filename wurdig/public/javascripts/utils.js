@@ -6,7 +6,7 @@ WURDIG_UTILS.app = function(){
             jQuery('.js').show();
             WURDIG_UTILS.app.ajaxSetup();
             WURDIG_UTILS.app.message();
-            WURDIG_UTILS.app.confirmDelete();
+            WURDIG_UTILS.app.confirm();
         },
         
         ajaxSetup: function(){
@@ -18,34 +18,54 @@ WURDIG_UTILS.app = function(){
         },
         
         /**
-         * Provide a javascript dialog confirmation for delete actions
+         * Provide a javascript dialog confirmation for actions
          */
-        confirmDelete: function(){
-            jQuery('a[href*="delete_confirm"]').bind('click', function(e){
-                var sure = confirm("Are you positive you want to delete this item?");
+        confirm: function(){
+            jQuery('a[href*="_confirm"]').bind('click', function(e){
+                var $that = jQuery(this);
+                var sure = confirm("Are you positive you want to do that?");
                 
                 if (sure == true) {
                     var postUrl = jQuery(this)[0].pathname;
-                    postUrl = postUrl.replace("delete_confirm", "delete");
+                    postUrl = postUrl.replace("_confirm", "");
                     var id = postUrl.match(WURDIG_UTILS.app.idPattern);
-                    
+                    var isApprove = postUrl.indexOf("/approve") != -1;
+                    var isDisapprove = postUrl.indexOf("/disapprove") != -1;
+                    var isDelete = postUrl.indexOf("/delete") != -1;
                     jQuery.ajax({
                         type: "POST",
                         url: postUrl,
                         data: "id=" + id,
                         success: function(msg){
                             if (jQuery('.' + id).length > 0) {
-                                jQuery('.' + id).animate({
-                                    opacity: 0.6
-                                }, 1000, function(){
-                                    jQuery(this).fadeOut('slow', function(){
-                                        WURDIG_UTILS.app.success('The item has successfully been deleted.');
+                                //yes, yes, redundancy abounds.  bleh
+                                if (isDelete) {
+                                    jQuery('.' + id).animate({
+                                        opacity: 0.6
+                                    }, 1000, function(){
+                                        jQuery(this).fadeOut('slow', function(){
+                                            WURDIG_UTILS.app.success('The item has successfully been deleted.');
+                                        });
                                     });
-                                });
+                                } else if (isApprove) {
+                                    jQuery('.' + id).removeClass('action');
+                                    var href = $that.attr('href');
+                                    href = href.replace("approve_", "disapprove_");
+                                    $that.text('Disapprove');
+                                    $that.attr('href', href);
+                                    WURDIG_UTILS.app.success('The item has successfully been approved.');
+                                } else if (isDisapprove) {
+                                    jQuery('.' + id).addClass('action');
+                                    var href = $that.attr('href');
+                                    href = href.replace("disapprove_", "approve_");
+                                    $that.attr('href', href);
+                                    $that.text('Approve');
+                                    WURDIG_UTILS.app.success('The item has successfully been disapproved.');
+                                }
                             }
                             else {
                                 var url = location.pathname;
-                                //window.location = url.match(/\/[a-zA-Z0-9_-]+\/?/) + '?jsredirect&message=The+item+has+successfully+been+deleted.';
+                                window.location = url.match(/\/[a-zA-Z0-9_-]+\/?/) + '?jsredirect&message=Your+request+has+been+completed+successfully.';
                             }
                         },
                         error: function(xhr, text){

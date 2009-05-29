@@ -260,6 +260,74 @@ class CommentController(BaseController):
             action='list'
         )
         return render('/derived/comment/list.html')
+     
+    """
+    @todo: Way too much redundancy below.  This needs to be refactored ... DRY 
+    """
+    
+    @h.auth.authorize(h.auth.is_valid_user)
+    def approve_confirm(self, id=None):
+        if id is None:
+            abort(404)
+        comment_q = meta.Session.query(model.Comment)
+        c.comment = comment_q.filter_by(id=id).first()
+        if c.comment is None:
+            abort(404)
+        post_q = meta.Session.query(model.Post)
+        c.post = c.comment.post_id and post_q.filter_by(id=int(c.comment.post_id)).first() or None
+        if c.post is None:
+            abort(404)
+        return render('/derived/comment/approve_confirm.html')
+
+    @h.auth.authorize(h.auth.is_valid_user)
+    @restrict('POST')
+    def approve(self, id=None):
+        id = request.params.getone('id')
+        comment_q = meta.Session.query(model.Comment)
+        comment = comment_q.filter_by(id=id).first()
+        if comment is None:
+            abort(404)
+        comment.approved=True
+        meta.Session.commit()
+        if request.is_xhr:
+            response.content_type = 'application/json'
+            return "{'success':true,'msg':'The comment has been approved'}"
+        else:
+            session['flash'] = 'Comment successfully approved.'
+            session.save()
+            return redirect_to(controller='comment', action='list')
+            
+    @h.auth.authorize(h.auth.is_valid_user)
+    def disapprove_confirm(self, id=None):
+        if id is None:
+            abort(404)
+        comment_q = meta.Session.query(model.Comment)
+        c.comment = comment_q.filter_by(id=id).first()
+        if c.comment is None:
+            abort(404)
+        post_q = meta.Session.query(model.Post)
+        c.post = c.comment.post_id and post_q.filter_by(id=int(c.comment.post_id)).first() or None
+        if c.post is None:
+            abort(404)
+        return render('/derived/comment/disapprove_confirm.html')
+
+    @h.auth.authorize(h.auth.is_valid_user)
+    @restrict('POST')
+    def disapprove(self, id=None):
+        id = request.params.getone('id')
+        comment_q = meta.Session.query(model.Comment)
+        comment = comment_q.filter_by(id=id).first()
+        if comment is None:
+            abort(404)
+        comment.approved=False
+        meta.Session.commit()
+        if request.is_xhr:
+            response.content_type = 'application/json'
+            return "{'success':true,'msg':'The comment has been approved'}"
+        else:
+            session['flash'] = 'Comment successfully approved.'
+            session.save()
+            return redirect_to(controller='comment', action='list')
 
     @h.auth.authorize(h.auth.is_valid_user)
     def delete_confirm(self, id=None):

@@ -30,14 +30,26 @@
             </td>
             <td>${comment.created_on.strftime('%c')}</td>
             <td>
-                ${h.link_to(
-                    u'Approve',
-                    h.url_for(
-                        controller=u'comment',
-                        action='approve_confirm',
-                        id=unicode(comment.id)
-                    )
-                )} |  
+                % if not comment.approved:
+                    ${h.link_to(
+                        u'Approve',
+                        h.url_for(
+                            controller=u'comment',
+                            action='approve_confirm',
+                            id=unicode(comment.id)
+                        )
+                    )} |  
+                % else:
+                    ${h.link_to(
+                        u'Disapprove',
+                        h.url_for(
+                            controller=u'comment',
+                            action='disapprove_confirm',
+                            id=unicode(comment.id)
+                        )
+                    )} |  
+                % endif
+                
                 ${h.link_to(
                     u'Edit',
                     h.url_for(

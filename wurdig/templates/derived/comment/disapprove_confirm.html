@@ -1,0 +1,21 @@
+<%inherit file="/base/master.html"/>
+
+<%def name="title()">
+    ${parent.title()} &gt; Disapprove Confirmation
+</%def>
+
+<h2>Disapprove Comment</h2>
+
+<p>Are you sure you want to disapprove the following comment:</p>
+
+<p>
+    Author: ${c.comment.name}<br>
+    ${h.literal(c.comment.content)}
+</p>
+
+${h.form(h.url_for(controller='comment', action='disapprove'), method='post')}
+    ${h.hidden('id', value=c.comment.id)}
+    ${h.submit('edit', 'Yes, Disapprove Comment')}  or
+        <a href="${h.url_for(controller='comment', 
+                      action='list')}">Cancel</a>
+${h.end_form()}
