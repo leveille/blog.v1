@@ -71,10 +71,11 @@ class NewCommentForm(formencode.Schema):
     )
     approved = formencode.validators.StringBool(if_missing=False)
     
-    if h.wurdig_use_akismet():
-        chained_validators = [AkismetSpamCheck()]
-    else:
-        wurdig_comment_question = PrimitiveSpamCheck(not_empty=True, max=10, strip=True)
+    if not h.auth.authorized(h.auth.is_valid_user):
+        if h.wurdig_use_akismet():
+            chained_validators = [AkismetSpamCheck()]
+        else:
+            wurdig_comment_question = PrimitiveSpamCheck(not_empty=True, max=10, strip=True)
 
 class CommentController(BaseController):
     
@@ -175,8 +176,11 @@ class CommentController(BaseController):
         c.post = post_id and post_q.filter_by(id=int(post_id)).first() or None
         if c.post is None:
             abort(404)
-        if self.form_result['wurdig_comment_question'] is not None:
-            del self.form_result['wurdig_comment_question']
+            
+        if not h.auth.authorized(h.auth.is_valid_user) and not h.wurdig_use_akismet():
+            if hasattr(self.form_result, 'wurdig_comment_question'):
+                del self.form_result['wurdig_comment_question']
+            
         comment = model.Comment()
         for k, v in self.form_result.items():
             setattr(comment, k, v)
@@ -189,11 +193,17 @@ class CommentController(BaseController):
         comment.content = h.comment_filter(comment.content)
         comment.content = h.auto_link(comment.content)
         
+        if h.auth.authorized(h.auth.is_valid_user):
+            comment.approved = True
+            session['flash'] = 'Your comment has been approved.'
+        else:
+            session['flash'] = 'Your comment is currently being moderated.'
+        # @todo: email administrator w/ each new comment
+        session.save()
+        
         meta.Session.add(comment)
         meta.Session.commit()
-        # @todo: email administrator w/ each new comment
-        session['flash'] = 'Your comment is currently being moderated.'
-        session.save()
+                
         return redirect_to(controller='post', 
                            action='view', 
                            year=c.post.posted_on.strftime('%Y'),
@@ -231,8 +241,9 @@ class CommentController(BaseController):
         if comment is None:
             abort(404)
             
-        if self.form_result['wurdig_comment_question'] is not None:
-            del self.form_result['wurdig_comment_question']
+        if not h.auth.authorized(h.auth.is_valid_user) and not h.wurdig_use_akismet():
+            if hasattr(self.form_result, 'wurdig_comment_question'):
+                del self.form_result['wurdig_comment_question']
             
         for k,v in self.form_result.items():
             if getattr(comment, k) != v:

@@ -35,7 +35,7 @@
     </div>
 </div>
 
-% if not h.wurdig_use_akismet():
+% if not h.auth.authorized(h.auth.is_valid_user) and not h.wurdig_use_akismet():
     <div class="field required">
         <div class="description">
             Please enter 
