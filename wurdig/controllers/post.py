@@ -244,10 +244,6 @@ class PostController(BaseController):
             'id':c.post.id,
             'title':c.post.title,
             'slug':c.post.slug,
-            ## Setting errors to replace
-            ## App failing w/ content not properly encoded
-            ## post WP import.  This will hopefully only be
-            ## a temporary solution
             'content':c.post.content,
             'draft':c.post.draft,
             'comments_allowed':c.post.comments_allowed,
@@ -276,8 +272,7 @@ class PostController(BaseController):
         # is this post marked draft or not
         if post.draft:
             post.posted_on = None
-        # this check for not post.draft is not necessary, but it is more readable
-        elif not post.draft and post.posted_on is None:
+        elif post.posted_on is None:
             post.posted_on = d.datetime.now()
         
         # remove existing tags which were not selected
@@ -298,9 +293,6 @@ class PostController(BaseController):
         session.save()
 
         if not post.draft:
-            # grab and clear cache
-            post_cache = cache.get_cache('b_post_home', type="memory")
-            post_cache.remove_value('b_post_home')
             return redirect_to(controller='post', 
                                action='view', 
                                year=post.posted_on.strftime('%Y'), 
