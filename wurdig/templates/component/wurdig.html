@@ -25,8 +25,8 @@
 
 <%def name="css()">
     <link href="${h.url_for('/css/yui-2.7.0.css')}" media="screen, projection" rel="stylesheet" type="text/css">
-    <link href="${h.url_for('/css/base.css')}?${h.mtime('/css/base.css')}" media="screen, projection" rel="stylesheet" type="text/css">
-    <link href="${h.url_for('/css/print.css')}?${h.mtime('/css/print.css')}" media="print" rel="stylesheet" type="text/css">
+    <link href="${h.url_for('/css/base.css')}?${h.checksum('/css/base.css')}" media="screen, projection" rel="stylesheet" type="text/css">
+    <link href="${h.url_for('/css/print.css')}?${h.checksum('/css/print.css')}" media="print" rel="stylesheet" type="text/css">
 </%def>
 
 <%def name="header()">
@@ -250,9 +250,9 @@
 </%def>
 
 <%def name="js()">
-    ${h.javascript_link(h.url_for('/javascripts/jquery/jquery.min.js?%s') % h.mtime("/javascripts/jquery/jquery.min.js"), 
-                        h.url_for('/javascripts/application.js?%s') % h.mtime("/javascripts/application.js"),
-                        h.url_for('/javascripts/utils.js?%s') % h.mtime("/javascripts/utils.js"))}
+    ${h.javascript_link(h.url_for('/javascripts/jquery/jquery.min.js?%s') % h.checksum("/javascripts/jquery/jquery.min.js"), 
+                        h.url_for('/javascripts/application.js?%s') % h.checksum("/javascripts/application.js"),
+                        h.url_for('/javascripts/utils.js?%s') % h.checksum("/javascripts/utils.js"))}
 </%def>
 
 <%def name="analytics()">
