@@ -1,5 +1,5 @@
 <%def name="css()">
-    ${h.stylesheet_link(h.url_for('/css/utils.css'), media="screen, projection")}
+    ${h.stylesheet_link(h.url_for('/css/utils.css?%s') % h.checksum('/css/utils.css'), media="screen, projection")}
 </%def>
 
 <%def name="flash()">
@@ -15,7 +15,7 @@
 </%def>
 
 <%def name="js()">
-    ${h.javascript_link(h.url_for('/javascripts/jquery/jquery.min.js'), 
-                        h.url_for('/javascripts/admin.js'),
-                        h.url_for('/javascripts/utils.js'))}
+    ${h.javascript_link(h.url_for('/javascripts/jquery/jquery.min.js?%s') % h.checksum("/javascripts/jquery/jquery.min.js"), 
+                        h.url_for('/javascripts/admin.js?%s') % h.checksum("/javascripts/application.js"),
+                        h.url_for('/javascripts/utils.js?%s') % h.checksum("/javascripts/utils.js"))}
 </%def>
