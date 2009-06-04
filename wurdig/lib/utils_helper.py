@@ -1,6 +1,6 @@
 import glob, os, random, binascii
 
-__all__ = ['random_header', 'checksum']
+__all__ = ['random_header', 'mtime']
 
 def random_header():
     image = 'header2.jpg'
@@ -15,16 +15,12 @@ def random_header():
         pass
     return image
 
-def checksum(file):
-    sum = ''
+def mtime(abs_file_from_public):
     try:
-        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) \
+        abs_public = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) \
             + os.sep + 'public'
-        fullpath = root + file
-        handle = open(fullpath)
-        str = handle.read()
-        sum = binascii.crc32(str)
+        full_path = abs_public + abs_file_from_public
+        return os.path.getmtime(fullpath)
     except Exception, e:
-        sum = 0
         pass
-    return sum
+    return 0
