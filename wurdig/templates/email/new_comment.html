@@ -1,0 +1,9 @@
+${h.link_to(
+    u'Approve',
+    h.url_for(
+        controller=u'comment',
+        action='list'
+    )
+)}
+
+${h.literal(c.comment.content)}

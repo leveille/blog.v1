@@ -16,6 +16,7 @@ from sqlalchemy.sql import and_, delete
 from webhelpers.feedgenerator import Atom1Feed
 from wurdig import model
 from wurdig.lib.base import BaseController, render
+from wurdig.lib.mail import EmailMessage
 
 log = logging.getLogger(__name__)
     
@@ -198,11 +199,19 @@ class CommentController(BaseController):
             session['flash'] = 'Your comment has been approved.'
         else:
             session['flash'] = 'Your comment is currently being moderated.'
-        # @todo: email administrator w/ each new comment
-        session.save()
         
+        session.save()
         meta.Session.add(comment)
         meta.Session.commit()
+        
+        if not h.auth.authorized(h.auth.is_valid_user):
+            # Send email to admin notifying of new comment
+            c.comment = comment
+            message = EmailMessage(subject='New Comment for "%s"' % c.post.title,
+                                   body=render('/email/new_comment.html'),
+                                   from_email='%s <%s>' % (comment.name, comment.email),
+                                   to=[h.wurdig_contact_email()])
+            message.send(fail_silently=True)
                 
         return redirect_to(controller='post', 
                            action='view', 
