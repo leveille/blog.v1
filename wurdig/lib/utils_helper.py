@@ -1,4 +1,4 @@
-import glob, os, random, binascii
+import glob, os, random
 
 __all__ = ['random_header', 'mtime']
 
@@ -20,7 +20,7 @@ def mtime(abs_file_from_public):
         abs_public = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) \
             + os.sep + 'public'
         full_path = abs_public + abs_file_from_public
-        return os.path.getmtime(fullpath)
+        return os.path.getmtime(full_path)
     except Exception, e:
         pass
     return 0
