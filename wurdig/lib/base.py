@@ -5,7 +5,9 @@ Provides the BaseController class for subclassing.
 import formencode
 import re
 import wurdig.lib.helpers as h
+import pylons
 
+from paste.deploy.converters import asbool
 from pylons.controllers import WSGIController
 from pylons.templating import render_mako as render
 from wurdig.model import meta
@@ -31,6 +33,8 @@ class BaseController(WSGIController):
         # the request is routed to. This routing information is
         # available in environ['pylons.routes_dict']
         try:
+            pylons.c.use_minified_assets = asbool(
+                pylons.config.get('use_minified_assets', 'false'))
             return WSGIController.__call__(self, environ, start_response)
         finally:
             meta.Session.remove()

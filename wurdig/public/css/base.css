@@ -769,28 +769,3 @@ p img.right {
 .loud {color:#000;}
 .highlight {background:#ff0; border:0;}
 .in {padding: 1em}
-
-/**
- * Utils
- */
-.js {
-    display: none
-}
-div.succ,
-div.err {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 20000;
-    color:#FFF;
-    font-weight: bold
-}
-div.succ p.message {
-    background:green;
-    padding:.8em
-}
-div.err p.message {
-    background: red;
-    padding:.8em
-}

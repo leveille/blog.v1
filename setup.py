@@ -21,6 +21,7 @@ setup(
         # http://countergram.com/software/pytidylib/docs/index.html#installing-tidylib
         "pytidylib>=0.1.1,<=0.1.99",
         "html5lib>=0.10,<=0.19",
+        "cssutils>=0.9.6a0", 
     ],
     setup_requires=["PasteScript>=1.6.3"],
     packages=find_packages(exclude=['ez_setup']),

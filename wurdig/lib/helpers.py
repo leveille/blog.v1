@@ -20,3 +20,13 @@ from wurdig.lib.mdown import *
 from wurdig.lib.tag import cloud, post_tags
 from wurdig.lib.tidy_helper import *
 from wurdig.lib.utils_helper import *
+
+def load_stylesheet_assets(csslist='FCSSLIST'):
+    import pylons
+    import os
+    path = os.path.join(pylons.config['pylons.paths']['static_files'], 'css',
+                        '%s')
+    f = open(path % csslist,'r')
+    stylesheets = f.read()
+    f.close()
+    return ['/css/%s.css?%s' % (f, mtime('/css/%s.css' % f)) for f in stylesheets.split()]

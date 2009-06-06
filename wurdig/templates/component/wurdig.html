@@ -24,9 +24,12 @@
 </%def>
 
 <%def name="css()">
-    <link href="${h.url_for('/css/yui-2.7.0.css')}" media="screen, projection" rel="stylesheet" type="text/css">
-    <link href="${h.url_for('/css/base.css')}?${h.mtime('/css/base.css')}" media="screen, projection" rel="stylesheet" type="text/css">
     <link href="${h.url_for('/css/print.css')}?${h.mtime('/css/print.css')}" media="print" rel="stylesheet" type="text/css">
+    % if c.use_minified_assets:
+        ${h.stylesheet_link('/css/%s' % config['wurdig.minified_css'])}
+    % else:
+        ${h.stylesheet_link(*h.load_stylesheet_assets())}
+    %endif
 </%def>
 
 <%def name="header()">
