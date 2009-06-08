@@ -1,4 +1,6 @@
-WURDIG_UTILS = {};
+if(!this.WURDIG_UTILS) {
+    WURDIG_UTILS = {};   
+}
 WURDIG_UTILS.app = function(){
     return {
         idPattern: /[0-9]+/,

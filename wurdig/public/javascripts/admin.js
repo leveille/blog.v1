@@ -1,4 +1,6 @@
-WURDIG_ADMIN = {};
+if(!this.WURDIG_ADMIN) {
+    WURDIG_ADMIN = {};   
+}
 WURDIG_ADMIN.app = function()
 {
     return {

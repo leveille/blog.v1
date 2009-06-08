@@ -15,7 +15,7 @@
 </%def>
 
 <%def name="js()">
-    ${h.javascript_link(h.url_for('/javascripts/jquery/jquery.min.js?%s') % h.mtime("/javascripts/jquery/jquery.min.js"), 
+    ${h.javascript_link(h.url_for('/javascripts/jquery.min.js?%s') % h.mtime("/javascripts/jquery/jquery.min.js"), 
                         h.url_for('/javascripts/admin.js?%s') % h.mtime("/javascripts/application.js"),
                         h.url_for('/javascripts/utils.js?%s') % h.mtime("/javascripts/utils.js"))}
 </%def>
