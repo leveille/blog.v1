@@ -63,6 +63,7 @@ flickr.id=
 
 use_minified_assets =
 wurdig.minified_css =
+wurdig.minified_js =
 
 # If you'd like to fine-tune the individual locations of the cache data dirs
 # for the Cache data, or the Session saves, un-comment the desired settings
