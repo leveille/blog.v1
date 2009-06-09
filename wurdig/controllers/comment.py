@@ -13,7 +13,6 @@ from pylons.decorators.cache import beaker_cache
 from pylons.decorators.rest import restrict
 from pylons.decorators.secure import authenticate_form
 from sqlalchemy.sql import and_, delete
-from webhelpers.feedgenerator import Atom1Feed
 from wurdig import model
 from wurdig.lib.base import BaseController, render
 from wurdig.lib.mail import EmailMessage
@@ -79,84 +78,6 @@ class NewCommentForm(formencode.Schema):
             wurdig_comment_question = PrimitiveSpamCheck(not_empty=True, max=10, strip=True)
 
 class CommentController(BaseController):
-    
-    @beaker_cache(expire=3600, type='memory', cache_key='comment_feeds')
-    def feeds(self):   
-        comments_q = meta.Session.query(model.Comment).filter(model.Comment.approved==True)
-        comments_q = comments_q.order_by(model.comments_table.c.created_on.desc()).limit(20)
-        
-        feed = Atom1Feed(
-            title=u"Comments for " + h.wurdig_title(),
-            subtitle=h.wurdig_subtitle(),
-            link=u'http://%s' % request.server_name,
-            description=h.wurdig_subtitle(),
-            language=u"en",
-        )
-        
-        for comment in comments_q:
-            post_q = meta.Session.query(model.Post)
-            c.post = comment.post_id and post_q.filter_by(id=int(comment.post_id)).first() or None
-            if c.post is not None:
-                feed.add_item(
-                    title=u"Comment on %s" % c.post.title,
-                    link=u'http://%s%s' % (request.server_name, h.url_for(
-                        controller='post', 
-                        action='view', 
-                        year=c.post.posted_on.strftime('%Y'), 
-                        month=c.post.posted_on.strftime('%m'), 
-                        slug=c.post.slug,
-                        anchor=u"comment-" + str(comment.id)
-                    )),
-                    description=comment.content
-                )
-                
-        response.content_type = 'application/atom+xml'
-        return feed.writeString('utf-8')
-    
-    @beaker_cache(expire=14400, type='memory', cache_key='comment_post_comment_feed')
-    def post_comment_feed(self, post_id=None):
-        if post_id is None:
-            abort(404)
-        
-        post_q = meta.Session.query(model.Post)
-        c.post = post_id and post_q.filter(and_(model.Post.id==int(post_id), 
-                                                model.Post.draft==False)).first() or None
-        if c.post is None:
-            abort(404)
-        comments_q = meta.Session.query(model.Comment).filter(and_(model.Comment.post_id==c.post.id, 
-                                                                   model.Comment.approved==True))
-        comments_q = comments_q.order_by(model.comments_table.c.created_on.desc()).limit(10)
-        
-        feed = Atom1Feed(
-            title=h.wurdig_title() + u' - ' + c.post.title,
-            subtitle=u'Most Recent Comments',
-            link=u'http://%s%s' % (request.server_name, h.url_for(
-                    controller='post', 
-                    action='view', 
-                    year=c.post.posted_on.strftime('%Y'), 
-                    month=c.post.posted_on.strftime('%m'), 
-                    slug=c.post.slug
-                )),
-            description=u"Most recent comments for %s" % c.post.title,
-            language=u"en",
-        )
-        
-        for comment in comments_q:
-            feed.add_item(
-                title=c.post.title + u" comment #%s" % comment.id,
-                link=u'http://%s%s' % (request.server_name, h.url_for(
-                    controller='post', 
-                    action='view', 
-                    year=c.post.posted_on.strftime('%Y'), 
-                    month=c.post.posted_on.strftime('%m'), 
-                    slug=c.post.slug,
-                    anchor=u'comment-' + str(comment.id)
-                )),
-                description=comment.content
-            )
-                
-        response.content_type = 'application/atom+xml'
-        return feed.writeString('utf-8')
     
     def new(self, action, post_id=None):
         if post_id is None:

@@ -16,7 +16,6 @@ from pylons.decorators.cache import beaker_cache
 from pylons.decorators.rest import restrict
 from sqlalchemy import func
 from sqlalchemy.sql import and_, delete
-from webhelpers.feedgenerator import Atom1Feed
 from wurdig.lib.base import BaseController, render
 
 log = logging.getLogger(__name__)
@@ -137,55 +136,6 @@ class TagController(BaseController):
         )
                 
         return render('/derived/tag/archive.html')
-
-    @beaker_cache(expire=28800, type='memory', cache_key='tag_feed')
-    def tag_feed(self, slug=None):
-        if slug is None:
-            abort(404)
-        tag_q = meta.Session.query(model.Tag)
-        c.tag = tag_q.filter(model.Tag.slug==slug).first()
-        
-        if(c.tag is None):
-            c.tagname = slug
-        else:
-            c.tagname = c.tag.name
-            
-        posts_q = meta.Session.query(model.Post).filter(
-            and_(
-                 model.Post.tags.any(slug=slug), 
-                 model.Post.draft == False 
-            )
-        ).order_by([model.Post.posted_on.desc()]).limit(10)
-
-        feed = Atom1Feed(
-            title=config['blog.title'],
-            subtitle=u'Blog posts tagged "%s"' % slug,
-            link=u"http://%s%s" % (request.server_name, h.url_for(
-                controller='tag',
-                action='archive',
-                slug=slug
-            )),
-            description=u"Blog posts tagged %s" % slug,
-            language=u"en",
-        )
-        
-        for post in posts_q:
-            tags = [tag.name for tag in post.tags]
-            feed.add_item(
-                title=post.title,
-                link=u'http://%s%s' % (request.server_name, h.url_for(
-                    controller='post', 
-                    action='view', 
-                    year=post.posted_on.strftime('%Y'), 
-                    month=post.posted_on.strftime('%m'), 
-                    slug=post.slug
-                )),
-                description=post.content,
-                categories=tuple(tags)
-            )
-                
-        response.content_type = 'application/atom+xml'
-        return feed.writeString('utf-8')
 
     @h.auth.authorize(h.auth.is_valid_user)
     def new(self):

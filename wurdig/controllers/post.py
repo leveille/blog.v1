@@ -16,7 +16,6 @@ from pylons.decorators import validate
 from pylons.decorators.cache import beaker_cache
 from pylons.decorators.rest import restrict
 from sqlalchemy.sql import and_, delete
-from webhelpers.feedgenerator import Atom1Feed
 from wurdig.lib.base import BaseController, Cleanup, ConstructSlug, render
 
 log = logging.getLogger(__name__)
@@ -102,42 +101,6 @@ class PostController(BaseController):
             action='home'
         )
         return render('/derived/post/home.html')
-    
-    def redirect_wp_feeds(self):
-        return redirect_to(controller='post', action='feeds', _code=301)
-        
-    @beaker_cache(expire=28800, type='memory', cache_key='post_feeds')
-    def feeds(self):
-        
-        posts_q = meta.Session.query(model.Post).filter(
-            model.Post.draft == False
-        ).order_by([model.Post.posted_on.desc()]).limit(10)
-        
-        feed = Atom1Feed(
-            title=config['blog.title'],
-            subtitle=config['blog.subtitle'],
-            link=u"http://%s" % request.server_name,
-            description=u"Most recent posts for %s" % config['blog.title'],
-            language=u"en",
-        )
-        
-        for post in posts_q:
-            tags = [tag.name for tag in post.tags]
-            feed.add_item(
-                title=post.title,
-                link=u'http://%s%s' % (request.server_name, h.url_for(
-                    controller='post', 
-                    action='view', 
-                    year=post.posted_on.strftime('%Y'), 
-                    month=post.posted_on.strftime('%m'), 
-                    slug=post.slug
-                )),
-                description=post.content,
-                categories=tuple(tags)
-            )
-                
-        response.content_type = 'application/atom+xml'
-        return feed.writeString('utf-8')
     
     def archive(self, year=None, month=None):   
         if year is None:
