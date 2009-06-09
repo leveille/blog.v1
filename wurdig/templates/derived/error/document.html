@@ -1,4 +1,5 @@
 <%inherit file="/base/master.html"/>
+<%namespace file="/component/wurdig.html" name="wurdig" import="search_form"/>
 
 <%def name="title()">
     Server Error ${c.code}
@@ -9,3 +10,7 @@
 </%def>
 
 <p>${c.message}</p>
+
+<h2>Search</h2>
+
+${wurdig.search_form(environ['PATH_INFO'])}
