@@ -102,7 +102,7 @@
     </div>
 </%def>
 
-<%def name="search_form()">
+<%def name="search_form(searchq=None)">
     <div id="wurdig-search">
         % if h.wurdig_use_googlesearch():
             <form action="/search" id="cse-search-box">
@@ -110,7 +110,7 @@
                     <input type="hidden" name="cx" value="${h.wurdig_googlesearch_key()}">
                     <input type="hidden" name="cof" value="FORID:9">
                     <input type="hidden" name="ie" value="UTF-8">
-                    <input type="text" name="q" id="cse-search-q" size="31">
+                    <input type="text" name="q" id="cse-search-q" size="31" value="${searchq}">
                     <input type="submit" name="sa" value="Search">
                 </div>
             </form>
