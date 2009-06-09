@@ -22,25 +22,25 @@ def make_map():
     map.connect('/', controller='post', action='home')
     
     map.connect('/feeds/', 
-                controller='post', 
+                controller='feed', 
                 action='redirect_wp_feeds')
     
     map.connect('/feeds/blog', 
-                controller='post', 
-                action='feeds')
+                controller='feed', 
+                action='posts_feed')
     
     map.connect('/feeds/comments', 
-                controller='comment', 
-                action='feeds')
+                controller='feed', 
+                action='comments_feed')
     
     map.connect('/feeds/comments/{post_id}',
-                controller='comment',
+                controller='feed',
                 action='post_comment_feed',
                 requirements = dict(post_id='\d+')
     )
 
     map.connect('/feeds/tag/{slug}',
-                controller='tag',
+                controller='feed',
                 action='tag_feed',
                 requirements = dict(slug='[-\w]+')
     )

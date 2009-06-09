@@ -17,10 +17,10 @@
     % if h.wurdig_use_externalposts_feed():
         <link href="${h.wurdig_external_posts_feed()}" rel="alternate" title="Recent Posts" type="application/atom+xml">
     % else:
-        <link href="${h.url_for(controller='post', action='feeds')}" rel="alternate" title="Recent Posts" type="application/atom+xml">
+        <link href="${h.url_for(controller='feed', action='posts_feed')}" rel="alternate" title="Recent Posts" type="application/atom+xml">
     % endif
 
-    <link href="${h.url_for(controller='comment', action='feeds')}" rel="alternate" title="Recent Comments" type="application/atom+xml">
+    <link href="${h.url_for(controller='feed', action='comments_feed')}" rel="alternate" title="Recent Comments" type="application/atom+xml">
 </%def>
 
 <%def name="css()">
@@ -130,14 +130,14 @@
                         Blog
                     </a>
                 % else:
-                    <a href="${h.url_for(controller='post', action='feeds')}"
+                    <a href="${h.url_for(controller='feed', action='posts_feed')}"
                         title="Blog">
                         Blog
                     </a>
                 % endif
             </li>
             <li>
-                <a href="${h.url_for(controller='comment', action='feeds')}"
+                <a href="${h.url_for(controller='feed', action='comments_feed')}"
                     title="Comments">
                     Comments
                 </a>
@@ -147,7 +147,7 @@
                 % if c.post.comments_allowed:
                     <li>
                         <a href="${h.url_for(
-                                    controller='comment', 
+                                    controller='feed', 
                                     action='post_comment_feed', 
                                     post_id=unicode(c.post.id)
                                 )}"
@@ -161,7 +161,7 @@
                  request.urlvars['action'] == 'archive':
                 <li>
                     <a href="${h.url_for(
-                                controller='tag', 
+                                controller='feed', 
                                 action='tag_feed', 
                                 slug=unicode(c.tag.slug)
                             )}"
@@ -221,14 +221,14 @@
                     Blog Feed
                 </a>
             % else:
-                <a href="${h.url_for(controller='post', action='feeds')}"
+                <a href="${h.url_for(controller='feed', action='posts_feed')}"
                     title="Blog">
                     Blog Feed
                 </a>
             % endif
         </li>
         <li class="wurdig-nav-last feed">
-            <a href="${h.url_for(controller='comment', action='feeds')}"
+            <a href="${h.url_for(controller='feed', action='comments_feed')}"
                 title="Comments (atom)">
                 Comments Feed
             </a>

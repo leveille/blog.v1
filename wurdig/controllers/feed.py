@@ -6,7 +6,9 @@ import wurdig.model.meta as meta
 from pylons import cache, config, request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators.cache import beaker_cache
+from sqlalchemy.sql import and_
 from webhelpers.feedgenerator import Atom1Feed
+from wurdig.lib.base import BaseController
 
 log = logging.getLogger(__name__)
 
