@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+cd /home/leveille/public_html/jasonleveille.com/wurdig/
+case "$1" in
+    start)
+        /home/leveille/env/bin/paster serve --daemon --pid-file=/home/leveille/public_html/jasonleveille.com/wurdig/paster.pid --log-file=/home/leveille/public_html/jasonleveille.com/wurdig/paster.log /home/leveille/public_html/jasonleveille.com/wurdig/production.ini start
+        ;;
+    stop)
+        /home/leveille/env/bin/paster serve --daemon --pid-file=/home/leveille/public_html/jasonleveille.com/wurdig/paster.pid --log-file=/home/leveille/public_html/jasonleveille.com/wurdig/paster.log /home/leveille/public_html/jasonleveille.com/wurdig/production.ini stop
+        ;;
+    restart)
+        /home/leveille/env/bin/paster serve --daemon --pid-file=/home/leveille/public_html/jasonleveille.com/wurdig/paster.pid --log-file=/home/leveille/public_html/jasonleveille.com/wurdig/paster.log /home/leveille/public_html/jasonleveille.com/wurdig/production.ini restart
+        ;;
+    force-reload)
+        /home/leveille/env/bin/paster serve --daemon --pid-file=/home/leveille/public_html/jasonleveille.com/wurdig/paster.pid --log-file=/home/leveille/public_html/jasonleveille.com/wurdig/paster.log /home/leveille/public_html/jasonleveille.com/wurdig/production.ini restart
+        killall nginx
+        /etc/init.d/nginx start
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|restart|force-reload}"
+        exit 1
+esac
+exit 0
