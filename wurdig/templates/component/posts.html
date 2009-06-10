@@ -75,8 +75,7 @@
             % endif
             
             <p class="wurdig-entry-meta">
-                ${tag_list(post.tags)}
-                                
+                ${tag_list(post.tags)}      
                 % if h.auth.authorized(h.auth.is_valid_user):
                     <span class="wurdig-admin">
                         <strong>Admin</strong> : 
@@ -85,7 +84,7 @@
                             h.url_for(controller='post', action='edit', id=unicode(post.id))
                         )}
                     </span>
-                % endif            
+                % endif
             </p>
         </div>
     </div>

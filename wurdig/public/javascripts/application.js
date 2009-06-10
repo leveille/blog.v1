@@ -14,7 +14,9 @@ WURDIG.app = function(){
     {
         $guide_href = jQuery('#comment-styleguide');
         var $guide_container = $guide_href.parent().find('div');
-        fetch_styleguide($guide_container);
+        if ($guide_container.length > 0) {
+            fetch_styleguide($guide_container);
+        }
         
         $guide_href.bind('click', function() {
             $guide_container.slideToggle('slow');
