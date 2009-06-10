@@ -17,7 +17,7 @@ class FeedController(BaseController):
     def redirect_wp_feeds(self):
         return redirect_to(controller='feed', action='posts_feed', _code=301)
         
-    @beaker_cache(expire=28800, type='memory', cache_key='posts_feed')
+    @beaker_cache(expire=28800, type='memory')
     def posts_feed(self):
         
         posts_q = meta.Session.query(model.Post).filter(
@@ -27,7 +27,7 @@ class FeedController(BaseController):
         feed = Atom1Feed(
             title=config['blog.title'],
             subtitle=config['blog.subtitle'],
-            link=u"http://%s" % request.server_name,
+            link=u"http://%s" % request.environ['HTTP_HOST'],
             description=u"Most recent posts for %s" % config['blog.title'],
             language=u"en",
         )
@@ -36,7 +36,7 @@ class FeedController(BaseController):
             tags = [tag.name for tag in post.tags]
             feed.add_item(
                 title=post.title,
-                link=u'http://%s%s' % (request.server_name, h.url_for(
+                link=u'http://%s%s' % (request.environ['HTTP_HOST'], h.url_for(
                     controller='post', 
                     action='view', 
                     year=post.posted_on.strftime('%Y'), 
@@ -50,7 +50,7 @@ class FeedController(BaseController):
         response.content_type = 'application/atom+xml'
         return feed.writeString('utf-8')
     
-    @beaker_cache(expire=3600, type='memory', cache_key='comments_feed')
+    @beaker_cache(expire=3600, type='memory')
     def comments_feed(self):   
         comments_q = meta.Session.query(model.Comment).filter(model.Comment.approved==True)
         comments_q = comments_q.order_by(model.comments_table.c.created_on.desc()).limit(20)
@@ -58,7 +58,7 @@ class FeedController(BaseController):
         feed = Atom1Feed(
             title=u"Comments for " + h.wurdig_title(),
             subtitle=h.wurdig_subtitle(),
-            link=u'http://%s' % request.server_name,
+            link=u"http://%s" % request.environ['HTTP_HOST'],
             description=h.wurdig_subtitle(),
             language=u"en",
         )
@@ -69,7 +69,7 @@ class FeedController(BaseController):
             if c.post is not None:
                 feed.add_item(
                     title=u"Comment on %s" % c.post.title,
-                    link=u'http://%s%s' % (request.server_name, h.url_for(
+                    link=u'http://%s%s' % (request.environ['HTTP_HOST'], h.url_for(
                         controller='post', 
                         action='view', 
                         year=c.post.posted_on.strftime('%Y'), 
@@ -83,7 +83,7 @@ class FeedController(BaseController):
         response.content_type = 'application/atom+xml'
         return feed.writeString('utf-8')
     
-    @beaker_cache(expire=14400, type='memory', cache_key='comment_post_comment_feed')
+    @beaker_cache(expire=14400, type='memory', query_args=True)
     def post_comment_feed(self, post_id=None):
         if post_id is None:
             abort(404)
@@ -100,7 +100,7 @@ class FeedController(BaseController):
         feed = Atom1Feed(
             title=h.wurdig_title() + u' - ' + c.post.title,
             subtitle=u'Most Recent Comments',
-            link=u'http://%s%s' % (request.server_name, h.url_for(
+            link=u'http://%s%s' % (request.environ['HTTP_HOST'], h.url_for(
                     controller='post', 
                     action='view', 
                     year=c.post.posted_on.strftime('%Y'), 
@@ -114,7 +114,7 @@ class FeedController(BaseController):
         for comment in comments_q:
             feed.add_item(
                 title=c.post.title + u" comment #%s" % comment.id,
-                link=u'http://%s%s' % (request.server_name, h.url_for(
+                link=u'http://%s%s' % (request.environ['HTTP_HOST'], h.url_for(
                     controller='post', 
                     action='view', 
                     year=c.post.posted_on.strftime('%Y'), 
@@ -128,7 +128,7 @@ class FeedController(BaseController):
         response.content_type = 'application/atom+xml'
         return feed.writeString('utf-8')
     
-    @beaker_cache(expire=28800, type='memory', cache_key='tag_feed')
+    @beaker_cache(expire=28800, type='memory', query_args=True)
     def tag_feed(self, slug=None):
         if slug is None:
             abort(404)
@@ -150,7 +150,7 @@ class FeedController(BaseController):
         feed = Atom1Feed(
             title=config['blog.title'],
             subtitle=u'Blog posts tagged "%s"' % slug,
-            link=u"http://%s%s" % (request.server_name, h.url_for(
+            link=u"http://%s%s" % (request.environ['HTTP_HOST'], h.url_for(
                 controller='tag',
                 action='archive',
                 slug=slug
