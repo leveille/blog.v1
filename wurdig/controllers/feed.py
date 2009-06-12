@@ -3,9 +3,8 @@ import wurdig.lib.helpers as h
 import wurdig.model as model
 import wurdig.model.meta as meta
 
-from pylons import cache, config, request, response, session, tmpl_context as c
+from pylons import app_globals, config, request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
-from pylons.decorators.cache import beaker_cache
 from sqlalchemy.sql import and_
 from webhelpers.feedgenerator import Atom1Feed
 from wurdig.lib.base import BaseController
@@ -17,12 +16,7 @@ class FeedController(BaseController):
     def redirect_wp_feeds(self):
         return redirect_to(controller='feed', action='posts_feed', _code=301)
         
-    @beaker_cache(expire=28800, type='memory')
-    def posts_feed(self):
-        
-        posts_q = meta.Session.query(model.Post).filter(
-            model.Post.draft == False
-        ).order_by([model.Post.posted_on.desc()]).limit(10)
+    def posts_feed(self):        
         
         feed = Atom1Feed(
             title=config['blog.title'],
@@ -32,6 +26,14 @@ class FeedController(BaseController):
             language=u"en",
         )
         
+        # @app_globals.cache.region('medium_term')
+        def load_posts():
+            posts = meta.Session.query(model.Post).filter(
+                model.Post.draft == False
+            ).order_by([model.Post.posted_on.desc()]).limit(10)
+            return posts
+        
+        posts_q = load_posts()
         for post in posts_q:
             tags = [tag.name for tag in post.tags]
             feed.add_item(
@@ -50,10 +52,7 @@ class FeedController(BaseController):
         response.content_type = 'application/atom+xml'
         return feed.writeString('utf-8')
     
-    @beaker_cache(expire=3600, type='memory')
-    def comments_feed(self):   
-        comments_q = meta.Session.query(model.Comment).filter(model.Comment.approved==True)
-        comments_q = comments_q.order_by(model.comments_table.c.created_on.desc()).limit(20)
+    def comments_feed(self):           
         
         feed = Atom1Feed(
             title=u"Comments for " + h.wurdig_title(),
@@ -63,6 +62,13 @@ class FeedController(BaseController):
             language=u"en",
         )
         
+        # @app_globals.cache.region('medium_term')
+        def load_comments():
+            comments = meta.Session.query(model.Comment).filter(model.Comment.approved==True)
+            comments = comments.order_by(model.comments_table.c.created_on.desc()).limit(20)
+            return comments
+        
+        comments_q = load_comments()
         for comment in comments_q:
             post_q = meta.Session.query(model.Post)
             c.post = comment.post_id and post_q.filter_by(id=int(comment.post_id)).first() or None
@@ -82,8 +88,7 @@ class FeedController(BaseController):
                 
         response.content_type = 'application/atom+xml'
         return feed.writeString('utf-8')
-    
-    @beaker_cache(expire=14400, type='memory', query_args=True)
+
     def post_comment_feed(self, post_id=None):
         if post_id is None:
             abort(404)
@@ -128,7 +133,6 @@ class FeedController(BaseController):
         response.content_type = 'application/atom+xml'
         return feed.writeString('utf-8')
     
-    @beaker_cache(expire=28800, type='memory', query_args=True)
     def tag_feed(self, slug=None):
         if slug is None:
             abort(404)
