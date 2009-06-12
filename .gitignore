@@ -12,3 +12,9 @@ temp.txt*
 posts.txt*
 *.egg
 egg-cache
+paster.*
+wurdig/public/cs520/
+wurdig/public/learn/
+wurdig/public/play/
+wurdig/public/talks/
+wurdig/public/teacher/
