@@ -9,10 +9,9 @@ import webhelpers.paginate as paginate
 
 from authkit.authorize.pylons_adaptors import authorize
 from formencode import htmlfill
-from pylons import cache, request, response, session, tmpl_context as c
+from pylons import app_globals, request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
-from pylons.decorators.cache import beaker_cache
 from pylons.decorators.rest import restrict
 from sqlalchemy.sql import and_, delete
 from wurdig.lib.base import BaseController, Cleanup, ConstructSlug, render
@@ -73,8 +72,13 @@ class PageController(BaseController):
     def view(self, slug=None):
         if slug is None:
             abort(404)
-        page_q = meta.Session.query(model.Page)
-        c.page = page_q.filter_by(slug=slug).first()
+            
+        @app_globals.cache.region('long_term')
+        def load_page(slug):
+            page_q = meta.Session.query(model.Page)
+            return page_q.filter_by(slug=slug).first()
+        
+        c.page = load_page(slug)
         if c.page is None:
             abort(404)
         if c.page.slug == 'search':

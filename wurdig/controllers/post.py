@@ -1,4 +1,3 @@
-import calendar
 import datetime as d
 import formencode
 import logging
@@ -13,7 +12,6 @@ from formencode import htmlfill
 from pylons import app_globals, config, request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
-# from pylons.decorators.cache import beaker_cache
 from pylons.decorators.rest import restrict
 from sqlalchemy.sql import and_, delete
 from wurdig.lib.base import BaseController, Cleanup, ConstructSlug, render
@@ -111,38 +109,44 @@ class PostController(BaseController):
         (c.date, year_i, month_start, month_end, day_end) = (year, int(year), 1, 12, 31)
         
         if month is not None:
+            import calendar
             c.date = calendar.month_name[month_start] + ', ' + year
             (month_start, month_end) = (int(month), int(month))
             day_end = calendar.monthrange(year_i, month_start)[1]
         
-        posts_q = meta.Session.query(model.Post).filter(
-            and_(
-                model.Post.posted_on >= d.datetime(year_i, month_start, 1), 
-                model.Post.posted_on <= d.datetime(year_i, month_end, day_end), 
-                model.Post.draft == False
+        @app_globals.cache.region('short_term')
+        def load_page(page):
+            posts_q = meta.Session.query(model.Post).filter(
+                and_(
+                    model.Post.posted_on >= d.datetime(year_i, month_start, 1), 
+                    model.Post.posted_on <= d.datetime(year_i, month_end, day_end), 
+                    model.Post.draft == False
+                )
             )
-        )
-        
-        c.paginator = paginate.Page(
-            posts_q,
-            page=int(request.params.get('page', 1)),
-            items_per_page = 10,
-            controller='post',
-            action='archive',
-            year=year,
-            month=month,
-        )
-                
+            return paginate.Page(
+                posts_q,
+                page=int(page),
+                items_per_page = 10,
+                controller='post',
+                action='archive',
+                year=year,
+                month=month,
+            )
+        c.paginator = load_page(request.params.get('page', 1))                
         return render('/derived/post/archive.html')
     
     def view(self, year, month, slug):
-        (year_i, month_i) = (int(year), int(month))
-        c.post = meta.Session.query(model.Post).filter(
-            and_(model.Post.posted_on >= d.datetime(year_i, month_i, 1), 
-                 model.Post.posted_on <= d.datetime(year_i, month_i, calendar.monthrange(year_i, month_i)[1]),
-                 model.Post.draft == False,
-                 model.Post.slug == slug)
-        ).first()
+        @app_globals.cache.region('short_term')
+        def load_post(year, month, slug):
+            import calendar
+            return meta.Session.query(model.Post).filter(
+                and_(model.Post.posted_on >= d.datetime(year, month, 1), 
+                     model.Post.posted_on <= d.datetime(year, month, calendar.monthrange(year, month)[1]),
+                     model.Post.draft == False,
+                     model.Post.slug == slug)
+            ).first()
+
+        c.post = load_post(int(year), int(month), slug)
                                  
         if c.post is None:
             abort(404)
