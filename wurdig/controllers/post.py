@@ -10,10 +10,10 @@ import wurdig.model.meta as meta
 
 from authkit.authorize.pylons_adaptors import authorize
 from formencode import htmlfill
-from pylons import cache, config, request, response, session, tmpl_context as c
+from pylons import app_globals, config, request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
-from pylons.decorators.cache import beaker_cache
+# from pylons.decorators.cache import beaker_cache
 from pylons.decorators.rest import restrict
 from sqlalchemy.sql import and_, delete
 from wurdig.lib.base import BaseController, Cleanup, ConstructSlug, render
@@ -90,16 +90,18 @@ class NewPostForm(formencode.Schema):
 class PostController(BaseController):
     
     def home(self):
-        posts_q = meta.Session.query(model.Post).filter(
-            model.Post.draft == False
-        )
-        c.paginator = paginate.Page(
-            posts_q,
-            page=int(request.params.get('page', 1)),
-            items_per_page = 10,
-            controller='post',
-            action='home'
-        )
+        @app_globals.cache.region('short_term')
+        def load_page(page):
+            return paginate.Page(
+                meta.Session.query(model.Post).filter(
+                    model.Post.draft == False
+                ),
+                page=int(page),
+                items_per_page = 10,
+                controller='post',
+                action='home'
+            )
+        c.paginator = load_page(request.params.get('page', 1))
         return render('/derived/post/home.html')
     
     def archive(self, year=None, month=None):   
