@@ -64,7 +64,6 @@ class FeedController(BaseController):
             comments_q = meta.Session.query(model.Comment).filter(model.Comment.approved==True)
             comments_q = comments_q.order_by(model.comments_table.c.created_on.desc()).limit(20)
         
-            comments_q = load_comments()
             for comment in comments_q:
                 post_q = meta.Session.query(model.Post)
                 c.post = comment.post_id and post_q.filter_by(id=int(comment.post_id)).first() or None
