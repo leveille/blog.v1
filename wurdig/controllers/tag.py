@@ -9,10 +9,9 @@ import webhelpers.paginate as paginate
 
 from authkit.authorize.pylons_adaptors import authorize
 from formencode import htmlfill
-from pylons import cache, config, request, response, session, tmpl_context as c
+from pylons import app_globals, config, request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
-from pylons.decorators.cache import beaker_cache
 from pylons.decorators.rest import restrict
 from sqlalchemy import func
 from sqlalchemy.sql import and_, delete
@@ -96,7 +95,7 @@ class TagController(BaseController):
     def category(self, slug=None):   
         if slug is None:
             abort(404)
-            
+        
         tag_q = meta.Session.query(model.Tag)
         c.tag = tag_q.filter(model.Tag.slug==slug).count()
         
@@ -105,36 +104,39 @@ class TagController(BaseController):
             
         return redirect_to(controller='tag', action='archive', slug=slug, _code=301)
     
-    def archive(self, slug=None):   
-        """
-        @todo: purge cache for tag_archive on post add and post delete for post_home
-        """
+    def archive(self, slug=None):
         if slug is None:
             abort(404)
-        tag_q = meta.Session.query(model.Tag)
-        c.tag = tag_q.filter(model.Tag.slug==slug).first()
+            
+        @app_globals.cache.region('long_term')
+        def load_tag(slug): 
+            tag_q = meta.Session.query(model.Tag)
+            return tag_q.filter(model.Tag.slug==slug).first()
         
+        c.tag = load_tag(slug)
         if(c.tag is None):
             c.tagname = slug
         else:
             c.tagname = c.tag.name
             
-        query = meta.Session.query(model.Post).filter(
-            and_(
-                 model.Post.tags.any(slug=slug), 
-                 model.Post.posted_on != None
+        @app_globals.cache.region('short_term')
+        def load_posts(slug, page):                
+            query = meta.Session.query(model.Post).filter(
+                and_(
+                     model.Post.tags.any(slug=slug), 
+                     model.Post.posted_on != None
+                )
+            ).all()   
+            return paginate.Page(
+                query,
+                page=int(page),
+                items_per_page = 10,
+                controller='tag',
+                action='archive',
+                slug=slug
             )
-        ).all()
-            
-        c.paginator = paginate.Page(
-            query,
-            page=int(request.params.get('page', 1)),
-            items_per_page = 10,
-            controller='tag',
-            action='archive',
-            slug=slug
-        )
-                
+        
+        c.paginator = load_posts(slug, request.params.get('page', 1))
         return render('/derived/tag/archive.html')
 
     @h.auth.authorize(h.auth.is_valid_user)
