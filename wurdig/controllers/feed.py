@@ -144,9 +144,9 @@ class FeedController(BaseController):
             c.tag = tag_q.filter(model.Tag.slug==slug).first()
             
             if(c.tag is None):
-                c.tagname = slug
-            else:
-                c.tagname = c.tag.name
+                abort(404)
+            
+            c.tagname = c.tag.name
                 
             posts_q = meta.Session.query(model.Post).filter(
                 and_(
