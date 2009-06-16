@@ -52,7 +52,7 @@ class FeedController(BaseController):
         return feed
     
     def comments_feed(self):
-        @app_globals.cache.region('medium_term')
+        @app_globals.cache.region('medium_term', 'comments_feed')
         def load_comments():
             feed = Atom1Feed(
                 title=u"Comments for " + h.wurdig_title(),
@@ -90,7 +90,7 @@ class FeedController(BaseController):
         if post_id is None:
             abort(404)
         
-        @app_globals.cache.region('medium_term')
+        @app_globals.cache.region('medium_term', 'post_comments_feed')
         def load_comments(post_id):
             post_q = meta.Session.query(model.Post)
             c.post = post_id and post_q.filter(and_(model.Post.id==int(post_id), 
@@ -137,17 +137,20 @@ class FeedController(BaseController):
     def tag_feed(self, slug=None):
         if slug is None:
             abort(404)
-        
-        @app_globals.cache.region('long_term')
-        def load_tag_posts(slug):
+            
+        @app_globals.cache.region('long_term', 'load_tag')
+        def load_tag(slug): 
             tag_q = meta.Session.query(model.Tag)
-            c.tag = tag_q.filter(model.Tag.slug==slug).first()
-            
-            if(c.tag is None):
-                abort(404)
-            
-            c.tagname = c.tag.name
-                
+            tag = tag_q.filter(model.Tag.slug==slug).first()
+            return tag
+        
+        c.tag = load_tag(slug)
+        if(c.tag is None):
+            abort(404)
+        c.tagname = c.tag.name
+        
+        @app_globals.cache.region('long_term', 'load_tag_posts')
+        def load_tag_posts(slug):                
             posts_q = meta.Session.query(model.Post).filter(
                 and_(
                      model.Post.tags.any(slug=slug), 

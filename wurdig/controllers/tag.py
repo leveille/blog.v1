@@ -115,9 +115,8 @@ class TagController(BaseController):
         
         c.tag = load_tag(slug)
         if(c.tag is None):
-            c.tagname = slug
-        else:
-            c.tagname = c.tag.name
+            abort(404)
+        c.tagname = c.tag.name
             
         @app_globals.cache.region('short_term')
         def load_posts(slug, page):                
