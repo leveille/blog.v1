@@ -174,7 +174,7 @@
     </div>
 </%def>
 
-<%def name="blogroll()">
+<%def name="blogroll()" cached="True" cache_timeout="86400" cache_key="blogroll" cache_type="file">
     <div id="wurdig-blogroll" class="wurdig-secondary-list">
         <h4>Blogroll</h4>
         <ul>
@@ -192,27 +192,27 @@
     </div>
 </%def>
 
-<%def name="twitter_updates()" cached="True" cache_timeout="3600" cache_key="twitter_feed" cache_type="memory">
+<%def name="twitter_updates()" cached="True" cache_timeout="3600" cache_key="twitter_feed" cache_type="ext:memcached" cache_url="127.0.0.1:11211">
     ${h.literal(h.twitter())}
 </%def>
 
-<%def name="tags()" cached="True" cache_timeout="43200" cache_key="tag_cloud" cache_type="memory">
+<%def name="tags()" cached="True" cache_timeout="43200" cache_key="tag_cloud" cache_type="ext:memcached" cache_url="127.0.0.1:11211">
     ${h.literal(h.cloud())}
 </%def>
 
-<%def name="recent_comments()" cached="True" cache_timeout="3600" cache_key="recent_comments" cache_type="memory">
+<%def name="recent_comments()" cached="True" cache_timeout="3600" cache_key="recent_comments" cache_type="ext:memcached" cache_url="127.0.0.1:11211">
     ${h.literal(h.recent_comments())}
 </%def>
 
-<%def name="delicious()" cached="True" cache_timeout="43200" cache_key="delicious_feed" cache_type="memory">
+<%def name="delicious()" cached="True" cache_timeout="43200" cache_key="delicious_feed" cache_type="ext:memcached" cache_url="127.0.0.1:11211">
     ${h.literal(h.delicious())}
 </%def>
 
-<%def name="flickr()" cached="True" cache_timeout="43200" cache_key="flickr_feed" cache_type="memory">
+<%def name="flickr()" cached="True" cache_timeout="43200" cache_key="flickr_feed" cache_type="ext:memcached" cache_url="127.0.0.1:11211">
     ${h.literal(h.flickr())}
 </%def>
 
-<%def name="footer()">
+<%def name="footer()" cached="True" cache_timeout="86400" cache_key="footer" cache_type="file">
     <ul>
         <li class="wurdig-nav-first feed">
             % if h.wurdig_use_externalposts_feed():
