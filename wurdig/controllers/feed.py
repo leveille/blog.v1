@@ -43,6 +43,7 @@ class FeedController(BaseController):
                         slug=post.slug
                     )),
                     description=post.content,
+                    pubdate=post.posted_on,
                     categories=tuple(tags)
                 )
             return feed.writeString('utf-8')
@@ -78,6 +79,7 @@ class FeedController(BaseController):
                             slug=c.post.slug,
                             anchor=u"comment-" + str(comment.id)
                         )),
+                        pubdate=comment.created_on,
                         description=comment.content
                     )
             return feed.writeString('utf-8')
@@ -126,6 +128,7 @@ class FeedController(BaseController):
                         slug=c.post.slug,
                         anchor=u'comment-' + str(comment.id)
                     )),
+                    pubdate=comment.created_on,
                     description=comment.content
                 )
             return feed.writeString('utf-8')
@@ -181,6 +184,7 @@ class FeedController(BaseController):
                         month=post.posted_on.strftime('%m'), 
                         slug=post.slug
                     )),
+                    pubdate=post.posted_on,
                     description=post.content,
                     categories=tuple(tags)
                 )
@@ -189,3 +193,4 @@ class FeedController(BaseController):
         feed = load_tag_posts(slug)
         response.content_type = 'application/atom+xml'
         return feed
+
