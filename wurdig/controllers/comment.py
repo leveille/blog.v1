@@ -101,13 +101,12 @@ class CommentController(BaseController):
             abort(404)
         
         rememberme = None
-        if not h.auth.authorized(h.auth.is_valid_user):
-            if hasattr(self.form_result, 'rememberme'):
-                rememberme = self.form_result['rememberme']
-                del self.form_result['rememberme']
-            if not h.wurdig_use_akismet():
-                if hasattr(self.form_result, 'wurdig_comment_question'):
-                    del self.form_result['wurdig_comment_question']
+        if hasattr(self.form_result, 'rememberme'):
+            rememberme = self.form_result['rememberme']
+            del self.form_result['rememberme']
+        if hasattr(self.form_result, 'wurdig_comment_question'):
+            del self.form_result['wurdig_comment_question']
+
         
         comment = model.Comment()
         for k, v in self.form_result.items():
@@ -137,13 +136,11 @@ class CommentController(BaseController):
         if not h.auth.authorized(h.auth.is_valid_user):
             # Send email to admin notifying of new comment
             c.comment = comment
-            """
             message = EmailMessage(subject='New Comment for "%s"' % c.post.title,
                                    body=render('/email/new_comment.html'),
                                    from_email='%s <%s>' % (comment.name, comment.email),
                                    to=[h.wurdig_contact_email()])
             message.send(fail_silently=True)
-            """
                 
         return redirect_to(controller='post', 
                            action='view', 
