@@ -35,6 +35,16 @@
     </div>
 </div>
 
+<div class="field">
+    <div class="description">
+        Do you want me to remember your comment information (name/email/website)?
+    </div>
+    <label for="rememberme">Remember?</label>
+    <div class="input">
+        ${h.checkbox('rememberme', value=None)}
+    </div>
+</div>
+
 % if not h.auth.authorized(h.auth.is_valid_user) and not h.wurdig_use_akismet():
     <div class="field required">
         <div class="description">

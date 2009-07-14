@@ -1,6 +1,8 @@
+import base64
 import datetime as d
 import formencode
 import logging
+import pickle
 import re
 import webhelpers.paginate as paginate
 import wurdig.lib.helpers as h
@@ -87,7 +89,7 @@ class NewPostForm(formencode.Schema):
 
 class PostController(BaseController):
     
-    def home(self):
+    def home(self): 
         @app_globals.cache.region('short_term')
         def load_page(page):
             return paginate.Page(
@@ -135,7 +137,7 @@ class PostController(BaseController):
         c.paginator = load_page(request.params.get('page', 1))                
         return render('/derived/post/archive.html')
     
-    def view(self, year, month, slug):
+    def view(self, year, month, slug):        
         @app_globals.cache.region('short_term')
         def load_post(year, month, slug):
             import calendar
@@ -150,8 +152,17 @@ class PostController(BaseController):
                                  
         if c.post is None:
             abort(404)
-            
-        return render('/derived/post/view.html')
+        
+        rememberme = None
+        try:
+            rememberme = request.cookies['rememberme']
+        finally:
+            if rememberme is not None:
+                values = pickle.loads(base64.b64decode(rememberme))
+                return htmlfill.render(render('/derived/post/view.html'), values)
+            else:
+                return render('/derived/post/view.html')
+
     
     @h.auth.authorize(h.auth.is_valid_user)
     def new(self):
