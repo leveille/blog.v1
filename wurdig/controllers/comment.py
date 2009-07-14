@@ -104,17 +104,16 @@ class CommentController(BaseController):
         if hasattr(self.form_result, 'rememberme'):
             rememberme = self.form_result['rememberme']
             del self.form_result['rememberme']
+            
         if hasattr(self.form_result, 'wurdig_comment_question'):
             del self.form_result['wurdig_comment_question']
-
         
         comment = model.Comment()
         for k, v in self.form_result.items():
             setattr(comment, k, v)
+            
         comment.post_id = c.post.id
-
         comment.created_on = datetime.datetime.now()
-
         comment.content = h.nl2br(comment.content)
         comment.content = h.mytidy(comment.content)
         comment.content = h.comment_filter(comment.content)
@@ -125,10 +124,10 @@ class CommentController(BaseController):
             session['flash'] = 'Your comment has been approved.'
         else:
             session['flash'] = 'Your comment is currently being moderated.'
-        
+                
         if rememberme is not None:
             h.set_rememberme_cookie(rememberme, comment)
-        
+                
         session.save()
         meta.Session.add(comment)
         meta.Session.commit()
