@@ -5,13 +5,15 @@
     </div>
 </div>
 <div class="field required">
-    <div class="description">
-        <strong>Email</strong> 
-        used to help prevent spam and will not be published.  Associates with 
-        <a href="http://gravatar.com/">
-            Gravatars
-        </a>.
-    </div>
+    % if not h.auth.authorized(h.auth.is_valid_user):
+        <div class="description">
+            <strong>Email</strong> 
+            used to help prevent spam and will not be published.  Associates with 
+            <a href="http://gravatar.com/">
+                Gravatars
+            </a>.
+        </div>
+    % endif
     <label for="email">Email</label>
     <div class="input">
         ${h.text('email', tabindex=2)}
@@ -25,25 +27,29 @@
 </div>
 
 <div class="field required">
-    <div class="description-textarea">
-        Follow my <a href="/comment-styleguide" id="comment-styleguide">guide</a> for leaving comments.  Some HTML allowed.
-        <div class="hide"></div>
-    </div>
+    % if not h.auth.authorized(h.auth.is_valid_user):
+        <div class="description-textarea">
+            Follow my <a href="/comment-styleguide" id="comment-styleguide">guide</a> for leaving comments.  Some HTML allowed.
+            <div class="hide"></div>
+        </div>
+    % endif
     <label for="content">Comment</label>
     <div class="input">
         ${h.textarea('content', cols=25, rows=10, tabindex=4)}
     </div>
 </div>
 
-<div class="field">
-    <div class="description">
-        Do you want me to remember your comment information (name/email/website)?
+% if not h.auth.authorized(h.auth.is_valid_user):
+    <div class="field">
+        <div class="description">
+            Do you want me to remember your comment information (name/email/website)?
+        </div>
+        <label for="rememberme">Remember?</label>
+        <div class="input">
+            ${h.checkbox('rememberme', value=None, tabindex=5)}
+        </div>
     </div>
-    <label for="rememberme">Remember?</label>
-    <div class="input">
-        ${h.checkbox('rememberme', value=None)}
-    </div>
-</div>
+% endif
 
 % if not h.auth.authorized(h.auth.is_valid_user) and not h.wurdig_use_akismet():
     <div class="field required">
@@ -54,7 +60,7 @@
         </div>
         <label for="wurdig_comment_question">Spamword</label>
         <div class="input">
-            ${h.text('wurdig_comment_question', tabindex=5)}
+            ${h.text('wurdig_comment_question', tabindex=6)}
         </div>
     </div>
 % endif

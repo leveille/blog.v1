@@ -13,6 +13,7 @@ from webob.exc import strip_tags
 
 from wurdig.lib import auth
 from wurdig.lib.comment import *
+from wurdig.lib.cookie import *
 from wurdig.lib.conf_helper import *
 from wurdig.lib.feed_display import *
 from wurdig.lib.html import *
@@ -24,8 +25,7 @@ from wurdig.lib.utils_helper import *
 def load_stylesheet_assets(csslist='FCSSLIST'):
     import pylons
     import os
-    path = os.path.join(pylons.config['pylons.paths']['static_files'], 'css',
-                        '%s')
+    path = os.path.join(pylons.config['pylons.paths']['static_files'], 'css', '%s')
     f = open(path % csslist,'r')
     stylesheets = f.read()
     f.close()

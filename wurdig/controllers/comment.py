@@ -1,8 +1,6 @@
-import base64
 import datetime
 import formencode
 import logging
-import pickle
 import webhelpers.paginate as paginate
 import wurdig.lib.helpers as h
 import wurdig.model.meta as meta
@@ -72,9 +70,9 @@ class NewCommentForm(formencode.Schema):
         }
     )
     approved = formencode.validators.StringBool(if_missing=False)
-    rememberme = formencode.validators.StringBool(if_missing=False)
     
     if not h.auth.authorized(h.auth.is_valid_user):
+        rememberme = formencode.validators.StringBool(if_missing=False)
         if h.wurdig_use_akismet():
             chained_validators = [AkismetSpamCheck()]
         else:
@@ -89,17 +87,8 @@ class CommentController(BaseController):
         c.post = post_id and post_q.filter_by(id=int(post_id)).first() or None
         if c.post is None:
             abort(404)
-        
-        rememberme = None
-        try:
-            rememberme = request.cookies['rememberme']
-        finally:
-            if rememberme is not None:
-                values = pickle.loads(base64.b64decode(rememberme))
-                return htmlfill.render(render('/derived/comment/new.html'), values)
-            else:
-                return render('/derived/comment/new.html')
-    
+        return h.comment_form('/derived/comment/new.html')
+            
     @restrict('POST')
     @authenticate_form
     @validate(schema=NewCommentForm(), form='new')
@@ -110,10 +99,15 @@ class CommentController(BaseController):
         c.post = post_id and post_q.filter_by(id=int(post_id)).first() or None
         if c.post is None:
             abort(404)
-            
-        if not h.auth.authorized(h.auth.is_valid_user) and not h.wurdig_use_akismet():
-            if hasattr(self.form_result, 'wurdig_comment_question'):
-                del self.form_result['wurdig_comment_question']
+        
+        rememberme = None
+        if not h.auth.authorized(h.auth.is_valid_user):
+            if hasattr(self.form_result, 'rememberme'):
+                rememberme = self.form_result['rememberme']
+                del self.form_result['rememberme']
+            if not h.wurdig_use_akismet():
+                if hasattr(self.form_result, 'wurdig_comment_question'):
+                    del self.form_result['wurdig_comment_question']
         
         comment = model.Comment()
         for k, v in self.form_result.items():
@@ -132,19 +126,9 @@ class CommentController(BaseController):
             session['flash'] = 'Your comment has been approved.'
         else:
             session['flash'] = 'Your comment is currently being moderated.'
-            
-        request.cookies.pop('rememberme', None)
-        if self.form_result['rememberme']:
-            values = {
-                'name': comment.name,
-                'email': comment.email,
-                'url': comment.url, 
-                'rememberme': True
-            }
-            cookievalue = base64.b64encode(pickle.dumps(values))
-            response.set_cookie('rememberme', cookievalue, max_age=180*24*3600)
-            
-        del self.form_result['rememberme']
+        
+        if rememberme is not None:
+            h.set_rememberme_cookie(rememberme, comment)
         
         session.save()
         meta.Session.add(comment)
@@ -198,9 +182,11 @@ class CommentController(BaseController):
         if comment is None:
             abort(404)
             
-        if not h.auth.authorized(h.auth.is_valid_user) and not h.wurdig_use_akismet():
-            if hasattr(self.form_result, 'wurdig_comment_question'):
-                del self.form_result['wurdig_comment_question']
+        if hasattr(self.form_result, 'rememberme'):
+            del self.form_result['rememberme']
+            
+        if hasattr(self.form_result, 'wurdig_comment_question'):
+            del self.form_result['wurdig_comment_question']
             
         for k,v in self.form_result.items():
             if getattr(comment, k) != v:

@@ -1,8 +1,16 @@
 import helpers as h
+from formencode import htmlfill
 from wurdig import model
 from wurdig.model import meta
+from wurdig.lib.base import render
 
-__all__ = ['comment_filter', 'recent_comments']
+__all__ = ['comment_form', 'comment_filter', 'recent_comments']
+
+def comment_form(template):
+    rememberme_values = h.get_rememberme_cookie()
+    if rememberme_values is not None:    
+        return htmlfill.render(render(template), rememberme_values)
+    return render(template)
 
 def comment_filter(comment):
     return h.sanitize_html(comment)

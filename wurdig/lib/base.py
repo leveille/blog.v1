@@ -3,9 +3,9 @@
 Provides the BaseController class for subclassing.
 """
 import formencode
-import re
-import wurdig.lib.helpers as h
+import helpers as h
 import pylons
+import re
 
 from paste.deploy.converters import asbool
 from pylons.controllers import WSGIController

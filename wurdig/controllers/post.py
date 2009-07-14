@@ -1,8 +1,6 @@
-import base64
 import datetime as d
 import formencode
 import logging
-import pickle
 import re
 import webhelpers.paginate as paginate
 import wurdig.lib.helpers as h
@@ -152,17 +150,8 @@ class PostController(BaseController):
                                  
         if c.post is None:
             abort(404)
-        
-        rememberme = None
-        try:
-            rememberme = request.cookies['rememberme']
-        finally:
-            if rememberme is not None:
-                values = pickle.loads(base64.b64decode(rememberme))
-                return htmlfill.render(render('/derived/post/view.html'), values)
-            else:
-                return render('/derived/post/view.html')
-
+            
+        return h.comment_form('/derived/post/view.html')
     
     @h.auth.authorize(h.auth.is_valid_user)
     def new(self):
