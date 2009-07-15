@@ -99,13 +99,13 @@ class CommentController(BaseController):
         c.post = post_id and post_q.filter_by(id=int(post_id)).first() or None
         if c.post is None:
             abort(404)
-        
-        rememberme = None
-        if hasattr(self.form_result, 'rememberme'):
+
+        rememberme = False
+        if self.form_result.has_key('rememberme'):
             rememberme = self.form_result['rememberme']
             del self.form_result['rememberme']
-            
-        if hasattr(self.form_result, 'wurdig_comment_question'):
+
+        if self.form_result.has_key('wurdig_comment_question'):
             del self.form_result['wurdig_comment_question']
         
         comment = model.Comment()
@@ -125,7 +125,7 @@ class CommentController(BaseController):
         else:
             session['flash'] = 'Your comment is currently being moderated.'
                 
-        if rememberme is not None:
+        if rememberme:
             h.set_rememberme_cookie(rememberme, comment)
                 
         session.save()
@@ -140,7 +140,6 @@ class CommentController(BaseController):
                                    from_email='%s <%s>' % (comment.name, comment.email),
                                    to=[h.wurdig_contact_email()])
             message.send(fail_silently=True)
-                
         return redirect_to(controller='post', 
                            action='view', 
                            year=c.post.posted_on.strftime('%Y'),
@@ -177,11 +176,11 @@ class CommentController(BaseController):
         
         if comment is None:
             abort(404)
-            
-        if hasattr(self.form_result, 'rememberme'):
+                        
+        if self.form_result.has_key('rememberme'):
             del self.form_result['rememberme']
-            
-        if hasattr(self.form_result, 'wurdig_comment_question'):
+
+        if self.form_result.has_key('wurdig_comment_question'):
             del self.form_result['wurdig_comment_question']
             
         for k,v in self.form_result.items():
