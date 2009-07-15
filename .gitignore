@@ -6,7 +6,7 @@ production.ini
 test.ini
 *.tmp*
 data
-test.db
+*.db
 Wurdig.egg-info
 temp.txt*
 posts.txt*
