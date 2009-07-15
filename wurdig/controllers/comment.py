@@ -95,19 +95,35 @@ class CommentController(BaseController):
     def create(self, action, post_id=None):
         if post_id is None:
             abort(404)
+            
         post_q = meta.Session.query(model.Post)
         c.post = post_id and post_q.filter_by(id=int(post_id)).first() or None
         if c.post is None:
             abort(404)
 
-        rememberme = False
+        # if rememberme is part of the form_result dict and true, set
+        # a cookie based on user input.  If rememberme is false,
+        # delete the cookie.  Finally, remove the form item from form_result
+        # so that the session does not attempt to save value to database,
+        # where there is no rememberme field for comments
         if self.form_result.has_key('rememberme'):
-            rememberme = self.form_result['rememberme']
+            if self.form_result['rememberme']:
+                h.set_rememberme_cookie({
+                    'name': self.form_result['name'],
+                    'email': self.form_result['email'],
+                    'url': self.form_result['url'], 
+                    'rememberme': True
+                })
+            else:
+                h.delete_rememberme_cookie()
             del self.form_result['rememberme']
 
+        # remove comment question from form_result dict
+        # so that the session does not attempt to save value to database,
+        # where there is no wurdig_comment_question field for comments
         if self.form_result.has_key('wurdig_comment_question'):
             del self.form_result['wurdig_comment_question']
-        
+                
         comment = model.Comment()
         for k, v in self.form_result.items():
             setattr(comment, k, v)
@@ -118,15 +134,8 @@ class CommentController(BaseController):
         comment.content = h.mytidy(comment.content)
         comment.content = h.comment_filter(comment.content)
         comment.content = h.auto_link(comment.content)
-        
         if h.auth.authorized(h.auth.is_valid_user):
             comment.approved = True
-            session['flash'] = 'Your comment has been approved.'
-        else:
-            session['flash'] = 'Your comment is currently being moderated.'
-                
-        if rememberme:
-            h.set_rememberme_cookie(rememberme, comment)
                 
         session.save()
         meta.Session.add(comment)
@@ -140,12 +149,15 @@ class CommentController(BaseController):
                                    from_email='%s <%s>' % (comment.name, comment.email),
                                    to=[h.wurdig_contact_email()])
             message.send(fail_silently=True)
+            session['flash'] = 'Your comment is currently being moderated.'
+        else:
+            session['flash'] = 'Your comment has been approved.'
+            
         return redirect_to(controller='post', 
                            action='view', 
                            year=c.post.posted_on.strftime('%Y'),
                            month=c.post.posted_on.strftime('%m'),
-                           slug=c.post.slug
-                           )
+                           slug=c.post.slug)
 
     @h.auth.authorize(h.auth.is_valid_user)
     def edit(self, id=None):
@@ -198,8 +210,8 @@ class CommentController(BaseController):
     @h.auth.authorize(h.auth.is_valid_user)
     def list(self):
         comments_q = meta.Session.query(model.Comment).order_by(
-                                                   model.Comment.approved
-                                                   ).order_by(model.Comment.created_on.desc())
+                                               model.Comment.approved
+                                               ).order_by(model.Comment.created_on.desc())
         comments_q = comments_q.all()
         c.paginator = paginate.Page(
             comments_q,
