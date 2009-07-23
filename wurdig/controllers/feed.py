@@ -53,7 +53,7 @@ class FeedController(BaseController):
         return feed
     
     def comments_feed(self):
-        @app_globals.cache.region('medium_term', 'comments_feed')
+        #@app_globals.cache.region('medium_term', 'comments_feed')
         def load_comments():
             feed = Atom1Feed(
                 title=u"Comments for " + h.wurdig_title(),
@@ -65,22 +65,31 @@ class FeedController(BaseController):
             comments_q = meta.Session.query(model.Comment).filter(model.Comment.approved==True)
             comments_q = comments_q.order_by(model.comments_table.c.created_on.desc()).limit(20)
         
+            comment_meta = u"""
+            <p style="margin: 0px; padding: 5px 15px 5px 15px; border: 1px solid #000">
+            Posted in <a href="%s">%s</a></p>
+            """
+            
             for comment in comments_q:
                 post_q = meta.Session.query(model.Post)
                 c.post = comment.post_id and post_q.filter_by(id=int(comment.post_id)).first() or None
                 if c.post is not None:
+                    post_link=u'http://%s%s' % (request.environ['HTTP_HOST'], h.url_for(
+                        controller='post', 
+                        action='view', 
+                        year=c.post.posted_on.strftime('%Y'), 
+                        month=c.post.posted_on.strftime('%m'), 
+                        slug=c.post.slug
+                    ))
+                    comment_link=post_link + u"#comment-" + str(comment.id)
                     feed.add_item(
                         title=u"Comment from %s" % comment.name,
-                        link=u'http://%s%s' % (request.environ['HTTP_HOST'], h.url_for(
-                            controller='post', 
-                            action='view', 
-                            year=c.post.posted_on.strftime('%Y'), 
-                            month=c.post.posted_on.strftime('%m'), 
-                            slug=c.post.slug,
-                            anchor=u"comment-" + str(comment.id)
-                        )),
+                        link=comment_link,
+                        unique_id=comment_link,
+                        author_name=comment.name,
+                        author_link=comment.url,
                         pubdate=comment.created_on,
-                        description=comment.content
+                        description=comment.content + comment_meta % (post_link, c.post.title)
                     )
             return feed.writeString('utf-8')
         
@@ -92,7 +101,7 @@ class FeedController(BaseController):
         if post_id is None:
             abort(404)
         
-        @app_globals.cache.region('medium_term', 'post_comments_feed')
+        # @app_globals.cache.region('medium_term', 'post_comments_feed')
         def load_comments(post_id):
             post_q = meta.Session.query(model.Post)
             c.post = post_id and post_q.filter(and_(model.Post.id==int(post_id), 
@@ -117,19 +126,29 @@ class FeedController(BaseController):
                 language=u"en",
             )
             
+            comment_meta = u"""
+            <p style="margin: 0px; padding: 5px 15px 5px 15px; border: 1px solid #000">
+            Posted in <a href="%s">%s</a></p>
+            """
+            
             for comment in comments_q:
+                post_link=u'http://%s%s' % (request.environ['HTTP_HOST'], h.url_for(
+                    controller='post', 
+                    action='view', 
+                    year=c.post.posted_on.strftime('%Y'), 
+                    month=c.post.posted_on.strftime('%m'), 
+                    slug=c.post.slug
+                ))
+                comment_link=post_link + u'comment-' + str(comment.id)
+                
                 feed.add_item(
                     title=u"Comment from %s" % comment.name,
-                    link=u'http://%s%s' % (request.environ['HTTP_HOST'], h.url_for(
-                        controller='post', 
-                        action='view', 
-                        year=c.post.posted_on.strftime('%Y'), 
-                        month=c.post.posted_on.strftime('%m'), 
-                        slug=c.post.slug,
-                        anchor=u'comment-' + str(comment.id)
-                    )),
+                    link=comment_link,
+                    unique_id=comment_link,
+                    author_name=comment.name,
+                    author_link=comment.url,
                     pubdate=comment.created_on,
-                    description=comment.content
+                    description=comment.content + comment_meta % (post_link, c.post.title)
                 )
             return feed.writeString('utf-8')
         
