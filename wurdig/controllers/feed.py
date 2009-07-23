@@ -53,7 +53,7 @@ class FeedController(BaseController):
         return feed
     
     def comments_feed(self):
-        #@app_globals.cache.region('medium_term', 'comments_feed')
+        @app_globals.cache.region('medium_term', 'comments_feed')
         def load_comments():
             feed = Atom1Feed(
                 title=u"Comments for " + h.wurdig_title(),
@@ -101,7 +101,7 @@ class FeedController(BaseController):
         if post_id is None:
             abort(404)
         
-        # @app_globals.cache.region('medium_term', 'post_comments_feed')
+        @app_globals.cache.region('medium_term', 'post_comments_feed')
         def load_comments(post_id):
             post_q = meta.Session.query(model.Post)
             c.post = post_id and post_q.filter(and_(model.Post.id==int(post_id), 
@@ -139,7 +139,7 @@ class FeedController(BaseController):
                     month=c.post.posted_on.strftime('%m'), 
                     slug=c.post.slug
                 ))
-                comment_link=post_link + u'comment-' + str(comment.id)
+                comment_link=post_link + u'#comment-' + str(comment.id)
                 
                 feed.add_item(
                     title=u"Comment from %s" % comment.name,
