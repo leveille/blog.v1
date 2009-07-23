@@ -70,7 +70,7 @@ class FeedController(BaseController):
                 c.post = comment.post_id and post_q.filter_by(id=int(comment.post_id)).first() or None
                 if c.post is not None:
                     feed.add_item(
-                        title=u"Comment on %s" % c.post.title,
+                        title=u"Comment from %s" % comment.name,
                         link=u'http://%s%s' % (request.environ['HTTP_HOST'], h.url_for(
                             controller='post', 
                             action='view', 
@@ -119,7 +119,7 @@ class FeedController(BaseController):
             
             for comment in comments_q:
                 feed.add_item(
-                    title=c.post.title + u" comment #%s" % comment.id,
+                    title=u"Comment from %s" % comment.name,
                     link=u'http://%s%s' % (request.environ['HTTP_HOST'], h.url_for(
                         controller='post', 
                         action='view', 
