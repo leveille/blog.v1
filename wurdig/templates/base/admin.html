@@ -6,7 +6,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-        <title>Administrator - ${self.title()}</title>
+        <title>${h.wurdig_title()} ${self.title()}</title>
         ${admin.css()}
     </head>
     <body role="application" id="admin">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 
-                <div id="nav" role="navigation">
+                <div id="nav">
                     <div class="wrapper">
                         <ul>
                             <li>

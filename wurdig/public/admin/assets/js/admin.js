@@ -1,7 +1,7 @@
-if(!this.WURDIG.admin) {
-    WURDIG.admin = {};   
+if(!this.WURDIG) {
+    WURDIG = {};   
 }
-WURDIG.admin.app = function()
+WURDIG.admin = function()
 {
     //private 
     return {
@@ -35,11 +35,11 @@ WURDIG.admin.app = function()
             });
 
             //finding if stored cookie for show/hide sidebar menu
-            $.each(jQuery('#secondary h3 a'), function(){
-                if(WURDIG_ADMIN.utils.getCookie(jQuery(this).text()) == "hide"){
+            jQuery.each(jQuery('#secondary h3 a'), function(){
+                if(WURDIG_UTILS.app.getCookie(jQuery(this).text()) == "hide"){
                     jQuery(this).parent().next().addClass("hide");
                 	jQuery(this).addClass("arrowLeft");
-                	WURDIG_ADMIN.utils.setCookie(jQuery(this).text(),"hide", 1000);
+                	WURDIG_UTILS.app.setCookie(jQuery(this).text(),"hide", 1000);
                 }
             });
             
@@ -48,12 +48,12 @@ WURDIG.admin.app = function()
                 if(this.className == "arrowLeft"){ //currently hiding
                     jQuery(this).parent().next().removeClass("hide");
                 	jQuery(this).removeClass("arrowLeft");
-                	WURDIG_ADMIN.utils.setCookie(jQuery(this).text(),"show", 1000);
+                	WURDIG_UTILS.app.setCookie(jQuery(this).text(),"show", 1000);
                 }
                 else{ //currently showing
                     jQuery(this).parent().next().addClass("hide");
                 	jQuery(this).addClass("arrowLeft");
-                	WURDIG_ADMIN.utils.setCookie(jQuery(this).text(),"hide", 1000);
+                	WURDIG_UTILS.app.setCookie(jQuery(this).text(),"hide", 1000);
                 }
                 return false;
         	});// closing sidemenu click handler
@@ -62,9 +62,8 @@ WURDIG.admin.app = function()
             jQuery('#primary thead th.form input:checkbox').click(function () {
                 jQuery('#primary tbody td.form input:checkbox').each( function() {
                     this.checked = !this.checked;
-                });
-                     	
-            });// closing sidemenu click handler
+                });	
+            });
         	
         	
             if(!jQuery('#secondary h3.home').hasClass("active")){
@@ -99,9 +98,9 @@ WURDIG.admin.app = function()
         }
     };
     
-})();
+}();
 
 jQuery.noConflict();
 jQuery(document).ready(function() {
-    WURDIG.admin.app.init();
+    WURDIG.admin.init();
 });
