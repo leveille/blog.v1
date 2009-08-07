@@ -310,7 +310,7 @@ class PostController(BaseController):
         c.paginator = paginate.Page(
             posts_q,
             page=page,
-            items_per_page = 50,
+            items_per_page = 15,
             controller='post',
             action='list',
         )
