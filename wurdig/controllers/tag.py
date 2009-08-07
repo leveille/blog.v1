@@ -128,14 +128,18 @@ class TagController(BaseController):
             ).all()   
             return paginate.Page(
                 query,
-                page=int(page),
+                page=page,
                 items_per_page = 10,
                 controller='tag',
                 action='archive',
                 slug=slug
             )
         
-        c.paginator = load_posts(slug, request.params.get('page', 1))
+        try:
+            c.paginator = load_posts(slug, request.params.get('page', 1))
+        except:
+            abort(400)
+
         return render('/derived/tag/archive.html')
 
     @h.auth.authorize(h.auth.is_valid_user)
@@ -160,8 +164,12 @@ class TagController(BaseController):
     
     @h.auth.authorize(h.auth.is_valid_user)
     def edit(self, id=None):
-        if id is None:
-            abort(404)
+
+        try:
+            id = int(id)
+        except:
+            abort(400)
+            
         tag_q = meta.Session.query(model.Tag)
         tag = tag_q.filter_by(id=id).first()
         if tag is None:
@@ -177,8 +185,12 @@ class TagController(BaseController):
     @restrict('POST')
     @validate(schema=NewTagForm(), form='edit')
     def save(self, id=None):
-        if id is None:
-            abort(404)
+
+        try:
+            id = int(id)
+        except:
+            abort(400)
+            
         tag_q = meta.Session.query(model.Tag)
         tag = tag_q.filter_by(id=id).first()
         if tag is None:
@@ -196,9 +208,15 @@ class TagController(BaseController):
     @h.auth.authorize(h.auth.is_valid_user)
     def list(self):
         tags_q = meta.Session.query(model.Tag)
+        
+        try:
+            page = int(request.params.get('page', 1))
+        except:
+            abort(400)
+            
         c.paginator = paginate.Page(
             tags_q,
-            page=int(request.params.get('page', 1)),
+            page=page,
             items_per_page = 50,
             controller='tag',
             action='list',
@@ -207,8 +225,12 @@ class TagController(BaseController):
     
     @h.auth.authorize(h.auth.is_valid_user)
     def delete_confirm(self, id=None):
-        if id is None:
-            abort(404)
+
+        try:
+            id = int(id)
+        except:
+            abort(400)
+            
         tag_q = meta.Session.query(model.Tag)
         c.tag = tag_q.filter_by(id=id).first()
         if c.tag is None:
@@ -218,13 +240,18 @@ class TagController(BaseController):
     @h.auth.authorize(h.auth.is_valid_user)
     @restrict('POST')
     def delete(self, id=None):
-        id = request.params.getone('id')
+
+        try:
+            id = int(request.params.getone('id'))
+        except:
+            abort(400)
+            
         tag_q = meta.Session.query(model.Tag)
         tag = tag_q.filter_by(id=id).first()
         if tag is None:
             abort(404)
         # delete post/tag associations
-        meta.Session.execute(delete(model.poststags_table, model.poststags_table.c.tag_id==tag.id))
+        meta.Session.execute(delete(model.poststags_table, model.poststags_table.c.tag_id==int(tag.id)))
         meta.Session.delete(tag)
         meta.Session.commit()
         if request.is_xhr:

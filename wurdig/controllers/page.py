@@ -111,8 +111,12 @@ class PageController(BaseController):
     
     @h.auth.authorize(h.auth.is_valid_user)
     def edit(self, id=None):
-        if id is None:
-            abort(404)
+        
+        try:
+            id = int(id)
+        except:
+            abort(400)
+            
         page_q = meta.Session.query(model.Page)
         page = page_q.filter_by(id=id).first()
         if page is None:
@@ -129,8 +133,12 @@ class PageController(BaseController):
     @restrict('POST')
     @validate(schema=NewPageForm(), form='edit')
     def save(self, id=None):
-        if id is None:
-            abort(404)
+        
+        try:
+            id = int(id)
+        except:
+            abort(400)
+            
         page_q = meta.Session.query(model.Page)
         page = page_q.filter_by(id=id).first()
         if page is None:
@@ -151,9 +159,15 @@ class PageController(BaseController):
     @h.auth.authorize(h.auth.is_valid_user)
     def list(self):
         pages_q = meta.Session.query(model.Page)
+        
+        try:
+            page = int(request.params.get('page', 1))
+        except:
+            abort(400)
+        
         c.paginator = paginate.Page(
             pages_q,
-            page=int(request.params.get('page', 1)),
+            page=page,
             items_per_page = 10,
             controller='page',
             action='list',
@@ -162,8 +176,12 @@ class PageController(BaseController):
     
     @h.auth.authorize(h.auth.is_valid_user)
     def delete_confirm(self, id=None):
-        if id is None:
-            abort(404)
+        
+        try:
+            id = int(id)
+        except:
+            abort(400)
+            
         page_q = meta.Session.query(model.Page)
         c.page = page_q.filter_by(id=id).first()
         if c.page is None:
@@ -173,7 +191,12 @@ class PageController(BaseController):
     @h.auth.authorize(h.auth.is_valid_user)
     @restrict('POST')
     def delete(self, id=None):
-        id = request.params.getone('id')
+
+        try:
+            id = int(request.params.getone('id'))
+        except:
+            abort(400)
+        
         page_q = meta.Session.query(model.Page)
         page = page_q.filter_by(id=id).first()
         if page is None:

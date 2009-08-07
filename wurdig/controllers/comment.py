@@ -70,19 +70,22 @@ class NewCommentForm(formencode.Schema):
         }
     )
     approved = formencode.validators.StringBool(if_missing=False)
+    wurdig_comment_question = PrimitiveSpamCheck(not_empty=True, max=10, strip=True)
     
     if not h.auth.authorized(h.auth.is_valid_user):
         rememberme = formencode.validators.StringBool(if_missing=False)
         if h.wurdig_use_akismet():
             chained_validators = [AkismetSpamCheck()]
-        else:
-            wurdig_comment_question = PrimitiveSpamCheck(not_empty=True, max=10, strip=True)
 
 class CommentController(BaseController):
     
     def new(self, action, post_id=None):
-        if post_id is None:
-            abort(404)
+
+        try:
+            post_id = int(post_id)
+        except:
+            abort(400)
+            
         post_q = meta.Session.query(model.Post)
         c.post = post_id and post_q.filter_by(id=int(post_id)).first() or None
         if c.post is None:
@@ -92,9 +95,12 @@ class CommentController(BaseController):
     @restrict('POST')
     @authenticate_form
     @validate(schema=NewCommentForm(), form='new')
-    def create(self, action, post_id=None):
-        if post_id is None:
-            abort(404)
+    def create(self, post_id=None):
+
+        try:
+            post_id = int(post_id)
+        except:
+            abort(400)
             
         post_q = meta.Session.query(model.Post)
         c.post = post_id and post_q.filter_by(id=int(post_id)).first() or None
@@ -161,8 +167,12 @@ class CommentController(BaseController):
 
     @h.auth.authorize(h.auth.is_valid_user)
     def edit(self, id=None):
-        if id is None:
-            abort(404)
+
+        try:
+            id = int(id)
+        except:
+            abort(400)
+            
         comment_q = meta.Session.query(model.Comment)
         comment = comment_q.filter_by(id=id).first()
         if comment is None:
@@ -180,8 +190,11 @@ class CommentController(BaseController):
     @restrict('POST')
     @validate(schema=NewCommentForm(), form='edit')
     def save(self, id=None):
-        if id is None:
-            abort(404)
+
+        try:
+            id = int(id)
+        except:
+            abort(400)
             
         comment_q = meta.Session.query(model.Comment)
         comment = comment_q.filter_by(id=id).first()
@@ -213,9 +226,15 @@ class CommentController(BaseController):
                                                model.Comment.approved
                                                ).order_by(model.Comment.created_on.desc())
         comments_q = comments_q.all()
+        
+        try:
+            page = int(request.params.get('page', 1))
+        except:
+            abort(400)
+        
         c.paginator = paginate.Page(
             comments_q,
-            page=int(request.params.get('page', 1)),
+            page=page,
             items_per_page=20,
             controller='comment',
             action='list'
@@ -228,14 +247,24 @@ class CommentController(BaseController):
     
     @h.auth.authorize(h.auth.is_valid_user)
     def approve_confirm(self, id=None):
-        if id is None:
-            abort(404)
+
+        try:
+            id = int(id)
+        except:
+            abort(400)
+            
         comment_q = meta.Session.query(model.Comment)
         c.comment = comment_q.filter_by(id=id).first()
         if c.comment is None:
             abort(404)
         post_q = meta.Session.query(model.Post)
-        c.post = c.comment.post_id and post_q.filter_by(id=int(c.comment.post_id)).first() or None
+        
+        try:
+            post_id = int(c.comment.post_id)
+        except:
+            abort(400)
+        
+        c.post = c.comment.post_id and post_q.filter_by(id=post_id).first() or None
         if c.post is None:
             abort(404)
         return render('/derived/comment/approve_confirm.html')
@@ -243,7 +272,12 @@ class CommentController(BaseController):
     @h.auth.authorize(h.auth.is_valid_user)
     @restrict('POST')
     def approve(self, id=None):
-        id = request.params.getone('id')
+
+        try:
+            id = int(request.params.getone('id'))
+        except:
+            abort(400)
+        
         comment_q = meta.Session.query(model.Comment)
         comment = comment_q.filter_by(id=id).first()
         if comment is None:
@@ -260,14 +294,24 @@ class CommentController(BaseController):
             
     @h.auth.authorize(h.auth.is_valid_user)
     def disapprove_confirm(self, id=None):
-        if id is None:
-            abort(404)
+
+        try:
+            id = int(id)
+        except:
+            abort(400)
+            
         comment_q = meta.Session.query(model.Comment)
         c.comment = comment_q.filter_by(id=id).first()
         if c.comment is None:
             abort(404)
         post_q = meta.Session.query(model.Post)
-        c.post = c.comment.post_id and post_q.filter_by(id=int(c.comment.post_id)).first() or None
+        
+        try:
+            post_id = int(c.comment.post_id)
+        except:
+            abort(400)
+        
+        c.post = c.comment.post_id and post_q.filter_by(id=post_id).first() or None
         if c.post is None:
             abort(404)
         return render('/derived/comment/disapprove_confirm.html')
@@ -275,7 +319,12 @@ class CommentController(BaseController):
     @h.auth.authorize(h.auth.is_valid_user)
     @restrict('POST')
     def disapprove(self, id=None):
-        id = request.params.getone('id')
+        
+        try:
+            id = int(request.params.getone('id'))
+        except:
+            abort(400)
+        
         comment_q = meta.Session.query(model.Comment)
         comment = comment_q.filter_by(id=id).first()
         if comment is None:
@@ -292,14 +341,24 @@ class CommentController(BaseController):
 
     @h.auth.authorize(h.auth.is_valid_user)
     def delete_confirm(self, id=None):
-        if id is None:
-            abort(404)
+
+        try:
+            id = int(id)
+        except:
+            abort(400)
+            
         comment_q = meta.Session.query(model.Comment)
         c.comment = comment_q.filter_by(id=id).first()
         if c.comment is None:
             abort(404)
         post_q = meta.Session.query(model.Post)
-        c.post = c.comment.post_id and post_q.filter_by(id=int(c.comment.post_id)).first() or None
+        
+        try:
+            post_id = int(c.comment.post_id)
+        except:
+            abort(400)
+        
+        c.post = c.comment.post_id and post_q.filter_by(id=post_id).first() or None
         if c.post is None:
             abort(404)
         return render('/derived/comment/delete_confirm.html')
@@ -307,7 +366,12 @@ class CommentController(BaseController):
     @h.auth.authorize(h.auth.is_valid_user)
     @restrict('POST')
     def delete(self, id=None):
-        id = request.params.getone('id')
+
+        try:
+            id = int(request.params.getone('id'))
+        except:
+            abort(400)
+        
         comment_q = meta.Session.query(model.Comment)
         comment = comment_q.filter_by(id=id).first()
         if comment is None:

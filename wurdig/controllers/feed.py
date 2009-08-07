@@ -98,8 +98,11 @@ class FeedController(BaseController):
         return feed
 
     def post_comment_feed(self, post_id=None):
-        if post_id is None:
-            abort(404)
+        
+        try:
+            post_id = int(post_id)
+        except:
+            abort(400)
         
         @app_globals.cache.region('medium_term', 'post_comments_feed')
         def load_comments(post_id):
@@ -108,7 +111,7 @@ class FeedController(BaseController):
                                                     model.Post.draft==False)).first() or None
             if c.post is None:
                 abort(404)
-            comments_q = meta.Session.query(model.Comment).filter(and_(model.Comment.post_id==c.post.id, 
+            comments_q = meta.Session.query(model.Comment).filter(and_(model.Comment.post_id==int(c.post.id), 
                                                                        model.Comment.approved==True))
             comments_q = comments_q.order_by(model.comments_table.c.created_on.desc()).limit(10)
             

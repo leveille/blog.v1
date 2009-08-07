@@ -63,4 +63,6 @@
             ${h.text('wurdig_comment_question', tabindex=6)}
         </div>
     </div>
+% else:
+    ${h.hidden('wurdig_comment_question', value=h.wurdig_spamword().lower())}
 % endif

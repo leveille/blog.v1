@@ -94,24 +94,37 @@ class PostController(BaseController):
                 meta.Session.query(model.Post).filter(
                     model.Post.draft == False
                 ),
-                page=int(page),
+                page=page,
                 items_per_page = 10,
                 controller='post',
                 action='home'
             )
-        c.paginator = load_page(request.params.get('page', 1))
+            
+        try:
+            c.paginator = load_page(int(request.params.get('page', 1)))
+        except:
+            abort(400)
+            
         return render('/derived/post/home.html')
     
-    def archive(self, year=None, month=None):   
-        if year is None:
-            abort(404)
+    def archive(self, year=None, month=None):  
+         
+        try:
+            year_i = int(year)
+        except:
+            abort(400)
         
-        (c.date, year_i, month_start, month_end, day_end) = (year, int(year), 1, 12, 31)
+        (c.date, month_start, month_end, day_end) = (year, 1, 12, 31)
         
         if month is not None:
+            try:
+                month_i = int(month)
+            except:
+                abort(400)
+            
             import calendar
             c.date = calendar.month_name[month_start] + ', ' + year
-            (month_start, month_end) = (int(month), int(month))
+            (month_start, month_end) = (month_i, month_i)
             day_end = calendar.monthrange(year_i, month_start)[1]
         
         @app_globals.cache.region('short_term')
@@ -125,14 +138,19 @@ class PostController(BaseController):
             )
             return paginate.Page(
                 posts_q,
-                page=int(page),
+                page=page,
                 items_per_page = 10,
                 controller='post',
                 action='archive',
                 year=year,
                 month=month,
             )
-        c.paginator = load_page(request.params.get('page', 1))                
+            
+        try:
+            c.paginator = load_page(int(request.params.get('page', 1)))
+        except:
+            abort(400)
+                    
         return render('/derived/post/archive.html')
     
     def view(self, year, month, slug):        
@@ -146,7 +164,10 @@ class PostController(BaseController):
                      model.Post.slug == slug)
             ).first()
 
-        c.post = load_post(int(year), int(month), slug)
+        try:
+            c.post = load_post(int(year), int(month), slug)
+        except:
+            abort(400)
                                  
         if c.post is None:
             abort(404)
@@ -197,13 +218,16 @@ class PostController(BaseController):
     
     @h.auth.authorize(h.auth.is_valid_user)
     def edit(self, id=None):
-        if id is None:
-            abort(404)
+            
+        try:
+            id = int(id)
+        except:
+            abort(400)
+            
         post_q = meta.Session.query(model.Post)
         c.post = post_q.filter_by(id=id).first()
         if c.post is None:
             abort(404)
-        import pprint
         
         tag_q = meta.Session.query(model.Tag)
         c.available_tags = [(tag.id, tag.name) for tag in tag_q]
@@ -224,8 +248,12 @@ class PostController(BaseController):
     @restrict('POST')
     @validate(schema=NewPostForm(), form='edit')
     def save(self, id=None):
-        if id is None:
-            abort(404)
+
+        try:
+            id = int(id)
+        except:
+            abort(400)
+            
         post_q = meta.Session.query(model.Post)
         post = post_q.filter_by(id=id).first()
         if post is None:
@@ -273,9 +301,15 @@ class PostController(BaseController):
     @h.auth.authorize(h.auth.is_valid_user)
     def list(self):
         posts_q = meta.Session.query(model.Post).order_by([model.Post.draft.desc(),model.Post.posted_on.desc()])
+        
+        try:
+            page = int(request.params.get('page', 1))
+        except:
+            abort(400)
+        
         c.paginator = paginate.Page(
             posts_q,
-            page=int(request.params.get('page', 1)),
+            page=page,
             items_per_page = 50,
             controller='post',
             action='list',
@@ -284,8 +318,12 @@ class PostController(BaseController):
     
     @h.auth.authorize(h.auth.is_valid_user)
     def delete_confirm(self, id=None):
-        if id is None:
-            abort(404)
+
+        try:
+            id = int(id)
+        except:
+            abort(400)
+            
         post_q = meta.Session.query(model.Post)
         c.post = post_q.filter_by(id=id).first()
         if c.post is None:
@@ -295,7 +333,12 @@ class PostController(BaseController):
     @h.auth.authorize(h.auth.is_valid_user)
     @restrict('POST')
     def delete(self, id=None):
-        id = request.params.getone('id')
+
+        try:
+            id = int(request.params.getone('id'))
+        except:
+            abort(400)
+        
         post_q = meta.Session.query(model.Post)
         post = post_q.filter_by(id=id).first()
         if post is None:
