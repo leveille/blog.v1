@@ -1,17 +1,19 @@
-<%inherit file="/base/admin.html"/>
+<%inherit file="/base/admin-login.html"/>
 
 <%def name="title()">
     ${parent.title()} &gt; Sign In
 </%def>
 
 ${h.form('%s', method='post')}
-    <div class="field">
+    <p>
         <label for="username">Username</label>
-        ${h.text('username')}
-    </div>
-    <div class="field">
+        ${h.text('username', tabindex=1)}
+    </p>
+    <p>
         <label for="password">Password</label>
-        ${h.password('password')}
-    </div>
-    ${h.submit('login', 'Login')}
+        ${h.password('password', tabindex=2)}
+    </p>
+    <p class="submit">
+        <input type="image" class="submit" src="/admin/assets/gr/login/submit.png" tabindex="3">
+    </p>
 ${h.end_form()}

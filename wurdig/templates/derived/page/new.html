@@ -1,8 +1,9 @@
 <%inherit file="/base/admin.html"/>
 <%namespace file="fields.html" name="fields" import="*"/>
 
-<%def name="title()">${parent.title()} &gt; Create a New Page</%def>
-<h2>Create a New Page</h2>
+<%def name="title()">
+    Create a New Page
+</%def>
 
 ${h.form(h.url_for(action='create', controller='page'), method='post')}
     ${fields.body()}

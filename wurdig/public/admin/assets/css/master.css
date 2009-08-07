@@ -1,0 +1,38 @@
+/*
+Title:		Blue Atlas Interactive
+Author: 	Jeffrey Brown, 07/06/2009
+Copyright:	2009, Blue Atlas Interactive LLC. All rights resevered.
+*/
+
+/* import stylesheets and hide from IE/Mac \*/
+
+/* Yahoo UI */
+@import url("yui/yui.css");
+@import url("yui/yui-base.css");
+
+/* Blue Atlas Resets */
+@import url("reset/ba-reset.css");
+
+/* Admin Styles */
+@import url("base.css");
+@import url("content/colors.css"); /* customize to color scheme */
+
+/* Login Styles */
+@import url("login/login.css");
+
+/* Content Specific Styles */
+@import url("content/boxes.css");
+@import url("content/threecol.css");
+@import url("content/headings.css");
+@import url("content/text.css");
+@import url("content/tables.css");
+@import url("content/forms.css");
+@import url("content/notices.css");
+@import url("content/pagination.css");
+@import url("content/tooltip.css");
+
+/* WIDTH CHANGES */
+@import url("width.css");
+
+
+/* end import/hide */

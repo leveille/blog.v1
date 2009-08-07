@@ -5,7 +5,6 @@
     ${parent.title()} &gt; Edit Comment
 </%def>
 
-<h2>Edit Comment</h2>
 ${h.form(h.url_for(action='save', controller='comment', id=request.urlvars['id']), method='post')}
     ${fields.body()}
     ${h.submit('edit', 'Edit Comment')}

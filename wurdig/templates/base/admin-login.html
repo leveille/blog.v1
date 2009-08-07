@@ -1,0 +1,43 @@
+## -*- coding: utf-8 -*-
+<%namespace file="/component/admin.html" name="admin" import="*"/>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="title" content="Blue Atlas Administrator">     
+        <meta http-equiv="Content-Language" content="en-us">
+        <meta name="author" content="Jason R. Leveille">
+        <meta name="copyright" content="http://jasonleveille.com">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+        <title>Blue Atlas Administrator - Login</title>
+        
+        ${admin.css()}
+    </head>
+    <body role="application">
+        <div id="doc" class="login">      
+            <div id="hd">                
+                <div id="logo" role="banner">
+                    <div class="wrapper">
+                        <h6>Wurdig Administrator</h6>
+                        <img src="/admin/assets/gr/header/logo.png" alt="Wurdig">
+                    </div>
+                </div>
+            </div>
+            <div id="streamer">
+                <div id="bd">
+                    <h1>Login</h1>
+                    <div class="pad">
+                        ${admin.flash()}
+                        <div id="login">
+                            ${next.body()}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        ${admin.js_login()}
+
+    </body>
+</html>

@@ -4,18 +4,18 @@
     Comment List
 </%def>
 
-<h1>Comment List</h1>
-
 % if len(c.paginator):
     <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
     
     <table class="paginator">
-        <tr>
-            <th>Name</th> 
-            <th>Content</th>
-            <th>Posted</th>
-            <th>Action</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Name</th> 
+                <th>Content</th>
+                <th>Posted</th>
+                <th>Action</th>
+            </tr>
+        </thead>
     % for comment in c.paginator:
         % if not comment.approved:
         <tr class="action ${comment.id}">

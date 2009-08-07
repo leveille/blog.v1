@@ -1,0 +1,20 @@
+/* _BOXES */
+
+#primary div.box{
+    border:1px solid #B3B4B5;
+    margin-bottom:20px;
+}
+
+#primary div.pad div.pad{
+    padding:10px;
+}
+
+#primary div.half{
+    float:left;
+    width:49%;
+    margin-right:10px;
+}
+#primary div.half+div.half{
+
+    margin-right:0px;
+}

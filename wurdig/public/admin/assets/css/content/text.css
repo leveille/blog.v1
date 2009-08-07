@@ -1,0 +1,10 @@
+/* _TEXT */
+
+#primary p{}
+#primary strong{}
+#primary em{
+    background:#51CEF0;
+    padding-left:3px;
+    padding-right:3px;
+    margin-right:2px;
+}

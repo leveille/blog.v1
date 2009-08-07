@@ -1,10 +1,8 @@
-<%inherit file="/base/master.html"/>
+<%inherit file="/base/admin.html"/>
 
 <%def name="title()">
-    ${parent.title()} &gt; Delete Confirmation
+    Post Delete Confirmation
 </%def>
-
-<h2>Delete Post</h2>
 
 <p>Are you sure you want to delete the post titled <strong>${c.post.title}</strong>.  This will also delete any tag associations and comments for this post.</p>
 

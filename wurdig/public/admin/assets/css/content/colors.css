@@ -1,0 +1,57 @@
+/* _COLORSCHEME
+
+aqua blue:          #179DE4;
+aqua blue (links):  #1194DD;
+light blue:         #A5DAf6;
+
+dark grey:          #373A3E;
+medium grey:        #989898;
+light grey:         #CACACA;
+
+*/
+
+a{color:#1194DD;}
+a:hover{}
+
+
+/* _LOGIN PAGE */
+#streamer{background-color:#179DE4;}
+
+/*_HEADER*/
+#hd {}
+
+/*_META*/
+#meta{
+    background-color:#179DE4;
+    color:#FFF;
+    border-bottom-color: #EAEAEA;
+}
+#meta a{color:#FFF;}
+#meta p em{color:#A5DAf6;}
+/*_LOGO*/
+#logo {background-color:#373A3E;}
+#logo a{color#179DE4;}
+#logo a:hover{color:#179DE4;}
+
+/*_NAV*/
+#nav{background-color:#F4F4F4;}
+#nav a,#nav a.first{
+    color:#0067A5;
+    border-color:#9C9C9C;
+    background-color:rgba(0, 0, 0, .05);
+}
+#nav a:hover{background-color:rgba(0, 0, 0, .15);}
+
+/*_BODY*/
+#bd {}
+    /*_PRIMARY*/
+    #primary{}
+    
+    /*_SECONDARY*/
+    #secondary{
+        background-color:#DCDCDC;
+    }
+
+/*_FOOTER*/
+#ft{color:#808285;}
+#ft a{color:#B6B7B8}

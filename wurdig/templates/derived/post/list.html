@@ -1,8 +1,8 @@
 <%inherit file="/base/admin.html"/>
 
-<%def name="title()">Post List</%def>
-
-<h1>Post List</h1>
+<%def name="title()">
+    Post List
+</%def>
 
 % if len(c.paginator):
     <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>

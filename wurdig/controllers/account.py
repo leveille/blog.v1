@@ -8,7 +8,7 @@ from formencode import htmlfill
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
-from sqlalchemy.sql import and_, delete
+from sqlalchemy.sql import and_
 from wurdig.lib.base import BaseController, render
 
 log = logging.getLogger(__name__)
@@ -36,7 +36,7 @@ class MyLoginForm(formencode.Schema):
     filter_extra_fields = True
     username = formencode.validators.UnicodeString(
         not_empty=True,
-        max=100, 
+        max=15, 
         messages={
             'empty':'Enter a username'
         },
@@ -44,7 +44,7 @@ class MyLoginForm(formencode.Schema):
     )
     password = formencode.validators.UnicodeString(
         not_empty=True,
-        max=100, 
+        max=25, 
         messages={
             'empty':'Enter a password'
         },
@@ -54,7 +54,8 @@ class MyLoginForm(formencode.Schema):
 
 class AccountController(BaseController):
 
-    @validate(schema=MyLoginForm(), form='signin')
+    # @validate(schema=MyLoginForm(), form='signin')
+    # need to figure out why validation is failing
     def signin(self):
         if not request.environ.get('REMOTE_USER'):
             # This triggers the AuthKit middleware into displaying the sign-in form
