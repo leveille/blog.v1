@@ -16,7 +16,7 @@
             <div id="hd">
                 <div id="meta">
                     <div class="wrapper">
-                        <p><em>(${h.wurdig_title()})</em></p>
+                        <p>User: <em>(${request.environ['REMOTE_USER']})</em></p>
                         <ul>
                             <li>
                                 ${h.link_to(
