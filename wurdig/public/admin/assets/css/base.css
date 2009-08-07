@@ -50,7 +50,7 @@ div.pad{padding:10px;}
 #logo a img, #logo a{margin:0;padding:0;}
 #logo a{margin-left:4px;}
 #logo div.wrapper{position:relative;}
-#logo div.wrapper img {position:relative;top: 30px}
+#admin #logo div.wrapper img {position:relative;top: 30px}
     /*_METAINFO */
     #metainfo{
         float:right;
