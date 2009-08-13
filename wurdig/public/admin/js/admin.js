@@ -5,6 +5,7 @@ WURDIG.admin = function()
 {
     //private 
     return {
+        cookie_prefix : 'wurdig.admin.',
         init: function()
         {
         
@@ -34,10 +35,10 @@ WURDIG.admin = function()
 
             //finding if stored cookie for show/hide sidebar menu
             jQuery.each(jQuery('#secondary h3 a'), function(){
-                if(WURDIG_UTILS.app.getCookie(jQuery(this).text()) == "hide"){
+                if(WURDIG_UTILS.app.getCookie(WURDIG.admin.cookie_prefix + jQuery(this).text()) == "hide"){
                     jQuery(this).parent().next().addClass("hide");
                 	jQuery(this).addClass("arrowLeft");
-                	WURDIG_UTILS.app.setCookie(jQuery(this).text(),"hide", 1000);
+                	WURDIG_UTILS.app.setCookie(WURDIG.admin.cookie_prefix + jQuery(this).text(),"hide", 1000);
                 }
             });
             
@@ -46,12 +47,12 @@ WURDIG.admin = function()
                 if(this.className == "arrowLeft"){ //currently hiding
                     jQuery(this).parent().next().removeClass("hide");
                 	jQuery(this).removeClass("arrowLeft");
-                	WURDIG_UTILS.app.setCookie(jQuery(this).text(),"show", 1000);
+                	WURDIG_UTILS.app.setCookie(WURDIG.admin.cookie_prefix + jQuery(this).text(),"show", 1000);
                 }
                 else{ //currently showing
                     jQuery(this).parent().next().addClass("hide");
                 	jQuery(this).addClass("arrowLeft");
-                	WURDIG_UTILS.app.setCookie(jQuery(this).text(),"hide", 1000);
+                	WURDIG_UTILS.app.setCookie(WURDIG.admin.cookie_prefix + jQuery(this).text(),"hide", 1000);
                 }
                 return false;
         	});// closing sidemenu click handler
@@ -73,22 +74,18 @@ WURDIG.admin = function()
                 function () {
                     jQuery("#home-rounded-top").attr({class:''});
                     if(jQuery(this).hasClass("active")){
-                        console.log("home active hover");
                         jQuery("#home-rounded-top").addClass("activehover");
                     }
                     else{//inactive - hover
-                        console.log("home inactive hover");
                         jQuery("#home-rounded-top").addClass("inactivehover");
                     }
                 },
                 function () {
                     jQuery("#home-rounded-top").attr({class:''});
                     if(jQuery(this).hasClass("active")){
-                        console.log("home active unhover");
                         jQuery("#home-rounded-top").addClass("active");
                     }
                     else{
-                        console.log("home inactive unhover");
                         jQuery("#home-rounded-top").addClass("inactive");
                     }
                 }
