@@ -15,8 +15,6 @@ WURDIG.admin = function()
                 return false;    
             });
         
-            jQuery('table.form sup').tooltip();
-        
             // Alternating Rows 
         	jQuery("table tbody tr:even").addClass("even");
         	jQuery("table tbody tr:odd").addClass("odd");
