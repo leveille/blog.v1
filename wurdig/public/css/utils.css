@@ -19,6 +19,6 @@ div.err p.message {
     background: red;
     padding:.8em
 }
-tr.action {background: #EAF2F5}
+table tr.action td {background: #EAF2F5}
 
 
