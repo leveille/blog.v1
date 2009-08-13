@@ -1,6 +1,7 @@
 <%def name="css()">
-    ${h.stylesheet_link(h.url_for('/admin/assets/css/master.css?%s') % h.mtime('/admin/assets/css/master.css'), media="screen, projection")}
+    ${h.stylesheet_link(h.url_for('/css/yui-2.7.0.css?%s') % h.mtime('/css/yui-2.7.0.css'), media="screen, projection")}
     ${h.stylesheet_link(h.url_for('/css/utils.css?%s') % h.mtime('/css/utils.css'), media="screen, projection")}
+    ${h.stylesheet_link(h.url_for('/admin/assets/css/base.css?%s') % h.mtime('/admin/assets/css/base.css'), media="screen, projection")}
     <!--[if IE 6]>
         ${h.stylesheet_link(h.url_for('/admin/assets/css/ie6.css?%s') % h.mtime('/admin/assets/css/ie6.css'), media="screen, projection")}
     <![endif]--> 
@@ -19,18 +20,8 @@
     % endif
 </%def>
 
-<%def name="js_login()">
-    ${h.javascript_link(h.url_for('/javascripts/jquery.min.js?%s') % h.mtime("/javascripts/jquery.min.js"), 
-                        h.url_for('/admin/assets/js/admin.js?%s') % h.mtime("/admin/assets/js/admin.js"),
-                        h.url_for('/javascripts/utils.js?%s') % h.mtime("/javascripts/utils.js"))}
-</%def>
-
 <%def name="js()">
     ${h.javascript_link(h.url_for('/javascripts/jquery.min.js?%s') % h.mtime("/javascripts/jquery.min.js"), 
                         h.url_for('/admin/assets/js/admin.js?%s') % h.mtime("/admin/assets/js/admin.js"),
-                        h.url_for('/javascripts/utils.js?%s') % h.mtime("/javascripts/utils.js"),
-                        h.url_for('/admin/assets/js/jquery/bgiframe.js?%s') % h.mtime("/admin/assets/js/jquery/bgiframe.js"),
-                        h.url_for('/admin/assets/js/jquery/delegate.js?%s') % h.mtime("/admin/assets/js/jquery/delegate.js"),
-                        h.url_for('/admin/assets/js/jquery/dimensions.js?%s') % h.mtime("/admin/assets/js/jquery/dimensions.js"),
-                        h.url_for('/admin/assets/js/jquery/jquery.tooltip.min.js?%s') % h.mtime("/admin/assets/js/jquery/jquery.tooltip.min.js"))}
+                        h.url_for('/javascripts/utils.js?%s') % h.mtime("/javascripts/utils.js"))}
 </%def>
