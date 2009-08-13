@@ -20,8 +20,8 @@
                         <ul>
                             <li>
                                 ${h.link_to(
-                                    'Logout',
-                                    h.url_for(controller='account', action='signout')
+                                    'Home',
+                                    '/'
                                 )}
                             </li>
                         </ul>
@@ -39,14 +39,8 @@
                     <div class="wrapper">
                         <ul>
                             <li>
-                                ${h.link_to(
-                                    'Posts',
-                                    h.url_for(controller='post', action='list')
-                                )}
-                            </li>
-                            <li>
-                                <a href="${h.url_for(controller='comment', action='list')}" class="last">
-                                    Comments
+                                <a href="${h.url_for(controller='account', action='signout')}" class="last">
+                                    Logout
                                 </a>
                             </li>
                         </ul>
@@ -69,6 +63,12 @@
                     <div class="pad">
                         <h3 class="home active"><a href="#">Dashboard</a></h3>
                         <ul>
+                            <li>
+                                <a href="${h.url_for(controller='account', action='signin')}" 
+                                    title="Dashboard">
+                                    Dashboard
+                                </a>
+                            </li>
                             <li>
                                 ${h.link_to(
                                     'Logout',

@@ -1,8 +1,7 @@
 <%inherit file="/base/admin.html"/>
 
 <%def name="title()">
-    ${parent.title()} &gt; Signed In
+    ${parent.title()} &gt; Dashboard
 </%def>
 
-<p>You are signed in as ${request.environ['REMOTE_USER']}.
-<a href="${h.url_for(controller='account', action='signout')}">Sign out</a></p>
+<p>Eventually place dashboard here</p>
