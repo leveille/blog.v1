@@ -8,10 +8,10 @@
     % if not h.auth.authorized(h.auth.is_valid_user):
         <div class="description">
             <strong>Email</strong> 
-            used to help prevent spam and will not be published.  Associates with 
+            will not be published.  Associates 
             <a href="http://gravatar.com/">
                 Gravatars
-            </a>.
+            </a>
         </div>
     % endif
     <label for="email">Email</label>
@@ -27,11 +27,6 @@
 </div>
 
 <div class="field required">
-    % if not h.auth.authorized(h.auth.is_valid_user):
-        <div class="description-textarea">
-            Some HTML allowed.
-        </div>
-    % endif
     <label for="content">Comment</label>
     <div class="input">
         ${h.textarea('content', cols=25, rows=10, tabindex=4)}
@@ -40,9 +35,6 @@
 
 % if not h.auth.authorized(h.auth.is_valid_user):
     <div class="field">
-        <div class="description">
-            Do you want me to remember your comment information (name/email/website)?
-        </div>
         <label for="rememberme">Remember?</label>
         <div class="input">
             ${h.checkbox('rememberme', value=None, tabindex=5)}
@@ -55,7 +47,7 @@
         <div class="description">
             Please enter 
             <strong>${h.wurdig_spamword()}</strong> 
-            below. I apologize for the inconvenience of this spam prevention method.
+            below.
         </div>
         <label for="wurdig_comment_question">Spamword</label>
         <div class="input">
