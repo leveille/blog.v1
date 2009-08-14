@@ -6,7 +6,7 @@ from html5lib import sanitizer, serializer, tokenizer, treebuilders, treewalkers
 __all__ = ['sanitize_html']
 
 class HTMLSanitizerMixin(sanitizer.HTMLSanitizerMixin):
-    acceptable_elements = ('a', 'em', 'blockquote', 'p', 'br')
+    acceptable_elements = ('a', 'em', 'blockquote', 'p', 'br', 'ul', 'ol', 'li', 'b', 'strong', 'i', 'em')
     acceptable_attributes = ('href', 'title')
 
     allowed_elements = acceptable_elements

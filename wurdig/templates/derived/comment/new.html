@@ -1,8 +1,13 @@
 <%inherit file="/base/master.html"/>
 <%namespace file="/derived/post/comment_fields.html" name="fields" import="*"/>
+<%namespace file="/component/editor.html" name="editor" import="*"/>
 
 <%def name="title()">
     ${parent.title()} &gt; Comment for ${c.post.title}
+</%def>
+
+<%def name="js()">
+    ${editor.comment_editor()}
 </%def>
 
 <%def name="content_header()">

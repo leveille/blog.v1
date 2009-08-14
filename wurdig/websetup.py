@@ -62,21 +62,7 @@ def setup_app(command, conf, vars):
     page2.content = u'<p>I am often asked about my old teaching material (which used to be housed at http://www.my-classes.org - <a href="http://web.archive.org/web/20071216031655/http://www.my-classes.org/">wayback</a>).  <a href="http://jasonleveille.com/teacher/">My old lessons</a> are still available (I can\'t say how relevant they still are though!).  Let me know if you have any questions.</p>'
     meta.Session.add(page2)
     meta.Session.flush()
-    
-    log.info("Adding comment styleguide page...")
-    styleguide = model.Page()
-    styleguide.title = u'Comment Styleguide'
-    styleguide.slug = u'comment-styleguide'
-    styleguide.content = u"""
-    <h5>Supported Comment HTML</h5>
-    <p>In addition to line breaks being converted to paragraphs:</p>
-    <ul>
-        <li>Links will automatically be linked for you if not wrapped in anchor tag.</li><li>&lt;a href=&quot;&quot title=&quot;&quot&gt;link&lt;/a&gt;</li>
-    </ul>
-    """
-    meta.Session.add(styleguide)
-    meta.Session.flush()
-    
+        
     log.info("Adding search page...")
     search = model.Page()
     search.title = u'Search'

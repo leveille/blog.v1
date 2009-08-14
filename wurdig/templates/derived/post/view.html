@@ -1,6 +1,7 @@
 <%inherit file="/base/master.html"/>
 <%namespace file="comment_fields.html" name="fields" import="*"/>
 <%namespace file="/component/posts.html" name="posts" import="*"/>
+<%namespace file="/component/editor.html" name="editor" import="*"/>
 
 <%def name="title()">
     ${parent.title()} &gt; ${c.post.title}
@@ -20,6 +21,10 @@
         feed_type='atom', 
         title='Recent Comments for "' + c.post.title + '"'
     )}
+</%def>
+
+<%def name="js()">
+    ${editor.comment_editor()}
 </%def>
 
 <%def name="post_data(post)">

@@ -1,13 +1,14 @@
 <%inherit file="/base/admin.html"/>
 <%namespace file="fields.html" name="fields" import="*"/>
 <%namespace file="/component/admin.html" name="admin" import="*"/>
+<%namespace file="/component/editor.html" name="editor" import="*"/>
 
 <%def name="title()">
     Edit Page
 </%def>
 
 <%def name="js()">
-    ${admin.editor()}
+    ${editor.admin_editor()}
 </%def>
 
 ${h.form(h.url_for(action='save', controller='page', id=request.urlvars['id']), method='post')}
