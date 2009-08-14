@@ -613,7 +613,7 @@ thead th.form,tbody td.form{
 /* _FORMS */
 
 tr.odd td{background:#F6F6F6;}
-tr.even td{background:#FFF;}
+tr.even td{background:#FFF}
 table.form thead tr th{
     background:#656565 url(../gr/body/sprite.png) 0px 12px repeat-x;
     color:#FFF;
@@ -629,11 +629,15 @@ table.form label{
     font-weight:normal;
 }
 table.form p.required label{font-weight:bold;}
-table.form input.text,table.form select{
+table.form input.text,
+table.form textarea.text, 
+table.form select, 
+table.form input.checkbox{
     margin:2px 0 10px 20px;
     float:left;
 }
-table.form input.text{
+table.form input.text,
+table.form textarea.text{
     width:470px;
 }
 table.form p{
@@ -648,10 +652,11 @@ table.form span.required,div.information span.required{
     font-weight:bold;
 }
 div.information{color:#179DE5;text-align:right;}
+table.form span.error-message{display: none}
+table.form p.required br{display: none}
 
 /* _NOTICES */
 
-.error, .notice, .success, .highlight{padding:.8em;margin-bottom:1em;border:2px solid #ddd;}
 .error {background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;}
 .notice {background:#FFF6BF;color:#514721;border-color:#FFD324;}
 .success {background:#E6EFC2;color:#264409;border-color:#C6D880;}
@@ -757,4 +762,21 @@ div.information{color:#179DE5;text-align:right;}
     background:url(../gr/sidebar/home-rounded-top.png) no-repeat 0 -10px;
 }
 
+div.admin-checkboxes {
+    float: left;
+    width: 94%;
+    padding: 3%;
+    margin-bottom: 25px;
+    border: solid 1px #CCC;
+    background: #f6f6f6
+}
 
+div.admin-checkboxes div.admin-checkbox {
+    float: left;
+    width: 33%;
+    margin-bottom: 3px
+}
+
+div.admin-checkboxes div.admin-checkbox input {
+    vertical-align: middle
+}

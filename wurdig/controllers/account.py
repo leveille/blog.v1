@@ -61,7 +61,7 @@ class AccountController(BaseController):
             # This triggers the AuthKit middleware into displaying the sign-in form
             abort(401)
         else:
-            return render('/derived/account/signedin.html')
+            return render('/derived/account/dashboard.html')
 
     def signout(self):
         # The actual removal of the AuthKit cookie occurs when the response passes

@@ -1,36 +1,68 @@
-<div class="field required">
-    <label for="title">Title</label>
-    ${h.text('title')}
-</div>
-<div class="field required">
-    <label for="slug">Slug</label>
-    <span class="description">A slug will be auto-generated if left blank</span>
-    ${h.text('slug')}
-</div>
-<div class="field required">
-    <label for="content">Content</label>
-    <span class="description">The text that will make up the body of this post</span>
-    ${h.textarea('content', cols=75, rows=75)}
-</div>
-<div class="field">
-    <label for="draft">Draft?</label>
-    ${h.checkbox('draft', value=None)}
-</div>
-<div class="field">
-    <label for="comments_allowed">Comments Allowed?</label>
-    % if request.urlvars['action'] == 'new':
-        ${h.checkbox('comments_allowed', value=None, checked='checked')}
-    % else:
-        ${h.checkbox('comments_allowed', value=None)}
-    % endif
-</div>
+<table class="form">
+    <thead>
+        <tr>
+            <th colspan="2">Post Information</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><span class="required">!</span></td>
+            <td>
+                <p class="field required">
+                    <label for="title">Title</label>
+                    ${h.text('title', class_='text')}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td><span class="required">!</span></td>
+            <td>
+                <p class="field required">
+                    <label for="slug">Slug</label>
+                    ${h.text('slug', class_='text')}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td><span class="required">!</span></td>
+            <td>
+                <p class="field required">
+                    <label for="content">Content</label>
+                    ${h.textarea('content', cols=75, rows=75, class_='text')}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <p class="field">
+                    <label for="draft">Draft?</label>
+                    ${h.checkbox('draft', value=None, class_='checkbox')}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <p class="field">
+                    <label for="comments_allowed">Comments?</label>
+                    % if request.urlvars['action'] == 'new':
+                        ${h.checkbox('comments_allowed', value=None, checked='checked', class_='checkbox')}
+                    % else:
+                        ${h.checkbox('comments_allowed', value=None, class_='checkbox')}
+                    % endif
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 <h3>Tags</h3>
-<div class="multiple-checkboxes">
+<div class="admin-checkboxes">
     % for tag in c.available_tags:
-        <div class="multiple-checkbox field">
-            <label for="tags">${tag[1]}</label>
+        <div class="admin-checkbox field">
             <input type="checkbox" name="tags" value="${tag[0]}">
+            <label for="tags">${tag[1]}</label>
         </div>
     % endfor
 </div>

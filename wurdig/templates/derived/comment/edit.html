@@ -7,5 +7,6 @@
 
 ${h.form(h.url_for(action='save', controller='comment', id=request.urlvars['id']), method='post')}
     ${fields.body()}
-    ${h.submit('edit', 'Edit Comment')}
+    ${h.submit('edit', 'Edit Comment')} or
+    ${h.link_to('Cancel', h.url_for(controller='comment', action='list'))}
 ${h.end_form()}

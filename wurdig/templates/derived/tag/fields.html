@@ -1,10 +1,27 @@
-<div class="field required">
-    <label for="name">Name</label>
-    <span class="description">Tags should only contain letters, numbers, and spaces</span>
-    ${h.text('name')}
-</div>
-<div class="field required">
-    <label for="slug">Slug</label>
-    <span class="description">A slug will be auto-generated if left blank</span>
-    ${h.text('slug')}
-</div>
+<table class="form">
+    <thead>
+        <tr>
+            <th colspan="2">Tag Information</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><span class="required">!</span></td>
+            <td>
+                <p class="field required">
+                    <label for="name">Name</label>
+                    ${h.text('name', class_='text')}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td><span class="required">!</span></td>
+            <td>
+                <p class="field required">
+                    <label for="slug">Slug</label>
+                    ${h.text('slug', class_='text')}
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>

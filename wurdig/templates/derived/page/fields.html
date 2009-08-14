@@ -1,14 +1,36 @@
-<div class="field required">
-    <label for="title">Title</label>
-    ${h.text('title')}
-</div>
-<div class="field required">
-    <label for="slug">Slug</label>
-    <span class="description">A slug will be auto-generated if left blank</span>
-    ${h.text('slug')}
-</div>
-<div class="field required">
-    <label for="content">Content</label>
-    <span class="description">The text that will make up the body of the page</span>
-    ${h.textarea('content', cols=25, rows=10)}
-</div>
+<table class="form">
+    <thead>
+        <tr>
+            <th colspan="2">Page Information</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><span class="required">!</span></td>
+            <td>
+                <p class="field required">
+                    <label for="title">Title</label>
+                    ${h.text('title', class_='text')}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td><span class="required">!</span></td>
+            <td>
+                <p class="field required">
+                    <label for="slug">Slug</label>
+                    ${h.text('slug', class_='text')}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td><span class="required">!</span></td>
+            <td>
+                <p class="field required">
+                    <label for="content">Content</label>
+                    ${h.textarea('content', cols=25, rows=10, class_='text')}
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>

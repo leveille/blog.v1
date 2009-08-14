@@ -7,5 +7,6 @@
 
 ${h.form(h.url_for(action='create', controller='post'), method='post')}
     ${fields.body()}    
-    ${h.submit('create', 'Create Post')}
+    ${h.submit('create', 'Create Post')} or
+    ${h.link_to('Cancel', h.url_for(controller='post', action='list'))}
 ${h.end_form()}

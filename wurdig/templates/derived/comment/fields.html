@@ -1,7 +1,57 @@
 <%namespace file="/derived/post/comment_fields.html" name="comment_fields" import="*"/>
 
-${comment_fields.body()}
-<div class="field">
-    <label for="approved">Approved?</label>
-    ${h.checkbox('approved', value=None)}
-</div>
+<table class="form">
+    <thead>
+        <tr>
+            <th colspan="2">Comment Information</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><span class="required">!</span></td>
+            <td>
+                <p class="field required">
+                    <label for="name">Name</label>
+                    ${h.text('name', tabindex=1, class_='text')}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td><span class="required">!</span></td>
+            <td>
+                <p class="field required">
+                    <label for="email">Email</label>
+                    ${h.text('email', tabindex=2, class_='text')}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <p class="field">
+                    <label for="url">Website</label>
+                    ${h.text('url', tabindex=3, class_='text')}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td><span class="required">!</span></td>
+            <td>
+                <p class="required field">
+                    <label for="content">Comment</label>
+                    ${h.textarea('content', cols=25, rows=10, tabindex=4, class_='text')}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <p class="field">
+                    <label for="approved">Approved?</label>
+                    ${h.checkbox('approved', value=None, class_='checkbox')}
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+${h.hidden('wurdig_comment_question', value=h.wurdig_spamword().lower())}
