@@ -632,12 +632,14 @@ table.form p.required label{font-weight:bold;}
 table.form input.text,
 table.form textarea.text, 
 table.form select, 
-table.form input.checkbox{
+table.form input.checkbox,
+table.form span.mceEditor {
     margin:2px 0 10px 20px;
     float:left;
 }
 table.form input.text,
-table.form textarea.text{
+table.form textarea.text,
+table.form span.mceEditor {
     width:470px;
 }
 table.form p{
