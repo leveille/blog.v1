@@ -1,8 +1,6 @@
 <%inherit file="/base/admin-login.html"/>
 
-<%def name="title()">
-    ${parent.title()} &gt; Sign In
-</%def>
+<%def name="title()">${parent.title()} &gt; Sign In</%def>
 
 ${h.form('%s', method='post')}
     <p>

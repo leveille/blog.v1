@@ -3,13 +3,9 @@
 <%namespace file="/component/posts.html" name="posts" import="*"/>
 <%namespace file="/component/editor.html" name="editor" import="*"/>
 
-<%def name="title()">
-    ${parent.title()} &gt; ${c.post.title}
-</%def>
-
-<%def name="content_header()">
-    <p>Now Viewing</p>
-</%def>
+<%def name="title()">${c.post.title}</%def>
+<%def name="description()">${title()}</%def>
+<%def name="content_header()"><p>Now Viewing</p></%def>
 
 <%def name="ps_feeds()">
     ${h.auto_discovery_link(

@@ -1,13 +1,9 @@
 <%inherit file="/base/master.html"/>
 <%namespace file="/component/posts.html" name="posts" import="*"/>
 
-<%def name="title()">
-    ${parent.title()} &gt; Entries tagged ${c.tagname}
-</%def>
-
-<%def name="content_header()">
-    <p>Tag, you're it</p>
-</%def>
+<%def name="title()">Entries tagged ${c.tagname}</%def>
+<%def name="description()">${title()}</%def>
+<%def name="content_header()"><p>Tag, you're it</p></%def>
 
 <%def name="ps_feeds()">
     ${h.auto_discovery_link(

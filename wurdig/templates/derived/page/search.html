@@ -1,13 +1,9 @@
 <%inherit file="/base/search.html"/>
 <%namespace file="/component/wurdig.html" name="wurdig" import="search_form"/>
 
-<%def name="title()">
-    ${parent.title()} &gt; ${c.page.title}
-</%def>
-
-<%def name="content_header()">
-    <h1>Your Search Results</h1>
-</%def>
+<%def name="title()">${c.page.title}</%def>
+<%def name="description()">${title()}</%def>
+<%def name="content_header()"><h1>Your Search Results</h1></%def>
 
 <div id="wurdig-search-results">
     <h2>Search Results</h2>
