@@ -782,3 +782,13 @@ div.admin-checkboxes div.admin-checkbox {
 div.admin-checkboxes div.admin-checkbox input {
     vertical-align: middle
 }
+
+#loading {
+    position: fixed;
+    bottom: 0;
+    height: 45px;
+    width: 100%;
+    display: none;
+    background: #000 url(../gr/loading.gif) no-repeat center center;
+    border-top: solid 3px #999
+}

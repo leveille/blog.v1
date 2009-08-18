@@ -8,7 +8,6 @@ WURDIG.admin = function()
         cookie_prefix : 'wurdig.admin.',
         init: function()
         {
-        
             /**
              * Delete confirmation
              */
