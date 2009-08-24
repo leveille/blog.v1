@@ -1,7 +1,16 @@
 <%
+    from pylons import request
     from pylons.i18n.translation import _
 %>
-
 ${_('Author: %s - %s') % (c.comment.name, c.comment.email)}
 ${_('URL: %s') % c.comment.url}
+${_(u'Approve Comment:')} ${u'http://%s%s' % (request.environ['HTTP_HOST'],
+                                    h.url_for(controller='comment', 
+                                        action='approve_confirm', 
+                                        id=c.comment.id))}
+${_(u'Disapprove Comment:')} ${u'http://%s%s' % (request.environ['HTTP_HOST'],
+                                    h.url_for(controller='comment', 
+                                        action='disapprove_confirm', 
+                                        id=c.comment.id))}
+                        
 ${h.strip_tags(c.comment.content)}
