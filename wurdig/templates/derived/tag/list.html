@@ -8,7 +8,7 @@
 </%def>
 
 % if len(c.paginator):
-    <p>${ c.paginator.pager('$link_first $link_previous $first_item %s $last_item %s $item_count $link_next $link_last') % (_('to'), _('of')) }</p>
+    <p>${ c.paginator.pager('$link_first $link_previous $first_item %s $last_item %s $item_count $link_next $link_last' % (_('to'), _('of')))}</p>
     
     <table class="paginator">
         <thead>

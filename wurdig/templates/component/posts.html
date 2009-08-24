@@ -11,7 +11,7 @@
 <%def name="paginated()">
     % if len(c.paginator):
     
-        <p>${ c.paginator.pager('$link_first $link_previous $first_item %s $last_item %s $item_count $link_next $link_last') % (_('to'), _('of')) }</p>
+        <p>${ c.paginator.pager('$link_first $link_previous $first_item %s $last_item %s $item_count $link_next $link_last' % (_('to'), _('of')))}</p>
         
         <div class="wurdig-entries">
             % for post in c.paginator:

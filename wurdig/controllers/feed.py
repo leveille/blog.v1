@@ -23,9 +23,9 @@ class FeedController(BaseController):
             feed = Atom1Feed(
                 title=config['blog.title'],
                 subtitle=config['blog.subtitle'],
-                link=u"http://%s" % request.environ['HTTP_HOST'],
+                link=u'http://%s' % request.environ['HTTP_HOST'],
                 description=_(u"Most recent posts for %s") % config['blog.title'],
-                language=u"en",
+                language=u'en',
             )
             
             posts_q = meta.Session.query(model.Post).filter(
@@ -57,19 +57,19 @@ class FeedController(BaseController):
         @app_globals.cache.region('medium_term', 'comments_feed')
         def load_comments():
             feed = Atom1Feed(
-                title=u"Comments for " + h.wurdig_title(),
+                title=_(u'Comments for %s') % h.wurdig_title(),
                 subtitle=h.wurdig_subtitle(),
-                link=u"http://%s" % request.environ['HTTP_HOST'],
+                link=u'http://%s' % request.environ['HTTP_HOST'],
                 description=h.wurdig_subtitle(),
-                language=u"en",
+                language=u'en',
             )
             comments_q = meta.Session.query(model.Comment).filter(model.Comment.approved==True)
             comments_q = comments_q.order_by(model.comments_table.c.created_on.desc()).limit(20)
         
             comment_meta = u"""
             <p style="margin: 0px; padding: 5px 15px 5px 15px; border: 1px solid #000">
-            %s <a href="%s">%s</a></p>
-            """ % _('Posted in')
+            %s %s</p>
+            """ % (_('Posted in'), '<a href="%s">%s</a>')
             
             for comment in comments_q:
                 post_q = meta.Session.query(model.Post)
@@ -84,7 +84,7 @@ class FeedController(BaseController):
                     ))
                     comment_link=post_link + u"#comment-" + str(comment.id)
                     feed.add_item(
-                        title=u"Comment from %s" % comment.name,
+                        title=u'Comment from %s' % comment.name,
                         link=comment_link,
                         unique_id=comment_link,
                         author_name=comment.name,
@@ -126,14 +126,14 @@ class FeedController(BaseController):
                         month=c.post.posted_on.strftime('%m'), 
                         slug=c.post.slug
                     )),
-                description=_(u"Most recent comments for %s") % c.post.title,
-                language=u"en",
+                description=_(u'Most recent comments for %s') % c.post.title,
+                language=u'en',
             )
             
             comment_meta = u"""
             <p style="margin: 0px; padding: 5px 15px 5px 15px; border: 1px solid #000">
-            %s <a href="%s">%s</a></p>
-            """ % _('Posted in')
+            %s %s</p>
+            """ % (_('Posted in'), '<a href="%s">%s</a>')
             
             for comment in comments_q:
                 post_link=u'http://%s%s' % (request.environ['HTTP_HOST'], h.url_for(
@@ -146,7 +146,7 @@ class FeedController(BaseController):
                 comment_link=post_link + u'#comment-' + str(comment.id)
                 
                 feed.add_item(
-                    title=u"Comment from %s" % comment.name,
+                    title=_(u'Comment from %s') % comment.name,
                     link=comment_link,
                     unique_id=comment_link,
                     author_name=comment.name,
@@ -192,8 +192,8 @@ class FeedController(BaseController):
                     action='archive',
                     slug=slug
                 )),
-                description=_(u"Blog posts tagged %s") % slug,
-                language=u"en",
+                description=_(u'Blog posts tagged %s') % slug,
+                language=u'en',
             )
             
             for post in posts_q:
@@ -216,4 +216,3 @@ class FeedController(BaseController):
         feed = load_tag_posts(slug)
         response.content_type = 'application/atom+xml'
         return feed
-

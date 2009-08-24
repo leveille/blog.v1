@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wurdig 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-08-24 18:32-0400\n"
+"POT-Creation-Date: 2009-08-24 19:42-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -143,6 +143,11 @@ msgstr ""
 msgid "Most recent posts for %s"
 msgstr ""
 
+#: wurdig/controllers/feed.py:60
+#, python-format
+msgid "Comments for %s"
+msgstr ""
+
 #: wurdig/controllers/feed.py:72 wurdig/controllers/feed.py:136
 msgid "Posted in"
 msgstr ""
@@ -154,6 +159,11 @@ msgstr ""
 #: wurdig/controllers/feed.py:129
 #, python-format
 msgid "Most recent comments for %s"
+msgstr ""
+
+#: wurdig/controllers/feed.py:149
+#, python-format
+msgid "Comment from %s"
 msgstr ""
 
 #: wurdig/controllers/feed.py:189
