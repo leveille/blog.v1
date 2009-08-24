@@ -18,6 +18,7 @@ port = 5000
 use = egg:Wurdig
 full_stack = true
 static_files = true
+lang = en
 
 cache_dir = %(here)s/data
 beaker.session.key = wurdig

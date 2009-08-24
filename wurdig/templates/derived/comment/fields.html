@@ -1,9 +1,12 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <%namespace file="/derived/post/comment_fields.html" name="comment_fields" import="*"/>
 
 <table class="form">
     <thead>
         <tr>
-            <th colspan="2">Comment Information</th>
+            <th colspan="2">${_('Comment Information')}</th>
         </tr>
     </thead>
     <tbody>
@@ -11,7 +14,7 @@
             <td><span class="required">!</span></td>
             <td>
                 <p class="field required">
-                    <label for="name">Name</label>
+                    <label for="name">${_('Name')}</label>
                     ${h.text('name', tabindex=1, class_='text')}
                 </p>
             </td>
@@ -20,7 +23,7 @@
             <td><span class="required">!</span></td>
             <td>
                 <p class="field required">
-                    <label for="email">Email</label>
+                    <label for="email">${_('Email')}</label>
                     ${h.text('email', tabindex=2, class_='text')}
                 </p>
             </td>
@@ -29,7 +32,7 @@
             <td>&nbsp;</td>
             <td>
                 <p class="field">
-                    <label for="url">Website</label>
+                    <label for="url">${_('Website')}</label>
                     ${h.text('url', tabindex=3, class_='text')}
                 </p>
             </td>
@@ -38,7 +41,7 @@
             <td><span class="required">!</span></td>
             <td>
                 <p class="required field">
-                    <label for="content">Comment</label>
+                    <label for="content">${_('Comment')}</label>
                     ${h.textarea('content', cols=25, rows=10, tabindex=4, class_='text')}
                 </p>
             </td>
@@ -47,7 +50,7 @@
             <td>&nbsp;</td>
             <td>
                 <p class="field">
-                    <label for="approved">Approved?</label>
+                    <label for="approved">${_('Approved')}?</label>
                     ${h.checkbox('approved', value=None, class_='checkbox')}
                 </p>
             </td>

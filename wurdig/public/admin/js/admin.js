@@ -3,6 +3,14 @@ if(!this.WURDIG) {
 }
 WURDIG.admin = function()
 {
+    /**
+     * i18n function for Babel translation.
+     * @param {Object} str
+     */
+    function _(str) {
+        return str;
+    }
+    
     //private 
     return {
         cookie_prefix : 'wurdig.admin.',
@@ -21,14 +29,14 @@ WURDIG.admin = function()
         
         	jQuery("#search input[type=text]").focus(function(){
                var field=jQuery("#search input[type=text]").val();
-               if(field=="Enter key word(s)"){
+               if(field==_("Enter key word(s)")){
                    jQuery("#search input[type=text]").val("");
                }
             });
         	jQuery("#search input[type=text]").blur(function(){
                var field=jQuery("#search input[type=text]").val();
                if(field==""){
-                  jQuery("#search input[type=text]").val("Enter key word(s)");
+                  jQuery("#search input[type=text]").val(_("Enter key word(s)"));
                }
             });
 

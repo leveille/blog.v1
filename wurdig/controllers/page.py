@@ -13,6 +13,7 @@ from pylons import app_globals, request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
 from pylons.decorators.rest import restrict
+from pylons.i18n.translation import _
 from sqlalchemy.sql import and_, delete
 from wurdig.lib.base import BaseController, Cleanup, ConstructSlug, render
 
@@ -28,7 +29,8 @@ class UniqueSlug(formencode.FancyValidator):
         # validate that slug only contains letters, numbers, and dashes
         result = re.compile("[^\w-]").search(value)
         if result:
-            raise formencode.Invalid("Slug can only contain letters, numbers, and dashes", value, state)
+            raise formencode.Invalid(_("Slug can only contain "
+                                       "letters, numbers, and dashes") , value, state)
         
         # Ensure slug is unique
         page_q = meta.Session.query(model.Page).filter_by(slug=value)
@@ -54,7 +56,7 @@ class NewPageForm(formencode.Schema):
         not_empty=True,
         max=100, 
         messages={
-            'empty':'Enter a page title'
+            'empty': _('Enter a page title')
         },
         strip=True
     )
@@ -62,7 +64,7 @@ class NewPageForm(formencode.Schema):
     content = formencode.validators.UnicodeString(
         not_empty=True,
         messages={
-            'empty':'Enter some post content.'
+            'empty': _('Enter some post content.')
         },
         strip=True
     )
@@ -102,7 +104,7 @@ class PageController(BaseController):
         
         meta.Session.add(page)
         meta.Session.commit()
-        session['flash'] = 'Page successfully added.'
+        session['flash'] = _('Page successfully added.')
         session.save()
 
         return redirect_to(controller='page', 
@@ -149,7 +151,7 @@ class PageController(BaseController):
                 setattr(page, k, v)
             
         meta.Session.commit()
-        session['flash'] = 'Page successfully updated.'
+        session['flash'] = _('Page successfully updated.')
         session.save()
 
         return redirect_to(controller='page', 
@@ -205,8 +207,8 @@ class PageController(BaseController):
         meta.Session.commit()
         if request.is_xhr:
             response.content_type = 'application/json'
-            return "{'success':true,'msg':'The page has been deleted'}"
+            return "{'success':true,'msg':'%s'}" % _('The page has been deleted')
         else:
-            session['flash'] = 'Page successfully deleted.'
+            session['flash'] = _('Page successfully deleted.')
             session.save()
             return redirect_to(controller='page', action='list')

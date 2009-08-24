@@ -1,3 +1,6 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <%inherit file="/base/master.html"/>
 <%namespace file="/component/posts.html" name="posts" import="*"/>
 
@@ -6,7 +9,7 @@
 </%def>
 
 <%def name="content_header()">
-    <p>Home</p>
+    <p>${_('Home')}</p>
 </%def>
 
 ${posts.paginated()}

@@ -1,21 +1,23 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <%inherit file="/base/admin.html"/>
 
 <%def name="title()">
-    ${parent.title()} &gt; Approve Confirmation
+    ${parent.title()} &gt; ${_('Approve Confirmation')}
 </%def>
 
-<h2>Approve Comment</h2>
+<h2>${_('Approve Comment')}</h2>
 
-<p>Are you sure you want to approve the following comment:</p>
+<p>${_('Are you sure you want to approve the following comment')}:</p>
 
 <p>
-    Author: ${c.comment.name}<br>
+    ${_('Author')}: ${c.comment.name}<br>
     ${h.literal(c.comment.content)}
 </p>
 
 ${h.form(h.url_for(controller='comment', action='approve'), method='post')}
     ${h.hidden('id', value=c.comment.id)}
-    ${h.submit('edit', 'Yes, Approve Comment')}  or
-        <a href="${h.url_for(controller='comment', 
-                      action='list')}">Cancel</a>
+    ${h.submit('edit', _('Yes, Approve Comment'))}  ${_('or')}
+    ${h.link_to(_('Cancel'), h.url_for(controller='comment', action='list'))}
 ${h.end_form()}

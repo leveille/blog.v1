@@ -1,7 +1,10 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <table class="form">
     <thead>
         <tr>
-            <th colspan="2">Page Information</th>
+            <th colspan="2">${_('Page Information')}</th>
         </tr>
     </thead>
     <tbody>
@@ -9,7 +12,7 @@
             <td><span class="required">!</span></td>
             <td>
                 <p class="field required">
-                    <label for="title">Title</label>
+                    <label for="title">${_('Title')}</label>
                     ${h.text('title', class_='text')}
                 </p>
             </td>
@@ -18,7 +21,7 @@
             <td><span class="required">!</span></td>
             <td>
                 <p class="field required">
-                    <label for="slug">Slug</label>
+                    <label for="slug">${_('Slug')}</label>
                     ${h.text('slug', class_='text')}
                 </p>
             </td>
@@ -27,7 +30,7 @@
             <td><span class="required">!</span></td>
             <td>
                 <p class="field required">
-                    <label for="content">Content</label>
+                    <label for="content">${_('Content')}</label>
                     ${h.textarea('content', cols=25, rows=10, class_='text')}
                 </p>
             </td>

@@ -1,5 +1,6 @@
 import helpers as h
 from pylons import tmpl_context as c
+from pylons.i18n.translation import _
 from wurdig import model
 from wurdig.model import meta
 
@@ -11,16 +12,17 @@ def cloud():
     c.tags = tags_q.all()
     if len(c.tags):
         parts = []
-        parts.append('<div class="hTagCloud"><h4>Tags</h4><ul class="popularity">')
+        parts.append('<div class="hTagCloud"><h4>%s</h4><ul class="popularity">' % _('Tags'))
         for tag in c.tags:
             parts.append('<li class="%s">' % tag_weight(tag.post_count));
-            link_pattern = '<a href="%s" rel="tag" title="%s tagged with %s">%s</a>'
+            link_pattern = '<a href="%s" rel="tag" title="%s %s %s">%s</a>'
             url = h.url_for(controller='tag', 
                              action='archive', 
                              slug=tag.slug)
             parts.append(link_pattern % (url, 
                                          h.plural(tag.post_count, 'Post', 'Posts'), 
                                          tag.name, 
+                                         _('tagged with'),
                                          tag.name)
             )
             parts.append('</li>')
@@ -32,7 +34,7 @@ def post_tags(tags):
     if len(tags):
         parts, _tags = [], []
         parts.append('<span class="wurdig-entry-tags">')
-        parts.append('<strong>Tagged in</strong> : ')
+        parts.append('<strong>%s</strong> : ' % _('Tagged in'))
         for tag in tags:
             link_pattern = '<a href="%s" rel="tag">%s</a>'
             _tags.append(link_pattern % (h.url_for(controller='tag', action='archive', slug=tag.slug),

@@ -5,6 +5,7 @@ import wurdig.model.meta as meta
 
 from pylons import app_globals, config, request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
+from pylons.i18n.translation import _
 from sqlalchemy.sql import and_
 from webhelpers.feedgenerator import Atom1Feed
 from wurdig.lib.base import BaseController
@@ -23,7 +24,7 @@ class FeedController(BaseController):
                 title=config['blog.title'],
                 subtitle=config['blog.subtitle'],
                 link=u"http://%s" % request.environ['HTTP_HOST'],
-                description=u"Most recent posts for %s" % config['blog.title'],
+                description=_(u"Most recent posts for %s") % config['blog.title'],
                 language=u"en",
             )
             
@@ -67,8 +68,8 @@ class FeedController(BaseController):
         
             comment_meta = u"""
             <p style="margin: 0px; padding: 5px 15px 5px 15px; border: 1px solid #000">
-            Posted in <a href="%s">%s</a></p>
-            """
+            %s <a href="%s">%s</a></p>
+            """ % _('Posted in')
             
             for comment in comments_q:
                 post_q = meta.Session.query(model.Post)
@@ -117,7 +118,7 @@ class FeedController(BaseController):
             
             feed = Atom1Feed(
                 title=h.wurdig_title() + u' - ' + c.post.title,
-                subtitle=u'Most Recent Comments',
+                subtitle=_(u'Most Recent Comments'),
                 link=u'http://%s%s' % (request.environ['HTTP_HOST'], h.url_for(
                         controller='post', 
                         action='view', 
@@ -125,14 +126,14 @@ class FeedController(BaseController):
                         month=c.post.posted_on.strftime('%m'), 
                         slug=c.post.slug
                     )),
-                description=u"Most recent comments for %s" % c.post.title,
+                description=_(u"Most recent comments for %s") % c.post.title,
                 language=u"en",
             )
             
             comment_meta = u"""
             <p style="margin: 0px; padding: 5px 15px 5px 15px; border: 1px solid #000">
-            Posted in <a href="%s">%s</a></p>
-            """
+            %s <a href="%s">%s</a></p>
+            """ % _('Posted in')
             
             for comment in comments_q:
                 post_link=u'http://%s%s' % (request.environ['HTTP_HOST'], h.url_for(
@@ -185,13 +186,13 @@ class FeedController(BaseController):
     
             feed = Atom1Feed(
                 title=config['blog.title'],
-                subtitle=u'Blog posts tagged "%s"' % slug,
+                subtitle=_(u'Blog posts tagged "%s"') % slug,
                 link=u"http://%s%s" % (request.environ['HTTP_HOST'], h.url_for(
                     controller='tag',
                     action='archive',
                     slug=slug
                 )),
-                description=u"Blog posts tagged %s" % slug,
+                description=_(u"Blog posts tagged %s") % slug,
                 language=u"en",
             )
             

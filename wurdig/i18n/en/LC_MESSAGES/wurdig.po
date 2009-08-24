@@ -1,0 +1,974 @@
+# English translations for Wurdig.
+# Copyright (C) 2009 Jason R. Leveille
+# This file is distributed under the same license as the Wurdig project.
+# Jason R. Leveille <json.leveille@gmail.com>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Wurdig 0.1\n"
+"Report-Msgid-Bugs-To: json.leveille@gmail.com\n"
+"POT-Creation-Date: 2009-08-24 14:34+0400\n"
+"PO-Revision-Date: 2009-08-24 18:33-0400\n"
+"Last-Translator: Jason R. Leveille <json.leveille@gmail.com>\n"
+"Language-Team: en <json.levceille@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.4\n"
+
+#: wurdig/websetup.py:21
+msgid "Adding the AuthKit model..."
+msgstr ""
+
+#: wurdig/websetup.py:27
+msgid "Dropping existing tables..."
+msgstr ""
+
+#: wurdig/websetup.py:33
+msgid "Adding roles and uses..."
+msgstr ""
+
+#: wurdig/websetup.py:38
+msgid "Adding about page..."
+msgstr ""
+
+#: wurdig/websetup.py:59
+msgid "Adding teach page..."
+msgstr ""
+
+#: wurdig/websetup.py:67
+msgid "Adding search page..."
+msgstr ""
+
+#: wurdig/websetup.py:86
+msgid "Adding first post..."
+msgstr ""
+
+#: wurdig/websetup.py:95
+msgid "Adding fifth post..."
+msgstr ""
+
+#: wurdig/websetup.py:106
+msgid "Adding second post..."
+msgstr ""
+
+#: wurdig/websetup.py:117
+msgid "Adding third post..."
+msgstr ""
+
+#: wurdig/websetup.py:128
+msgid "Adding fourth post..."
+msgstr ""
+
+#: wurdig/websetup.py:139 wurdig/websetup.py:149
+msgid "Adding second post comment..."
+msgstr ""
+
+#: wurdig/websetup.py:160
+msgid "Adding first tag..."
+msgstr ""
+
+#: wurdig/websetup.py:167
+msgid "Adding second tag..."
+msgstr ""
+
+#: wurdig/websetup.py:174
+msgid "Assigning tags..."
+msgstr ""
+
+#: wurdig/controllers/account.py:19
+msgid "You entered an invalid username or password"
+msgstr ""
+
+#: wurdig/controllers/account.py:42
+msgid "Enter a username"
+msgstr ""
+
+#: wurdig/controllers/account.py:50
+msgid "Enter a password"
+msgstr ""
+
+#: wurdig/controllers/comment.py:25
+msgid "Your comment has been identified as spam.  Are you a spammer?"
+msgstr ""
+
+#: wurdig/controllers/comment.py:58
+msgid "Double check your answer to the spam prevention question and resubmit."
+msgstr ""
+
+#: wurdig/controllers/comment.py:73
+msgid "Please enter a comment."
+msgstr ""
+
+#: wurdig/controllers/comment.py:156
+#, python-format
+msgid "New Comment for \"%s\""
+msgstr ""
+
+#: wurdig/controllers/comment.py:161
+msgid "Your comment is currently being moderated."
+msgstr ""
+
+#: wurdig/controllers/comment.py:163
+msgid "Your comment has been approved."
+msgstr ""
+
+#: wurdig/controllers/comment.py:222
+msgid "Comment successfully updated."
+msgstr ""
+
+#: wurdig/controllers/comment.py:292
+msgid "The comment has been approved"
+msgstr ""
+
+#: wurdig/controllers/comment.py:294 wurdig/controllers/comment.py:341
+msgid "Comment successfully approved."
+msgstr ""
+
+#: wurdig/controllers/comment.py:386
+msgid "The comment has been deleted"
+msgstr ""
+
+#: wurdig/controllers/comment.py:388
+msgid "Comment successfully deleted."
+msgstr ""
+
+#: wurdig/controllers/error.py:33
+msgid "No status code was found"
+msgstr ""
+
+#: wurdig/controllers/feed.py:27
+#, python-format
+msgid "Most recent posts for %s"
+msgstr ""
+
+#: wurdig/controllers/feed.py:72 wurdig/controllers/feed.py:136
+msgid "Posted in"
+msgstr ""
+
+#: wurdig/controllers/feed.py:121
+msgid "Most Recent Comments"
+msgstr ""
+
+#: wurdig/controllers/feed.py:129
+#, python-format
+msgid "Most recent comments for %s"
+msgstr ""
+
+#: wurdig/controllers/feed.py:189
+#, python-format
+msgid "Blog posts tagged \"%s\""
+msgstr ""
+
+#: wurdig/controllers/feed.py:195
+#, python-format
+msgid "Blog posts tagged %s"
+msgstr ""
+
+#: wurdig/controllers/page.py:32 wurdig/controllers/post.py:32
+#: wurdig/controllers/tag.py:68
+msgid "Slug can only contain letters, numbers, and dashes"
+msgstr ""
+
+#: wurdig/controllers/page.py:59
+msgid "Enter a page title"
+msgstr ""
+
+#: wurdig/controllers/page.py:67 wurdig/controllers/post.py:81
+msgid "Enter some post content."
+msgstr ""
+
+#: wurdig/controllers/page.py:107
+msgid "Page successfully added."
+msgstr ""
+
+#: wurdig/controllers/page.py:154
+msgid "Page successfully updated."
+msgstr ""
+
+#: wurdig/controllers/page.py:210
+msgid "The page has been deleted"
+msgstr ""
+
+#: wurdig/controllers/page.py:212
+msgid "Page successfully deleted."
+msgstr ""
+
+#: wurdig/controllers/post.py:24
+msgid "Slug must be unique"
+msgstr ""
+
+#: wurdig/controllers/post.py:52
+msgid "One ore more selected tags could not be found in the database"
+msgstr ""
+
+#: wurdig/controllers/post.py:73
+msgid "Enter a post title"
+msgstr ""
+
+#: wurdig/controllers/post.py:209
+msgid "Post successfully added."
+msgstr ""
+
+#: wurdig/controllers/post.py:291
+msgid "Post successfully updated."
+msgstr ""
+
+#: wurdig/controllers/post.py:355
+msgid "The post has been deleted"
+msgstr ""
+
+#: wurdig/controllers/post.py:357
+msgid "Post successfully deleted."
+msgstr ""
+
+#: wurdig/controllers/tag.py:32
+msgid "Tag name must be unique"
+msgstr ""
+
+#: wurdig/controllers/tag.py:40
+msgid "Tag name can only contain letters, numbers, and spaces"
+msgstr ""
+
+#: wurdig/controllers/tag.py:60
+msgid "Tag slug must be unique"
+msgstr ""
+
+#: wurdig/controllers/tag.py:164
+msgid "Tag successfully added."
+msgstr ""
+
+#: wurdig/controllers/tag.py:207
+msgid "Tag successfully updated."
+msgstr ""
+
+#: wurdig/controllers/tag.py:262
+msgid "The tag has been deleted"
+msgstr ""
+
+#: wurdig/controllers/tag.py:264
+msgid "Tag successfully deleted."
+msgstr ""
+
+#: wurdig/lib/comment.py:61
+msgid "Shared in"
+msgstr ""
+
+#: wurdig/lib/comment.py:62
+msgid "Newest Comments"
+msgstr ""
+
+#: wurdig/lib/feed_display.py:25
+msgid "Bookmarks"
+msgstr ""
+
+#: wurdig/lib/feed_display.py:49
+msgid "Public Flickr Stream"
+msgstr ""
+
+#: wurdig/lib/feed_display.py:74
+msgid "Twitter Updates"
+msgstr ""
+
+#: wurdig/lib/feed_display.py:76
+msgid "Follow"
+msgstr ""
+
+#: wurdig/lib/mail.py:92 wurdig/lib/mail.py:112
+#, python-format
+msgid "Header values can't contain newlines (got %r for header %r)"
+msgstr ""
+
+#: wurdig/lib/tag.py:15 wurdig/templates/base/admin.html:120
+#: wurdig/templates/derived/post/fields.html:63
+msgid "Tags"
+msgstr ""
+
+#: wurdig/lib/tag.py:25
+msgid "tagged with"
+msgstr ""
+
+#: wurdig/lib/tag.py:37
+msgid "Tagged in"
+msgstr ""
+
+#: wurdig/public/admin/js/admin.js:32 wurdig/public/admin/js/admin.js:39
+msgid "Enter key word(s)"
+msgstr ""
+
+#: wurdig/public/javascripts/utils.js:38
+msgid "Are you positive you want to do that?"
+msgstr ""
+
+#: wurdig/public/javascripts/utils.js:59
+msgid "The item has successfully been deleted."
+msgstr ""
+
+#: wurdig/public/javascripts/utils.js:66
+#: wurdig/templates/derived/comment/list.html:47
+msgid "Disapprove"
+msgstr ""
+
+#: wurdig/public/javascripts/utils.js:68
+msgid "The item has successfully been approved."
+msgstr ""
+
+#: wurdig/public/javascripts/utils.js:74
+#: wurdig/templates/derived/comment/list.html:38
+msgid "Approve"
+msgstr ""
+
+#: wurdig/public/javascripts/utils.js:75
+msgid "The item has successfully been disapproved."
+msgstr ""
+
+#: wurdig/public/javascripts/utils.js:80
+msgid "Your+request+has+been+completed+successfully"
+msgstr ""
+
+#: wurdig/public/javascripts/utils.js:85
+msgid "An unexpected error has occurred."
+msgstr ""
+
+#: wurdig/templates/base/admin-login.html:11
+msgid "Admin Login"
+msgstr ""
+
+#: wurdig/templates/base/admin-login.html:19
+#: wurdig/templates/base/admin.html:35
+#: wurdig/templates/component/wurdig.html:105
+msgid "Administrator"
+msgstr ""
+
+#: wurdig/templates/base/admin-login.html:26
+msgid "Login"
+msgstr ""
+
+#: wurdig/templates/base/admin.html:21
+msgid "User"
+msgstr ""
+
+#: wurdig/templates/base/admin.html:25
+#: wurdig/templates/component/wurdig.html:53
+#: wurdig/templates/component/wurdig.html:81
+#: wurdig/templates/component/wurdig.html:82
+#: wurdig/templates/derived/post/home.html:12
+msgid "Home"
+msgstr ""
+
+#: wurdig/templates/base/admin.html:45 wurdig/templates/base/admin.html:76
+msgid "Log Out"
+msgstr ""
+
+#: wurdig/templates/base/admin.html:66 wurdig/templates/base/admin.html:70
+#: wurdig/templates/base/admin.html:71
+#: wurdig/templates/derived/account/dashboard.html:7
+msgid "Dashboard"
+msgstr ""
+
+#: wurdig/templates/base/admin.html:81
+msgid "Posts"
+msgstr ""
+
+#: wurdig/templates/base/admin.html:85 wurdig/templates/base/admin.html:100
+#: wurdig/templates/base/admin.html:109 wurdig/templates/base/admin.html:124
+msgid "List"
+msgstr ""
+
+#: wurdig/templates/base/admin.html:91 wurdig/templates/base/admin.html:115
+#: wurdig/templates/base/admin.html:130
+msgid "New"
+msgstr ""
+
+#: wurdig/templates/base/admin.html:96 wurdig/templates/component/posts.html:48
+#: wurdig/templates/component/wurdig.html:165
+#: wurdig/templates/component/wurdig.html:166
+#: wurdig/templates/component/wurdig.html:256
+#: wurdig/templates/component/wurdig.html:257
+#: wurdig/templates/derived/post/fields.html:51
+#: wurdig/templates/derived/post/list.html:18
+#: wurdig/templates/derived/post/view.html:136
+msgid "Comments"
+msgstr ""
+
+#: wurdig/templates/base/admin.html:105
+msgid "Pages"
+msgstr ""
+
+#: wurdig/templates/base/admin.html:141
+#: wurdig/templates/component/wurdig.html:262
+msgid "Powered by"
+msgstr ""
+
+#: wurdig/templates/component/posts.html:14
+#: wurdig/templates/derived/comment/list.html:11
+#: wurdig/templates/derived/page/list.html:11
+#: wurdig/templates/derived/post/list.html:11
+#: wurdig/templates/derived/tag/list.html:11
+msgid "to"
+msgstr ""
+
+#: wurdig/templates/component/posts.html:14
+#: wurdig/templates/derived/comment/list.html:11
+#: wurdig/templates/derived/page/list.html:11
+#: wurdig/templates/derived/post/list.html:11
+#: wurdig/templates/derived/tag/list.html:11
+msgid "of"
+msgstr ""
+
+#: wurdig/templates/component/posts.html:24
+msgid "No posts were found that matched your request."
+msgstr ""
+
+#: wurdig/templates/component/posts.html:48
+#: wurdig/templates/derived/comment/fields.html:44
+#: wurdig/templates/derived/post/comment_fields.html:33
+#: wurdig/templates/derived/post/view.html:136
+msgid "Comment"
+msgstr ""
+
+#: wurdig/templates/component/posts.html:58
+#: wurdig/templates/derived/post/view.html:146
+msgid "No Comments"
+msgstr ""
+
+#: wurdig/templates/component/posts.html:83
+#: wurdig/templates/component/wurdig.html:106
+#: wurdig/templates/derived/post/view.html:41
+msgid "Admin"
+msgstr ""
+
+#: wurdig/templates/component/posts.html:85
+#: wurdig/templates/derived/post/view.html:43
+msgid "Edit This Post"
+msgstr ""
+
+#: wurdig/templates/component/wurdig.html:52
+msgid "Jump to Content"
+msgstr ""
+
+#: wurdig/templates/component/wurdig.html:87
+msgid "About This Site"
+msgstr ""
+
+#: wurdig/templates/component/wurdig.html:88
+msgid "About"
+msgstr ""
+
+#: wurdig/templates/component/wurdig.html:93
+#: wurdig/templates/component/wurdig.html:94
+msgid "Teaching"
+msgstr ""
+
+#: wurdig/templates/component/wurdig.html:99
+msgid "Contact"
+msgstr ""
+
+#: wurdig/templates/component/wurdig.html:113
+#: wurdig/templates/component/wurdig.html:114
+msgid "Sign Out"
+msgstr ""
+
+#: wurdig/templates/component/wurdig.html:120
+#: wurdig/templates/component/wurdig.html:121
+#: wurdig/templates/derived/account/signedout.html:16
+#: wurdig/templates/derived/account/signin.html:7
+msgid "Sign In"
+msgstr ""
+
+#: wurdig/templates/component/wurdig.html:138
+#: wurdig/templates/derived/error/document.html:17
+msgid "Search"
+msgstr ""
+
+#: wurdig/templates/component/wurdig.html:148
+msgid "Feeds"
+msgstr ""
+
+#: wurdig/templates/component/wurdig.html:153
+#: wurdig/templates/component/wurdig.html:154
+#: wurdig/templates/component/wurdig.html:158
+#: wurdig/templates/component/wurdig.html:159
+#: wurdig/templates/component/wurdig.html:244
+#: wurdig/templates/component/wurdig.html:249
+msgid "Blog"
+msgstr ""
+
+#: wurdig/templates/component/wurdig.html:178
+#: wurdig/templates/derived/post/view.html:119
+msgid "Comments Feed"
+msgstr ""
+
+#: wurdig/templates/component/wurdig.html:179
+msgid "Post Comments"
+msgstr ""
+
+#: wurdig/templates/component/wurdig.html:192
+msgid "Posts Tagged"
+msgstr ""
+
+#: wurdig/templates/component/wurdig.html:203
+msgid "Blogroll"
+msgstr ""
+
+#: wurdig/templates/component/wurdig.html:245
+#: wurdig/templates/component/wurdig.html:250
+msgid "Blog Feed"
+msgstr ""
+
+#: wurdig/templates/component/wurdig.html:263
+msgid "built with"
+msgstr ""
+
+#: wurdig/templates/derived/account/signedout.html:7
+#: wurdig/templates/derived/account/signedout.html:14
+msgid "Signed Out"
+msgstr ""
+
+#: wurdig/templates/derived/account/signedout.html:11
+msgid "admin"
+msgstr ""
+
+#: wurdig/templates/derived/account/signedout.html:16
+msgid "You have been signed out"
+msgstr ""
+
+#: wurdig/templates/derived/account/signin.html:12
+msgid "Username"
+msgstr ""
+
+#: wurdig/templates/derived/account/signin.html:16
+msgid "Password"
+msgstr ""
+
+#: wurdig/templates/derived/comment/approve_confirm.html:7
+msgid "Approve Confirmation"
+msgstr ""
+
+#: wurdig/templates/derived/comment/approve_confirm.html:10
+msgid "Approve Comment"
+msgstr ""
+
+#: wurdig/templates/derived/comment/approve_confirm.html:12
+msgid "Are you sure you want to approve the following comment"
+msgstr ""
+
+#: wurdig/templates/derived/comment/approve_confirm.html:15
+#: wurdig/templates/derived/comment/delete_confirm.html:15
+#: wurdig/templates/derived/comment/disapprove_confirm.html:15
+msgid "Author"
+msgstr ""
+
+#: wurdig/templates/derived/comment/approve_confirm.html:21
+msgid "Yes, Approve Comment"
+msgstr ""
+
+#: wurdig/templates/derived/comment/approve_confirm.html:21
+#: wurdig/templates/derived/comment/delete_confirm.html:21
+#: wurdig/templates/derived/comment/disapprove_confirm.html:21
+#: wurdig/templates/derived/comment/edit.html:19
+#: wurdig/templates/derived/comment/new.html:25
+#: wurdig/templates/derived/page/delete_confirm.html:14
+#: wurdig/templates/derived/page/edit.html:19
+#: wurdig/templates/derived/page/new.html:19
+#: wurdig/templates/derived/post/delete_confirm.html:14
+#: wurdig/templates/derived/post/edit.html:19
+#: wurdig/templates/derived/post/new.html:19
+#: wurdig/templates/derived/tag/delete_confirm.html:14
+msgid "or"
+msgstr ""
+
+#: wurdig/templates/derived/comment/approve_confirm.html:22
+#: wurdig/templates/derived/comment/delete_confirm.html:22
+#: wurdig/templates/derived/comment/disapprove_confirm.html:22
+#: wurdig/templates/derived/comment/edit.html:20
+#: wurdig/templates/derived/comment/new.html:26
+#: wurdig/templates/derived/page/delete_confirm.html:15
+#: wurdig/templates/derived/page/edit.html:20
+#: wurdig/templates/derived/page/new.html:20
+#: wurdig/templates/derived/post/delete_confirm.html:15
+#: wurdig/templates/derived/post/edit.html:20
+#: wurdig/templates/derived/post/new.html:20
+#: wurdig/templates/derived/tag/delete_confirm.html:15
+#: wurdig/templates/derived/tag/edit.html:14
+#: wurdig/templates/derived/tag/new.html:14
+msgid "Cancel"
+msgstr ""
+
+#: wurdig/templates/derived/comment/delete_confirm.html:7
+msgid "Delete Confirmation"
+msgstr ""
+
+#: wurdig/templates/derived/comment/delete_confirm.html:10
+msgid "Delete Comment"
+msgstr ""
+
+#: wurdig/templates/derived/comment/delete_confirm.html:12
+msgid "Are you sure you want to delete the following comment"
+msgstr ""
+
+#: wurdig/templates/derived/comment/delete_confirm.html:21
+msgid "Yes, Delete Comment"
+msgstr ""
+
+#: wurdig/templates/derived/comment/disapprove_confirm.html:7
+msgid "Disapprove Confirmation"
+msgstr ""
+
+#: wurdig/templates/derived/comment/disapprove_confirm.html:10
+msgid "Disapprove Comment"
+msgstr ""
+
+#: wurdig/templates/derived/comment/disapprove_confirm.html:12
+msgid "Are you sure you want to disapprove the following comment"
+msgstr ""
+
+#: wurdig/templates/derived/comment/disapprove_confirm.html:21
+msgid "Yes, Disapprove Comment"
+msgstr ""
+
+#: wurdig/templates/derived/comment/edit.html:10
+#: wurdig/templates/derived/comment/edit.html:19
+msgid "Edit Comment"
+msgstr ""
+
+#: wurdig/templates/derived/comment/fields.html:9
+msgid "Comment Information"
+msgstr ""
+
+#: wurdig/templates/derived/comment/fields.html:17
+#: wurdig/templates/derived/comment/list.html:16
+#: wurdig/templates/derived/post/comment_fields.html:5
+#: wurdig/templates/derived/tag/fields.html:15
+#: wurdig/templates/derived/tag/list.html:16
+msgid "Name"
+msgstr ""
+
+#: wurdig/templates/derived/comment/fields.html:26
+#: wurdig/templates/derived/post/comment_fields.html:13
+#: wurdig/templates/derived/post/comment_fields.html:20
+msgid "Email"
+msgstr ""
+
+#: wurdig/templates/derived/comment/fields.html:35
+#: wurdig/templates/derived/post/comment_fields.html:26
+msgid "Website"
+msgstr ""
+
+#: wurdig/templates/derived/comment/fields.html:53
+msgid "Approved"
+msgstr ""
+
+#: wurdig/templates/derived/comment/list.html:7
+msgid "Comment List"
+msgstr ""
+
+#: wurdig/templates/derived/comment/list.html:17
+#: wurdig/templates/derived/page/fields.html:33
+#: wurdig/templates/derived/post/fields.html:33
+msgid "Content"
+msgstr ""
+
+#: wurdig/templates/derived/comment/list.html:18
+#: wurdig/templates/derived/post/list.html:17
+msgid "Posted"
+msgstr ""
+
+#: wurdig/templates/derived/comment/list.html:19
+#: wurdig/templates/derived/page/list.html:17
+#: wurdig/templates/derived/post/list.html:19
+#: wurdig/templates/derived/tag/list.html:17
+msgid "Action"
+msgstr ""
+
+#: wurdig/templates/derived/comment/list.html:57
+#: wurdig/templates/derived/page/list.html:33
+#: wurdig/templates/derived/post/list.html:49
+#: wurdig/templates/derived/post/view.html:68
+#: wurdig/templates/derived/tag/list.html:32
+msgid "Edit"
+msgstr ""
+
+#: wurdig/templates/derived/comment/list.html:65
+#: wurdig/templates/derived/page/list.html:37
+#: wurdig/templates/derived/post/list.html:53
+#: wurdig/templates/derived/post/view.html:74
+#: wurdig/templates/derived/tag/list.html:36
+msgid "Delete"
+msgstr ""
+
+#: wurdig/templates/derived/comment/list.html:80
+msgid "No comments have yet been created"
+msgstr ""
+
+#: wurdig/templates/derived/comment/new.html:9
+#: wurdig/templates/derived/post/view.html:166
+msgid "Comment for"
+msgstr ""
+
+#: wurdig/templates/derived/comment/new.html:17
+msgid "Comment Errors"
+msgstr ""
+
+#: wurdig/templates/derived/comment/new.html:20
+msgid "Comment Errors for"
+msgstr ""
+
+#: wurdig/templates/derived/comment/new.html:25
+#: wurdig/templates/derived/post/view.html:109
+msgid "Create Comment"
+msgstr ""
+
+#: wurdig/templates/derived/error/document.html:8
+#: wurdig/templates/derived/error/document.html:12
+msgid "Server Error"
+msgstr ""
+
+#: wurdig/templates/derived/page/delete_confirm.html:7
+msgid "Page Delete Confirmation"
+msgstr ""
+
+#: wurdig/templates/derived/page/delete_confirm.html:10
+msgid "Are you sure you want to delete the page titled"
+msgstr ""
+
+#: wurdig/templates/derived/page/delete_confirm.html:14
+#: wurdig/templates/derived/post/delete_confirm.html:14
+msgid "Yes, Delete Page"
+msgstr ""
+
+#: wurdig/templates/derived/page/edit.html:10
+msgid "Edit Page"
+msgstr ""
+
+#: wurdig/templates/derived/page/edit.html:19
+#: wurdig/templates/derived/post/edit.html:19
+msgid "Submit Edits"
+msgstr ""
+
+#: wurdig/templates/derived/page/fields.html:7
+msgid "Page Information"
+msgstr ""
+
+#: wurdig/templates/derived/page/fields.html:15
+#: wurdig/templates/derived/post/fields.html:15
+msgid "Title"
+msgstr ""
+
+#: wurdig/templates/derived/page/fields.html:24
+#: wurdig/templates/derived/post/fields.html:24
+#: wurdig/templates/derived/tag/fields.html:24
+msgid "Slug"
+msgstr ""
+
+#: wurdig/templates/derived/page/list.html:7
+msgid "Page List"
+msgstr ""
+
+#: wurdig/templates/derived/page/list.html:16
+msgid "Page Title"
+msgstr ""
+
+#: wurdig/templates/derived/page/new.html:10
+msgid "Create a New Page"
+msgstr ""
+
+#: wurdig/templates/derived/page/new.html:19
+msgid "Create Page"
+msgstr ""
+
+#: wurdig/templates/derived/page/search.html:12
+msgid "Your Search Results"
+msgstr ""
+
+#: wurdig/templates/derived/page/search.html:16
+msgid "Search Results"
+msgstr ""
+
+#: wurdig/templates/derived/page/view.html:11
+#: wurdig/templates/derived/post/view.html:14
+msgid "Now Viewing"
+msgstr ""
+
+#: wurdig/templates/derived/page/view.html:24
+msgid "Edit This Page"
+msgstr ""
+
+#: wurdig/templates/derived/post/archive.html:8
+msgid "Archives for"
+msgstr ""
+
+#: wurdig/templates/derived/post/archive.html:12
+msgid "The Archives"
+msgstr ""
+
+#: wurdig/templates/derived/post/archive.html:15
+msgid "Post Archives for"
+msgstr ""
+
+#: wurdig/templates/derived/post/comment_fields.html:14
+msgid "will not be published.  Associates"
+msgstr ""
+
+#: wurdig/templates/derived/post/comment_fields.html:41
+msgid "Remember"
+msgstr ""
+
+#: wurdig/templates/derived/post/comment_fields.html:51
+msgid "Please enter"
+msgstr ""
+
+#: wurdig/templates/derived/post/comment_fields.html:53
+msgid "below"
+msgstr ""
+
+#: wurdig/templates/derived/post/comment_fields.html:55
+msgid "Spamword"
+msgstr ""
+
+#: wurdig/templates/derived/post/delete_confirm.html:7
+msgid "Post Delete Confirmation"
+msgstr ""
+
+#: wurdig/templates/derived/post/delete_confirm.html:10
+msgid "Are you sure you want to delete the post titled"
+msgstr ""
+
+#: wurdig/templates/derived/post/edit.html:10
+msgid "Edit Post"
+msgstr ""
+
+#: wurdig/templates/derived/post/fields.html:7
+msgid "Post Information"
+msgstr ""
+
+#: wurdig/templates/derived/post/fields.html:42
+#: wurdig/templates/derived/post/list.html:41
+msgid "Draft"
+msgstr ""
+
+#: wurdig/templates/derived/post/list.html:7
+msgid "Post List"
+msgstr ""
+
+#: wurdig/templates/derived/post/list.html:16
+msgid "Post Title"
+msgstr ""
+
+#: wurdig/templates/derived/post/new.html:10
+msgid "New Post"
+msgstr ""
+
+#: wurdig/templates/derived/post/new.html:19
+msgid "Create Post"
+msgstr ""
+
+#: wurdig/templates/derived/post/view.html:25
+#, python-format
+msgid "Recent Comments for \"%s\""
+msgstr ""
+
+#: wurdig/templates/derived/post/view.html:67
+msgid "Edit Comment From"
+msgstr ""
+
+#: wurdig/templates/derived/post/view.html:73
+msgid "Delete Comment From"
+msgstr ""
+
+#: wurdig/templates/derived/post/view.html:95
+msgid "Link"
+msgstr ""
+
+#: wurdig/templates/derived/post/view.html:104
+msgid "Leave a Comment"
+msgstr ""
+
+#: wurdig/templates/derived/post/view.html:120
+msgid "Subscribe to post comments"
+msgstr ""
+
+#: wurdig/templates/derived/post/view.html:121
+msgid "Subscribe to comments for"
+msgstr ""
+
+#: wurdig/templates/derived/post/view.html:126
+#: wurdig/templates/derived/post/view.html:161
+msgid "Comments have been disabled for this post"
+msgstr ""
+
+#: wurdig/templates/derived/post/view.html:166
+msgid "Comments for"
+msgstr ""
+
+#: wurdig/templates/derived/tag/archive.html:8
+#: wurdig/templates/derived/tag/archive.html:27
+msgid "Entries tagged"
+msgstr ""
+
+#: wurdig/templates/derived/tag/archive.html:12
+msgid "Tag, you're it"
+msgstr ""
+
+#: wurdig/templates/derived/tag/archive.html:23
+#, python-format
+msgid "Posts tagged \"%s\""
+msgstr ""
+
+#: wurdig/templates/derived/tag/cloud.html:8
+#: wurdig/templates/derived/tag/cloud.html:15
+msgid "Tag Cloud"
+msgstr ""
+
+#: wurdig/templates/derived/tag/cloud.html:12
+msgid "In the cloud"
+msgstr ""
+
+#: wurdig/templates/derived/tag/delete_confirm.html:7
+msgid "Tag Delete Confirmation"
+msgstr ""
+
+#: wurdig/templates/derived/tag/delete_confirm.html:10
+msgid "Are you sure you want to delete the tag named"
+msgstr ""
+
+#: wurdig/templates/derived/tag/delete_confirm.html:14
+msgid "Yes, Delete Tag"
+msgstr ""
+
+#: wurdig/templates/derived/tag/edit.html:8
+#: wurdig/templates/derived/tag/edit.html:13
+msgid "Edit Tag"
+msgstr ""
+
+#: wurdig/templates/derived/tag/fields.html:7
+msgid "Tag Information"
+msgstr ""
+
+#: wurdig/templates/derived/tag/list.html:7
+msgid "Tag List"
+msgstr ""
+
+#: wurdig/templates/derived/tag/list.html:28
+msgid "View"
+msgstr ""
+
+#: wurdig/templates/derived/tag/new.html:8
+msgid "Create a New Tag"
+msgstr ""
+
+#: wurdig/templates/derived/tag/new.html:13
+msgid "Create Tag"
+msgstr ""
+
+#: wurdig/templates/email/new_comment.html:5
+#, python-format
+msgid "Author: %s - %s"
+msgstr ""
+
+#: wurdig/templates/email/new_comment.html:6
+#, python-format
+msgid "URL: %s"
+msgstr ""
+

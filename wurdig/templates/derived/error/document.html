@@ -1,16 +1,19 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <%inherit file="/base/master.html"/>
 <%namespace file="/component/wurdig.html" name="wurdig" import="search_form"/>
 
 <%def name="title()">
-    Server Error ${c.code}
+    ${_('Server Error')} ${c.code}
 </%def>
 
 <%def name="content_header()">
-    <h1>Server Error ${c.code}</h1>
+    <h1>${_('Server Error')} ${c.code}</h1>
 </%def>
 
 <p>${c.message}</p>
 
-<h2>Search</h2>
+<h2>${_('Search')}</h2>
 
 ${wurdig.search_form()}

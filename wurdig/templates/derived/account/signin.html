@@ -1,16 +1,19 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <%inherit file="/base/admin-login.html"/>
 
 <%def name="title()">
-    ${parent.title()} &gt; Sign In
+    ${parent.title()} &gt; ${_('Sign In')}
 </%def>
 
 ${h.form('%s', method='post')}
     <p>
-        <label for="username">Username</label>
+        <label for="username">${_('Username')}</label>
         ${h.text('username', tabindex=1)}
     </p>
     <p>
-        <label for="password">Password</label>
+        <label for="password">${_('Password')}</label>
         ${h.password('password', tabindex=2)}
     </p>
     <p class="submit">

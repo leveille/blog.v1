@@ -8,6 +8,7 @@ from formencode import htmlfill
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
+from pylons.i18n.translation import _
 from sqlalchemy.sql import and_
 from wurdig.lib.base import BaseController, render
 
@@ -15,7 +16,7 @@ log = logging.getLogger(__name__)
 
 class ValidLogin(formencode.FancyValidator):
     messages = {
-        'invalid': 'You entered an invalid username or password'
+        'invalid': _('You entered an invalid username or password')
     }
     def _to_python(self, values, state):
         user_q = meta.Session.query(model.User).filter(
@@ -38,7 +39,7 @@ class MyLoginForm(formencode.Schema):
         not_empty=True,
         max=15, 
         messages={
-            'empty':'Enter a username'
+            'empty': _('Enter a username')
         },
         strip=True
     )
@@ -46,7 +47,7 @@ class MyLoginForm(formencode.Schema):
         not_empty=True,
         max=25, 
         messages={
-            'empty':'Enter a password'
+            'empty': _('Enter a password')
         },
         strip=True
     )

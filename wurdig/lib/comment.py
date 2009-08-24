@@ -1,5 +1,6 @@
 import helpers as h
 from formencode import htmlfill
+from pylons.i18n.translation import _
 from wurdig import model
 from wurdig.model import meta
 from wurdig.lib.base import render
@@ -25,7 +26,7 @@ def recent_comments():
         comments= []
         template = """
         <div id="wurdig-recent-comments" class="wurdig-sidebar-list">
-            <h4>Newest Comments</h4>
+            <h4>%s</h4>
             <ul>
                 %s
             </ul>
@@ -37,7 +38,7 @@ def recent_comments():
                 <li class="%s">
                     <span class="lone">%s shared: </span>
                     <span>%s</span>
-                    <span>Shared in: %s</span>
+                    <span>%s: %s</span>
                 </li>
             """
             name = comment.name
@@ -57,6 +58,6 @@ def recent_comments():
                     anchor=u"comment-" + str(comment.id)
                 )
             )
-            comments.append(i % (comment.id, name, content, link))
-        return template % '\n'.join(comments)
+            comments.append(i % (comment.id, name, content, _('Shared in'), link))
+        return template % (_('Newest Comments'), '\n'.join(comments))
     

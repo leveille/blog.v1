@@ -1,24 +1,27 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <%inherit file="/base/admin.html"/>
 
 <%def name="title()">
-    ${parent.title()} &gt; Delete Confirmation
+    ${parent.title()} &gt; ${_('Delete Confirmation')}
 </%def>
 
-<h2>Delete Comment</h2>
+<h2>${_('Delete Comment')}</h2>
 
-<p>Are you sure you want to delete the following comment:</p>
+<p>${_('Are you sure you want to delete the following comment')}:</p>
 
 <p>
-    Author: ${c.comment.name}<br>
+    ${_('Author')}: ${c.comment.name}<br>
     ${h.literal(c.comment.content)}
 </p>
 
 ${h.form(h.url_for(controller='comment', action='delete'), method='post')}
     ${h.hidden('id', value=c.comment.id)}
-    ${h.submit('edit', 'Yes, Delete Comment')}  or
-        <a href="${h.url_for(controller='post', 
-                      action='view', 
-                      year=c.post.posted_on.strftime('%Y'), 
-                      month=c.post.posted_on.strftime('%m'), 
-                      slug=c.post.slug)}">Cancel</a>
+    ${h.submit('edit', _('Yes, Delete Comment'))}  ${_('or')}
+    ${h.link_to(_('Cancel'), h.url_for(controller='post', 
+                                       action='view', 
+                                       year=c.post.posted_on.strftime('%Y'), 
+                                       month=c.post.posted_on.strftime('%m'), 
+                                       slug=c.post.slug))}
 ${h.end_form()}

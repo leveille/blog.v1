@@ -1,3 +1,7 @@
-${'Author: %s - %s' % (c.comment.name, c.comment.email)}
-${'URL: %s' % c.comment.url}
+<%
+    from pylons.i18n.translation import _
+%>
+
+${_('Author: %s - %s') % (c.comment.name, c.comment.email)}
+${_('URL: %s') % c.comment.url}
 ${h.strip_tags(c.comment.content)}

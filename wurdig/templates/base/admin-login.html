@@ -1,11 +1,14 @@
 ## -*- coding: utf-8 -*-
 <%namespace file="/component/admin.html" name="admin" import="*"/>
+<%
+    from pylons.i18n.translation import _
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-        <title>${h.wurdig_title()} - Admin Login</title>
+        <title>${h.wurdig_title()} - ${_('Admin Login')}</title>
         ${admin.css()}
     </head>
     <body role="application">
@@ -13,14 +16,14 @@
             <div id="hd">                
                 <div id="logo" role="banner">
                     <div class="wrapper">
-                        <h6>${h.wurdig_title()} Administrator</h6>
+                        <h6>${h.wurdig_title()} ${_('Administrator')}</h6>
                         <img src="/admin/gr/header/logo.png" alt="Wurdig">
                     </div>
                 </div>
             </div>
             <div id="streamer">
                 <div id="bd">
-                    <h1>Login</h1>
+                    <h1>${_('Login')}</h1>
                     <div class="pad">
                         ${admin.flash()}
                         <div id="login">

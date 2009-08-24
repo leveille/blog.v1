@@ -13,6 +13,7 @@ from pylons import app_globals, config, request, response, session, tmpl_context
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
 from pylons.decorators.rest import restrict
+from pylons.i18n.translation import _
 from sqlalchemy import func
 from sqlalchemy.sql import and_, delete
 from wurdig.lib.base import BaseController, render
@@ -28,7 +29,7 @@ class ConstructSlug(formencode.FancyValidator):
 
 class UniqueName(formencode.FancyValidator):
     messages = {
-        'invalid': 'Tag name must be unique'
+        'invalid': _('Tag name must be unique')
     }
     def _to_python(self, value, state):
         # Ensure we have a valid string
@@ -36,7 +37,8 @@ class UniqueName(formencode.FancyValidator):
         # validate that tag only contains letters, numbers, and spaces
         result = re.compile("[^a-zA-Z0-9 ]").search(value)
         if result:
-            raise formencode.Invalid("Tag name can only contain letters, numbers, and spaces", value, state)
+            raise formencode.Invalid(_("Tag name can only contain "
+                                       "letters, numbers, and spaces"), value, state)
         
         # Ensure tag name is unique
         tag_q = meta.Session.query(model.Tag).filter_by(name=value)
@@ -55,7 +57,7 @@ class UniqueName(formencode.FancyValidator):
     
 class UniqueSlug(formencode.FancyValidator):
     messages = {
-        'invalid': 'Tag slug must be unique'
+        'invalid': _('Tag slug must be unique')
     }
     def _to_python(self, value, state):
         # Ensure we have a valid string
@@ -63,7 +65,8 @@ class UniqueSlug(formencode.FancyValidator):
         # validate that slug only contains letters, numbers, and dashes
         result = re.compile("[^\w-]").search(value)
         if result:
-            raise formencode.Invalid("Slug can only contain letters, numbers, and dashes", value, state)
+            raise formencode.Invalid(_("Slug can only contain "
+                                     "letters, numbers, and dashes"), value, state)
         
         # Ensure tag slug is unique
         tag_q = meta.Session.query(model.Tag).filter_by(slug=value)
@@ -158,7 +161,7 @@ class TagController(BaseController):
         pprint.pprint(tag)
         meta.Session.add(tag)
         meta.Session.commit()
-        session['flash'] = 'Tag successfully added.'
+        session['flash'] = _('Tag successfully added.')
         session.save()
         return redirect_to(controller='tag', action='cloud')
     
@@ -201,7 +204,7 @@ class TagController(BaseController):
                 setattr(tag, k, v)
             
         meta.Session.commit()
-        session['flash'] = 'Tag successfully updated.'
+        session['flash'] = _('Tag successfully updated.')
         session.save()
         return redirect_to(controller='tag', action='list')
     
@@ -256,8 +259,8 @@ class TagController(BaseController):
         meta.Session.commit()
         if request.is_xhr:
             response.content_type = 'application/json'
-            return "{'success':true,'msg':'The tag has been deleted'}"
+            return "{'success':true,'msg':'%s'}" % _('The tag has been deleted')
         else:
-            session['flash'] = 'Tag successfully deleted.'
+            session['flash'] = _('Tag successfully deleted.')
             session.save()
             return redirect_to(controller='page', action='list')

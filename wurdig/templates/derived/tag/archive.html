@@ -1,12 +1,15 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <%inherit file="/base/master.html"/>
 <%namespace file="/component/posts.html" name="posts" import="*"/>
 
 <%def name="title()">
-    ${parent.title()} &gt; Entries tagged ${c.tagname}
+    ${parent.title()} &gt; ${_('Entries tagged')} ${c.tagname}
 </%def>
 
 <%def name="content_header()">
-    <p>Tag, you're it</p>
+    <p>${_("Tag, you're it")}</p>
 </%def>
 
 <%def name="ps_feeds()">
@@ -14,13 +17,13 @@
         h.url_for(
             controller='tag', 
             action='tag_feed', 
-            slug=unicode(c.tag.slug)
+            slug=c.tag.slug
         ), 
         feed_type='atom', 
-        title='Posts tagged "%s"' % c.tagname
+        title= _('Posts tagged "%s"') % c.tag.slug
     )}
 </%def>
 
-<h2 class="wurdig-entries-tagged">Entries tagged "<strong>${c.tagname}</strong>"</h2>
+<h2 class="wurdig-entries-tagged">${_('Entries tagged')} "<strong>${c.tagname}</strong>"</h2>
 
 ${posts.paginated()}

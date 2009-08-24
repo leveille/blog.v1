@@ -1,6 +1,7 @@
 import feedparser
 import helpers as h
 from pylons import config
+from pylons.i18n.translation import _
 
 __all__ = ['delicious', 'flickr', 'twitter']
 
@@ -10,7 +11,7 @@ def delicious():
         items = []
         template = """
         <div id="wurdig-delicious-feed" class="wurdig-secondary-list">
-            <h4>Bookmarks</h4>
+            <h4>%s</h4>
             <ul>
                 %s
             </ul>
@@ -21,7 +22,7 @@ def delicious():
             link = '<a href="%s" title="%s">%s (%s)</a>'
             link = link % (entry['guid'], entry['title'], entry['title'], entry.updated[:11])
             items.append(i % link)
-        return template % '\n'.join(items)
+        return template % (_('Bookmarks'), '\n'.join(items))
     else:
         return ''
 
@@ -31,7 +32,7 @@ def flickr():
         items = []
         template = """
         <div id="wurdig-flickr-feed">
-            <h4>Public Flickr Stream</h4>
+            <h4>%s</h4>
             <ul>
                 %s
             </ul>
@@ -45,7 +46,7 @@ def flickr():
                                         entry['link']
                                         )
             items.append(i)
-        return template % '\n'.join(items)
+        return template % (_('Public Flickr Stream'), '\n'.join(items))
     else:
         return ''
 
@@ -55,7 +56,7 @@ def twitter():
         items = []
         template = """
         <div id="wurdig-twitter-feed" class="wurdig-sidebar-list">
-            <h4>Twitter Updates (<a href="http://twitter.com/%s">Follow</a>)</h4>
+            <h4>%s (<a href="http://twitter.com/%s">%s</a>)</h4>
             <ul>
                 %s
             </ul>
@@ -70,6 +71,9 @@ def twitter():
                                                 h.auto_link(description)
                                                 )
             items.append(i)
-        return template % (config['twitter.user.screen_name'], '\n'.join(items))
+        return template % (_('Twitter Updates'), 
+                           config['twitter.user.screen_name'], 
+                           _('Follow'),
+                           '\n'.join(items))
     else:
         return ''

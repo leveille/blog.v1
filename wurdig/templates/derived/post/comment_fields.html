@@ -1,5 +1,8 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <div class="field required">
-    <label for="name">Name</label>
+    <label for="name">${_('Name')}</label>
     <div class="input">
         ${h.text('name', tabindex=1)}
     </div>
@@ -7,27 +10,27 @@
 <div class="field required">
     % if not h.auth.authorized(h.auth.is_valid_user):
         <div class="description">
-            <strong>Email</strong> 
-            will not be published.  Associates 
+            <strong>${_('Email')}</strong> 
+            ${_('will not be published.  Associates')}
             <a href="http://gravatar.com/">
                 Gravatars
             </a>
         </div>
     % endif
-    <label for="email">Email</label>
+    <label for="email">${_('Email')}</label>
     <div class="input">
         ${h.text('email', tabindex=2)}
     </div>
 </div>
 <div class="field">
-    <label for="url">Website</label>
+    <label for="url">${_('Website')}</label>
     <div class="input">
         ${h.text('url', tabindex=3)}
     </div>
 </div>
 
 <div class="field required">
-    <label for="content">Comment</label>
+    <label for="content">${_('Comment')}</label>
     <div class="input">
         ${h.textarea('content', cols=25, rows=10, tabindex=4)}
     </div>
@@ -35,7 +38,7 @@
 
 % if not h.auth.authorized(h.auth.is_valid_user):
     <div class="field">
-        <label for="rememberme">Remember?</label>
+        <label for="rememberme">${_('Remember')}?</label>
         <div class="input">
             ${h.checkbox('rememberme', value=None, tabindex=5)}
         </div>
@@ -45,11 +48,11 @@
 % if not h.auth.authorized(h.auth.is_valid_user) and not h.wurdig_use_akismet():
     <div class="field required">
         <div class="description">
-            Please enter 
+            ${_('Please enter')}
             <strong>${h.wurdig_spamword()}</strong> 
-            below.
+            ${_('below')}.
         </div>
-        <label for="wurdig_comment_question">Spamword</label>
+        <label for="wurdig_comment_question">${_('Spamword')}</label>
         <div class="input">
             ${h.text('wurdig_comment_question', tabindex=6)}
         </div>

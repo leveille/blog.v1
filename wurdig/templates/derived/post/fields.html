@@ -1,7 +1,10 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <table class="form">
     <thead>
         <tr>
-            <th colspan="2">Post Information</th>
+            <th colspan="2">${_('Post Information')}</th>
         </tr>
     </thead>
     <tbody>
@@ -9,7 +12,7 @@
             <td><span class="required">!</span></td>
             <td>
                 <p class="field required">
-                    <label for="title">Title</label>
+                    <label for="title">${_('Title')}</label>
                     ${h.text('title', class_='text')}
                 </p>
             </td>
@@ -18,7 +21,7 @@
             <td><span class="required">!</span></td>
             <td>
                 <p class="field required">
-                    <label for="slug">Slug</label>
+                    <label for="slug">${_('Slug')}</label>
                     ${h.text('slug', class_='text')}
                 </p>
             </td>
@@ -27,7 +30,7 @@
             <td><span class="required">!</span></td>
             <td>
                 <p class="field required">
-                    <label for="content">Content</label>
+                    <label for="content">${_('Content')}</label>
                     ${h.textarea('content', cols=75, rows=75, class_='text')}
                 </p>
             </td>
@@ -36,7 +39,7 @@
             <td>&nbsp;</td>
             <td>
                 <p class="field">
-                    <label for="draft">Draft?</label>
+                    <label for="draft">${_('Draft')}?</label>
                     ${h.checkbox('draft', value=None, class_='checkbox')}
                 </p>
             </td>
@@ -45,7 +48,7 @@
             <td>&nbsp;</td>
             <td>
                 <p class="field">
-                    <label for="comments_allowed">Comments?</label>
+                    <label for="comments_allowed">${_('Comments')}?</label>
                     % if request.urlvars['action'] == 'new':
                         ${h.checkbox('comments_allowed', value=None, checked='checked', class_='checkbox')}
                     % else:
@@ -57,7 +60,7 @@
     </tbody>
 </table>
 
-<h3>Tags</h3>
+<h3>${_('Tags')}</h3>
 <div class="admin-checkboxes">
     % for tag in c.available_tags:
         <div class="admin-checkbox field">

@@ -1,12 +1,15 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <%inherit file="/base/admin.html"/>
 <%namespace file="fields.html" name="fields" import="*"/>
 
 <%def name="title()">
-    Edit Tag
+    ${_('Edit Tag')}
 </%def>
 
 ${h.form(h.url_for(controller='tag', action='save', id=request.urlvars['id']), method='post')}
     ${fields.body()}
-    ${h.submit('edit', 'Edit Tag')} or
-    ${h.link_to('Cancel', h.url_for(controller='tag', action='list'))}
+    ${h.submit('edit', _('Edit Tag'))} or
+    ${h.link_to(_('Cancel'), h.url_for(controller='tag', action='list'))}
 ${h.end_form()}

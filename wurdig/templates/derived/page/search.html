@@ -1,3 +1,6 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <%inherit file="/base/search.html"/>
 <%namespace file="/component/wurdig.html" name="wurdig" import="search_form"/>
 
@@ -6,11 +9,11 @@
 </%def>
 
 <%def name="content_header()">
-    <h1>Your Search Results</h1>
+    <h1>${_('Your Search Results')}</h1>
 </%def>
 
 <div id="wurdig-search-results">
-    <h2>Search Results</h2>
+    <h2>${_('Search Results')}</h2>
     ${wurdig.search_form()}
     ${h.literal(c.page.content)}    
 </div>

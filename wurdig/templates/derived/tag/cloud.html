@@ -1,14 +1,17 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <%inherit file="/base/master.html"/>
 <%namespace file="/component/wurdig.html" name="wurdig" import="tags"/>
 
 <%def name="title()">
-    ${parent.title()} &gt; Tag Cloud
+    ${parent.title()} &gt; ${_('Tag Cloud')}
 </%def>
 
 <%def name="content_header()">
-    <p>In the cloud</p>
+    <p>${_('In the cloud')}</p>
 </%def>
 
-<h2>Tag Cloud</h2>
+<h2>${_('Tag Cloud')}</h2>
 
 ${wurdig.tags()}

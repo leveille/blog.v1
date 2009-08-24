@@ -1,3 +1,7 @@
+<%
+    from pylons.i18n.translation import _
+%>
+
 <%def name="doctype()">
     <!DOCTYPE html>
 </%def>
@@ -45,8 +49,8 @@
 </%def>
 
 <%def name="header()">
-    <div><a id="skip" href="#yui-main">Jump to Content</a></div>
-    <h1><a href="${h.url_for(controller='post', action='home')}" title="Home">${title()}</a></h1>
+    <div><a id="skip" href="#yui-main">${_('Jump to Content')}</a></div>
+    <h1><a href="${h.url_for(controller='post', action='home')}" title="${_('Home')}">${title()}</a></h1>
     % if h.wurdig_use_subtitle():
         <p class="wurdig-tagline">${h.wurdig_subtitle()}</p>
     % endif
@@ -74,47 +78,47 @@
             %>
             <li class="${n_home} wurdig-nav-first">
                 <a href="${h.url_for(controller='post', action='home')}" 
-                    title="Home" class="${n_home}">
-                    Home
+                    title="${_('Home')}" class="${n_home}">
+                    ${_('Home')}
                 </a>
             </li>
             <li class="${n_about}">
                 <a href="${h.url_for(controller='page', action='view', slug='about')}" 
-                    title="About This Site" class="${n_about}">
-                    About
+                    title="${_('About This Site')}" class="${n_about}">
+                    ${_('About')}
                 </a>
             </li>
             <li class="${n_teaching}">
                 <a href="${h.url_for(controller='page', action='view', slug='teaching')}" 
-                    title="My Former Teaching Life" class="${n_teaching}">
-                    Teaching
+                    title="${_('Teaching')}" class="${n_teaching}">
+                    ${_('Teaching')}
                 </a>
             </li>
             % if h.wurdig_display_contact_email():
                 <li>
-                    ${h.mail_to(h.wurdig_contact_email(), "Contact", encode = "hex")}
+                    ${h.mail_to(h.wurdig_contact_email(), _('Contact'), encode = "hex")}
                 </li>
             % endif
             % if h.auth.authorized(h.auth.is_valid_user):
                 <li>
                     <a href="${h.url_for(controller='account', action='signin')}" 
-                        title="Administrator">
-                        Admin
+                        title="${_('Administrator')}">
+                        ${_('Admin')}
                     </a>
                 </li>
             % endif
             % if h.auth.authorized(h.auth.is_valid_user) and request.urlvars['action'] != 'signout':
                 <li class="wurdig-nav-last">
                     <a href="${h.url_for(controller='account', action='signout')}" 
-                        title="Sign Out">
-                        Sign Out
+                        title="${_('Sign Out')}">
+                        ${_('Sign Out')}
                     </a>
                 </li>
             % else:
                 <li class="wurdig-nav-last">
                     <a href="${h.url_for(controller='account', action='signin')}" 
-                        title="Sign In">
-                        Sign In
+                        title="${_('Sign In')}">
+                        ${_('Sign In')}
                     </a>
                 </li>
             % endif
@@ -131,7 +135,7 @@
                     <input type="hidden" name="cof" value="FORID:9">
                     <input type="hidden" name="ie" value="UTF-8">
                     <input type="text" name="q" id="cse-search-q" size="31" value="${searchq}">
-                    <input type="submit" name="sa" value="Search">
+                    <input type="submit" name="sa" value="${_('Search')}">
                 </div>
             </form>
             <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
@@ -141,25 +145,25 @@
 
 <%def name="subscribe()">
     <div id="wurdig-subscribe">
-        <h4>Feeds</h4>
+        <h4>${_('Feeds')}</h4>
         <ul>
             <li>
                 % if h.wurdig_use_externalposts_feed():
                     <a href="${h.wurdig_external_posts_feed()}"
-                        title="Blog">
-                        Blog
+                        title="${_('Blog')}">
+                        ${_('Blog')}
                     </a>
                 % else:
                     <a href="${h.url_for(controller='feed', action='posts_feed')}"
-                        title="Blog">
-                        Blog
+                        title="${_('Blog')}">
+                        ${_('Blog')}
                     </a>
                 % endif
             </li>
             <li>
                 <a href="${h.url_for(controller='feed', action='comments_feed')}"
-                    title="Comments">
-                    Comments
+                    title="${_('Comments')}">
+                    ${_('Comments')}
                 </a>
             </li>
             % if request.urlvars['controller'] == 'post' and \
@@ -171,8 +175,8 @@
                                     action='post_comment_feed', 
                                     post_id=unicode(c.post.id)
                                 )}"
-                            title="${c.post.title} Comments Feed">
-                            Post Comments
+                            title="${c.post.title} ${_('Comments Feed')}">
+                            ${_('Post Comments')}
                         </a>
                     </li>
                 % endif
@@ -185,7 +189,7 @@
                                 action='tag_feed', 
                                 slug=unicode(c.tag.slug)
                             )}"
-                        title="Posts tagged ${c.tagname}">
+                        title="${_('Posts Tagged')} ${c.tagname}">
                         ${c.tagname}
                     </a>
                 </li>
@@ -196,7 +200,7 @@
 
 <%def name="blogroll()" cached="True" cache_timeout="86400" cache_key="blogroll" cache_type="file">
     <div id="wurdig-blogroll" class="wurdig-secondary-list">
-        <h4>Blogroll</h4>
+        <h4>${_('Blogroll')}</h4>
         <ul>
             <li><a href="http://www.456bereastreet.com/" rel="external" title="456 Berea Street">456 Berea Street</a></li>
             <li><a href="http://benramsey.com/" rel="external" title="Ben Ramsey">Ben Ramsey</a></li>
@@ -237,26 +241,26 @@
         <li class="wurdig-nav-first feed">
             % if h.wurdig_use_externalposts_feed():
                 <a href="${h.wurdig_external_posts_feed()}"
-                    title="Blog">
-                    Blog Feed
+                    title="${_('Blog')}">
+                    ${_('Blog Feed')}
                 </a>
             % else:
                 <a href="${h.url_for(controller='feed', action='posts_feed')}"
-                    title="Blog">
-                    Blog Feed
+                    title="${_('Blog')}">
+                    ${_('Blog Feed')}
                 </a>
             % endif
         </li>
         <li class="wurdig-nav-last feed">
             <a href="${h.url_for(controller='feed', action='comments_feed')}"
-                title="Comments (atom)">
-                Comments Feed
+                title="${_('Comments')} (atom)">
+                ${_('Comments')}
             </a>
         </li>
     </ul>
     <p>
-        Powered by
-<a href="http://github.com/leveille/wurdig" title="Wurdig">Wurdig</a>, built with <a href="http://www.pylonshq.com" title="Pylons">Pylons</a>, &copy; Jason Leveille 
+        ${_('Powered by')}
+<a href="http://github.com/leveille/wurdig" title="Wurdig">Wurdig</a>, ${_('built with')} <a href="http://www.pylonshq.com" title="Pylons">Pylons</a>, &copy; Jason R. Leveille 
     </p>
 </%def>
 

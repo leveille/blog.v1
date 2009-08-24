@@ -5,6 +5,7 @@ from pylons import request
 from pylons import tmpl_context as c
 from pylons.controllers.util import forward
 from pylons.middleware import error_document_template
+from pylons.i18n.translation import _
 from webhelpers.html.builder import literal
 from wurdig.lib.base import BaseController, render
 
@@ -29,7 +30,7 @@ class ErrorController(BaseController):
             content = literal(resp.status)
             code = code or cgi.escape(str(resp.status_int))
         if not code:
-            raise Exception('No status code was found')
+            raise Exception(_('No status code was found'))
         c.code = code
         c.message = content
         return render('/derived/error/document.html')

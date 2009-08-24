@@ -1,14 +1,16 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <%inherit file="/base/admin.html"/>
 
 <%def name="title()">
-    Page Delete Confirmation
+    ${_('Page Delete Confirmation')}
 </%def>
 
-<p>Are you sure you want to delete the page titled <strong>${c.page.title}</strong></p>
+<p>${_('Are you sure you want to delete the page titled')} <strong>${c.page.title}</strong></p>
 
 ${h.form(h.url_for(controller='page', action='delete'), method='post')}
     ${h.hidden('id', value=c.page.id)}
-    ${h.submit('edit', 'Yes, Delete Page')}  or
-        <a href="${h.url_for(controller='page', 
-                      action='list')}">Cancel</a>
+    ${h.submit('edit', _('Yes, Delete Page'))} ${_('or')}
+    ${h.link_to(_('Cancel'), h.url_for(controller='page', action='list'))}
 ${h.end_form()}

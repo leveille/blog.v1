@@ -12,6 +12,7 @@ from pylons.decorators import validate
 from pylons.decorators.cache import beaker_cache
 from pylons.decorators.rest import restrict
 from pylons.decorators.secure import authenticate_form
+from pylons.i18n.translation import _
 from sqlalchemy.sql import and_, delete
 from wurdig import model
 from wurdig.lib.base import BaseController, render
@@ -21,7 +22,8 @@ log = logging.getLogger(__name__)
     
 class AkismetSpamCheck(formencode.FancyValidator):
     messages = {
-        'invalid-akismet': 'Your comment has been identified as spam.  Are you a spammer?'
+        'invalid-akismet': _("Your comment has been "
+                             "identified as spam.  Are you a spammer?")
     }
     def _to_python(self, values, state):
         # we're in the administrator
@@ -53,7 +55,9 @@ class PrimitiveSpamCheck(formencode.FancyValidator):
         value = formencode.validators.UnicodeString(max=10).to_python(value, state)
         eq = h.wurdig_spamword().lower() == value.lower()
         if not eq:
-            raise formencode.Invalid("Double check your answer to the spam prevention question and resubmit.", value, state)
+            raise formencode.Invalid(_("Double check your answer "
+                                       "to the spam prevention question "
+                                       "and resubmit."), value, state)
         return value
 
 class NewCommentForm(formencode.Schema):
@@ -66,7 +70,7 @@ class NewCommentForm(formencode.Schema):
         not_empty=True,
         strip=True,
         messages={
-            'empty':'Please enter a comment.'
+            'empty': _('Please enter a comment.')
         }
     )
     approved = formencode.validators.StringBool(if_missing=False)
@@ -149,14 +153,14 @@ class CommentController(BaseController):
         if not h.auth.authorized(h.auth.is_valid_user):
             # Send email to admin notifying of new comment
             c.comment = comment
-            message = EmailMessage(subject='New Comment for "%s"' % c.post.title,
+            message = EmailMessage(subject=_('New Comment for "%s"') % c.post.title,
                                    body=render('/email/new_comment.html'),
                                    from_email='%s <%s>' % (comment.name, comment.email),
                                    to=[h.wurdig_contact_email()])
             message.send(fail_silently=True)
-            session['flash'] = 'Your comment is currently being moderated.'
+            session['flash'] = _('Your comment is currently being moderated.')
         else:
-            session['flash'] = 'Your comment has been approved.'
+            session['flash'] = _('Your comment has been approved.')
             
         return redirect_to(controller='post', 
                            action='view', 
@@ -215,7 +219,7 @@ class CommentController(BaseController):
         comment.content = h.auto_link(comment.content)
         
         meta.Session.commit()
-        session['flash'] = 'Comment successfully updated.'
+        session['flash'] = _('Comment successfully updated.')
         session.save()
         return redirect_to(controller='comment', action='list')
 
@@ -285,9 +289,9 @@ class CommentController(BaseController):
         meta.Session.commit()
         if request.is_xhr:
             response.content_type = 'application/json'
-            return "{'success':true,'msg':'The comment has been approved'}"
+            return "{'success':true,'msg':'%s'}" % _('The comment has been approved')
         else:
-            session['flash'] = 'Comment successfully approved.'
+            session['flash'] = _('Comment successfully approved.')
             session.save()
             return redirect_to(controller='comment', action='list')
             
@@ -332,9 +336,9 @@ class CommentController(BaseController):
         meta.Session.commit()
         if request.is_xhr:
             response.content_type = 'application/json'
-            return "{'success':true,'msg':'The comment has been approved'}"
+            return "{'success':true,'msg':'%s'}" % u('The comment has been approved')
         else:
-            session['flash'] = 'Comment successfully approved.'
+            session['flash'] = _('Comment successfully approved.')
             session.save()
             return redirect_to(controller='comment', action='list')
 
@@ -379,8 +383,8 @@ class CommentController(BaseController):
         meta.Session.commit()
         if request.is_xhr:
             response.content_type = 'application/json'
-            return "{'success':true,'msg':'The comment has been deleted'}"
+            return "{'success':true,'msg':'%s'}" % _('The comment has been deleted')
         else:
-            session['flash'] = 'Comment successfully deleted.'
+            session['flash'] = _('Comment successfully deleted.')
             session.save()
             return redirect_to(controller='comment', action='list')

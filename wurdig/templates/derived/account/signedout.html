@@ -1,13 +1,16 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <%inherit file="/base/master.html"/>
 
 <%def name="title()">
-    ${parent.title()} &gt; Signed Out
+    ${parent.title()} &gt; ${_('Signed Out')}
 </%def>
 
 <%def name="content_header()">
-    <p>admin</p>
+    <p>${_('admin')}</p>
 </%def>
 
-<h2>Signed Out</h2>
+<h2>${_('Signed Out')}</h2>
 
-<p>You have been signed out. <a href="${h.url_for(controller='account', action='signin')}">Sign in</a>.</p>
+<p>${_('You have been signed out')}. <a href="${h.url_for(controller='account', action='signin')}">${_('Sign In')}</a>.</p>

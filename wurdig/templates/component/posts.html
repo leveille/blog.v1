@@ -1,3 +1,7 @@
+<%
+    from pylons.i18n.translation import _
+%>
+
 <%def name="tag_list(tags)">
     % if len(tags):
         ${h.literal(h.post_tags(tags))}
@@ -7,7 +11,7 @@
 <%def name="paginated()">
     % if len(c.paginator):
     
-        <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
+        <p>${ c.paginator.pager('$link_first $link_previous $first_item %s $last_item %s $item_count $link_next $link_last') % (_('to'), _('of')) }</p>
         
         <div class="wurdig-entries">
             % for post in c.paginator:
@@ -17,7 +21,7 @@
         <p>${ c.paginator.pager('~2~') }</p>
     % else:
         <p>
-            No posts were found that matched your request.
+            ${_('No posts were found that matched your request.')}
         </p>
     % endif
 </%def>
@@ -41,7 +45,7 @@
         <span class="wurdig-entry-comments">
             % if len(post.comments):
                 ${h.link_to(
-                    h.plural(len(post.comments), 'Comment', 'Comments'),
+                    h.plural(len(post.comments), _('Comment'), _('Comments')),
                     h.url_for(controller='post', 
                               action='view', 
                               year=post.posted_on.strftime('%Y'), 
@@ -51,7 +55,7 @@
                 )}
             % else:
                 ${h.link_to(
-                    'No Comments',
+                    _('No Comments'),
                     h.url_for(controller='post', 
                               action='view', 
                               year=post.posted_on.strftime('%Y'), 
@@ -76,9 +80,9 @@
                 ${tag_list(post.tags)}      
                 % if h.auth.authorized(h.auth.is_valid_user):
                     <span class="wurdig-admin">
-                        <strong>Admin</strong> : 
+                        <strong>${_('Admin')}</strong> : 
                         ${h.link_to(
-                            'Edit This Post',
+                            _('Edit This Post'),
                             h.url_for(controller='post', action='edit', id=unicode(post.id))
                         )}
                     </span>

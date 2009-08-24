@@ -2,6 +2,7 @@
 .pydevproject
 *.pyc
 development.ini
+_development.ini
 production.ini
 test.ini
 *.tmp*

@@ -1,6 +1,8 @@
 ## -*- coding: utf-8 -*-
 <%namespace file="/component/admin.html" name="admin" import="*"/>
-
+<%
+    from pylons.i18n.translation import _
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
     <head>
@@ -16,11 +18,11 @@
             <div id="hd">
                 <div id="meta">
                     <div class="wrapper">
-                        <p>User: <em>(${request.environ['REMOTE_USER']})</em></p>
+                        <p>${_('User')}: <em>(${request.environ['REMOTE_USER']})</em></p>
                         <ul>
                             <li>
                                 ${h.link_to(
-                                    'Home',
+                                    _('Home'),
                                     '/'
                                 )}
                             </li>
@@ -30,7 +32,7 @@
                 
                 <div id="logo" role="banner">
                     <div class="wrapper">
-                        <h6>Administrator</h6>
+                        <h6>${_('Administrator')}</h6>
                         <a href="/"><img src="/admin/gr/header/logo.png" alt=""></a>
                     </div>
                 </div>
@@ -40,7 +42,7 @@
                         <ul>
                             <li>
                                 <a href="${h.url_for(controller='account', action='signout')}" class="last">
-                                    Logout
+                                    ${_('Log Out')}
                                 </a>
                             </li>
                         </ul>
@@ -61,71 +63,71 @@
                 <div id="secondary" class="yui-b" role="navigation">
                     <div id="triangle"></div>
                     <div class="pad">
-                        <h3 class="home active"><a href="#">Dashboard</a></h3>
+                        <h3 class="home active"><a href="#">${_('Dashboard')}</a></h3>
                         <ul>
                             <li>
                                 <a href="${h.url_for(controller='account', action='signin')}" 
-                                    title="Dashboard">
-                                    Dashboard
+                                    title="${_('Dashboard')}">
+                                    ${_('Dashboard')}
                                 </a>
                             </li>
                             <li>
                                 ${h.link_to(
-                                    'Logout',
+                                    _('Log Out'),
                                     h.url_for(controller='account', action='signout')
                                 )}
                             </li>
                         </ul>
-                        <h3 class="pages"><a href="#">Posts</a></h3>
+                        <h3 class="pages"><a href="#">${_('Posts')}</a></h3>
                         <ul>
                             <li>
                                 ${h.link_to(
-                                    'List',
+                                    _('List'),
                                     h.url_for(controller='post', action='list')
                                 )}
                             </li>
                             <li>
                                 ${h.link_to(
-                                    'New',
+                                    _('New'),
                                     h.url_for(controller='post', action='new')
                                 )}
                             </li>
                         </ul>
-                        <h3 class="users"><a href="#">Comments</a></h3>
+                        <h3 class="users"><a href="#">${_('Comments')}</a></h3>
                         <ul>
                             <li>
                                 ${h.link_to(
-                                    'List',
+                                    _('List'),
                                     h.url_for(controller='comment', action='list')
                                 )}
                             </li>
                         </ul>
-                        <h3 class="pages"><a href="#">Pages</a></h3>
+                        <h3 class="pages"><a href="#">${_('Pages')}</a></h3>
                         <ul>
                             <li>
                                 ${h.link_to(
-                                    'List',
+                                    _('List'),
                                     h.url_for(controller='page', action='list')
                                 )}
                             </li>
                             <li>
                                 ${h.link_to(
-                                    'New',
+                                    _('New'),
                                     h.url_for(controller='page', action='new')
                                 )}
                             </li>
                         </ul>
-                        <h3 class="servers"><a href="#">Tags</a></h3>
+                        <h3 class="servers"><a href="#">${_('Tags')}</a></h3>
                         <ul>
                             <li>
                                 ${h.link_to(
-                                    'List',
+                                    _('List'),
                                     h.url_for(controller='tag', action='list')
                                 )}
                             </li>
                             <li>
                                 ${h.link_to(
-                                    'New',
+                                    _('New'),
                                     h.url_for(controller='tag', action='new')
                                 )}
                             </li>
@@ -136,7 +138,7 @@
             
             <div id="ft" role="contentinfo">
                 <div class="wrapper">
-                    <p>Powered by Wurdig</p>
+                    <p>${_('Powered by')} Wurdig</p>
                     <ul>
                         <li>${h.wurdig_title()}</li>
                     </ul>

@@ -1,10 +1,13 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <%inherit file="/base/admin.html"/>
 <%namespace file="fields.html" name="fields" import="*"/>
 <%namespace file="/component/admin.html" name="admin" import="*"/>
 <%namespace file="/component/editor.html" name="editor" import="*"/>
 
 <%def name="title()">
-    Create a New Page
+    ${_('Create a New Page')}
 </%def>
 
 <%def name="js()">
@@ -13,6 +16,6 @@
 
 ${h.form(h.url_for(action='create', controller='page'), method='post')}
     ${fields.body()}
-    ${h.submit('create', 'Create Page')} or
-    ${h.link_to('Cancel', h.url_for(controller='page', action='list'))}
+    ${h.submit('create', _('Create Page'))} ${_('or')}
+    ${h.link_to(_('Cancel'), h.url_for(controller='page', action='list'))}
 ${h.end_form()}

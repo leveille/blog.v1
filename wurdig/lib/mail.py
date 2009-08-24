@@ -8,6 +8,7 @@ from email.MIMEMultipart import MIMEMultipart
 from email.MIMEBase import MIMEBase
 from email.Header import Header
 from email.Utils import formatdate, parseaddr, formataddr
+from pylons.i18n.translation import _
 import mimetypes
 import os
 import random
@@ -88,7 +89,8 @@ class SafeMIMEText(MIMEText):
     def __setitem__(self, name, val):
         "Forbids multi-line headers, to prevent header injection."
         if '\n' in val or '\r' in val:
-            raise BadHeaderError, "Header values can't contain newlines (got %r for header %r)" % (val, name)
+            raise BadHeaderError, _("Header values can't "
+                                    "contain newlines (got %r for header %r)") % (val, name)
         try:
             val = str(force_unicode(val))
         except UnicodeEncodeError:
@@ -107,7 +109,8 @@ class SafeMIMEMultipart(MIMEMultipart):
     def __setitem__(self, name, val):
         "Forbids multi-line headers, to prevent header injection."
         if '\n' in val or '\r' in val:
-            raise BadHeaderError, "Header values can't contain newlines (got %r for header %r)" % (val, name)
+            raise BadHeaderError, _("Header values can't contain "
+                                    "newlines (got %r for header %r)") % (val, name)
         try:
             val = str(force_unicode(val))
         except UnicodeEncodeError:

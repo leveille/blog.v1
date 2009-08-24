@@ -1,17 +1,20 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <%inherit file="/base/admin.html"/>
 
 <%def name="title()">
-    Tag List
+    ${_('Tag List')}
 </%def>
 
 % if len(c.paginator):
-    <p>${ c.paginator.pager('$link_first $link_previous $first_item to $last_item of $item_count $link_next $link_last') }</p>
+    <p>${ c.paginator.pager('$link_first $link_previous $first_item %s $last_item %s $item_count $link_next $link_last') % (_('to'), _('of')) }</p>
     
     <table class="paginator">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Action</th>
+                <th>${_('Name')}</th>
+                <th>${_('Action')}</th>
             </tr>
         </thead>
         <tbody>
@@ -22,15 +25,15 @@
                     </td>
                     <td>
                         ${h.link_to(
-                            'View',
+                            _('View'),
                             h.url_for(controller='tag', action='archive', slug=unicode(tag.slug))
                         )} | 
                         ${h.link_to(
-                            'Edit',
+                            _('Edit'),
                             h.url_for(controller='tag', action='edit', id=unicode(tag.id))
                         )} | 
                         ${h.link_to(
-                            'Delete',
+                            _('Delete'),
                             h.url_for(controller='tag', action='delete_confirm', id=unicode(tag.id))
                         )}
                     </td>

@@ -1,3 +1,6 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <%inherit file="/base/master.html"/>
 
 <%def name="title()">
@@ -5,7 +8,7 @@
 </%def>
 
 <%def name="content_header()">
-    <p>Now Viewing</p>
+    <p>${_('Now Viewing')}</p>
 </%def>
 
 <%def name="page_view(page)">
@@ -18,7 +21,7 @@
     % if h.auth.authorized(h.auth.is_valid_user):
         <p>
             ${h.link_to(
-                'Edit This Page',
+                _('Edit This Page'),
                 h.url_for(controller='page', action='edit', id=unicode(c.page.id))
             )}
         </p>

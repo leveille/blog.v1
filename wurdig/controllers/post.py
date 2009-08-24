@@ -13,6 +13,7 @@ from pylons import app_globals, config, request, response, session, tmpl_context
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
 from pylons.decorators.rest import restrict
+from pylons.i18n.translation import _
 from sqlalchemy.sql import and_, delete
 from wurdig.lib.base import BaseController, Cleanup, ConstructSlug, render
 
@@ -20,7 +21,7 @@ log = logging.getLogger(__name__)
 
 class UniqueSlug(formencode.FancyValidator):
     messages = {
-        'invalid': 'Slug must be unique'
+        'invalid': _(u'Slug must be unique')
     }
     def _to_python(self, value, state):
         # Ensure we have a valid string
@@ -28,7 +29,8 @@ class UniqueSlug(formencode.FancyValidator):
         # validate that slug only contains letters, numbers, and dashes
         result = re.compile("[^\w-]").search(value)
         if result:
-            raise formencode.Invalid("Slug can only contain letters, numbers, and dashes", value, state)
+            raise formencode.Invalid(_("Slug can only contain "
+                                       "letters, numbers, and dashes"), value, state)
         
         # Ensure slug is unique
         post_q = meta.Session.query(model.Post).filter_by(slug=value)
@@ -47,8 +49,8 @@ class UniqueSlug(formencode.FancyValidator):
     
 class ValidTags(formencode.FancyValidator):
     messages = {
-        'invalid': 'One ore more selected tags could not ' +
-        'be found in the database'
+        'invalid': _("One ore more selected tags could not "
+                     "be found in the database")
     }
     def _to_python(self, values, state):
         all_tag_ids = [tag.id for tag in meta.Session.query(model.Tag)]
@@ -68,7 +70,7 @@ class NewPostForm(formencode.Schema):
         not_empty=True,
         max=100, 
         messages={
-            'empty':'Enter a post title'
+            'empty': _('Enter a post title')
         },
         strip=True
     )
@@ -76,7 +78,7 @@ class NewPostForm(formencode.Schema):
     content = formencode.validators.UnicodeString(
         not_empty=True,
         messages={
-            'empty':'Enter some post content.'
+            'empty': _('Enter some post content.')
         },
         strip=True
     )
@@ -204,7 +206,7 @@ class PostController(BaseController):
             post.tags.append(t)
         
         meta.Session.commit()        
-        session['flash'] = 'Post successfully added.'
+        session['flash'] = _('Post successfully added.')
         session.save()
         # Issue an HTTP redirect
         if post.posted_on is not None:
@@ -286,7 +288,7 @@ class PostController(BaseController):
                 post.tags.append(t)
             
         meta.Session.commit()
-        session['flash'] = 'Post successfully updated.'
+        session['flash'] = _('Post successfully updated.')
         session.save()
 
         if not post.draft:
@@ -350,8 +352,8 @@ class PostController(BaseController):
         meta.Session.commit()
         if request.is_xhr:
             response.content_type = 'application/json'
-            return "{'success':true,'msg':'The post has been deleted'}"
+            return "{'success':true,'msg':'%s'}" % _('The post has been deleted')
         else:
-            session['flash'] = 'Post successfully deleted.'
+            session['flash'] = _('Post successfully deleted.')
             session.save()
             return redirect_to(controller='post', action='list')

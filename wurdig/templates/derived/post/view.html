@@ -1,3 +1,6 @@
+<%
+    from pylons.i18n.translation import _
+%>
 <%inherit file="/base/master.html"/>
 <%namespace file="comment_fields.html" name="fields" import="*"/>
 <%namespace file="/component/posts.html" name="posts" import="*"/>
@@ -8,7 +11,7 @@
 </%def>
 
 <%def name="content_header()">
-    <p>Now Viewing</p>
+    <p>${_('Now Viewing')}</p>
 </%def>
 
 <%def name="ps_feeds()">
@@ -19,7 +22,7 @@
             post_id=unicode(c.post.id)
         ), 
         feed_type='atom', 
-        title='Recent Comments for "' + c.post.title + '"'
+        title=_('Recent Comments for "%s"') % c.post.title
     )}
 </%def>
 
@@ -35,9 +38,9 @@
         ${posts.tag_list(post.tags)}
         % if h.auth.authorized(h.auth.is_valid_user):
             <span class="wurdig-admin">
-                <strong>Admin</strong> : 
+                <strong>${_('Admin')}</strong> : 
                 ${h.link_to(
-                    'Edit This Post',
+                    _('Edit This Post'),
                     h.url_for(controller='post', action='edit', id=unicode(c.post.id))
                 )}
             </span>
@@ -61,14 +64,14 @@
                     <ul>
                         <li>
                             <a href="${h.url_for(controller='comment', action='edit', id=comment.id)}"
-                               title="Edit Comment From ${comment.name}">
-                                Edit
+                               title="${_('Edit Comment From')} ${comment.name}">
+                                ${_('Edit')}
                             </a>
                         </li>
                        <li>
                             <a href="${h.url_for(controller='comment', action='delete_confirm', id=comment.id)}"
-                               title="Delete Comment From ${comment.name}">
-                                Delete
+                               title="${_('Delete Comment From')} ${comment.name}">
+                                ${_('Delete')}
                             </a>
                         </li>
                     </ul>    
@@ -89,7 +92,7 @@
                 ${h.literal(comment.content)}
                 <p class="wurdig-comment-posted">
                     ${comment.created_on}
-                    <a href="#comment-${comment.id}">Link</a>
+                    <a href="#comment-${comment.id}">${_('Link')}</a>
                 </p>
             </blockquote>
         </div>
@@ -98,12 +101,12 @@
 
 <%def name="comment_form(c)">
     % if c.post.comments_allowed:
-        <h4>Leave a Comment (<span class="error-message">*</span> = required)</h4>
+        <h4>${_('Leave a Comment')} (<span class="error-message">*</span> = required)</h4>
         <div id="leave-comment">
             ${h.secure_form(h.url_for(post_id=c.post.id, controller='comment', action='create'), method='post')}
                 ${fields.body()}
                 <div class="input">
-                    ${h.submit('create_comment', 'Create Comment', tabindex=6)}
+                    ${h.submit('create_comment', _('Create Comment'), tabindex=6)}
                 </div>
             ${h.end_form()}
             <p class="leave-comment-subscribe">
@@ -113,14 +116,14 @@
                             post_id=unicode(c.post.id)
                         )}"
                     class="_blank"
-                    title="${c.post.title} Comments Feed">
-                    <img src="/images/feed-icon-14x14.png" alt="Subscribe to post comments"> 
-                    Subscribe to comments for "${c.post.title}"
+                    title="${c.post.title} ${_('Comments Feed')}">
+                    <img src="/images/feed-icon-14x14.png" alt="${_('Subscribe to post comments')}"> 
+                    ${_('Subscribe to comments for')} "${c.post.title}"
                 </a>
             </p>
         </div>
     % else:
-        <p class="flash">Comments have been disabled for this post.</p>
+        <p class="flash">${_('Comments have been disabled for this post')}.</p>
     % endif
 </%def>
 
@@ -130,7 +133,7 @@
     <span class="wurdig-entry-comments">
         % if len(c.post.comments):
             ${h.link_to(
-                h.plural(len(c.post.comments), 'Comment', 'Comments'),
+                h.plural(len(c.post.comments), _('Comment'), _('Comments')),
                 h.url_for(controller='post', 
                           action='view', 
                           year=c.post.posted_on.strftime('%Y'), 
@@ -140,13 +143,13 @@
             )}
         % else:
             ${h.link_to(
-                'No Comments',
+                _('No Comments'),
                 h.url_for(controller='post', 
                           action='view', 
                           year=c.post.posted_on.strftime('%Y'), 
                           month=c.post.posted_on.strftime('%m'), 
                           slug=c.post.slug, 
-                          anchor=u'leave-comment')
+                          anchor='leave-comment')
             )}
         % endif
     </span>
@@ -155,12 +158,12 @@
     ${post_data(c.post)}
 
     % if not c.post.comments_allowed and len(c.post.comments) > 20:
-        <p class="flash">Comments have been disabled for this post.</p>
+        <p class="flash">${_('Comments have been disabled for this post')}.</p>
     % endif
     
     % if len(c.post.comments):
         <div id="comments">
-            <h3>${h.plural(len(c.post.comments), 'Comment', 'Comments')} for "${c.post.title}"</h3>
+            <h3>${h.plural(len(c.post.comments), _('Comment for'), _('Comments for'))} "${c.post.title}"</h3>
             ${comments(c.post)}
         </div>        
     % endif
