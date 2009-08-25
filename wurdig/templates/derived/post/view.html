@@ -55,7 +55,7 @@
     % for k,comment in enumerate(post.comments):
         <%
             author_class = ''
-            if comment.url not in ['', u'', None] and request.environ['SERVER_NAME'] in comment.url:
+            if request.environ['SERVER_NAME'] in comment.url:
                 author_class = 'is_author'
         %>
         <div id="comment-${comment.id}" class="${author_class} ${comment.id}">                    
