@@ -4,14 +4,10 @@
 <%inherit file="/base/master.html"/>
 <%namespace file="/component/posts.html" name="posts" import="*"/>
 
-<%def name="title()">
-    ${parent.title()} &gt; ${_('Archives for')} ${c.date}
-</%def>
+<%def name="title()">${_('Post Archives for')} ${c.date}</%def>
+<%def name="description()">${title()}</%def>
+<%def name="content_header()"><p>${_('The Archives')}</p></%def>
 
-<%def name="content_header()">
-    <p>${_('The Archives')}</p>
-</%def>
-
-<h2>${_('Post Archives for')} ${c.date}</h2>
+<h2>${title()}</h2>
 
 ${posts.paginated()}

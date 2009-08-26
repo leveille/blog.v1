@@ -1,10 +1,14 @@
 ## -*- coding: utf-8 -*-
 <%namespace file="/component/wurdig.html" name="wurdig" import="*"/>
+<%
+    from pylons.i18n.translation import _
+%>
 ${wurdig.doctype()}
 <html>
     <head>
-        ${wurdig.meta()}
         <title>${self.title()}</title>
+        <meta name="description" content="${self.description()}">
+        ${wurdig.meta()}
         ${self.ps_feeds()}
         ${wurdig.css()}
     </head>
@@ -67,9 +71,8 @@ ${wurdig.doctype()}
         ${wurdig.analytics()}
     </body>
 </html>
-<%def name="title()">
-    ${wurdig.title()}
-</%def>
+<%def name="title()">${wurdig.title()}</%def>
+<%def name="description()">${_('Topics in Web Application Development')}</%def>
 <%def name="content_header()"></%def>
 <%def name="ps_feeds()"></%def>
 <%def name="js()"></%def>

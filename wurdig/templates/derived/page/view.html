@@ -3,13 +3,9 @@
 %>
 <%inherit file="/base/master.html"/>
 
-<%def name="title()">
-    ${parent.title()} &gt; ${c.page.title}
-</%def>
-
-<%def name="content_header()">
-    <p>${_('Now Viewing')}</p>
-</%def>
+<%def name="title()">${c.page.title}</%def>
+<%def name="description()">${title()}</%def>
+<%def name="content_header()"><p>${_('Now Viewing')}</p></%def>
 
 <%def name="page_view(page)">
     <h2>${page.title}</h2>

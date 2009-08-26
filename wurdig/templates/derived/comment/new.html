@@ -5,17 +5,10 @@
 <%namespace file="/derived/post/comment_fields.html" name="fields" import="*"/>
 <%namespace file="/component/editor.html" name="editor" import="*"/>
 
-<%def name="title()">
-    ${parent.title()} &gt; ${_('Comment for')} ${c.post.title}
-</%def>
-
-<%def name="js()">
-    ${editor.comment_editor()}
-</%def>
-
-<%def name="content_header()">
-    <h1>${_('Comment Errors')}!</h1>
-</%def>
+<%def name="title()">${_('Comment Errors for')} ${c.post.title}</%def>
+<%def name="description()">${title()}</%def>
+<%def name="js()">{editor.comment_editor()}</%def>
+<%def name="content_header()"><h1>${_('Comment Errors!')}</h1></%def>
 
 <h2>${_('Comment Errors for')} "${c.post.title}"</h2>
 
