@@ -34,10 +34,7 @@ setup(
             ('**.py', 'python', None),
             ('templates/**.mako', 'mako', {'input_encoding': 'utf-8'}),
             ('templates/**.html', 'mako', {'input_encoding': 'utf-8'}),
-            # ('public/**', 'ignore', None),
-            ('public/javascripts/utils.js', 'javascript', {'input_encoding': 'utf-8'}),
-            ('public/javascripts/application.js', 'javascript', {'input_encoding': 'utf-8'}),
-            ('public/admin/js/admin.js', 'javascript', {'input_encoding': 'utf-8'})]},
+            ('public/**', 'ignore', None)]},
     zip_safe=False,
     paster_plugins=['PasteScript', 'Pylons'],
     entry_points="""

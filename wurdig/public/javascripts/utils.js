@@ -7,8 +7,12 @@ WURDIG_UTILS.app = function(){
      * i18n function for Babel translation.
      * @param {Object} str
      */
-    function _(str) {
-        return str;
+    function _(string) {
+        try {
+            return WURDIG.translate[string];
+        } catch(err) {
+            return string;
+        }
     }
     
     return {

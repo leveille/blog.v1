@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Wurdig 0.1\n"
 "Report-Msgid-Bugs-To: json.leveille@gmail.com\n"
 "POT-Creation-Date: 2009-08-24 14:34+0400\n"
-"PO-Revision-Date: 2009-08-25 22:05-0400\n"
+"PO-Revision-Date: 2009-08-26 12:30-0400\n"
 "Last-Translator: Jason R. Leveille <json.leveille@gmail.com>\n"
 "Language-Team: fr <json.leveille@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
@@ -176,6 +176,42 @@ msgstr ""
 msgid "Blog posts tagged %s"
 msgstr ""
 
+#: wurdig/controllers/js.py:16
+msgid "Are you positive you want to do that?"
+msgstr ""
+
+#: wurdig/controllers/js.py:18
+msgid "The item has successfully been deleted."
+msgstr ""
+
+#: wurdig/controllers/js.py:20 wurdig/templates/derived/comment/list.html:47
+msgid "Disapprove"
+msgstr ""
+
+#: wurdig/controllers/js.py:21
+msgid "The item has successfully been approved."
+msgstr ""
+
+#: wurdig/controllers/js.py:23 wurdig/templates/derived/comment/list.html:38
+msgid "Approve"
+msgstr ""
+
+#: wurdig/controllers/js.py:24
+msgid "The item has successfully been disapproved."
+msgstr ""
+
+#: wurdig/controllers/js.py:26
+msgid "Your+request+has+been+completed+successfully"
+msgstr ""
+
+#: wurdig/controllers/js.py:28
+msgid "An unexpected error has occurred."
+msgstr ""
+
+#: wurdig/controllers/js.py:29
+msgid "Enter key word(s)"
+msgstr ""
+
 #: wurdig/controllers/page.py:32 wurdig/controllers/post.py:32
 #: wurdig/controllers/tag.py:68
 msgid "Slug can only contain letters, numbers, and dashes"
@@ -301,44 +337,6 @@ msgstr ""
 
 #: wurdig/lib/tag.py:37
 msgid "Tagged in"
-msgstr ""
-
-#: wurdig/public/admin/js/admin.js:32 wurdig/public/admin/js/admin.js:39
-msgid "Enter key word(s)"
-msgstr ""
-
-#: wurdig/public/javascripts/utils.js:38
-msgid "Are you positive you want to do that?"
-msgstr ""
-
-#: wurdig/public/javascripts/utils.js:59
-msgid "The item has successfully been deleted."
-msgstr ""
-
-#: wurdig/public/javascripts/utils.js:66
-#: wurdig/templates/derived/comment/list.html:47
-msgid "Disapprove"
-msgstr ""
-
-#: wurdig/public/javascripts/utils.js:68
-msgid "The item has successfully been approved."
-msgstr ""
-
-#: wurdig/public/javascripts/utils.js:74
-#: wurdig/templates/derived/comment/list.html:38
-msgid "Approve"
-msgstr ""
-
-#: wurdig/public/javascripts/utils.js:75
-msgid "The item has successfully been disapproved."
-msgstr ""
-
-#: wurdig/public/javascripts/utils.js:80
-msgid "Your+request+has+been+completed+successfully"
-msgstr ""
-
-#: wurdig/public/javascripts/utils.js:85
-msgid "An unexpected error has occurred."
 msgstr ""
 
 #: wurdig/templates/base/admin-login.html:11
@@ -989,10 +987,4 @@ msgstr ""
 #: wurdig/templates/email/new_comment.html:11
 msgid "Disapprove Comment:"
 msgstr ""
-
-#~ msgid "Comment Errors"
-#~ msgstr ""
-
-#~ msgid "Archives for"
-#~ msgstr ""
 

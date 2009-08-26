@@ -275,9 +275,11 @@
 
 <%def name="js()">
     % if c.use_minified_assets:
-        ${h.javascript_link('/javascripts/%s' % config['wurdig.minified_js'])}
+        ${h.javascript_link(h.url_for(controller='js', action='translations'),
+                            h.url_for('/javascripts/%s' % config['wurdig.minified_js']))}
     % else:
-        ${h.javascript_link(h.url_for('/javascripts/jquery.min.js?%s') % h.mtime("/javascripts/jquery/jquery.min.js"), 
+        ${h.javascript_link(h.url_for(controller='js', action='translations'),
+                            h.url_for('/javascripts/jquery.min.js?%s') % h.mtime("/javascripts/jquery/jquery.min.js"), 
                             h.url_for('/javascripts/application.js?%s') % h.mtime("/javascripts/application.js"),
                             h.url_for('/javascripts/utils.js?%s') % h.mtime("/javascripts/utils.js"))}
     %endif
