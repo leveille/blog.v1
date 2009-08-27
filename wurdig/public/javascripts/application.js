@@ -15,4 +15,5 @@ WURDIG.app = function(){
 jQuery.noConflict();
 jQuery(document).ready(function(){
     WURDIG.app.init();
+    prettyPrint();
 });

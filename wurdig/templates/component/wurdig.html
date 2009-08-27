@@ -281,7 +281,10 @@
         ${h.javascript_link(h.url_for(controller='js', action='translations'),
                             h.url_for('/javascripts/jquery.min.js?%s') % h.mtime("/javascripts/jquery/jquery.min.js"), 
                             h.url_for('/javascripts/application.js?%s') % h.mtime("/javascripts/application.js"),
-                            h.url_for('/javascripts/utils.js?%s') % h.mtime("/javascripts/utils.js"))}
+                            h.url_for('/javascripts/utils.js?%s') % h.mtime("/javascripts/utils.js"),
+                            h.url_for('/javascripts/prettify.js'),
+                            h.url_for('/javascripts/lang-css.js'),
+                            h.url_for('/javascripts/lang-sql.js'))}
     %endif
 </%def>
 
