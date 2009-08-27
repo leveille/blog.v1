@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wurdig 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-08-26 12:29-0400\n"
+"POT-Creation-Date: 2009-08-27 15:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,40 +97,44 @@ msgstr ""
 msgid "Double check your answer to the spam prevention question and resubmit."
 msgstr ""
 
-#: wurdig/controllers/comment.py:73
+#: wurdig/controllers/comment.py:69
+msgid "Please enter the name of the person leaving the comment."
+msgstr ""
+
+#: wurdig/controllers/comment.py:84
 msgid "Please enter a comment."
 msgstr ""
 
-#: wurdig/controllers/comment.py:156
+#: wurdig/controllers/comment.py:167
 #, python-format
 msgid "New Comment for \"%s\""
 msgstr ""
 
-#: wurdig/controllers/comment.py:161
+#: wurdig/controllers/comment.py:172
 msgid "Your comment is currently being moderated."
 msgstr ""
 
-#: wurdig/controllers/comment.py:163
+#: wurdig/controllers/comment.py:174
 msgid "Your comment has been approved."
 msgstr ""
 
-#: wurdig/controllers/comment.py:222
+#: wurdig/controllers/comment.py:233
 msgid "Comment successfully updated."
 msgstr ""
 
-#: wurdig/controllers/comment.py:292
+#: wurdig/controllers/comment.py:303
 msgid "The comment has been approved"
 msgstr ""
 
-#: wurdig/controllers/comment.py:294 wurdig/controllers/comment.py:341
+#: wurdig/controllers/comment.py:305 wurdig/controllers/comment.py:352
 msgid "Comment successfully approved."
 msgstr ""
 
-#: wurdig/controllers/comment.py:386
+#: wurdig/controllers/comment.py:397
 msgid "The comment has been deleted"
 msgstr ""
 
-#: wurdig/controllers/comment.py:388
+#: wurdig/controllers/comment.py:399
 msgid "Comment successfully deleted."
 msgstr ""
 
@@ -214,86 +218,106 @@ msgstr ""
 
 #: wurdig/controllers/page.py:32 wurdig/controllers/post.py:32
 #: wurdig/controllers/tag.py:68
-msgid "Slug can only contain letters, numbers, and dashes"
+msgid "Slug can only contain letters, numbers, and dashes."
 msgstr ""
 
 #: wurdig/controllers/page.py:59
-msgid "Enter a page title"
+msgid "Enter a page title."
 msgstr ""
 
-#: wurdig/controllers/page.py:67 wurdig/controllers/post.py:81
-msgid "Enter some post content."
+#: wurdig/controllers/page.py:66
+msgid "Enter a page slug, ex: my-page-title."
 msgstr ""
 
-#: wurdig/controllers/page.py:107
+#: wurdig/controllers/page.py:74
+msgid "Enter some page content."
+msgstr ""
+
+#: wurdig/controllers/page.py:114
 msgid "Page successfully added."
 msgstr ""
 
-#: wurdig/controllers/page.py:154
+#: wurdig/controllers/page.py:161
 msgid "Page successfully updated."
 msgstr ""
 
-#: wurdig/controllers/page.py:210
+#: wurdig/controllers/page.py:217
 msgid "The page has been deleted"
 msgstr ""
 
-#: wurdig/controllers/page.py:212
+#: wurdig/controllers/page.py:219
 msgid "Page successfully deleted."
 msgstr ""
 
 #: wurdig/controllers/post.py:24
-msgid "Slug must be unique"
+msgid "Slug must be unique."
 msgstr ""
 
 #: wurdig/controllers/post.py:52
-msgid "One ore more selected tags could not be found in the database"
+msgid "One ore more selected tags could not be found in the database."
 msgstr ""
 
 #: wurdig/controllers/post.py:73
-msgid "Enter a post title"
+msgid "Enter a post title."
 msgstr ""
 
-#: wurdig/controllers/post.py:209
+#: wurdig/controllers/post.py:80
+msgid "Enter a post slug, ex: my-post-title."
+msgstr ""
+
+#: wurdig/controllers/post.py:88
+msgid "Enter some post content."
+msgstr ""
+
+#: wurdig/controllers/post.py:216
 msgid "Post successfully added."
 msgstr ""
 
-#: wurdig/controllers/post.py:291
+#: wurdig/controllers/post.py:298
 msgid "Post successfully updated."
 msgstr ""
 
-#: wurdig/controllers/post.py:355
+#: wurdig/controllers/post.py:362
 msgid "The post has been deleted"
 msgstr ""
 
-#: wurdig/controllers/post.py:357
+#: wurdig/controllers/post.py:364
 msgid "Post successfully deleted."
 msgstr ""
 
 #: wurdig/controllers/tag.py:32
-msgid "Tag name must be unique"
+msgid "Tag name must be unique."
 msgstr ""
 
 #: wurdig/controllers/tag.py:40
-msgid "Tag name can only contain letters, numbers, and spaces"
+msgid "Tag name can only contain letters, numbers, and spaces."
 msgstr ""
 
 #: wurdig/controllers/tag.py:60
-msgid "Tag slug must be unique"
+msgid "Tag slug must be unique."
 msgstr ""
 
-#: wurdig/controllers/tag.py:164
+#: wurdig/controllers/tag.py:93
+msgid "Enter a tag name."
+msgstr ""
+
+#: wurdig/controllers/tag.py:101
+msgid "Enter a tag slug, ex: my-tag-name."
+msgstr ""
+
+#: wurdig/controllers/tag.py:178
 msgid "Tag successfully added."
 msgstr ""
 
-#: wurdig/controllers/tag.py:207
+#: wurdig/controllers/tag.py:221
 msgid "Tag successfully updated."
 msgstr ""
 
-#: wurdig/controllers/tag.py:262
+#: wurdig/controllers/tag.py:276
 msgid "The tag has been deleted"
 msgstr ""
 
-#: wurdig/controllers/tag.py:264
+#: wurdig/controllers/tag.py:278
 msgid "Tag successfully deleted."
 msgstr ""
 
@@ -327,7 +351,7 @@ msgid "Header values can't contain newlines (got %r for header %r)"
 msgstr ""
 
 #: wurdig/lib/tag.py:15 wurdig/templates/base/admin.html:120
-#: wurdig/templates/derived/post/fields.html:63
+#: wurdig/templates/derived/post/fields.html:75
 msgid "Tags"
 msgstr ""
 
@@ -392,7 +416,7 @@ msgstr ""
 #: wurdig/templates/component/wurdig.html:163
 #: wurdig/templates/component/wurdig.html:253
 #: wurdig/templates/component/wurdig.html:254
-#: wurdig/templates/derived/post/fields.html:51
+#: wurdig/templates/derived/post/fields.html:59
 #: wurdig/templates/derived/post/list.html:18
 #: wurdig/templates/derived/post/view.html:132
 msgid "Comments"
@@ -578,11 +602,11 @@ msgstr ""
 #: wurdig/templates/derived/comment/edit.html:19
 #: wurdig/templates/derived/comment/new.html:18
 #: wurdig/templates/derived/page/delete_confirm.html:12
-#: wurdig/templates/derived/page/edit.html:19
-#: wurdig/templates/derived/page/new.html:19
+#: wurdig/templates/derived/page/edit.html:20
+#: wurdig/templates/derived/page/new.html:20
 #: wurdig/templates/derived/post/delete_confirm.html:12
-#: wurdig/templates/derived/post/edit.html:19
-#: wurdig/templates/derived/post/new.html:19
+#: wurdig/templates/derived/post/edit.html:20
+#: wurdig/templates/derived/post/new.html:20
 #: wurdig/templates/derived/tag/delete_confirm.html:12
 msgid "or"
 msgstr ""
@@ -593,14 +617,14 @@ msgstr ""
 #: wurdig/templates/derived/comment/edit.html:20
 #: wurdig/templates/derived/comment/new.html:19
 #: wurdig/templates/derived/page/delete_confirm.html:13
-#: wurdig/templates/derived/page/edit.html:20
-#: wurdig/templates/derived/page/new.html:20
+#: wurdig/templates/derived/page/edit.html:21
+#: wurdig/templates/derived/page/new.html:21
 #: wurdig/templates/derived/post/delete_confirm.html:13
-#: wurdig/templates/derived/post/edit.html:20
-#: wurdig/templates/derived/post/new.html:20
+#: wurdig/templates/derived/post/edit.html:21
+#: wurdig/templates/derived/post/new.html:21
 #: wurdig/templates/derived/tag/delete_confirm.html:13
-#: wurdig/templates/derived/tag/edit.html:14
-#: wurdig/templates/derived/tag/new.html:14
+#: wurdig/templates/derived/tag/edit.html:19
+#: wurdig/templates/derived/tag/new.html:19
 msgid "Cancel"
 msgstr ""
 
@@ -673,8 +697,8 @@ msgid "Comment List"
 msgstr ""
 
 #: wurdig/templates/derived/comment/list.html:17
-#: wurdig/templates/derived/page/fields.html:33
-#: wurdig/templates/derived/post/fields.html:33
+#: wurdig/templates/derived/page/fields.html:37
+#: wurdig/templates/derived/post/fields.html:37
 msgid "Content"
 msgstr ""
 
@@ -746,8 +770,8 @@ msgstr ""
 msgid "Edit Page"
 msgstr ""
 
-#: wurdig/templates/derived/page/edit.html:19
-#: wurdig/templates/derived/post/edit.html:19
+#: wurdig/templates/derived/page/edit.html:20
+#: wurdig/templates/derived/post/edit.html:20
 msgid "Submit Edits"
 msgstr ""
 
@@ -766,6 +790,14 @@ msgstr ""
 msgid "Slug"
 msgstr ""
 
+#: wurdig/templates/derived/page/fields.html:28
+#: wurdig/templates/derived/post/fields.html:28
+#: wurdig/templates/derived/tag/fields.html:28
+msgid ""
+"Enter your own slug or leave this field blank to have one auto generated (as "
+"long as you have entered a title)."
+msgstr ""
+
 #: wurdig/templates/derived/page/list.html:7
 msgid "Page List"
 msgstr ""
@@ -778,7 +810,7 @@ msgstr ""
 msgid "Create a New Page"
 msgstr ""
 
-#: wurdig/templates/derived/page/new.html:19
+#: wurdig/templates/derived/page/new.html:20
 msgid "Create Page"
 msgstr ""
 
@@ -843,9 +875,19 @@ msgstr ""
 msgid "Post Information"
 msgstr ""
 
-#: wurdig/templates/derived/post/fields.html:42
+#: wurdig/templates/derived/post/fields.html:46
 #: wurdig/templates/derived/post/list.html:41
 msgid "Draft"
+msgstr ""
+
+#: wurdig/templates/derived/post/fields.html:50
+msgid ""
+"A draft post is one you are working on, that should not display to non logged"
+" in users?"
+msgstr ""
+
+#: wurdig/templates/derived/post/fields.html:67
+msgid "Will comments be allowed for this post?"
 msgstr ""
 
 #: wurdig/templates/derived/post/list.html:7
@@ -860,7 +902,7 @@ msgstr ""
 msgid "New Post"
 msgstr ""
 
-#: wurdig/templates/derived/post/new.html:19
+#: wurdig/templates/derived/post/new.html:20
 msgid "Create Post"
 msgstr ""
 
@@ -941,8 +983,8 @@ msgstr ""
 msgid "Yes, Delete Tag"
 msgstr ""
 
-#: wurdig/templates/derived/tag/edit.html:8
-#: wurdig/templates/derived/tag/edit.html:13
+#: wurdig/templates/derived/tag/edit.html:9
+#: wurdig/templates/derived/tag/edit.html:18
 msgid "Edit Tag"
 msgstr ""
 
@@ -958,11 +1000,11 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: wurdig/templates/derived/tag/new.html:8
+#: wurdig/templates/derived/tag/new.html:9
 msgid "Create a New Tag"
 msgstr ""
 
-#: wurdig/templates/derived/tag/new.html:13
+#: wurdig/templates/derived/tag/new.html:18
 msgid "Create Tag"
 msgstr ""
 
