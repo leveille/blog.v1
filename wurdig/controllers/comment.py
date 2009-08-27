@@ -63,8 +63,19 @@ class PrimitiveSpamCheck(formencode.FancyValidator):
 class NewCommentForm(formencode.Schema):
     allow_extra_fields = True
     filter_extra_fields = True
-    name = formencode.validators.UnicodeString(not_empty=True, max=100, strip=True)
-    email = formencode.validators.Email(not_empty=True, max=50, strip=True)
+    name = formencode.validators.UnicodeString(
+        not_empty=True,
+        messages={
+            'empty': _('Please enter the name of the person leaving the comment.')
+        },
+        max=100, 
+        strip=True
+    )
+    email = formencode.validators.Email(
+        not_empty=True, 
+        max=50, 
+        strip=True
+    )
     url = formencode.validators.URL(not_empty=False, check_exists=True, max=125, strip=True)
     content = formencode.validators.UnicodeString(
         not_empty=True,

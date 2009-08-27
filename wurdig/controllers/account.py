@@ -57,7 +57,7 @@ class AccountController(BaseController):
 
     # @validate(schema=MyLoginForm(), form='signin')
     # need to figure out why validation is failing
-    def signin(self):
+    def dashboard(self):
         if not request.environ.get('REMOTE_USER'):
             # This triggers the AuthKit middleware into displaying the sign-in form
             abort(401)
@@ -72,5 +72,5 @@ class AccountController(BaseController):
 
     def signinagain(self):
         request.environ['paste.auth_tkt.logout_user']()
-        return render('/derived/account/signin.html').replace('%s', h.url_for('signin'))
+        return render('/derived/account/signin.html').replace('%s', h.url_for('dashboard'))
     

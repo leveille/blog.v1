@@ -29,7 +29,7 @@ class ConstructSlug(formencode.FancyValidator):
 
 class UniqueName(formencode.FancyValidator):
     messages = {
-        'invalid': _('Tag name must be unique')
+        'invalid': _('Tag name must be unique.')
     }
     def _to_python(self, value, state):
         # Ensure we have a valid string
@@ -38,7 +38,7 @@ class UniqueName(formencode.FancyValidator):
         result = re.compile("[^a-zA-Z0-9 ]").search(value)
         if result:
             raise formencode.Invalid(_("Tag name can only contain "
-                                       "letters, numbers, and spaces"), value, state)
+                                       "letters, numbers, and spaces."), value, state)
         
         # Ensure tag name is unique
         tag_q = meta.Session.query(model.Tag).filter_by(name=value)
@@ -57,7 +57,7 @@ class UniqueName(formencode.FancyValidator):
     
 class UniqueSlug(formencode.FancyValidator):
     messages = {
-        'invalid': _('Tag slug must be unique')
+        'invalid': _('Tag slug must be unique.')
     }
     def _to_python(self, value, state):
         # Ensure we have a valid string
@@ -66,7 +66,7 @@ class UniqueSlug(formencode.FancyValidator):
         result = re.compile("[^\w-]").search(value)
         if result:
             raise formencode.Invalid(_("Slug can only contain "
-                                     "letters, numbers, and dashes"), value, state)
+                                     "letters, numbers, and dashes."), value, state)
         
         # Ensure tag slug is unique
         tag_q = meta.Session.query(model.Tag).filter_by(slug=value)
@@ -87,8 +87,22 @@ class NewTagForm(formencode.Schema):
     pre_validators = [ConstructSlug()]
     allow_extra_fields = True
     filter_extra_fields = True
-    name = UniqueName(not_empty=True, max=30, strip=True)
-    slug = UniqueSlug(not_empty=True, max=30, strip=True)
+    name = UniqueName(
+        not_empty=True, 
+        messages={
+            'empty': _('Enter a tag name.')
+        },
+        max=30, 
+        strip=True
+    )
+    slug = UniqueSlug(
+        not_empty=True, 
+        messages={
+            'empty': _('Enter a tag slug, ex: my-tag-name.')
+        },
+        max=30, 
+        strip=True
+    )
 
 class TagController(BaseController):
 

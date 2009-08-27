@@ -23,6 +23,10 @@
                 <p class="field required">
                     <label for="slug">${_('Slug')}</label>
                     ${h.text('slug', class_='text')}
+                    <a href="#slug_tip" class="tip">?</a>
+                    <div id="slug_tip" class="hide tip">
+                        <p class="nom">${_('Enter your own slug or leave this field blank to have one auto generated (as long as you have entered a title).')}</p>
+                    </div>
                 </p>
             </td>
         </tr>
@@ -41,6 +45,10 @@
                 <p class="field">
                     <label for="draft">${_('Draft')}?</label>
                     ${h.checkbox('draft', value=None, class_='checkbox')}
+                    <a href="#draft_tip" class="tip">?</a>
+                    <div id="draft_tip" class="hide tip">
+                        <p class="nom">${_('A draft post is one you are working on, that should not display to non logged in users?')}</p>
+                    </div>
                 </p>
             </td>
         </tr>
@@ -54,6 +62,10 @@
                     % else:
                         ${h.checkbox('comments_allowed', value=None, class_='checkbox')}
                     % endif
+                    <a href="#comments_tip" class="tip">?</a>
+                    <div id="comments_tip" class="hide tip">
+                        <p class="nom">${_('Will comments be allowed for this post?')}</p>
+                    </div>
                 </p>
             </td>
         </tr>

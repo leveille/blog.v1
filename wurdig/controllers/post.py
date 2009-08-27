@@ -21,7 +21,7 @@ log = logging.getLogger(__name__)
 
 class UniqueSlug(formencode.FancyValidator):
     messages = {
-        'invalid': _(u'Slug must be unique')
+        'invalid': _(u'Slug must be unique.')
     }
     def _to_python(self, value, state):
         # Ensure we have a valid string
@@ -30,7 +30,7 @@ class UniqueSlug(formencode.FancyValidator):
         result = re.compile("[^\w-]").search(value)
         if result:
             raise formencode.Invalid(_("Slug can only contain "
-                                       "letters, numbers, and dashes"), value, state)
+                                       "letters, numbers, and dashes."), value, state)
         
         # Ensure slug is unique
         post_q = meta.Session.query(model.Post).filter_by(slug=value)
@@ -50,7 +50,7 @@ class UniqueSlug(formencode.FancyValidator):
 class ValidTags(formencode.FancyValidator):
     messages = {
         'invalid': _("One ore more selected tags could not "
-                     "be found in the database")
+                     "be found in the database.")
     }
     def _to_python(self, values, state):
         all_tag_ids = [tag.id for tag in meta.Session.query(model.Tag)]
@@ -70,11 +70,18 @@ class NewPostForm(formencode.Schema):
         not_empty=True,
         max=100, 
         messages={
-            'empty': _('Enter a post title')
+            'empty': _('Enter a post title.')
         },
         strip=True
     )
-    slug = UniqueSlug(not_empty=True, max=100, strip=True)
+    slug = UniqueSlug(
+        not_empty=True, 
+        messages={
+            'empty': _('Enter a post slug, ex: my-post-title.')
+        },
+        max=100, 
+        strip=True
+    )
     content = formencode.validators.UnicodeString(
         not_empty=True,
         messages={

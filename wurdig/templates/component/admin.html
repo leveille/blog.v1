@@ -1,7 +1,10 @@
 <%def name="css()">
     ${h.stylesheet_link(h.url_for('/css/yui-2.7.0.css?%s') % h.mtime('/css/yui-2.7.0.css'), media="screen, projection")}
     ${h.stylesheet_link(h.url_for('/css/utils.css?%s') % h.mtime('/css/utils.css'), media="screen, projection")}
+    ${h.stylesheet_link(h.url_for('/admin/css/tools.css?%s') % h.mtime('/admin/css/tools.css'), media="screen, projection")}
     ${h.stylesheet_link(h.url_for('/admin/css/base.css?%s') % h.mtime('/admin/css/base.css'), media="screen, projection")}
+    ${h.stylesheet_link(h.url_for('/admin/css/custom.css?%s') % h.mtime('/admin/css/custom.css'), media="screen, projection")}
+    ${h.stylesheet_link(h.url_for('/admin/css/redmond/jquery-ui-1.7.2.custom.css'), media="screen, projection")}
     <!--[if IE 6]>
         ${h.stylesheet_link(h.url_for('/admin/css/ie6.css?%s') % h.mtime('/admin/css/ie6.css'), media="screen, projection")}
     <![endif]--> 
@@ -18,6 +21,7 @@
             session.save()
         %>
     % endif
+    <div id="form-errors"></div>
 </%def>
 
 <%def name="js()">
@@ -25,4 +29,18 @@
                         h.url_for('/javascripts/jquery.min.js?%s') % h.mtime("/javascripts/jquery.min.js"), 
                         h.url_for('/admin/js/admin.js?%s') % h.mtime("/admin/js/admin.js"),
                         h.url_for('/javascripts/utils.js?%s') % h.mtime("/javascripts/utils.js"))}
+</%def>
+
+<%def name="tooltip()">
+    ${h.javascript_link(h.url_for('/admin/js/jquery/jquery.tooltip.min.js'))}
+    <script>
+        jQuery(document).ready(function() {
+            jQuery("a.tip").tooltip({ 
+                bodyHandler: function() { 
+                    return jQuery(jQuery(this).attr("href")).html(); 
+                }, 
+                showURL: false 
+            });
+        });
+    </script>
 </%def>

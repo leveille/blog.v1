@@ -23,6 +23,10 @@
                 <p class="field required">
                     <label for="slug">${_('Slug')}</label>
                     ${h.text('slug', class_='text')}
+                    <a href="#slug_tip" class="tip">?</a>
+                    <div id="slug_tip" class="hide tip">
+                        <p class="nom">${_('Enter your own slug or leave this field blank to have one auto generated (as long as you have entered a title).')}</p>
+                    </div>
                 </p>
             </td>
         </tr>

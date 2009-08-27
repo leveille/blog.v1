@@ -21,7 +21,7 @@ log = logging.getLogger(__name__)
     
 class UniqueSlug(formencode.FancyValidator):
     messages = {
-        'invalid': 'Slug must be unique'
+        'invalid': 'Slug must be unique.'
     }
     def _to_python(self, value, state):
         # Ensure we have a valid string
@@ -30,7 +30,7 @@ class UniqueSlug(formencode.FancyValidator):
         result = re.compile("[^\w-]").search(value)
         if result:
             raise formencode.Invalid(_("Slug can only contain "
-                                       "letters, numbers, and dashes") , value, state)
+                                       "letters, numbers, and dashes.") , value, state)
         
         # Ensure slug is unique
         page_q = meta.Session.query(model.Page).filter_by(slug=value)
@@ -56,15 +56,22 @@ class NewPageForm(formencode.Schema):
         not_empty=True,
         max=100, 
         messages={
-            'empty': _('Enter a page title')
+            'empty': _('Enter a page title.')
         },
         strip=True
     )
-    slug = UniqueSlug(not_empty=True, max=100, strip=True)
+    slug = UniqueSlug(
+        not_empty=True, 
+        messages={
+            'empty': _('Enter a page slug, ex: my-page-title.')
+        },
+        max=100, 
+        strip=True
+    )
     content = formencode.validators.UnicodeString(
         not_empty=True,
         messages={
-            'empty': _('Enter some post content.')
+            'empty': _('Enter some page content.')
         },
         strip=True
     )

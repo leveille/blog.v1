@@ -20,9 +20,14 @@ WURDIG.admin = function()
         cookie_prefix : 'wurdig.admin.',
         init: function()
         {
-            /**
-             * Delete confirmation
-             */
+            //display any error messages associated with a form submit
+            if(jQuery('span.error-message').length > 0) {
+                jQuery('span.error-message').each( function() {
+                    jQuery('#form-errors').append('<p class="notice"><strong>' + jQuery(this).html() + '</strong></p>').slideDown('slow');
+                });
+            }
+            
+            //delete confirmation
             jQuery('a[href*="delete"]').bind('click', function(){
                 return false;    
             });

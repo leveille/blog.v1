@@ -12,6 +12,7 @@
 
 <%def name="js()">
     ${editor.admin_editor()}
+    ${admin.tooltip()}
 </%def>
 
 ${h.form(h.url_for(action='create', controller='post'), method='post')}
