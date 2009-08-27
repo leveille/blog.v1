@@ -290,14 +290,14 @@ div.pad{padding:10px;}
 #ft {
     border-top:1px solid #000;
     background:#373A3E;
-    color:#808285;
+    color:#FFF;
     padding-top:20px;
     padding-bottom:20px;
 }
 #ft ul{margin:0;}
-#ft ul li{display:inline;color:#000;}
+#ft ul li{display:inline;color:#808285;}
 #ft p{float:right;}
-#ft ul a{color:#B6B7B8;padding-left:10px;padding-right:10px;}
+#ft ul a{color:#FFF;padding-left:10px;padding-right:10px;}
 #ft ul a.first{padding-left:0;}
 
 /* CONTENT STYLES */

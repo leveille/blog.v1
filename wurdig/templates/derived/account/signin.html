@@ -8,11 +8,11 @@
 ${h.form('%s', method='post')}
     <p>
         <label for="username">${_('Username')}</label>
-        ${h.text('username', tabindex=1)}
+        ${h.text('username', tabindex=1, class_='text')}
     </p>
     <p>
         <label for="password">${_('Password')}</label>
-        ${h.password('password', tabindex=2)}
+        ${h.password('password', tabindex=2, class_='text')}
     </p>
     <p class="submit">
         <input type="image" class="submit" src="/admin/gr/login/submit.png" tabindex="3">
