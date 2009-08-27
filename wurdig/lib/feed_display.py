@@ -66,7 +66,7 @@ def twitter():
         for entry in twitter_feed.entries[:4]:
             description = entry['description'].split(':', 1)[1]
             i = '<li><span class="lone">%s</span> <span>%s</span></li>' % (h.link_to(
-                                                entry.updated[:14],
+                                                entry.updated,
                                                 entry['guid']),
                                                 h.auto_link(description)
                                                 )
