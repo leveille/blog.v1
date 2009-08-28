@@ -18,12 +18,21 @@
             <div id="hd">
                 <div id="meta">
                     <div class="wrapper">
-                        <p>${_('User')}: <em>(${request.environ['REMOTE_USER']})</em></p>
+                        <p>
+                            ${h.link_to(
+                                h.wurdig_title(),
+                                h.url_for(controller='post', action='home')
+                            )}
+                        </p>
                         <ul>
                             <li>
+                                ${_('User')}: (${request.environ['REMOTE_USER']}),
+                            </li>
+                            <li class="last">
                                 ${h.link_to(
-                                    _('Home'),
-                                    '/'
+                                    _('Log Out'), 
+                                    h.url_for(controller='account', action='signout'),
+                                    class_='last'
                                 )}
                             </li>
                         </ul>
@@ -33,7 +42,10 @@
                 <div id="logo" role="banner">
                     <div class="wrapper">
                         <h6>${_('Administrator')}</h6>
-                        <a href="/"><img src="/admin/gr/header/logo.gif" alt="Wurdig"></a>
+                        ${h.link_to(
+                            h.literal('<img src="/admin/gr/header/logo.gif" alt="Wurdig">'), 
+                            h.url_for(controller='post', action='home')
+                        )}
                     </div>
                 </div>
                 
@@ -41,9 +53,11 @@
                     <div class="wrapper">
                         <ul>
                             <li>
-                                <a href="${h.url_for(controller='account', action='signout')}" class="last">
-                                    ${_('Log Out')}
-                                </a>
+                                ${h.link_to(
+                                    _('Log Out'), 
+                                    h.url_for(controller='account', action='signout'),
+                                    class_='last'
+                                )}
                             </li>
                         </ul>
                     </div>
@@ -63,13 +77,19 @@
                 <div id="secondary" class="yui-b" role="navigation">
                     <div id="triangle"></div>
                     <div class="pad">
-                        <h3 class="home active"><a href="#">${_('Dashboard')}</a></h3>
+                        <h3 class="home active">
+                            ${h.link_to(
+                                _('Dashboard'), 
+                                h.url_for(controller='account', action='dashboard')
+                            )}
+                        </h3>
                         <ul>
                             <li>
-                                <a href="${h.url_for(controller='account', action='dashboard')}" 
-                                    title="${_('Dashboard')}">
-                                    ${_('Dashboard')}
-                                </a>
+                                ${h.link_to(
+                                    _('Dashboard'), 
+                                    h.url_for(controller='account', action='dashboard'), 
+                                    title=_('Dashboard')
+                                )}
                             </li>
                             <li>
                                 ${h.link_to(
@@ -78,7 +98,12 @@
                                 )}
                             </li>
                         </ul>
-                        <h3 class="pages"><a href="#">${_('Posts')}</a></h3>
+                        <h3 class="pages">
+                            ${h.link_to(
+                                _('Posts'),
+                                h.url_for(controller='post', action='list')
+                            )}
+                        </h3>
                         <ul>
                             <li>
                                 ${h.link_to(
@@ -93,7 +118,12 @@
                                 )}
                             </li>
                         </ul>
-                        <h3 class="users"><a href="#">${_('Comments')}</a></h3>
+                        <h3 class="users">
+                            ${h.link_to(
+                                _('Comments'),
+                                h.url_for(controller='comment', action='list')
+                            )}
+                        </h3>
                         <ul>
                             <li>
                                 ${h.link_to(
@@ -102,7 +132,12 @@
                                 )}
                             </li>
                         </ul>
-                        <h3 class="pages"><a href="#">${_('Pages')}</a></h3>
+                        <h3 class="pages">
+                            ${h.link_to(
+                                _('Pages'),
+                                h.url_for(controller='page', action='list')
+                            )}
+                        </h3>
                         <ul>
                             <li>
                                 ${h.link_to(
@@ -117,7 +152,12 @@
                                 )}
                             </li>
                         </ul>
-                        <h3 class="servers"><a href="#">${_('Tags')}</a></h3>
+                        <h3 class="servers">
+                            ${h.link_to(
+                                _('Tags'),
+                                h.url_for(controller='tag', action='list')
+                            )}
+                        </h3>
                         <ul>
                             <li>
                                 ${h.link_to(
@@ -138,9 +178,20 @@
             
             <div id="ft" role="contentinfo">
                 <div class="wrapper">
-                    <p>${_('Powered by')} Wurdig</p>
+                    <p>
+                        ${_('Powered by')}
+                        ${h.link_to(
+                            _('Wurdig'),
+                            'http://github.com/leveille/wurdig/tree/master'
+                        )}
+                    </p>
                     <ul>
-                        <li>${h.wurdig_title()}</li>
+                        <li>
+                            ${h.link_to(
+                                h.wurdig_title(), 
+                                h.url_for(controller='post', action='home')
+                            )}
+                        </li>
                     </ul>
                 </div>
             </div>

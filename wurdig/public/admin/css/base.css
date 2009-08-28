@@ -27,28 +27,23 @@ div.pad{padding:10px;}
     padding-bottom:7px;
     font-size:90%;
 }
-#meta a{
-    padding-left:10px;padding-right:10px;
-    text-transform: capitalize;
-}
-#meta a.last{padding-right:0;}
 #meta p{
     float:left;
     background:url(../gr/body/sprite.png) 0 -175px no-repeat;
     margin:0;padding:0 0 0 10px;
 }
-#meta p em{font-style:normal;}
 #meta ul,#meta ul li{margin:0;padding:0;}
-#meta ul li{display:inline;color:#0C4A79;}
+#meta ul li{display:inline;color:#EFEFEF;}
 
 /* LOGO */
 #__LOGO__{}
 #logo {
     background:url(../gr/body/sprite.png) 0 0 repeat-x;
-    min-height:120px;
+    height:110px;
     clear:both;
     border-top:1px solid #262626;
     border-bottom:1px solid #262626;
+    line-height: 110px;
 }
 #logo h6{position:absolute;left:-9999px;}
 
@@ -56,6 +51,11 @@ div.pad{padding:10px;}
 #logo a img, #logo a{margin:0;padding:0;}
 #logo a{margin-left:4px;}
 #logo div.wrapper{position:relative;}
+
+#logo a img {
+    vertical-align:bottom;
+    margin-bottom: 15px
+}
     
     /* METAINFO */
     #__METAINFO__{}
@@ -703,14 +703,10 @@ div.login #hd{
     border-bottom:1px solid #FFF;
 }
 div.login #logo{
-    height:210px;
+    height:170px;
     background:#373A3E url(../gr/body/sprite.png) 0 -676px repeat-x;
     text-align:center;
-    line-height: 210px;
-}
-
-div.login #logo a img {
-    vertical-align:bottom;
+    line-height: 170px;
 }
 
 div.login #streamer{
