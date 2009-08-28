@@ -1,27 +1,27 @@
 /* Pretty printing styles. Used with prettify.js. */
 
-.str { color: #080; }
-.kwd { color: #008; }
-.com { color: #800; }
-.typ { color: #606; }
-.lit { color: #066; }
-.pun { color: #660; }
-.pln { color: #000; }
-.tag { color: #008; }
-.atn { color: #606; }
-.atv { color: #080; }
-.dec { color: #606; }
+pre.prettyprint .str { color: #080; }
+pre.prettyprint .kwd { color: #008; }
+pre.prettyprint .com { color: #800; }
+pre.prettyprint .typ { color: #606; }
+pre.prettyprint .lit { color: #066; }
+pre.prettyprint .pun { color: #660; }
+pre.prettyprint .pln { color: #000; }
+pre.prettyprint .tag { color: #008; }
+pre.prettyprint .atn { color: #606; }
+pre.prettyprint .atv { color: #080; }
+pre.prettyprint .dec { color: #606; }
 pre.prettyprint { max-width: 580px;border:solid 1px #888;border-left-width: 5px;padding:10px;overflow: auto }
 
 @media print {
-  .str { color: #060; }
-  .kwd { color: #006; font-weight: bold; }
-  .com { color: #600; font-style: italic; }
-  .typ { color: #404; font-weight: bold; }
-  .lit { color: #044; }
-  .pun { color: #440; }
-  .pln { color: #000; }
-  .tag { color: #006; font-weight: bold; }
-  .atn { color: #404; }
-  .atv { color: #060; }
+  pre.prettyprint .str { color: #060; }
+  pre.prettyprint .kwd { color: #006; font-weight: bold; }
+  pre.prettyprint .com { color: #600; font-style: italic; }
+  pre.prettyprint .typ { color: #404; font-weight: bold; }
+  pre.prettyprint .lit { color: #044; }
+  pre.prettyprint .pun { color: #440; }
+  pre.prettyprint .pln { color: #000; }
+  pre.prettyprint .tag { color: #006; font-weight: bold; }
+  pre.prettyprint .atn { color: #404; }
+  pre.prettyprint .atv { color: #060; }
 }
