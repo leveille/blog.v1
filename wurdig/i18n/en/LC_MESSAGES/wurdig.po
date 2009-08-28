@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Wurdig 0.1\n"
 "Report-Msgid-Bugs-To: json.leveille@gmail.com\n"
 "POT-Creation-Date: 2009-08-24 14:34+0400\n"
-"PO-Revision-Date: 2009-08-27 15:37-0400\n"
+"PO-Revision-Date: 2009-08-28 09:54-0400\n"
 "Last-Translator: Jason R. Leveille <json.leveille@gmail.com>\n"
 "Language-Team: en <json.levceille@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -350,7 +350,7 @@ msgstr ""
 msgid "Header values can't contain newlines (got %r for header %r)"
 msgstr ""
 
-#: wurdig/lib/tag.py:15 wurdig/templates/base/admin.html:120
+#: wurdig/lib/tag.py:15 wurdig/templates/base/admin.html:157
 #: wurdig/templates/derived/post/fields.html:75
 msgid "Tags"
 msgstr ""
@@ -367,70 +367,68 @@ msgstr ""
 msgid "Admin Login"
 msgstr ""
 
-#: wurdig/templates/base/admin-login.html:19
-#: wurdig/templates/base/admin.html:35
+#: wurdig/templates/base/admin-login.html:22
+#: wurdig/templates/base/admin.html:44
 #: wurdig/templates/component/wurdig.html:102
 msgid "Administrator"
 msgstr ""
 
-#: wurdig/templates/base/admin-login.html:26
+#: wurdig/templates/base/admin-login.html:29
 msgid "Login"
 msgstr ""
 
-#: wurdig/templates/base/admin.html:21
+#: wurdig/templates/base/admin.html:29
 msgid "User"
 msgstr ""
 
-#: wurdig/templates/base/admin.html:25
-#: wurdig/templates/component/wurdig.html:50
-#: wurdig/templates/component/wurdig.html:78
-#: wurdig/templates/component/wurdig.html:79
-#: wurdig/templates/derived/post/home.html:8
-msgid "Home"
-msgstr ""
-
-#: wurdig/templates/base/admin.html:45 wurdig/templates/base/admin.html:76
+#: wurdig/templates/base/admin.html:33 wurdig/templates/base/admin.html:57
+#: wurdig/templates/base/admin.html:96
 msgid "Log Out"
 msgstr ""
 
-#: wurdig/templates/base/admin.html:66 wurdig/templates/base/admin.html:70
-#: wurdig/templates/base/admin.html:71
+#: wurdig/templates/base/admin.html:82 wurdig/templates/base/admin.html:89
+#: wurdig/templates/base/admin.html:91
 #: wurdig/templates/derived/account/dashboard.html:6
 msgid "Dashboard"
 msgstr ""
 
-#: wurdig/templates/base/admin.html:81
+#: wurdig/templates/base/admin.html:103
 msgid "Posts"
 msgstr ""
 
-#: wurdig/templates/base/admin.html:85 wurdig/templates/base/admin.html:100
-#: wurdig/templates/base/admin.html:109 wurdig/templates/base/admin.html:124
+#: wurdig/templates/base/admin.html:110 wurdig/templates/base/admin.html:130
+#: wurdig/templates/base/admin.html:144 wurdig/templates/base/admin.html:164
 msgid "List"
 msgstr ""
 
-#: wurdig/templates/base/admin.html:91 wurdig/templates/base/admin.html:115
-#: wurdig/templates/base/admin.html:130
+#: wurdig/templates/base/admin.html:116 wurdig/templates/base/admin.html:150
+#: wurdig/templates/base/admin.html:170
 msgid "New"
 msgstr ""
 
-#: wurdig/templates/base/admin.html:96 wurdig/templates/component/posts.html:48
+#: wurdig/templates/base/admin.html:123
+#: wurdig/templates/component/posts.html:48
 #: wurdig/templates/component/wurdig.html:162
 #: wurdig/templates/component/wurdig.html:163
 #: wurdig/templates/component/wurdig.html:253
 #: wurdig/templates/component/wurdig.html:254
 #: wurdig/templates/derived/post/fields.html:59
-#: wurdig/templates/derived/post/list.html:18
+#: wurdig/templates/derived/post/list.html:26
 #: wurdig/templates/derived/post/view.html:132
 msgid "Comments"
 msgstr ""
 
-#: wurdig/templates/base/admin.html:105
+#: wurdig/templates/base/admin.html:137
 msgid "Pages"
 msgstr ""
 
-#: wurdig/templates/base/admin.html:141
+#: wurdig/templates/base/admin.html:182
 #: wurdig/templates/component/wurdig.html:259
 msgid "Powered by"
+msgstr ""
+
+#: wurdig/templates/base/admin.html:184
+msgid "Wurdig"
 msgstr ""
 
 #: wurdig/templates/base/master.html:75
@@ -445,17 +443,17 @@ msgstr ""
 
 #: wurdig/templates/component/posts.html:14
 #: wurdig/templates/derived/comment/list.html:11
-#: wurdig/templates/derived/page/list.html:11
-#: wurdig/templates/derived/post/list.html:11
-#: wurdig/templates/derived/tag/list.html:11
+#: wurdig/templates/derived/page/list.html:20
+#: wurdig/templates/derived/post/list.html:20
+#: wurdig/templates/derived/tag/list.html:20
 msgid "to"
 msgstr ""
 
 #: wurdig/templates/component/posts.html:14
 #: wurdig/templates/derived/comment/list.html:11
-#: wurdig/templates/derived/page/list.html:11
-#: wurdig/templates/derived/post/list.html:11
-#: wurdig/templates/derived/tag/list.html:11
+#: wurdig/templates/derived/page/list.html:20
+#: wurdig/templates/derived/post/list.html:20
+#: wurdig/templates/derived/tag/list.html:20
 msgid "of"
 msgstr ""
 
@@ -488,6 +486,13 @@ msgstr ""
 
 #: wurdig/templates/component/wurdig.html:49
 msgid "Jump to Content"
+msgstr ""
+
+#: wurdig/templates/component/wurdig.html:50
+#: wurdig/templates/component/wurdig.html:78
+#: wurdig/templates/component/wurdig.html:79
+#: wurdig/templates/derived/post/home.html:8
+msgid "Home"
 msgstr ""
 
 #: wurdig/templates/component/wurdig.html:84
@@ -603,14 +608,14 @@ msgstr ""
 #: wurdig/templates/derived/comment/approve_confirm.html:21
 #: wurdig/templates/derived/comment/delete_confirm.html:21
 #: wurdig/templates/derived/comment/disapprove_confirm.html:21
-#: wurdig/templates/derived/comment/edit.html:19
+#: wurdig/templates/derived/comment/edit.html:28
 #: wurdig/templates/derived/comment/new.html:18
 #: wurdig/templates/derived/page/delete_confirm.html:12
-#: wurdig/templates/derived/page/edit.html:20
-#: wurdig/templates/derived/page/new.html:20
+#: wurdig/templates/derived/page/edit.html:29
+#: wurdig/templates/derived/page/new.html:29
 #: wurdig/templates/derived/post/delete_confirm.html:12
-#: wurdig/templates/derived/post/edit.html:20
-#: wurdig/templates/derived/post/new.html:20
+#: wurdig/templates/derived/post/edit.html:29
+#: wurdig/templates/derived/post/new.html:29
 #: wurdig/templates/derived/tag/delete_confirm.html:12
 msgid "or"
 msgstr ""
@@ -618,17 +623,24 @@ msgstr ""
 #: wurdig/templates/derived/comment/approve_confirm.html:22
 #: wurdig/templates/derived/comment/delete_confirm.html:22
 #: wurdig/templates/derived/comment/disapprove_confirm.html:22
-#: wurdig/templates/derived/comment/edit.html:20
+#: wurdig/templates/derived/comment/edit.html:22
+#: wurdig/templates/derived/comment/edit.html:29
 #: wurdig/templates/derived/comment/new.html:19
 #: wurdig/templates/derived/page/delete_confirm.html:13
-#: wurdig/templates/derived/page/edit.html:21
-#: wurdig/templates/derived/page/new.html:21
+#: wurdig/templates/derived/page/edit.html:23
+#: wurdig/templates/derived/page/edit.html:30
+#: wurdig/templates/derived/page/new.html:23
+#: wurdig/templates/derived/page/new.html:30
 #: wurdig/templates/derived/post/delete_confirm.html:13
-#: wurdig/templates/derived/post/edit.html:21
-#: wurdig/templates/derived/post/new.html:21
+#: wurdig/templates/derived/post/edit.html:23
+#: wurdig/templates/derived/post/edit.html:30
+#: wurdig/templates/derived/post/new.html:23
+#: wurdig/templates/derived/post/new.html:30
 #: wurdig/templates/derived/tag/delete_confirm.html:13
-#: wurdig/templates/derived/tag/edit.html:19
-#: wurdig/templates/derived/tag/new.html:19
+#: wurdig/templates/derived/tag/edit.html:21
+#: wurdig/templates/derived/tag/edit.html:28
+#: wurdig/templates/derived/tag/new.html:21
+#: wurdig/templates/derived/tag/new.html:28
 msgid "Cancel"
 msgstr ""
 
@@ -665,7 +677,7 @@ msgid "Yes, Disapprove Comment"
 msgstr ""
 
 #: wurdig/templates/derived/comment/edit.html:10
-#: wurdig/templates/derived/comment/edit.html:19
+#: wurdig/templates/derived/comment/edit.html:28
 msgid "Edit Comment"
 msgstr ""
 
@@ -677,7 +689,7 @@ msgstr ""
 #: wurdig/templates/derived/comment/list.html:16
 #: wurdig/templates/derived/post/comment_fields.html:5
 #: wurdig/templates/derived/tag/fields.html:15
-#: wurdig/templates/derived/tag/list.html:16
+#: wurdig/templates/derived/tag/list.html:25
 msgid "Name"
 msgstr ""
 
@@ -707,30 +719,30 @@ msgid "Content"
 msgstr ""
 
 #: wurdig/templates/derived/comment/list.html:18
-#: wurdig/templates/derived/post/list.html:17
+#: wurdig/templates/derived/post/list.html:25
 msgid "Posted"
 msgstr ""
 
 #: wurdig/templates/derived/comment/list.html:19
-#: wurdig/templates/derived/page/list.html:17
-#: wurdig/templates/derived/post/list.html:19
-#: wurdig/templates/derived/tag/list.html:17
+#: wurdig/templates/derived/page/list.html:26
+#: wurdig/templates/derived/post/list.html:27
+#: wurdig/templates/derived/tag/list.html:26
 msgid "Action"
 msgstr ""
 
 #: wurdig/templates/derived/comment/list.html:57
-#: wurdig/templates/derived/page/list.html:33
-#: wurdig/templates/derived/post/list.html:49
+#: wurdig/templates/derived/page/list.html:42
+#: wurdig/templates/derived/post/list.html:57
 #: wurdig/templates/derived/post/view.html:64
-#: wurdig/templates/derived/tag/list.html:32
+#: wurdig/templates/derived/tag/list.html:41
 msgid "Edit"
 msgstr ""
 
 #: wurdig/templates/derived/comment/list.html:65
-#: wurdig/templates/derived/page/list.html:37
-#: wurdig/templates/derived/post/list.html:53
+#: wurdig/templates/derived/page/list.html:46
+#: wurdig/templates/derived/post/list.html:61
 #: wurdig/templates/derived/post/view.html:70
-#: wurdig/templates/derived/tag/list.html:36
+#: wurdig/templates/derived/tag/list.html:45
 msgid "Delete"
 msgstr ""
 
@@ -774,8 +786,8 @@ msgstr ""
 msgid "Edit Page"
 msgstr ""
 
-#: wurdig/templates/derived/page/edit.html:20
-#: wurdig/templates/derived/post/edit.html:20
+#: wurdig/templates/derived/page/edit.html:29
+#: wurdig/templates/derived/post/edit.html:29
 msgid "Submit Edits"
 msgstr ""
 
@@ -796,7 +808,6 @@ msgstr ""
 
 #: wurdig/templates/derived/page/fields.html:28
 #: wurdig/templates/derived/post/fields.html:28
-#: wurdig/templates/derived/tag/fields.html:28
 msgid ""
 "Enter your own slug or leave this field blank to have one auto generated "
 "(as long as you have entered a title)."
@@ -806,7 +817,11 @@ msgstr ""
 msgid "Page List"
 msgstr ""
 
-#: wurdig/templates/derived/page/list.html:16
+#: wurdig/templates/derived/page/list.html:15
+msgid "Add New Page"
+msgstr ""
+
+#: wurdig/templates/derived/page/list.html:25
 msgid "Page Title"
 msgstr ""
 
@@ -814,7 +829,7 @@ msgstr ""
 msgid "Create a New Page"
 msgstr ""
 
-#: wurdig/templates/derived/page/new.html:20
+#: wurdig/templates/derived/page/new.html:29
 msgid "Create Page"
 msgstr ""
 
@@ -880,7 +895,7 @@ msgid "Post Information"
 msgstr ""
 
 #: wurdig/templates/derived/post/fields.html:46
-#: wurdig/templates/derived/post/list.html:41
+#: wurdig/templates/derived/post/list.html:49
 msgid "Draft"
 msgstr ""
 
@@ -898,7 +913,11 @@ msgstr ""
 msgid "Post List"
 msgstr ""
 
-#: wurdig/templates/derived/post/list.html:16
+#: wurdig/templates/derived/post/list.html:15
+msgid "Add New Post"
+msgstr ""
+
+#: wurdig/templates/derived/post/list.html:24
 msgid "Post Title"
 msgstr ""
 
@@ -906,7 +925,7 @@ msgstr ""
 msgid "New Post"
 msgstr ""
 
-#: wurdig/templates/derived/post/new.html:20
+#: wurdig/templates/derived/post/new.html:29
 msgid "Create Post"
 msgstr ""
 
@@ -988,7 +1007,7 @@ msgid "Yes, Delete Tag"
 msgstr ""
 
 #: wurdig/templates/derived/tag/edit.html:9
-#: wurdig/templates/derived/tag/edit.html:18
+#: wurdig/templates/derived/tag/edit.html:27
 msgid "Edit Tag"
 msgstr ""
 
@@ -996,11 +1015,21 @@ msgstr ""
 msgid "Tag Information"
 msgstr ""
 
+#: wurdig/templates/derived/tag/fields.html:28
+msgid ""
+"Enter your own slug or leave this field blank to have one auto generated "
+"(as long as you have entered a tag name)."
+msgstr ""
+
 #: wurdig/templates/derived/tag/list.html:7
 msgid "Tag List"
 msgstr ""
 
-#: wurdig/templates/derived/tag/list.html:28
+#: wurdig/templates/derived/tag/list.html:15
+msgid "Add New Tag"
+msgstr ""
+
+#: wurdig/templates/derived/tag/list.html:37
 msgid "View"
 msgstr ""
 
@@ -1008,7 +1037,7 @@ msgstr ""
 msgid "Create a New Tag"
 msgstr ""
 
-#: wurdig/templates/derived/tag/new.html:18
+#: wurdig/templates/derived/tag/new.html:27
 msgid "Create Tag"
 msgstr ""
 
@@ -1029,28 +1058,4 @@ msgstr ""
 #: wurdig/templates/email/new_comment.html:11
 msgid "Disapprove Comment:"
 msgstr ""
-
-#~ msgid "Slug can only contain letters, numbers, and dashes"
-#~ msgstr ""
-
-#~ msgid "Enter a page title"
-#~ msgstr ""
-
-#~ msgid "Slug must be unique"
-#~ msgstr ""
-
-#~ msgid "One ore more selected tags could not be found in the database"
-#~ msgstr ""
-
-#~ msgid "Enter a post title"
-#~ msgstr ""
-
-#~ msgid "Tag name must be unique"
-#~ msgstr ""
-
-#~ msgid "Tag name can only contain letters, numbers, and spaces"
-#~ msgstr ""
-
-#~ msgid "Tag slug must be unique"
-#~ msgstr ""
 
