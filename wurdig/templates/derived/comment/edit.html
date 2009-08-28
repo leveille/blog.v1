@@ -14,6 +14,15 @@
     ${editor.admin_editor()}
 </%def>
 
+<p class="submenu action">
+    ${h.link_to(
+        h.literal('<span class="ui-icon ui-icon-cancel"></span>'),
+        h.url_for(controller='comment', action='list'), 
+        class_='ui-state-default ui-corner-all', 
+        title=_('Cancel')
+    )}
+</p>
+
 ${h.form(h.url_for(action='save', controller='comment', id=request.urlvars['id']), method='post')}
     ${fields.body()}
     ${h.submit('edit', _('Edit Comment'))} ${_('or')}

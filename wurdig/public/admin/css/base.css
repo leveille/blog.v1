@@ -130,7 +130,8 @@ div.pad{padding:10px;}
         #primary div.pad{padding-left:0;padding-top:0;}
         #primary .submenu{
             border-top: none; 
-            float: right
+            float: right;
+            margin-top: -17px
         }
 
 

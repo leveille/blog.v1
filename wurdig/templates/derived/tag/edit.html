@@ -13,6 +13,15 @@
     ${admin.tooltip()}
 </%def>
 
+<p class="submenu action">
+    ${h.link_to(
+        h.literal('<span class="ui-icon ui-icon-cancel"></span>'),
+        h.url_for(controller='tag', action='list'), 
+        class_='ui-state-default ui-corner-all', 
+        title=_('Cancel')
+    )}
+</p>
+
 ${h.form(h.url_for(controller='tag', action='save', id=request.urlvars['id']), method='post')}
     ${fields.body()}
     ${h.submit('edit', _('Edit Tag'))} or

@@ -7,9 +7,17 @@
     ${_('Post List')}
 </%def>
 
+<p class="submenu action">
+    ${h.link_to(
+        h.literal('<span class="ui-icon ui-icon-plusthick"></span>'),
+        h.url_for(controller='post', action='new'), 
+        class_='ui-state-default ui-corner-all', 
+        title=_('Add New Post')
+    )}
+</p>
+
 % if len(c.paginator):
     <p>${ c.paginator.pager('$link_first $link_previous $first_item %s $last_item %s $item_count $link_next $link_last' % (_('to'), _('of')))}</p>
-    
     <table class="paginator">
         <thead>
             <tr>
@@ -58,6 +66,5 @@
             % endfor
         </tbody>
     </table>
-    
     <p>${ c.paginator.pager('~2~') }</p>
 % endif
