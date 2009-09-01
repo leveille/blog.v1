@@ -150,7 +150,7 @@ class CommentController(BaseController):
             setattr(comment, k, v)
             
         comment.post_id = c.post.id
-        comment.created_on = datetime.datetime.now()
+        comment.created_on = datetime.datetime.utcnow()
         comment.content = h.mytidy(comment.content)
         comment.content = h.comment_filter(comment.content)
         comment.content = h.auto_link(comment.content)

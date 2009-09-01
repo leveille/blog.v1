@@ -21,7 +21,7 @@ def init_model(engine):
     meta.Session = orm.scoped_session(sm)
 
 def now():
-    return datetime.datetime.now()
+    return datetime.datetime.utcnow()
 
 pages_table = schema.Table('pages', meta.metadata,
     schema.Column('id', types.Integer,

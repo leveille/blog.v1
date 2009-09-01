@@ -202,9 +202,9 @@ class PostController(BaseController):
             setattr(post, k, v)
         
         if not post.draft:
-            post.posted_on = d.datetime.now()
+            post.posted_on = d.datetime.utcnow()
         
-        post.created_on = d.datetime.now()
+        post.created_on = d.datetime.utcnow()
         
         meta.Session.add(post)
 
@@ -279,7 +279,7 @@ class PostController(BaseController):
         if post.draft:
             post.posted_on = None
         elif post.posted_on is None:
-            post.posted_on = d.datetime.now()
+            post.posted_on = d.datetime.utcnow()
         
         # remove existing tags which were not selected
         # in the "posted" tags

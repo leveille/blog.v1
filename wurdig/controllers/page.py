@@ -107,7 +107,7 @@ class PageController(BaseController):
         for k, v in self.form_result.items():
             setattr(page, k, v)
             
-        page.created_on = d.datetime.now()
+        page.created_on = d.datetime.utcnow()
         
         meta.Session.add(page)
         meta.Session.commit()
