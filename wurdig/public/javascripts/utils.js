@@ -20,9 +20,23 @@ WURDIG_UTILS.app = function(){
         
         init: function(){
             jQuery('.js').show();
+            WURDIG_UTILS.app.localizeDateTime();
             WURDIG_UTILS.app.ajaxSetup();
             WURDIG_UTILS.app.message();
             WURDIG_UTILS.app.confirm();
+        },
+        
+        localizeDateTime: function(){
+            jQuery('.localize_datetime').each(function(){
+                var utc_datetime = jQuery(this).text();
+                var localized = utc_datetime;
+                try {
+                    var datetime = new Date(utc_datetime);
+                    localized = datetime.toLocaleDateString() + ' ' + datetime.toLocaleTimeString();
+                } finally {
+                    jQuery(this).text(localized);
+                }
+            });
         },
         
         ajaxSetup: function(){
