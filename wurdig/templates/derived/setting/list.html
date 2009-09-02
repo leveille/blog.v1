@@ -40,10 +40,6 @@
                         ${h.link_to(
                             _('Edit'),
                             h.url_for(controller='setting', action='edit', id=unicode(setting.id))
-                        )} | 
-                        ${h.link_to(
-                            _('Delete'),
-                            h.url_for(controller='setting', action='delete_confirm', id=unicode(setting.id))
                         )}
                     </td>
                 </tr>

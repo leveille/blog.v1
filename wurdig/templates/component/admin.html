@@ -14,7 +14,7 @@
 <%def name="flash()">
     % if session.has_key('flash'):
         <div id="flash">
-            <p class="flash">${session.get('flash')}</p>
+            <p class="flash success"><strong>${session.get('flash')}</strong></p>
         </div>
         <%
             del session['flash']

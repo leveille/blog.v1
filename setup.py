@@ -15,7 +15,7 @@ setup(
     install_requires=[
         "Pylons>=0.9.7,<=0.9.7.99",
         "SQLAlchemy>=0.5,<=0.5.99",
-        "Beaker>=1.3.1,<=1.3.99",
+        "Beaker>=1.4,<=1.4.99",
         "Mako>=0.2.2,<=0.2.99",
         "AuthKit>=0.4.3,<=0.4.99",
         # requires tidy to be installed

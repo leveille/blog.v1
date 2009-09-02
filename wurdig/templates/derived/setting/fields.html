@@ -4,25 +4,20 @@
 <table class="form">
     <thead>
         <tr>
-            <th colspan="2">${_('Setting Information')}</th>
+            <th colspan="2">${_('Setting Value')}</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><span class="required">!</span></td>
-            <td>
-                <p class="field required">
-                    <label for="key">${_('Key')}</label>
-                    ${h.text('key', class_='text')}
-                </p>
-            </td>
+            <td>&nbsp;</td>
+            <td class="notice"><strong>${c.setting.key}</strong></td>
         </tr>
         <tr>
             <td>&nbsp;</td>
             <td>
                 <p class="field">
                     <label for="value">${_('Value')}</label>
-                    ${h.text('value', class_='text')}
+                    ${h.textarea('value', class_='text')}
                 </p>
             </td>
         </tr>

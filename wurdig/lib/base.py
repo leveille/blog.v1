@@ -31,12 +31,17 @@ class BaseController(WSGIController):
       
     def _setup(self):
         
-        @app_globals.cache.region('short_term')
         def get_db_settings(): 
             return meta.Session.query(model.Setting).all()
         
+        # set settings cache object
+        # Fails when I attempt to store this in type file
+        settings = app_globals.cache.get_cache(
+            'base._setup', 
+            type='memory'
+        ).get(key='settings', createfunc=get_db_settings)
+        
         pylons.c.settings = {}
-        settings = get_db_settings()
         for setting in settings:
             pylons.c.settings[setting.key] = setting.value    
 
@@ -50,7 +55,7 @@ class BaseController(WSGIController):
         pylons.c.enable_flickr_display = asbool(pylons.c.settings.get('enable_flickr_display', False))
         pylons.c.use_minified_assets = asbool(pylons.c.settings.get('use_minified_assets', False))
         pylons.c.use_externalposts_feed = asbool(pylons.c.settings.get('use_externalposts_feed', False))  
-    
+            
     def __call__(self, environ, start_response):
         """Invoke the Controller"""
         # WSGIController.__call__ dispatches to the Controller method

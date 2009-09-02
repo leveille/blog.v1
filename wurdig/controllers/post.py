@@ -97,7 +97,7 @@ class NewPostForm(formencode.Schema):
 class PostController(BaseController):
     
     def home(self): 
-        @app_globals.cache.region('short_term')
+        @app_globals.cache.region('short_term', 'post.home.load_page')
         def load_page(page):
             return paginate.Page(
                 meta.Session.query(model.Post).filter(
@@ -136,7 +136,7 @@ class PostController(BaseController):
             (month_start, month_end) = (month_i, month_i)
             day_end = calendar.monthrange(year_i, month_start)[1]
         
-        @app_globals.cache.region('short_term')
+        @app_globals.cache.region('short_term', 'post.archive.load_page')
         def load_page(page):
             posts_q = meta.Session.query(model.Post).filter(
                 and_(
@@ -163,7 +163,7 @@ class PostController(BaseController):
         return render('/derived/post/archive.html')
     
     def view(self, year, month, slug):        
-        @app_globals.cache.region('short_term')
+        @app_globals.cache.region('short_term', 'post.view.load_post')
         def load_post(year, month, slug):
             import calendar
             return meta.Session.query(model.Post).filter(
@@ -215,6 +215,7 @@ class PostController(BaseController):
         meta.Session.commit()        
         session['flash'] = _('Post successfully added.')
         session.save()
+                
         # Issue an HTTP redirect
         if post.posted_on is not None:
             return redirect_to(controller='post', 

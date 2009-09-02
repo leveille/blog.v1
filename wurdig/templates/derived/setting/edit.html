@@ -6,7 +6,7 @@
 <%namespace file="/component/admin.html" name="admin" import="*"/>
 
 <%def name="title()">
-    ${_('Edit Setting')}
+    ${_('Edit Setting: %s') % c.setting.key}
 </%def>
 
 <%def name="js()">
