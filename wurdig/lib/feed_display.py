@@ -65,11 +65,18 @@ def twitter():
 
         for entry in twitter_feed.entries[:4]:
             description = entry['description'].split(':', 1)[1]
-            i = '<li><span class="lone">%s</span> <span>%s</span></li>' % (h.link_to(
-                                                entry.updated,
-                                                entry['guid']),
-                                                h.auto_link(description)
-                                                )
+            i = '<li><span class="lone">%s</span> <span>%s</span></li>' % (
+                h.link_to(
+                    h.literal(
+                        '<abbr title="%s" class="localize_datetime">%s</abbr>' % (
+                            entry.updated, 
+                            entry.updated
+                        )
+                    ),
+                    entry['guid']
+                ),
+                h.auto_link(description)
+            )
             items.append(i)
         return template % (_('Twitter Updates'), 
                            config['twitter.user.screen_name'], 

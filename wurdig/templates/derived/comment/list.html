@@ -31,7 +31,7 @@
             <td>
                 ${h.strip_tags(comment.content)}
             </td>
-            <td>${comment.created_on.strftime('%c')}</td>
+            <td>${h.literal(h.abbr_datetime(comment.created_on))}</td>
             <td>
                 % if not comment.approved:
                     ${h.link_to(

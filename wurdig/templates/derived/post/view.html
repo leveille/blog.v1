@@ -87,7 +87,7 @@
             <blockquote>
                 ${h.literal(comment.content)}
                 <p class="wurdig-comment-posted">
-                    ${comment.created_on}
+                    ${h.literal(h.abbr_datetime(comment.created_on))}
                     <a href="#comment-${comment.id}">${_('Link')}</a>
                 </p>
             </blockquote>
@@ -125,7 +125,7 @@
 
 <h2>${c.post.title}</h2>
 <p class="wurdig-entry-date">
-    ${c.post.posted_on.strftime('%B %d, %Y')}, 
+    ${h.literal(h.abbr_datetime(c.post.posted_on))}, 
     <span class="wurdig-entry-comments">
         % if len(c.post.comments):
             ${h.link_to(

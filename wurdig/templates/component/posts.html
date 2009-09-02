@@ -41,7 +41,7 @@
         ${post_link % post.title}
     </h2>
     <p class="wurdig-entry-date">
-        ${post.posted_on.strftime('%B %d, %Y')},
+        ${h.literal(h.abbr_datetime(post.posted_on))},
         <span class="wurdig-entry-comments">
             % if len(post.comments):
                 ${h.link_to(

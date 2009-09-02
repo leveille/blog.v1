@@ -48,7 +48,7 @@
                         % if post.draft:
                             ${_('Draft')}
                         % else:
-                            ${post.posted_on.strftime('%c')}
+                            ${h.literal(h.abbr_datetime(post.posted_on))}
                         % endif
                     </td>
                     <td>${len(post.comments)}</td>
