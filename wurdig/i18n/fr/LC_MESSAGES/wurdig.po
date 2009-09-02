@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Wurdig 0.1\n"
 "Report-Msgid-Bugs-To: json.leveille@gmail.com\n"
 "POT-Creation-Date: 2009-08-24 14:34+0400\n"
-"PO-Revision-Date: 2009-08-28 09:54-0400\n"
+"PO-Revision-Date: 2009-09-02 13:36-0400\n"
 "Last-Translator: Jason R. Leveille <json.leveille@gmail.com>\n"
 "Language-Team: fr <json.leveille@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
@@ -16,66 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.4\n"
-
-#: wurdig/websetup.py:21
-msgid "Adding the AuthKit model..."
-msgstr ""
-
-#: wurdig/websetup.py:27
-msgid "Dropping existing tables..."
-msgstr ""
-
-#: wurdig/websetup.py:33
-msgid "Adding roles and uses..."
-msgstr ""
-
-#: wurdig/websetup.py:38
-msgid "Adding about page..."
-msgstr ""
-
-#: wurdig/websetup.py:59
-msgid "Adding teach page..."
-msgstr ""
-
-#: wurdig/websetup.py:67
-msgid "Adding search page..."
-msgstr ""
-
-#: wurdig/websetup.py:86
-msgid "Adding first post..."
-msgstr ""
-
-#: wurdig/websetup.py:95
-msgid "Adding fifth post..."
-msgstr ""
-
-#: wurdig/websetup.py:106
-msgid "Adding second post..."
-msgstr ""
-
-#: wurdig/websetup.py:117
-msgid "Adding third post..."
-msgstr ""
-
-#: wurdig/websetup.py:128
-msgid "Adding fourth post..."
-msgstr ""
-
-#: wurdig/websetup.py:139 wurdig/websetup.py:149
-msgid "Adding second post comment..."
-msgstr ""
-
-#: wurdig/websetup.py:160
-msgid "Adding first tag..."
-msgstr ""
-
-#: wurdig/websetup.py:167
-msgid "Adding second tag..."
-msgstr ""
-
-#: wurdig/websetup.py:174
-msgid "Assigning tags..."
-msgstr ""
 
 #: wurdig/controllers/account.py:19
 msgid "You entered an invalid username or password"
@@ -285,6 +225,38 @@ msgstr ""
 msgid "Post successfully deleted."
 msgstr ""
 
+#: wurdig/controllers/setting.py:25
+msgid "Setting key must be unique."
+msgstr ""
+
+#: wurdig/controllers/setting.py:33
+msgid "Setting key can only contain letters and underscores."
+msgstr ""
+
+#: wurdig/controllers/setting.py:57
+msgid "Enter a setting key."
+msgstr ""
+
+#: wurdig/controllers/setting.py:65
+msgid "Enter a setting value."
+msgstr ""
+
+#: wurdig/controllers/setting.py:87
+msgid "Setting successfully added."
+msgstr ""
+
+#: wurdig/controllers/setting.py:130
+msgid "Setting successfully updated."
+msgstr ""
+
+#: wurdig/controllers/setting.py:183
+msgid "The setting has been deleted"
+msgstr ""
+
+#: wurdig/controllers/setting.py:185
+msgid "Setting successfully deleted."
+msgstr ""
+
 #: wurdig/controllers/tag.py:32
 msgid "Tag name must be unique."
 msgstr ""
@@ -305,19 +277,19 @@ msgstr ""
 msgid "Enter a tag slug, ex: my-tag-name."
 msgstr ""
 
-#: wurdig/controllers/tag.py:178
+#: wurdig/controllers/tag.py:177
 msgid "Tag successfully added."
 msgstr ""
 
-#: wurdig/controllers/tag.py:221
+#: wurdig/controllers/tag.py:220
 msgid "Tag successfully updated."
 msgstr ""
 
-#: wurdig/controllers/tag.py:276
+#: wurdig/controllers/tag.py:275
 msgid "The tag has been deleted"
 msgstr ""
 
-#: wurdig/controllers/tag.py:278
+#: wurdig/controllers/tag.py:277
 msgid "Tag successfully deleted."
 msgstr ""
 
@@ -329,19 +301,51 @@ msgstr ""
 msgid "Newest Comments"
 msgstr ""
 
-#: wurdig/lib/feed_display.py:25
+#: wurdig/lib/conf_helper.py:21
+msgid "Error retrieving akismet key"
+msgstr ""
+
+#: wurdig/lib/conf_helper.py:27
+msgid "Error retrieving spamword"
+msgstr ""
+
+#: wurdig/lib/conf_helper.py:30
+msgid "Error retrieving site title"
+msgstr ""
+
+#: wurdig/lib/conf_helper.py:33
+msgid "Error retrieving site tagline"
+msgstr ""
+
+#: wurdig/lib/conf_helper.py:39
+msgid "Error retrieving admin email"
+msgstr ""
+
+#: wurdig/lib/conf_helper.py:45
+msgid "Error retrieving Google search key"
+msgstr ""
+
+#: wurdig/lib/conf_helper.py:51
+msgid "Error retrieving Google analytics key"
+msgstr ""
+
+#: wurdig/lib/conf_helper.py:57
+msgid "Error retrieving external posts feed url"
+msgstr ""
+
+#: wurdig/lib/feed_display.py:28
 msgid "Bookmarks"
 msgstr ""
 
-#: wurdig/lib/feed_display.py:49
+#: wurdig/lib/feed_display.py:55
 msgid "Public Flickr Stream"
 msgstr ""
 
-#: wurdig/lib/feed_display.py:74
+#: wurdig/lib/feed_display.py:90
 msgid "Twitter Updates"
 msgstr ""
 
-#: wurdig/lib/feed_display.py:76
+#: wurdig/lib/feed_display.py:92
 msgid "Follow"
 msgstr ""
 
@@ -398,11 +402,12 @@ msgstr ""
 
 #: wurdig/templates/base/admin.html:110 wurdig/templates/base/admin.html:130
 #: wurdig/templates/base/admin.html:144 wurdig/templates/base/admin.html:164
+#: wurdig/templates/base/admin.html:184
 msgid "List"
 msgstr ""
 
 #: wurdig/templates/base/admin.html:116 wurdig/templates/base/admin.html:150
-#: wurdig/templates/base/admin.html:170
+#: wurdig/templates/base/admin.html:170 wurdig/templates/base/admin.html:190
 msgid "New"
 msgstr ""
 
@@ -410,8 +415,8 @@ msgstr ""
 #: wurdig/templates/component/posts.html:48
 #: wurdig/templates/component/wurdig.html:162
 #: wurdig/templates/component/wurdig.html:163
-#: wurdig/templates/component/wurdig.html:253
-#: wurdig/templates/component/wurdig.html:254
+#: wurdig/templates/component/wurdig.html:241
+#: wurdig/templates/component/wurdig.html:242
 #: wurdig/templates/derived/post/fields.html:59
 #: wurdig/templates/derived/post/list.html:26
 #: wurdig/templates/derived/post/view.html:132
@@ -422,12 +427,16 @@ msgstr ""
 msgid "Pages"
 msgstr ""
 
-#: wurdig/templates/base/admin.html:182
-#: wurdig/templates/component/wurdig.html:259
+#: wurdig/templates/base/admin.html:177
+msgid "Settings"
+msgstr ""
+
+#: wurdig/templates/base/admin.html:202
+#: wurdig/templates/component/wurdig.html:247
 msgid "Powered by"
 msgstr ""
 
-#: wurdig/templates/base/admin.html:184
+#: wurdig/templates/base/admin.html:204
 msgid "Wurdig"
 msgstr ""
 
@@ -445,6 +454,7 @@ msgstr ""
 #: wurdig/templates/derived/comment/list.html:11
 #: wurdig/templates/derived/page/list.html:20
 #: wurdig/templates/derived/post/list.html:20
+#: wurdig/templates/derived/setting/list.html:20
 #: wurdig/templates/derived/tag/list.html:20
 msgid "to"
 msgstr ""
@@ -453,6 +463,7 @@ msgstr ""
 #: wurdig/templates/derived/comment/list.html:11
 #: wurdig/templates/derived/page/list.html:20
 #: wurdig/templates/derived/post/list.html:20
+#: wurdig/templates/derived/setting/list.html:20
 #: wurdig/templates/derived/tag/list.html:20
 msgid "of"
 msgstr ""
@@ -532,8 +543,8 @@ msgstr ""
 #: wurdig/templates/component/wurdig.html:151
 #: wurdig/templates/component/wurdig.html:155
 #: wurdig/templates/component/wurdig.html:156
-#: wurdig/templates/component/wurdig.html:241
-#: wurdig/templates/component/wurdig.html:246
+#: wurdig/templates/component/wurdig.html:229
+#: wurdig/templates/component/wurdig.html:234
 msgid "Blog"
 msgstr ""
 
@@ -550,16 +561,12 @@ msgstr ""
 msgid "Posts Tagged"
 msgstr ""
 
-#: wurdig/templates/component/wurdig.html:200
-msgid "Blogroll"
-msgstr ""
-
-#: wurdig/templates/component/wurdig.html:242
-#: wurdig/templates/component/wurdig.html:247
+#: wurdig/templates/component/wurdig.html:230
+#: wurdig/templates/component/wurdig.html:235
 msgid "Blog Feed"
 msgstr ""
 
-#: wurdig/templates/component/wurdig.html:260
+#: wurdig/templates/component/wurdig.html:248
 msgid "built with"
 msgstr ""
 
@@ -616,6 +623,7 @@ msgstr ""
 #: wurdig/templates/derived/post/delete_confirm.html:12
 #: wurdig/templates/derived/post/edit.html:29
 #: wurdig/templates/derived/post/new.html:29
+#: wurdig/templates/derived/setting/delete_confirm.html:12
 #: wurdig/templates/derived/tag/delete_confirm.html:12
 msgid "or"
 msgstr ""
@@ -636,6 +644,11 @@ msgstr ""
 #: wurdig/templates/derived/post/edit.html:30
 #: wurdig/templates/derived/post/new.html:23
 #: wurdig/templates/derived/post/new.html:30
+#: wurdig/templates/derived/setting/delete_confirm.html:13
+#: wurdig/templates/derived/setting/edit.html:21
+#: wurdig/templates/derived/setting/edit.html:28
+#: wurdig/templates/derived/setting/new.html:21
+#: wurdig/templates/derived/setting/new.html:28
 #: wurdig/templates/derived/tag/delete_confirm.html:13
 #: wurdig/templates/derived/tag/edit.html:21
 #: wurdig/templates/derived/tag/edit.html:28
@@ -726,6 +739,7 @@ msgstr ""
 #: wurdig/templates/derived/comment/list.html:19
 #: wurdig/templates/derived/page/list.html:26
 #: wurdig/templates/derived/post/list.html:27
+#: wurdig/templates/derived/setting/list.html:27
 #: wurdig/templates/derived/tag/list.html:26
 msgid "Action"
 msgstr ""
@@ -734,6 +748,7 @@ msgstr ""
 #: wurdig/templates/derived/page/list.html:42
 #: wurdig/templates/derived/post/list.html:57
 #: wurdig/templates/derived/post/view.html:64
+#: wurdig/templates/derived/setting/list.html:41
 #: wurdig/templates/derived/tag/list.html:41
 msgid "Edit"
 msgstr ""
@@ -742,6 +757,7 @@ msgstr ""
 #: wurdig/templates/derived/page/list.html:46
 #: wurdig/templates/derived/post/list.html:61
 #: wurdig/templates/derived/post/view.html:70
+#: wurdig/templates/derived/setting/list.html:45
 #: wurdig/templates/derived/tag/list.html:45
 msgid "Delete"
 msgstr ""
@@ -971,6 +987,53 @@ msgstr ""
 msgid "Comments for"
 msgstr ""
 
+#: wurdig/templates/derived/setting/delete_confirm.html:6
+msgid "Setting Delete Confirmation"
+msgstr ""
+
+#: wurdig/templates/derived/setting/delete_confirm.html:8
+msgid "Are you sure you want to delete the setting with key"
+msgstr ""
+
+#: wurdig/templates/derived/setting/delete_confirm.html:12
+msgid "Yes, Delete Setting"
+msgstr ""
+
+#: wurdig/templates/derived/setting/edit.html:9
+#: wurdig/templates/derived/setting/edit.html:27
+msgid "Edit Setting"
+msgstr ""
+
+#: wurdig/templates/derived/setting/fields.html:7
+msgid "Setting Information"
+msgstr ""
+
+#: wurdig/templates/derived/setting/fields.html:15
+#: wurdig/templates/derived/setting/list.html:25
+msgid "Key"
+msgstr ""
+
+#: wurdig/templates/derived/setting/fields.html:24
+#: wurdig/templates/derived/setting/list.html:26
+msgid "Value"
+msgstr ""
+
+#: wurdig/templates/derived/setting/list.html:7
+msgid "Setting List"
+msgstr ""
+
+#: wurdig/templates/derived/setting/list.html:15
+msgid "Add New Setting"
+msgstr ""
+
+#: wurdig/templates/derived/setting/new.html:9
+msgid "Create a New Setting"
+msgstr ""
+
+#: wurdig/templates/derived/setting/new.html:27
+msgid "Create Setting"
+msgstr ""
+
 #: wurdig/templates/derived/tag/archive.html:7
 #: wurdig/templates/derived/tag/archive.html:23
 msgid "Entries tagged"
@@ -1058,4 +1121,52 @@ msgstr ""
 #: wurdig/templates/email/new_comment.html:11
 msgid "Disapprove Comment:"
 msgstr ""
+
+#~ msgid "Adding the AuthKit model..."
+#~ msgstr ""
+
+#~ msgid "Dropping existing tables..."
+#~ msgstr ""
+
+#~ msgid "Adding roles and uses..."
+#~ msgstr ""
+
+#~ msgid "Adding about page..."
+#~ msgstr ""
+
+#~ msgid "Adding teach page..."
+#~ msgstr ""
+
+#~ msgid "Adding search page..."
+#~ msgstr ""
+
+#~ msgid "Adding first post..."
+#~ msgstr ""
+
+#~ msgid "Adding fifth post..."
+#~ msgstr ""
+
+#~ msgid "Adding second post..."
+#~ msgstr ""
+
+#~ msgid "Adding third post..."
+#~ msgstr ""
+
+#~ msgid "Adding fourth post..."
+#~ msgstr ""
+
+#~ msgid "Adding second post comment..."
+#~ msgstr ""
+
+#~ msgid "Adding first tag..."
+#~ msgstr ""
+
+#~ msgid "Adding second tag..."
+#~ msgstr ""
+
+#~ msgid "Assigning tags..."
+#~ msgstr ""
+
+#~ msgid "Blogroll"
+#~ msgstr ""
 
