@@ -23,6 +23,13 @@ def init_model(engine):
 def now():
     return datetime.datetime.utcnow()
 
+settings_table = schema.Table('settings', meta.metadata,
+    schema.Column('id', types.Integer,
+        schema.Sequence('setting_seq_id', optional=True), primary_key=True),
+    schema.Column('key', types.Unicode(50), nullable=False, unique=True),
+    schema.Column('value', types.UnicodeText(), default=u''),
+)
+
 pages_table = schema.Table('pages', meta.metadata,
     schema.Column('id', types.Integer,
         schema.Sequence('page_seq_id', optional=True), primary_key=True),
@@ -71,6 +78,9 @@ poststags_table = schema.Table('posts_tags', meta.metadata,
     schema.Column('tag_id', types.Integer, schema.ForeignKey('tags.id')),
 )
 
+class Setting(object):
+    pass
+
 class Page(object):
     pass
 
@@ -83,6 +93,7 @@ class Comment(object):
 class Tag(object):
     pass
 
+orm.mapper(Setting, settings_table)
 orm.mapper(Comment, comments_table)
 orm.mapper(Tag, tags_table, order_by='name', properties={
     'post_count': column_property(

@@ -1,0 +1,55 @@
+<%
+    from pylons.i18n.translation import _
+%>
+<%inherit file="/base/admin.html"/>
+
+<%def name="title()">
+    ${_('Setting List')}
+</%def>
+
+<p class="submenu action">
+    ${h.link_to(
+        h.literal('<span class="ui-icon ui-icon-plusthick"></span>'),
+        h.url_for(controller='tag', action='new'), 
+        class_='ui-state-default ui-corner-all', 
+        title=_('Add New Setting')
+    )}
+</p>
+
+% if len(c.paginator):
+    <p>${ c.paginator.pager('$link_first $link_previous $first_item %s $last_item %s $item_count $link_next $link_last' % (_('to'), _('of')))}</p>
+    
+    <table class="paginator">
+        <thead>
+            <tr>
+                <th>${_('Key')}</th>
+                <th>${_('Value')}</th>
+                <th>${_('Action')}</th>
+            </tr>
+        </thead>
+        <tbody>
+            % for setting in c.paginator:
+                <tr class="${setting.id}">
+                    <td>
+                        ${setting.key}
+                    </td>
+                    <td>
+                        ${h.literal(setting.value)}
+                    </td>
+                    <td>
+                        ${h.link_to(
+                            _('Edit'),
+                            h.url_for(controller='setting', action='edit', id=unicode(setting.id))
+                        )} | 
+                        ${h.link_to(
+                            _('Delete'),
+                            h.url_for(controller='setting', action='delete_confirm', id=unicode(setting.id))
+                        )}
+                    </td>
+                </tr>
+            % endfor
+        </tbody>
+    </table>
+    
+    <p>${ c.paginator.pager('~2~') }</p>
+% endif

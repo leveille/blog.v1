@@ -197,19 +197,7 @@
 
 <%def name="blogroll()" cached="True" cache_timeout="86400" cache_key="blogroll" cache_type="file">
     <div id="wurdig-blogroll" class="wurdig-secondary-list">
-        <h4>${_('Blogroll')}</h4>
-        <ul>
-            <li><a href="http://www.456bereastreet.com/" rel="external" title="456 Berea Street">456 Berea Street</a></li>
-            <li><a href="http://benramsey.com/" rel="external" title="Ben Ramsey">Ben Ramsey</a></li>
-            <li><a href="http://jchrisa.net" rel="external" title="Daytime Running Lights">Daytime Running Lights</a></li>
-            <li><a href="http://www.eflorenzano.com" rel="external" title="Eric Florenzano">Eric Florenzano</a></li>
-            <li><a href="http://blog.ianbicking.org/" rel="external" title="Ian Bicking">Ian Bicking</a></li>
-            <li><a href="http://shiflett.org/" rel="external" title="Chris Shiflett">Chris Shiflett</a></li>
-            <li><a href="http://simonwillison.net/" rel="external" title="Simon Willison">Simon Willison</a></li>
-            <li><a href="http://teachmetheweb.org/" rel="external" title="Teach Me the Web">Teach Me the Web</a></li>
-            <li><a href="http://www.travisswicegood.com/index.php" rel="external" title="Travis Swicegood">Travis Swicegood</a></li>
-            <li><a href="http://zgordon.org/" rel="external" title="Zac Gordon">Zac Gordon</a></li>
-        </ul>
+        ${h.literal(c.settings.get('blogroll', u''))}
     </div>
 </%def>
 

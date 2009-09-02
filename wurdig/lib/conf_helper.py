@@ -1,4 +1,5 @@
-from pylons import config
+from pylons import tmpl_context as c
+from pylons.i18n.translation import _
 
 __all__ = ['wurdig_use_akismet', 
            'wurdig_get_akismet_key',
@@ -17,75 +18,43 @@ __all__ = ['wurdig_use_akismet',
            ]
 
 def wurdig_get_akismet_key():
-    try:
-        akistmet_key = config['akismet.api_key']
-    except Exception, e:
-        akistmet_key = None
-    return akistmet_key
+    return c.settings.get('akismet_key', _('Error retrieving akismet key'))
 
 def wurdig_use_akismet():
-    return wurdig_get_akismet_key() not in ['', None, u'']
+    return c.enable_akismet
 
 def wurdig_spamword():
-    try:
-        wurdig_spamword = config['blog.spamword']
-    except Exception, e:
-        wurdig_spamword = u'wurdig'
-    return wurdig_spamword
+    return c.settings.get('spamword', _('Error retrieving spamword'))
 
 def wurdig_title():
-    try:
-        wurdig_title = config['blog.title']
-    except Exception, e:
-        wurdig_title = u'Please enter a blog title in your main configuration file: blog.title'
-    return wurdig_title
+    return c.settings.get('site_title', _('Error retrieving site title'))
 
 def wurdig_subtitle():
-    try:
-        wurdig_subtitle = config['blog.subtitle']
-    except Exception, e:
-        wurdig_subtitle = None
-    return wurdig_subtitle
+    return c.settings.get('site_tagline', _('Error retrieving site tagline'))
 
 def wurdig_use_subtitle():
-    return wurdig_subtitle() not in ['', None, u'']
+    return c.display_tagline
 
 def wurdig_contact_email():
-    try:
-        wurdig_contact = config['blog.contact']
-    except Exception, e:
-        wurdig_contact = None
-    return wurdig_contact
+    return c.settings.get('admin_email', _('Error retrieving admin email'))
 
 def wurdig_display_contact_email():
-    return wurdig_contact_email() not in ['', None, u'']
+    return c.display_admin_email
 
 def wurdig_googlesearch_key():
-    try:
-        wurdig_googlesearch_key = config['wurdig.googlesearch.key']
-    except Exception, e:
-        wurdig_googlesearch_key = None
-    return wurdig_googlesearch_key
+    return c.settings.get('googlesearch_key', _('Error retrieving Google search key'))
 
 def wurdig_use_googlesearch():
-    return wurdig_googlesearch_key() not in ['', None, u'']
+    return c.enable_googlesearch
 
 def wurdig_googleanalytics_key():
-    try:
-        wurdig_googleanalytics_key = config['wurdig.googleanalytics.key']
-    except Exception, e:
-        wurdig_googleanalytics_key = None
-    return wurdig_googleanalytics_key
+    return c.settings.get('googleanalytics_key', _('Error retrieving Google analytics key'))
 
 def wurdig_use_googleanalytics():
-    return wurdig_googleanalytics_key() not in ['', None, u'']
+    return c.enable_googleanalytics
 
 def wurdig_external_posts_feed():
-    try:
-        wurdig_external_posts_feed = config['wurdig.externalposts.feed']
-    except Exception, e:
-        wurdig_external_posts_feed = None
-    return wurdig_external_posts_feed
+    return c.settings.get('externalposts_feed_url', _('Error retrieving external posts feed url'))
 
 def wurdig_use_externalposts_feed():
-    return wurdig_external_posts_feed() not in ['', None, u'']
+    return c.use_externalposts_feed

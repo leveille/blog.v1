@@ -1,12 +1,15 @@
 import feedparser
 import helpers as h
-from pylons import config
+from pylons import tmpl_context as c
 from pylons.i18n.translation import _
 
 __all__ = ['delicious', 'flickr', 'twitter']
 
 def delicious():
-    delicious_feed = feedparser.parse('http://feeds.delicious.com/v2/rss/%s?count=10' % config['delicious.username'])
+    if not c.enable_delicious_display:
+        return u''
+    
+    delicious_feed = feedparser.parse('http://feeds.delicious.com/v2/rss/%s?count=10' % c.settings.get('delicious_username'))
     if len(delicious_feed.entries):
         items = []
         template = """
@@ -24,10 +27,13 @@ def delicious():
             items.append(i % link)
         return template % (_('Bookmarks'), '\n'.join(items))
     else:
-        return ''
+        return u''
 
 def flickr():
-    flickr_feed = feedparser.parse('http://api.flickr.com/services/feeds/photos_public.gne?id=%s@N00&lang=en-us&format=atom' % config['flickr.id'])
+    if not c.enable_flickr_display:
+        return u''
+    
+    flickr_feed = feedparser.parse('http://api.flickr.com/services/feeds/photos_public.gne?id=%s@N00&lang=en-us&format=atom' % c.settings.get('flickr_id'))
     if len(flickr_feed.entries):
         items = []
         template = """
@@ -48,10 +54,13 @@ def flickr():
             items.append(i)
         return template % (_('Public Flickr Stream'), '\n'.join(items))
     else:
-        return ''
+        return u''
 
 def twitter():
-    twitter_feed = feedparser.parse("http://twitter.com/statuses/user_timeline/%s.rss" % config['twitter.user.screen_name'])
+    if not c.enable_twitter_display:
+        return u''
+    
+    twitter_feed = feedparser.parse("http://twitter.com/statuses/user_timeline/%s.rss" % c.settings.get('twitter_screenname'))
     if len(twitter_feed.entries):
         items = []
         template = """
@@ -79,8 +88,8 @@ def twitter():
             )
             items.append(i)
         return template % (_('Twitter Updates'), 
-                           config['twitter.user.screen_name'], 
+                           c.settings.get('twitter_screenname'), 
                            _('Follow'),
                            '\n'.join(items))
     else:
-        return ''
+        return u''

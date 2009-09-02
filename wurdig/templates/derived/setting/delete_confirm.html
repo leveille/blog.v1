@@ -1,0 +1,14 @@
+<%
+    from pylons.i18n.translation import _
+%>
+<%inherit file="/base/admin.html"/>
+
+<%def name="title()">${_('Setting Delete Confirmation')}</%def>
+
+<p>${_('Are you sure you want to delete the setting with key')} <strong>${c.setting.key}</strong></p>
+
+${h.form(h.url_for(controller='setting', action='delete'), method='post')}
+    ${h.hidden('id', value=c.setting.id)}
+    ${h.submit('edit', _('Yes, Delete Setting'))} ${_('or')}
+    ${h.link_to(_('Cancel'), h.url_for(controller='setting', action='list'))}
+${h.end_form()}

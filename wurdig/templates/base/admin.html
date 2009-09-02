@@ -172,6 +172,26 @@
                                 )}
                             </li>
                         </ul>
+                        <h3 class="servers">
+                            ${h.link_to(
+                                _('Settings'),
+                                h.url_for(controller='setting', action='list')
+                            )}
+                        </h3>
+                        <ul>
+                            <li>
+                                ${h.link_to(
+                                    _('List'),
+                                    h.url_for(controller='setting', action='list')
+                                )}
+                            </li>
+                            <li>
+                                ${h.link_to(
+                                    _('New'),
+                                    h.url_for(controller='setting', action='new')
+                                )}
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

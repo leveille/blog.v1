@@ -1,0 +1,30 @@
+<%
+    from pylons.i18n.translation import _
+%>
+<table class="form">
+    <thead>
+        <tr>
+            <th colspan="2">${_('Setting Information')}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><span class="required">!</span></td>
+            <td>
+                <p class="field required">
+                    <label for="key">${_('Key')}</label>
+                    ${h.text('key', class_='text')}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <p class="field">
+                    <label for="value">${_('Value')}</label>
+                    ${h.text('value', class_='text')}
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
