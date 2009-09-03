@@ -8,6 +8,7 @@ from sqlalchemy import engine_from_config
 
 import wurdig.lib.app_globals as app_globals
 import wurdig.lib.helpers
+from wurdig.lib.querytimer import TimerProxy
 from wurdig.config.routing import make_map
 from wurdig.model import init_model
 
@@ -39,7 +40,7 @@ def load_environment(global_conf, app_conf):
         imports=['from webhelpers.html import escape'])
 
     # Setup the SQLAlchemy database engine
-    engine = engine_from_config(config, 'sqlalchemy.')
+    engine = engine_from_config(config, 'sqlalchemy.', proxy=TimerProxy())
     init_model(engine)
 
     # CONFIGURATION OPTIONS HERE (note: all config options will override

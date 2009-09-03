@@ -10,7 +10,7 @@ setup(
     version='0.1',
     description='A Simple Pylons Blog',
     author='Jason R. Leveille',
-    author_email='leveillej@gmail.com',
+    author_email='json.leveille@gmail.com',
     url='http://jasonleveille.com',
     install_requires=[
         "Pylons>=0.9.7,<=0.9.7.99",
@@ -24,6 +24,7 @@ setup(
         "html5lib>=0.10,<=0.19",
         "cssutils>=0.9.6a0", 
         "Babel>=0.9.4,<=0.9.9",
+        "Dozer>=0.1,<=1",
     ],
     setup_requires=["PasteScript>=1.6.3"],
     packages=find_packages(exclude=['ez_setup']),

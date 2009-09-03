@@ -68,5 +68,9 @@ def make_app(global_conf, full_stack=True, static_files=True, **app_conf):
         # Serve static files
         static_app = StaticURLParser(config['pylons.paths']['static_files'])
         app = Cascade([static_app, app])
+        
+    if asbool(config['debug']):
+        from dozer import Logview
+        app = Logview(app, config)
 
     return app
