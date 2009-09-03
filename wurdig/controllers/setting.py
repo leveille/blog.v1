@@ -9,6 +9,7 @@ import webhelpers.paginate as paginate
 
 from authkit.authorize.pylons_adaptors import authorize
 from formencode import htmlfill
+from paste.deploy.converters import asbool
 from pylons import app_globals, config, request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
@@ -19,15 +20,29 @@ from sqlalchemy.sql import and_, delete
 from wurdig.lib.base import BaseController, render
 
 log = logging.getLogger(__name__)
+
+class Cleanup(formencode.FancyValidator):
+    def _to_python(self, value, state):
+        # clean up value['value'] if type is boolean
+        if value['type'] == 'b':
+            v = value.get('value', None)
+            if v is None:
+                value['value'] = u'false'
+            else:
+                value['value'] = u'true'
+        return value
     
 class SettingForm(formencode.Schema):
+    pre_validators = [Cleanup()]
     allow_extra_fields = True
     filter_extra_fields = True
+    type = formencode.validators.UnicodeString(
+        not_empty=True,
+        max=2,
+        strip=True
+    )
     value = formencode.validators.UnicodeString(
         not_empty=False,
-        messages={
-            'empty': _('Enter a setting value.')
-        },
         strip=True
     )
 
@@ -50,6 +65,8 @@ class SettingController(BaseController):
             'key': c.setting.key,
             'value': c.setting.value
         }
+        if c.setting.type == 'b':
+            values['value'] = asbool(c.setting.value)
         return htmlfill.render(render('/derived/setting/edit.html'), values)
     
     @h.auth.authorize(h.auth.is_valid_user)
@@ -84,7 +101,7 @@ class SettingController(BaseController):
     @h.auth.authorize(h.auth.is_valid_user)
     def list(self):
         
-        settings_q = meta.Session.query(model.Setting)
+        settings_q = meta.Session.query(model.Setting).order_by([model.Setting.id])
         
         try:
             page = int(request.params.get('page', 1))

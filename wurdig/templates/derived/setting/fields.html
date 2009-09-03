@@ -4,22 +4,28 @@
 <table class="form">
     <thead>
         <tr>
-            <th colspan="2">${_('Setting Value')}</th>
+            <th>${c.setting.description}</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>&nbsp;</td>
-            <td class="notice"><strong>${c.setting.key}</strong></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
             <td>
                 <p class="field">
                     <label for="value">${_('Value')}</label>
-                    ${h.textarea('value', class_='text')}
+                    % if c.setting.type in ['t', u't']:
+                        ${h.text('value', class_='text')}
+                    % elif c.setting.type in ['ta', u'ta']:
+                        ${h.textarea('value', class_='text')}
+                    % elif c.setting.type in ['b', u'b']:
+                        ${h.checkbox('value', value=None, class_='checkbox')}
+                    % endif
+                    <a href="#${c.setting.key}" class="tip">?</a>
+                    <div id="${c.setting.key}" class="hide tip">
+                        <p class="nom">${h.literal(c.setting.help)}</p>
+                    </div>
                 </p>
             </td>
         </tr>
     </tbody>
 </table>
+${h.hidden('type', value=c.setting.type)}

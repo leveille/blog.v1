@@ -4,13 +4,17 @@
 <%inherit file="/base/admin.html"/>
 <%namespace file="fields.html" name="fields" import="*"/>
 <%namespace file="/component/admin.html" name="admin" import="*"/>
+<%namespace file="/component/editor.html" name="editor" import="*"/>
 
 <%def name="title()">
-    ${_('Edit Setting: %s') % c.setting.key}
+    ${_('Edit Setting: %s') % c.setting.description}
 </%def>
 
 <%def name="js()">
     ${admin.tooltip()}
+    % if c.setting.type == 'ta':
+        ${editor.admin_editor()}
+    % endif
 </%def>
 
 <p class="submenu action">

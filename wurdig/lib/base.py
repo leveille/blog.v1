@@ -45,16 +45,16 @@ class BaseController(WSGIController):
         for setting in settings:
             pylons.c.settings[setting.key] = setting.value    
 
-        pylons.c.display_tagline = asbool(pylons.c.settings.get('display_tagline', False))
-        pylons.c.display_admin_email = asbool(pylons.c.settings.get('display_admin_email', False))
-        pylons.c.enable_googlesearch = asbool(pylons.c.settings.get('enable_googlesearch', False))
-        pylons.c.enable_googleanalytics = asbool(pylons.c.settings.get('enable_googleanalytics', False))
-        pylons.c.enable_akismet = asbool(pylons.c.settings.get('enable_akismet', False))
-        pylons.c.enable_twitter_display = asbool(pylons.c.settings.get('enable_twitter_display', False))
-        pylons.c.enable_delicious_display = asbool(pylons.c.settings.get('enable_delicious_display', False))
-        pylons.c.enable_flickr_display = asbool(pylons.c.settings.get('enable_flickr_display', False))
-        pylons.c.use_minified_assets = asbool(pylons.c.settings.get('use_minified_assets', False))
-        pylons.c.use_externalposts_feed = asbool(pylons.c.settings.get('use_externalposts_feed', False))  
+        pylons.c.display_tagline = asbool(pylons.c.settings.get('display_tagline', 'false'))
+        pylons.c.display_admin_email = asbool(pylons.c.settings.get('display_admin_email', 'false'))
+        pylons.c.enable_googlesearch = asbool(pylons.c.settings.get('enable_googlesearch', 'false'))
+        pylons.c.enable_googleanalytics = asbool(pylons.c.settings.get('enable_googleanalytics', 'false'))
+        pylons.c.enable_akismet = asbool(pylons.c.settings.get('enable_akismet', 'false'))
+        pylons.c.enable_twitter_display = asbool(pylons.c.settings.get('enable_twitter_display', 'false'))
+        pylons.c.enable_delicious_display = asbool(pylons.c.settings.get('enable_delicious_display', 'false'))
+        pylons.c.enable_flickr_display = asbool(pylons.c.settings.get('enable_flickr_display', 'false'))
+        pylons.c.use_minified_assets = asbool(pylons.c.settings.get('use_minified_assets', 'false'))
+        pylons.c.use_externalposts_feed = asbool(pylons.c.settings.get('use_externalposts_feed', 'false'))  
             
     def __call__(self, environ, start_response):
         """Invoke the Controller"""

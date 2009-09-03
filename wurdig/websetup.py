@@ -5,6 +5,7 @@ import datetime
 
 from authkit.users.sqlalchemy_driver import UsersFromDatabase
 from authkit.users import md5
+from pylons.i18n.translation import _
 from wurdig import model
 from wurdig.config.environment import load_environment
 
@@ -12,6 +13,11 @@ log = logging.getLogger(__name__)
 
 def setup_app(command, conf, vars):
     load_environment(conf.global_conf, conf.local_conf)
+    
+    # http://pylonshq.com/project/pylonshq/ticket/509
+    from pylons.i18n.translation import _get_translator
+    import pylons
+    pylons.translator._push_object(_get_translator(pylons.config.get('lang')))
 
     from wurdig.model import meta
     meta.metadata.bind = meta.engine
@@ -30,136 +36,209 @@ def setup_app(command, conf, vars):
     users.user_create("admin", password=md5("admin"))
     users.user_add_role("admin", role="admin")
     
-    setting1 = model.Setting()
-    setting1.key = u'site_title'
-    setting1.value = u'My Wurdig Blog'
-    meta.Session.add(setting1)
+    setting_site_title = model.Setting()
+    setting_site_title.key = u'site_title'
+    setting_site_title.value = u'My Wurdig Blog'
+    setting_site_title.description = _(u'Site Title?')
+    setting_site_title.help = _(u'What is the title of this '
+                                'site (ex. Jason Leveille\'s Blog)?')
+    meta.Session.add(setting_site_title)
     meta.Session.flush()
     
-    setting2 = model.Setting()
-    setting2.key = u'site_tagline'
-    setting2.value = u'Just Another Wurdig Blog'
-    meta.Session.add(setting2)
+    setting_site_tagline = model.Setting()
+    setting_site_tagline.key = u'site_tagline'
+    setting_site_tagline.value = u'Just Another Wurdig Blog'
+    setting_site_tagline.description = _(u'Site Tagline?')
+    setting_site_tagline.help = _(u'What is the tagline of this site?')
+    meta.Session.add(setting_site_tagline)
     meta.Session.flush()
     
     setting_display_tagline = model.Setting()
     setting_display_tagline.key = u'display_tagline'
-    setting_display_tagline.value = u'True'
+    setting_display_tagline.value = u'true'
+    setting_display_tagline.description = _(u'Display Site Tagline?')
+    setting_display_tagline.type = u'b'
+    setting_display_tagline.help = _(u'Should the tagline be shown for your site?')
     meta.Session.add(setting_display_tagline)
     meta.Session.flush()
     
-    setting3 = model.Setting()
-    setting3.key = u'admin_email'
-    setting3.value = u'json.leveille@gmail.com'
-    meta.Session.add(setting3)
+    setting_admin_email = model.Setting()
+    setting_admin_email.key = u'admin_email'
+    setting_admin_email.value = u''
+    setting_admin_email.description = _(u'Administrator Email')
+    setting_admin_email.help = _(u'What is the administrator email for this site?  '
+                                 'This will be used for notifications, to send email, etc?')
+    meta.Session.add(setting_admin_email)
     meta.Session.flush()
     
-    setting4 = model.Setting()
-    setting4.key = u'display_admin_email'
-    setting4.value = u'False'
-    meta.Session.add(setting4)
+    setting_display_admin_email = model.Setting()
+    setting_display_admin_email.key = u'display_admin_email'
+    setting_display_admin_email.value = u'false'
+    setting_display_admin_email.description = _(u'Display Admin Email?')
+    setting_display_admin_email.type = u'b'
+    setting_display_admin_email.help = _(u'Should the administrator email be '
+                                         'display (obfuscated) publicly?')
+    meta.Session.add(setting_display_admin_email)
     meta.Session.flush()
     
-    setting5 = model.Setting()
-    setting5.key = u'spamword'
-    setting5.value = u'wurdig'
-    meta.Session.add(setting5)
+    setting_spamword = model.Setting()
+    setting_spamword.key = u'spamword'
+    setting_spamword.value = u'wurdig'
+    setting_spamword.description = _(u'Your Spam Deterrent Word?')
+    setting_spamword.help = _(u'If you enable Akismet this spamword '
+                              'becomes irrelevant.  Otherwise, what is '
+                              'your spam deterrent word (used in comments)?')
+    meta.Session.add(setting_spamword)
     meta.Session.flush()
     
-    setting6 = model.Setting()
-    setting6.key = u'enable_googlesearch'
-    setting6.value = u'False'
-    meta.Session.add(setting6)
+    setting_enable_googlesearch = model.Setting()
+    setting_enable_googlesearch.key = u'enable_googlesearch'
+    setting_enable_googlesearch.value = u'false'
+    setting_enable_googlesearch.description = _(u'Enable Google Search?')
+    setting_enable_googlesearch.type = u'b'
+    setting_enable_googlesearch.help = _(u'Should Google Search be enabled?  '
+                                         'If so, you\'ll need a Google Search '
+                                         'Key (http://www.google.com/sitesearch/).')
+    meta.Session.add(setting_enable_googlesearch)
     meta.Session.flush()
     
-    setting7 = model.Setting()
-    setting7.key = u'googlesearch_key'
-    setting7.value = u''
-    meta.Session.add(setting7)
+    setting_googlesearch_key = model.Setting()
+    setting_googlesearch_key.key = u'googlesearch_key'
+    setting_googlesearch_key.value = u''
+    setting_googlesearch_key.description = _(u'Your Google Search Key?')
+    setting_googlesearch_key.help = _(u'What is your Google Search Key '
+                                      '(http://www.google.com/sitesearch/)?  '
+                                      'Only relevant if you have Google search enabled.')
+    meta.Session.add(setting_googlesearch_key)
     meta.Session.flush()
     
-    setting8 = model.Setting()
-    setting8.key = u'enable_googleanalytics'
-    setting8.value = u'False'
-    meta.Session.add(setting8)
+    setting_enable_googleanalytics = model.Setting()
+    setting_enable_googleanalytics.key = u'enable_googleanalytics'
+    setting_enable_googleanalytics.value = u'false'
+    setting_enable_googleanalytics.description = _(u'Enable Google Analytics?')
+    setting_enable_googleanalytics.type = u'b'
+    setting_enable_googleanalytics.help = _(u'Do you want to enable Google Analytics?')
+    meta.Session.add(setting_enable_googleanalytics)
     meta.Session.flush()
     
-    setting9 = model.Setting()
-    setting9.key = u'googleanalytics_key'
-    setting9.value = u''
-    meta.Session.add(setting9)
+    setting_googleanalytics_key = model.Setting()
+    setting_googleanalytics_key.key = u'googleanalytics_key'
+    setting_googleanalytics_key.value = u''
+    setting_googleanalytics_key.description = _(u'Your Google Analytics Key?')
+    setting_googleanalytics_key.help = _(u'What is your Google Analytics key?')
+    meta.Session.add(setting_googleanalytics_key)
     meta.Session.flush()
     
-    setting10 = model.Setting()
-    setting10.key = u'enable_akismet'
-    setting10.value = u'False'
-    meta.Session.add(setting10)
+    setting_enable_akismet = model.Setting()
+    setting_enable_akismet.key = u'enable_akismet'
+    setting_enable_akismet.value = u'false'
+    setting_enable_akismet.description = _(u'Enable Akismet Spam Detection?')
+    setting_enable_akismet.type = u'b'
+    setting_enable_akismet.help = _(u'Do you want to enable Akismet spam '
+                                    'detection?  You\'ll need an Akismet '
+                                    'API key (http://akismet.com/personal/).')
+    meta.Session.add(setting_enable_akismet)
     meta.Session.flush()
     
-    setting11 = model.Setting()
-    setting11.key = u'akismet_key'
-    setting11.value = u''
-    meta.Session.add(setting11)
+    setting_akismet_key = model.Setting()
+    setting_akismet_key.key = u'akismet_key'
+    setting_akismet_key.value = u''
+    setting_akismet_key.description = _(u'Your Akismet API Key?')
+    setting_akismet_key.help = _(u'What is your Akismet API Key '
+                                 '(http://akismet.com/personal/)?')
+    meta.Session.add(setting_akismet_key)
     meta.Session.flush()
     
-    setting12 = model.Setting()
-    setting12.key = u'enable_twitter_display'
-    setting12.value = u'False'
-    meta.Session.add(setting12)
+    setting_enable_twitter_display = model.Setting()
+    setting_enable_twitter_display.key = u'enable_twitter_display'
+    setting_enable_twitter_display.value = u'false'
+    setting_enable_twitter_display.description = _(u'Enable Twitter Display?')
+    setting_enable_twitter_display.type = u'b'
+    setting_enable_twitter_display.help = _(u'Do you want to display '
+                                            'your latest tweets?')
+    meta.Session.add(setting_enable_twitter_display)
     meta.Session.flush()
     
-    setting13 = model.Setting()
-    setting13.key = u'twitter_screenname'
-    setting13.value = u''
-    meta.Session.add(setting13)
+    setting_twitter_screenname = model.Setting()
+    setting_twitter_screenname.key = u'twitter_screenname'
+    setting_twitter_screenname.value = u''
+    setting_twitter_screenname.description = u'Your Twitter Screen Name?'
+    setting_twitter_screenname.help = _(u'What is your Twitter screen name?')
+    meta.Session.add(setting_twitter_screenname)
     meta.Session.flush()
     
-    setting14 = model.Setting()
-    setting14.key = u'enable_delicious_display'
-    setting14.value = u'False'
-    meta.Session.add(setting14)
+    setting_enable_delicious_display = model.Setting()
+    setting_enable_delicious_display.key = u'enable_delicious_display'
+    setting_enable_delicious_display.value = u'false'
+    setting_enable_delicious_display.description = _(u'Enable Delicious Bookmarks Display?')
+    setting_enable_delicious_display.type = u'b'
+    setting_enable_delicious_display.help = _(u'Do you want to display your '
+                                              'Delicious bookmarks '
+                                              '(http://delicious.com/)?')
+    meta.Session.add(setting_enable_delicious_display)
     meta.Session.flush()
     
-    setting15 = model.Setting()
-    setting15.key = u'delicious_username'
-    setting15.value = u''
-    meta.Session.add(setting15)
+    setting_delicious_username = model.Setting()
+    setting_delicious_username.key = u'delicious_username'
+    setting_delicious_username.value = u''
+    setting_delicious_username.description = _(u'Your Delicious User Name?')
+    setting_delicious_username.help = _(u'What is your Delicious user name?')
+    meta.Session.add(setting_delicious_username)
     meta.Session.flush()
     
-    setting16 = model.Setting()
-    setting16.key = u'enable_flickr_display'
-    setting16.value = u'False'
-    meta.Session.add(setting16)
+    setting_enable_flickr_display = model.Setting()
+    setting_enable_flickr_display.key = u'enable_flickr_display'
+    setting_enable_flickr_display.value = u'false'
+    setting_enable_flickr_display.description = _(u'Enable Flickr Image Display?')
+    setting_enable_flickr_display.type = u'b'
+    setting_enable_flickr_display.help = _(u'Do you want to display '
+                                           'images from your Flickr account?')
+    meta.Session.add(setting_enable_flickr_display)
     meta.Session.flush()
     
-    setting17 = model.Setting()
-    setting17.key = u'flickr_id'
-    setting17.value = u''
-    meta.Session.add(setting17)
+    setting_flickr_id = model.Setting()
+    setting_flickr_id.key = u'flickr_id'
+    setting_flickr_id.value = u''
+    setting_flickr_id.description = _(u'Your Flickr ID?')
+    setting_flickr_id.help = _(u'What is your Flickr ID (http://idgettr.com/)?')
+    meta.Session.add(setting_flickr_id)
     meta.Session.flush()
     
-    setting18 = model.Setting()
-    setting18.key = u'use_minified_assets'
-    setting18.value = u'False'
-    meta.Session.add(setting18)
+    setting_use_minified_assets = model.Setting()
+    setting_use_minified_assets.key = u'use_minified_assets'
+    setting_use_minified_assets.value = u'false'
+    setting_use_minified_assets.description = _(u'Use Minified Assets (CSS/JS)?')
+    setting_use_minified_assets.type = u'b'
+    setting_use_minified_assets.help = _(u'Do you want to combine and '
+                                         'minify your js/css files?  If '
+                                         'you\'re unsure, don\'t do anything.')
+    meta.Session.add(setting_use_minified_assets)
     meta.Session.flush()
     
-    setting19 = model.Setting()
-    setting19.key = u'use_externalposts_feed'
-    setting19.value = u'False'
-    meta.Session.add(setting19)
+    setting_use_externalposts_feed = model.Setting()
+    setting_use_externalposts_feed.key = u'use_externalposts_feed'
+    setting_use_externalposts_feed.value = u'false'
+    setting_use_externalposts_feed.description = _(u'Use External Posts Feed (ex. Feedburner)?')
+    setting_use_externalposts_feed.type = u'b'
+    setting_use_externalposts_feed.help = _(u'Do you want to point your '
+                                            'blog posts feed at an external URL?')
+    meta.Session.add(setting_use_externalposts_feed)
     meta.Session.flush()
     
-    setting20 = model.Setting()
-    setting20.key = u'externalposts_feed_url'
-    setting20.value = u''
-    meta.Session.add(setting20)
+    setting_externalposts_feed_url = model.Setting()
+    setting_externalposts_feed_url.key = u'externalposts_feed_url'
+    setting_externalposts_feed_url.value = u''
+    setting_externalposts_feed_url.description = _(u'Your External Posts Feed URL?')
+    setting_externalposts_feed_url.help = _(u'What is the external URL '
+                                            'that contains your post feed '
+                                            '(ex. http://feeds2.feedburner.com/leveille)?')
+    meta.Session.add(setting_externalposts_feed_url)
     meta.Session.flush()
     
-    setting21 = model.Setting()
-    setting21.key = u'blogroll'
-    setting21.value = u"""
-    <h4>Blogroll</h4>
+    setting_blogroll = model.Setting()
+    setting_blogroll.key = u'blogroll'
+    setting_blogroll.value = u"""
+    <h4>%s</h4>
     <ul>
         <li><a title="456 Berea Street" rel="external" href="http://www.456bereastreet.com/">456 Berea Street</a></li>
         <li><a title="Ben Ramsey" rel="external" href="http://benramsey.com/">Ben Ramsey</a></li>
@@ -172,8 +251,11 @@ def setup_app(command, conf, vars):
         <li><a title="Travis Swicegood" rel="external" href="http://www.travisswicegood.com/index.php">Travis Swicegood</a></li>
         <li><a title="Zac Gordon" rel="external" href="http://zgordon.org/">Zac Gordon</a></li>
     </ul>
-    """
-    meta.Session.add(setting21)
+    """ % _('Blogroll')
+    setting_blogroll.description = _(u'Blogroll')
+    setting_blogroll.type = u'ta'
+    setting_blogroll.help = _(u'Your favorite links!')
+    meta.Session.add(setting_blogroll)
     meta.Session.flush()
 
     page1 = model.Page()

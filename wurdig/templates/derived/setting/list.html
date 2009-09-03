@@ -4,17 +4,8 @@
 <%inherit file="/base/admin.html"/>
 
 <%def name="title()">
-    ${_('Setting List')}
+    ${_('Settings List')}
 </%def>
-
-<p class="submenu action">
-    ${h.link_to(
-        h.literal('<span class="ui-icon ui-icon-plusthick"></span>'),
-        h.url_for(controller='tag', action='new'), 
-        class_='ui-state-default ui-corner-all', 
-        title=_('Add New Setting')
-    )}
-</p>
 
 % if len(c.paginator):
     <p>${ c.paginator.pager('$link_first $link_previous $first_item %s $last_item %s $item_count $link_next $link_last' % (_('to'), _('of')))}</p>
@@ -22,7 +13,7 @@
     <table class="paginator">
         <thead>
             <tr>
-                <th>${_('Key')}</th>
+                <th>${_('Setting')}</th>
                 <th>${_('Value')}</th>
                 <th>${_('Action')}</th>
             </tr>
@@ -31,7 +22,7 @@
             % for setting in c.paginator:
                 <tr class="${setting.id}">
                     <td>
-                        ${setting.key}
+                        ${setting.description}
                     </td>
                     <td>
                         ${h.literal(setting.value)}

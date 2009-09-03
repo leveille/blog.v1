@@ -23,11 +23,21 @@ def init_model(engine):
 def now():
     return datetime.datetime.utcnow()
 
+"""
+A key value pair in the settings table can be one of the following types:
+t = text
+b = boolean
+ta = textarea
+
+"""
 settings_table = schema.Table('settings', meta.metadata,
     schema.Column('id', types.Integer,
         schema.Sequence('setting_seq_id', optional=True), primary_key=True),
     schema.Column('key', types.Unicode(50), nullable=False, unique=True),
     schema.Column('value', types.UnicodeText(), default=u''),
+    schema.Column('description', types.Unicode(75), default=u''),
+    schema.Column('type', types.Unicode(2), nullable=False, default=u't'),
+    schema.Column('help', types.UnicodeText(), default=u''),
 )
 
 pages_table = schema.Table('pages', meta.metadata,
