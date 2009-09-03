@@ -33,7 +33,7 @@ def flickr():
     if not c.enable_flickr_display:
         return u''
     
-    flickr_feed = feedparser.parse('http://api.flickr.com/services/feeds/photos_public.gne?id=%s@N00&lang=en-us&format=atom' % c.settings.get('flickr_id'))
+    flickr_feed = feedparser.parse('http://api.flickr.com/services/feeds/photos_public.gne?id=%s&lang=en-us&format=atom' % c.settings.get('flickr_id'))
     if len(flickr_feed.entries):
         items = []
         template = """
