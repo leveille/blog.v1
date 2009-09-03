@@ -1,7 +1,7 @@
 import feedparser
 import helpers as h
 from pylons import tmpl_context as c
-from pylons.i18n.translation import _
+from pylons.i18n.translation import _, get_lang
 
 __all__ = ['delicious', 'flickr', 'twitter']
 
@@ -33,7 +33,7 @@ def flickr():
     if not c.enable_flickr_display:
         return u''
     
-    flickr_feed = feedparser.parse('http://api.flickr.com/services/feeds/photos_public.gne?id=%s&lang=en-us&format=atom' % c.settings.get('flickr_id'))
+    flickr_feed = feedparser.parse('http://api.flickr.com/services/feeds/photos_public.gne?id=%s&lang=%s&format=atom' % (c.settings.get('flickr_id'), get_lang()))
     if len(flickr_feed.entries):
         items = []
         template = """
