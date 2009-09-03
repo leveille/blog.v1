@@ -21,10 +21,10 @@ class FeedController(BaseController):
         @app_globals.cache.region('long_term')
         def load_posts():
             feed = Atom1Feed(
-                title=config['blog.title'],
-                subtitle=config['blog.subtitle'],
+                title=h.wurdig_title(),
+                subtitle=h.wurdig_subtitle(),
                 link=u'http://%s' % request.environ['HTTP_HOST'],
-                description=_(u"Most recent posts for %s") % config['blog.title'],
+                description=_(u"Most recent posts for %s") % h.wurdig_title(),
                 language=u'en',
             )
             
@@ -185,7 +185,7 @@ class FeedController(BaseController):
             ).order_by([model.Post.posted_on.desc()]).limit(10)
     
             feed = Atom1Feed(
-                title=config['blog.title'],
+                title=h.wurdig_title(),
                 subtitle=_(u'Blog posts tagged "%s"') % slug,
                 link=u"http://%s%s" % (request.environ['HTTP_HOST'], h.url_for(
                     controller='tag',
