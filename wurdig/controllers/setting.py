@@ -104,13 +104,13 @@ class SettingController(BaseController):
         settings_q = meta.Session.query(model.Setting).order_by([model.Setting.id])
         
         try:
-            page = int(request.params.get('page', 1))
+            settings_page = int(request.params.get('settings_page', 1))
         except:
             abort(400)
             
         c.paginator = paginate.Page(
             settings_q,
-            page=page,
+            page=settings_page,
             items_per_page = 25,
             controller='setting',
             action='list',

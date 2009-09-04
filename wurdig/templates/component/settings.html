@@ -1,0 +1,38 @@
+<%
+    from pylons.i18n.translation import _
+%>
+
+<%def name="paginated(data)">
+    % if len(data):
+        <p class="paginator_links paginator_links_long">${ data.pager('$link_first $link_previous $first_item %s $last_item %s $item_count $link_next $link_last' % (_('to'), _('of')), page_param='settings_page')}</p>
+        <table class="paginator">
+            <thead>
+                <tr>
+                    <th>${_('Setting')}</th>
+                    <th>${_('Value')}</th>
+                    <th>${_('Action')}</th>
+                </tr>
+            </thead>
+            <tbody>
+                % for setting in data:
+                    <tr class="${setting.id}">
+                        <td>
+                            ${setting.description}
+                        </td>
+                        <td>
+                            ${h.literal(setting.value)}
+                        </td>
+                        <td>
+                            ${h.link_to(
+                                _('Edit'),
+                                h.url_for(controller='setting', action='edit', id=unicode(setting.id))
+                            )}
+                        </td>
+                    </tr>
+                % endfor
+            </tbody>
+        </table>
+        
+        <p class="paginator_links paginator_links_short">${ data.pager(format='~2~', page_param='settings_page') }</p>
+    % endif
+</%def>

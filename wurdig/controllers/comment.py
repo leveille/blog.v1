@@ -242,13 +242,13 @@ class CommentController(BaseController):
         comments_q = comments_q.all()
         
         try:
-            page = int(request.params.get('page', 1))
+            comment_page = int(request.params.get('comment_page', 1))
         except:
             abort(400)
         
         c.paginator = paginate.Page(
             comments_q,
-            page=page,
+            page=comment_page,
             items_per_page=20,
             controller='comment',
             action='list'

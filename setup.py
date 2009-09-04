@@ -24,7 +24,6 @@ setup(
         "html5lib>=0.10,<=0.19",
         "cssutils>=0.9.6a0", 
         "Babel>=0.9.4,<=0.9.9",
-        "Dozer>=0.1,<=1",
     ],
     setup_requires=["PasteScript>=1.6.3"],
     packages=find_packages(exclude=['ez_setup']),

@@ -313,13 +313,13 @@ class PostController(BaseController):
         posts_q = meta.Session.query(model.Post).order_by([model.Post.draft.desc(),model.Post.posted_on.desc()])
         
         try:
-            page = int(request.params.get('page', 1))
+            posts_page = int(request.params.get('posts_page', 1))
         except:
             abort(400)
         
         c.paginator = paginate.Page(
             posts_q,
-            page=page,
+            page=posts_page,
             items_per_page = 15,
             controller='post',
             action='list',

@@ -1,5 +1,6 @@
 import formencode
 import logging
+import webhelpers.paginate as paginate
 import wurdig.lib.helpers as h
 import wurdig.model as model
 import wurdig.model.meta as meta
@@ -62,6 +63,9 @@ class AccountController(BaseController):
             # This triggers the AuthKit middleware into displaying the sign-in form
             abort(401)
         else:
+            self._recent_comments()
+            self._drafts()
+            self._settings()
             return render('/derived/account/dashboard.html')
 
     def signout(self):
@@ -74,3 +78,54 @@ class AccountController(BaseController):
         request.environ['paste.auth_tkt.logout_user']()
         return render('/derived/account/signin.html').replace('%s', h.url_for('dashboard'))
     
+    def _recent_comments(self):
+        # Get recent comments
+        comments_q = meta.Session.query(model.Comment).order_by(
+                                               model.Comment.approved
+                                               ).order_by(model.Comment.created_on.desc())
+        comments_q = comments_q.all()
+        
+        try:
+            comment_page = int(request.params.get('comment_page', 1))
+        except:
+            abort(400)
+        
+        c.comment_paginator = paginate.Page(
+            comments_q,
+            page=comment_page,
+            items_per_page=5,
+            controller='account',
+            action='dashboard'
+        )
+        
+    def _drafts(self):
+        posts_q = meta.Session.query(model.Post).filter(model.Post.draft == True).order_by([model.Post.created_on.desc()])
+        
+        try:
+            posts_page = int(request.params.get('posts_page', 1))
+        except:
+            abort(400)
+        
+        c.draft_paginator = paginate.Page(
+            posts_q,
+            page=posts_page,
+            items_per_page = 5,
+            controller='account',
+            action='dashboard',
+        )
+        
+    def _settings(self):
+        settings_q = meta.Session.query(model.Setting).order_by([model.Setting.id])
+        
+        try:
+            settings_page = int(request.params.get('settings_page', 1))
+        except:
+            abort(400)
+            
+        c.settings_paginator = paginate.Page(
+            settings_q,
+            page=settings_page,
+            items_per_page = 15,
+            controller='account',
+            action='dashboard',
+        )

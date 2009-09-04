@@ -1,0 +1,78 @@
+<%
+    from pylons.i18n.translation import _
+%>
+
+<%def name="paginated(data)">
+    % if len(data):
+        <p class="paginator_links paginator_links_long">${ data.pager('$link_first $link_previous $first_item %s $last_item %s $item_count $link_next $link_last' % (_('to'), _('of')), page_param='comment_page')}</p>
+        <table class="paginator">
+            <thead>
+                <tr>
+                    <th>${_('Name')}</th> 
+                    <th>${_('Content')}</th>
+                    <th>${_('Posted')}</th>
+                    <th>${_('Action')}</th>
+                </tr>
+            </thead>
+        % for comment in data:
+            % if not comment.approved:
+            <tr class="action ${comment.id}">
+            % else:
+            <tr class="${comment.id}">
+            % endif
+                <td>
+                    ${comment.name}
+                </td>
+                <td>
+                    ${h.strip_tags(comment.content)}
+                </td>
+                <td>${h.literal(h.abbr_datetime(comment.created_on))}</td>
+                <td>
+                    % if not comment.approved:
+                        ${h.link_to(
+                            _('Approve'),
+                            h.url_for(
+                                controller=u'comment',
+                                action='approve_confirm',
+                                id=unicode(comment.id)
+                            )
+                        )} |  
+                    % else:
+                        ${h.link_to(
+                            _('Disapprove'),
+                            h.url_for(
+                                controller=u'comment',
+                                action='disapprove_confirm',
+                                id=unicode(comment.id)
+                            )
+                        )} |  
+                    % endif
+                    
+                    ${h.link_to(
+                        _('Edit'),
+                        h.url_for(
+                            controller=u'comment',
+                            action='edit',
+                            id=unicode(comment.id)
+                        )
+                    )} | 
+                    ${h.link_to(
+                        _('Delete'),
+                        h.url_for(
+                            controller=u'comment',
+                            action='delete_confirm',
+                            id=unicode(comment.id)
+                        )
+                    )}  
+                </td>
+    
+            </tr>
+        % endfor
+        </table>
+        <p class="paginator_links paginator_links_short">${ data.pager(format='~2~', page_param='comment_page') }</p>
+    % else:
+        <p>
+            ${_('No comments have yet been created')}.
+        </p>
+    % endif
+</%def>

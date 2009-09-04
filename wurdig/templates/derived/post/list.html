@@ -2,6 +2,7 @@
     from pylons.i18n.translation import _
 %>
 <%inherit file="/base/admin.html"/>
+<%namespace file="/component/posts.html" name="post" import="*"/>
 
 <%def name="title()">
     ${_('Post List')}
@@ -16,55 +17,6 @@
     )}
 </p>
 
-% if len(c.paginator):
-    <p>${ c.paginator.pager('$link_first $link_previous $first_item %s $last_item %s $item_count $link_next $link_last' % (_('to'), _('of')))}</p>
-    <table class="paginator">
-        <thead>
-            <tr>
-                <th>${_('Post Title')}</th>
-                <th>${_('Posted')}</th>
-                <th>${_('Comments')}</th>
-                <th>${_('Action')}</th>
-            </tr>
-        </thead>
-        <tbody>
-            % for post in c.paginator:
-                <tr class="${post.id}">
-                    <td>
-                        % if not post.draft:
-                            ${h.link_to(
-                                h.truncate(post.title),
-                                h.url_for(controller='post', 
-                                      action='view', 
-                                      year=post.posted_on.strftime('%Y'), 
-                                      month=post.posted_on.strftime('%m'), 
-                                      slug=unicode(post.slug))
-                            )}
-                        % else:
-                            ${h.truncate(post.title)}
-                        % endif
-                    </td>
-                    <td>
-                        % if post.draft:
-                            ${_('Draft')}
-                        % else:
-                            ${h.literal(h.abbr_datetime(post.posted_on))}
-                        % endif
-                    </td>
-                    <td>${len(post.comments)}</td>
-                    <td>
-                        ${h.link_to(
-                            _('Edit'),
-                            h.url_for(controller='post', action='edit', id=unicode(post.id))
-                        )} | 
-                        ${h.link_to(
-                            _('Delete'),
-                            h.url_for(controller='post', action='delete_confirm', id=unicode(post.id))
-                        )}
-                    </td>
-                </tr>
-            % endfor
-        </tbody>
-    </table>
-    <p>${ c.paginator.pager('~2~') }</p>
-% endif
+<div id="paginator_data">
+    ${post.admin_list(c.paginator)}
+</div>

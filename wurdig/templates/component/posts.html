@@ -10,15 +10,13 @@
 
 <%def name="paginated()">
     % if len(c.paginator):
-    
-        <p>${ c.paginator.pager('$link_first $link_previous $first_item %s $last_item %s $item_count $link_next $link_last' % (_('to'), _('of')))}</p>
-        
+        <p class="paginator_links paginator_links_long">${ c.paginator.pager('$link_first $link_previous $first_item %s $last_item %s $item_count $link_next $link_last' % (_('to'), _('of')), page_param='posts_page')}</p>
         <div class="wurdig-entries">
             % for post in c.paginator:
                 ${display_post(post)}
             % endfor
         </div>
-        <p>${ c.paginator.pager('~2~') }</p>
+        <p class="paginator_links paginator_links_short">${ c.paginator.pager('~2~') }</p>
     % else:
         <p>
             ${_('No posts were found that matched your request.')}
@@ -90,4 +88,59 @@
             </p>
         </div>
     </div>
+</%def>
+
+<%def name="admin_list(data)">
+    % if len(data):
+        <p class="paginator_links paginator_links_long">${ data.pager('$link_first $link_previous $first_item %s $last_item %s $item_count $link_next $link_last' % (_('to'), _('of')))}</p>
+        <table class="paginator">
+            <thead>
+                <tr>
+                    <th>${_('Post Title')}</th>
+                    <th>${_('Posted')}</th>
+                    <th>${_('Comments')}</th>
+                    <th>${_('Action')}</th>
+                </tr>
+            </thead>
+            <tbody>
+                % for post in data:
+                    <tr class="${post.id}">
+                        <td>
+                            % if not post.draft:
+                                ${h.link_to(
+                                    h.truncate(post.title),
+                                    h.url_for(controller='post', 
+                                          action='view', 
+                                          year=post.posted_on.strftime('%Y'), 
+                                          month=post.posted_on.strftime('%m'), 
+                                          slug=unicode(post.slug))
+                                )}
+                            % else:
+                                ${h.truncate(post.title)}
+                            % endif
+                        </td>
+                        <td>
+                            % if post.draft:
+                                ${_('Draft')}
+                            % else:
+                                ${h.literal(h.abbr_datetime(post.posted_on))}
+                            % endif
+                        </td>
+                        <td>${len(post.comments)}</td>
+                        <td>
+                            ${h.link_to(
+                                _('Edit'),
+                                h.url_for(controller='post', action='edit', id=unicode(post.id))
+                            )} | 
+                            ${h.link_to(
+                                _('Delete'),
+                                h.url_for(controller='post', action='delete_confirm', id=unicode(post.id))
+                            )}
+                        </td>
+                    </tr>
+                % endfor
+            </tbody>
+        </table>
+        <p class="paginator_links paginator_links_short">${ data.pager(format='~2~', page_param='posts_page') }</p>
+    % endif
 </%def>

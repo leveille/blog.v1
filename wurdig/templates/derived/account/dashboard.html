@@ -2,161 +2,53 @@
     from pylons.i18n.translation import _
 %>
 <%inherit file="/base/admin.html"/>
+<%namespace file="/component/comment.html" name="comment" import="*"/>
+<%namespace file="/component/posts.html" name="post" import="*"/>
+<%namespace file="/component/settings.html" name="settings" import="*"/>
 
 <%def name="title()">${parent.title()} &gt; ${_('Dashboard')}</%def>
 
-<p class="error">
-    <strong>Error: </strong> This is just all dummy content for the time being.  
-</p>
-<p class="notice">
-    <strong>Notice: </strong> This is just all dummy content for the time being.  
-</p>
-<p class="success">
-    <strong>Success: </strong> This is just all dummy content for the time being.  
-</p>
-<div class="box">
-    <h2>Recent Comments</h2>
-    <table summary="">
-        <tbody>
-
-            <tr>
-                <td>
-                    <a href="#">Jason Leveille</a>
-                </td>
-                <td>
-                    8/18/09 - 9:30am
-                </td>
-                <td class="actions">
-                    <a href="#">Edit</a> | <a href="#">View</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a href="#">Jason Leveille</a>
-                </td>
-                <td>
-                    8/18/09 - 9:30am
-                </td>
-
-                <td class="actions">
-                    <a href="#">Edit</a> | <a href="#">View</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a href="#">Jason Leveille</a>
-
-                </td>
-                <td>
-                    8/18/09 - 9:30am
-                </td>
-                <td class="actions">
-                    <a href="#">Edit</a> | <a href="#">View</a>
-                </td>
-
-            </tr>
-            <tr>
-                <td>
-                    <a href="#">Jason Leveille</a>
-                </td>
-                <td>
-                    8/18/09 - 9:30am
-                </td>
-                <td class="actions">
-
-                    <a href="#">Edit</a> | <a href="#">View</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a href="#">Jason Leveille</a>
-
-                </td>
-                <td>
-                    8/18/09 - 9:30am
-                </td>
-                <td class="actions">
-                    <a href="#">Edit</a> | <a href="#">View</a>
-                </td>
-
-            </tr>
-            <tr>
-                <td>
-                    <a href="#">Jason Leveille</a>
-                </td>
-                <td>
-                    8/18/09 - 9:30am
-                </td>
-                <td class="actions">
-
-                    <a href="#">Edit</a> | <a href="#">View</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a href="#">Jason Leveille</a>
-
-                </td>
-                <td>
-                    8/18/09 - 9:30am
-                </td>
-                <td class="actions">
-                    <a href="#">Edit</a> | <a href="#">View</a>
-                </td>
-
-            </tr>
-        </tbody>
-    </table>
-    <p class="action">
-        <a href="#" title="Title Here" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-plusthick"></span></a>
-        <a href="#" title="Title Here" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-search"></span></a>
-    </p>
-</div>
-
-<div class="box">
-    <h2>Drafts</h2>
-    <table id="alerts" summary="Empoyees that need urgent attention">
-        <tbody>
-            <tr>
-                <td>
-                    <a href="#">Jason Leveille</a>: 
-                    Some informative message here
-                </td>
-
-                <td>
-                    <a href="#">Edit</a> | <a href="#">View</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a href="#">Jason Leveille</a>: 
-                    Some informative message here
-                </td>
-
-                <td class="actions">
-                    <a href="#">Edit</a> | <a href="#">View</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a href="#">Jason Leveille</a>: 
-                    Some informative message here
-                </td>
-
-                <td class="actions">
-                    <a href="#">Edit</a> | <a href="#">View</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a href="#">Jason Leveille</a>: 
-                    Some informative message here
-                </td>
-
-                <td class="actions">
-                    <a href="#">Edit</a> | <a href="#">View</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div id="dashboard">
+    <div class="drafts box">
+        <h2>${_('Drafts')}</h2>
+        <div class="paginator_data">
+            ${post.admin_list(c.draft_paginator)}
+        </div>
+        <p class="action">
+            ${h.link_to(
+                h.literal('<span class="ui-icon ui-icon-search"></span>'),
+                h.url_for(controller='post', action='list'),
+                title=_('View All Posts'),
+                class_='ui-state-default ui-corner-all'
+            )}
+        </p>
+    </div>
+    <div class="recent_comments box">
+        <h2>${_('Recent Comments')}</h2>
+        <div class="paginator_data">
+            ${comment.paginated(c.comment_paginator)}
+        </div>
+        <p class="action">
+            ${h.link_to(
+                h.literal('<span class="ui-icon ui-icon-search"></span>'),
+                h.url_for(controller='comment', action='list'),
+                title=_('View All Comments'),
+                class_='ui-state-default ui-corner-all'
+            )}
+        </p>
+    </div>
+    <div class="settings box">
+        <h2>${_('Settings')}</h2>
+        <div class="paginator_data">
+            ${settings.paginated(c.settings_paginator)}
+        </div>
+        <p class="action">
+            ${h.link_to(
+                h.literal('<span class="ui-icon ui-icon-search"></span>'),
+                h.url_for(controller='setting', action='list'),
+                title=_('View All Settings'),
+                class_='ui-state-default ui-corner-all'
+            )}
+        </p>
+    </div>
 </div>

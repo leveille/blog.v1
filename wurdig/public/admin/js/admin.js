@@ -18,6 +18,21 @@ WURDIG.admin = function()
     //private 
     return {
         cookie_prefix : 'wurdig.admin.',
+        
+        dashboardPagination : function()
+        {
+            var paginationSetup = function(param) {
+                jQuery(param + ' p.paginator_links a').live('click', function(){
+                    var link = jQuery(this).attr('href');
+                    jQuery(param + ' .paginator_data').load(link + ' ' + param + ' .paginator_data');
+                    return false;    
+                });
+            }
+            paginationSetup('.recent_comments');
+            paginationSetup('.drafts');
+            paginationSetup('.settings');
+        },
+        
         init: function()
         {
             //display any error messages associated with a form submit
@@ -27,6 +42,8 @@ WURDIG.admin = function()
                 });
             }
             
+            WURDIG.admin.dashboardPagination();
+                        
             //delete confirmation
             jQuery('a[href*="delete"]').bind('click', function(){
                 return false;    
