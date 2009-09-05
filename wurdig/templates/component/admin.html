@@ -25,7 +25,10 @@
 </%def>
 
 <%def name="js()">
-    ${h.javascript_link(h.url_for(controller='js', action='translations'),
+    <%
+        from pylons import app_globals
+    %>
+    ${h.javascript_link(h.url_for(controller='js', action='translations', stamp=app_globals.current_version),
                         h.url_for('/javascripts/jquery.min.js?%s') % h.mtime("/javascripts/jquery.min.js"), 
                         h.url_for('/admin/js/admin.js?%s') % h.mtime("/admin/js/admin.js"),
                         h.url_for('/javascripts/utils.js?%s') % h.mtime("/javascripts/utils.js"))}

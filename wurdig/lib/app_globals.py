@@ -28,3 +28,6 @@ class Globals(object):
             'cache.long_term.expire':'86400',
         }
         self.cache = CacheManager(**parse_cache_config_options(cache_opts))
+        
+        self.versions = ['0.1']
+        self.current_version = '0.1'

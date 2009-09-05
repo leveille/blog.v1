@@ -1,7 +1,8 @@
 import logging
+import hashlib
 
 from pylons import request, response, session, tmpl_context as c
-from pylons.controllers.util import abort, redirect_to
+from pylons.controllers.util import abort, redirect_to, etag_cache
 from pylons.decorators import jsonify
 from pylons.i18n.translation import _
 from wurdig.lib.base import BaseController, render
@@ -31,11 +32,9 @@ class JsController(BaseController):
         return translations
         
     def translations(self):
-        json_string = """
-            if(!this.WURDIG) {
-                var WURDIG = {};   
-            }
-            WURDIG.translate = %s
-        """ % self._json()
-        response.content_type = 'text/javascript; charset=utf-8'
+        json_string = "if(!this.WURDIG) {var WURDIG = {};}WURDIG.translate = %s" % self._json()
+        etag_cache(key=hashlib.md5(json_string).hexdigest())
+        response.content_type = 'application/x-javascript; charset=utf-8'
+        response.cache_control = 'max-age=2592000'
+        response.pragma = ''
         return json_string

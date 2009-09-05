@@ -263,7 +263,10 @@
 
 <%def name="js()">
     % if c.use_minified_assets:
-        ${h.javascript_link(h.url_for(controller='js', action='translations'),
+        <%
+            from pylons import app_globals
+        %>
+        ${h.javascript_link(h.url_for(controller='js', action='translations', stamp=app_globals.current_version),
                             h.url_for('/javascripts/%s' % config['wurdig.minified_js']))}
     % else:
         ${h.javascript_link(h.url_for(controller='js', action='translations'),
