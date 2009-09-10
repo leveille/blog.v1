@@ -4,7 +4,7 @@
 <%inherit file="/base/master.html"/>
 <%namespace file="/component/posts.html" name="posts" import="*"/>
 
-<%def name="title()">${_('Post Archives for')} ${c.date}</%def>
+<%def name="title()">${_('Post Archives for')} ${c.date} - ${parent.title()}</%def>
 <%def name="description()">${title()}</%def>
 <%def name="content_header()"><p>${_('The Archives')}</p></%def>
 

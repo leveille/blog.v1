@@ -3,7 +3,7 @@
 %>
 <%inherit file="/base/master.html"/>
 
-<%def name="title()">${c.page.title}</%def>
+<%def name="title()">${c.page.title} - ${parent.title()}</%def>
 <%def name="description()">${title()}</%def>
 <%def name="content_header()"><p>${_('Now Viewing')}</p></%def>
 
