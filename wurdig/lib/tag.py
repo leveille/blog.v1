@@ -20,9 +20,9 @@ def cloud():
                              action='archive', 
                              slug=tag.slug)
             parts.append(link_pattern % (url, 
-                                         h.plural(tag.post_count, 'Post', 'Posts'), 
+                                         h.plural(tag.post_count, _('Post'), _('Posts')), 
+                                         _('tagged'),
                                          tag.name, 
-                                         _('tagged with'),
                                          tag.name)
             )
             parts.append('</li>')
