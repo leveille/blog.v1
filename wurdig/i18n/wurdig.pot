@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wurdig 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2009-09-04 10:29-0400\n"
+"POT-Creation-Date: 2009-09-10 16:48-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -306,39 +306,39 @@ msgstr ""
 msgid "Blog posts tagged %s"
 msgstr ""
 
-#: wurdig/controllers/js.py:16
+#: wurdig/controllers/js.py:17
 msgid "Are you positive you want to do that?"
 msgstr ""
 
-#: wurdig/controllers/js.py:18
+#: wurdig/controllers/js.py:19
 msgid "The item has successfully been deleted."
 msgstr ""
 
-#: wurdig/controllers/js.py:20 wurdig/templates/component/comment.html:42
+#: wurdig/controllers/js.py:21 wurdig/templates/component/comment.html:42
 msgid "Disapprove"
 msgstr ""
 
-#: wurdig/controllers/js.py:21
+#: wurdig/controllers/js.py:22
 msgid "The item has successfully been approved."
 msgstr ""
 
-#: wurdig/controllers/js.py:23 wurdig/templates/component/comment.html:33
+#: wurdig/controllers/js.py:24 wurdig/templates/component/comment.html:33
 msgid "Approve"
 msgstr ""
 
-#: wurdig/controllers/js.py:24
+#: wurdig/controllers/js.py:25
 msgid "The item has successfully been disapproved."
 msgstr ""
 
-#: wurdig/controllers/js.py:26
+#: wurdig/controllers/js.py:27
 msgid "Your+request+has+been+completed+successfully"
 msgstr ""
 
-#: wurdig/controllers/js.py:28
+#: wurdig/controllers/js.py:29
 msgid "An unexpected error has occurred."
 msgstr ""
 
-#: wurdig/controllers/js.py:29
+#: wurdig/controllers/js.py:30
 msgid "Enter key word(s)"
 msgstr ""
 
@@ -517,8 +517,16 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
-#: wurdig/lib/tag.py:25
-msgid "tagged with"
+#: wurdig/lib/tag.py:23
+msgid "Post"
+msgstr ""
+
+#: wurdig/lib/tag.py:23 wurdig/templates/base/admin.html:103
+msgid "Posts"
+msgstr ""
+
+#: wurdig/lib/tag.py:24
+msgid "tagged"
 msgstr ""
 
 #: wurdig/lib/tag.py:37
@@ -551,10 +559,6 @@ msgstr ""
 #: wurdig/templates/base/admin.html:91
 #: wurdig/templates/derived/account/dashboard.html:9
 msgid "Dashboard"
-msgstr ""
-
-#: wurdig/templates/base/admin.html:103
-msgid "Posts"
 msgstr ""
 
 #: wurdig/templates/base/admin.html:110 wurdig/templates/base/admin.html:130
