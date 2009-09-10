@@ -13,7 +13,7 @@
 <%def name="ps_feeds()">
     ${h.auto_discovery_link(
         h.url_for(
-            controller='comment', 
+            controller='feed', 
             action='post_comment_feed', 
             post_id=unicode(c.post.id)
         ), 
