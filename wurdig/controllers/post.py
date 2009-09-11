@@ -110,7 +110,7 @@ class PostController(BaseController):
             )
             
         try:
-            c.page = int(request.params.get('page', 1))
+            c.page = int(request.params.get('posts_page', 1))
             c.paginator = load_page(c.page)
         except:
             abort(400)
