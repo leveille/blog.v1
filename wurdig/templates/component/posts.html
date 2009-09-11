@@ -16,7 +16,7 @@
                 ${display_post(post)}
             % endfor
         </div>
-        <p class="paginator_links paginator_links_short">${ c.paginator.pager('~2~') }</p>
+        <p class="paginator_links paginator_links_short">${ c.paginator.pager(format='~2~', page_param='posts_page') }</p>
     % else:
         <p>
             ${_('No posts were found that matched your request.')}
