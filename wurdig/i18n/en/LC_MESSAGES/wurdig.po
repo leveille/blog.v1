@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Wurdig 0.1\n"
 "Report-Msgid-Bugs-To: json.leveille@gmail.com\n"
 "POT-Creation-Date: 2009-08-24 14:34+0400\n"
-"PO-Revision-Date: 2009-09-10 16:49-0400\n"
+"PO-Revision-Date: 2009-09-11 13:13-0400\n"
 "Last-Translator: Jason R. Leveille <json.leveille@gmail.com>\n"
 "Language-Team: en <json.levceille@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -395,19 +395,19 @@ msgstr ""
 msgid "Enter some post content."
 msgstr ""
 
-#: wurdig/controllers/post.py:216
+#: wurdig/controllers/post.py:217
 msgid "Post successfully added."
 msgstr ""
 
-#: wurdig/controllers/post.py:299
+#: wurdig/controllers/post.py:300
 msgid "Post successfully updated."
 msgstr ""
 
-#: wurdig/controllers/post.py:363
+#: wurdig/controllers/post.py:364
 msgid "The post has been deleted"
 msgstr ""
 
-#: wurdig/controllers/post.py:365
+#: wurdig/controllers/post.py:366
 msgid "Post successfully deleted."
 msgstr ""
 
@@ -574,14 +574,14 @@ msgid "New"
 msgstr ""
 
 #: wurdig/templates/base/admin.html:123
-#: wurdig/templates/component/posts.html:46
-#: wurdig/templates/component/posts.html:101
+#: wurdig/templates/component/posts.html:43
+#: wurdig/templates/component/posts.html:108
 #: wurdig/templates/component/wurdig.html:162
 #: wurdig/templates/component/wurdig.html:163
 #: wurdig/templates/component/wurdig.html:241
 #: wurdig/templates/component/wurdig.html:242
 #: wurdig/templates/derived/post/fields.html:59
-#: wurdig/templates/derived/post/view.html:132
+#: wurdig/templates/derived/post/view.html:136
 msgid "Comments"
 msgstr ""
 
@@ -615,7 +615,7 @@ msgstr ""
 
 #: wurdig/templates/component/comment.html:7
 #: wurdig/templates/component/posts.html:13
-#: wurdig/templates/component/posts.html:95
+#: wurdig/templates/component/posts.html:102
 #: wurdig/templates/component/settings.html:7
 #: wurdig/templates/derived/page/list.html:20
 #: wurdig/templates/derived/tag/list.html:20
@@ -624,7 +624,7 @@ msgstr ""
 
 #: wurdig/templates/component/comment.html:7
 #: wurdig/templates/component/posts.html:13
-#: wurdig/templates/component/posts.html:95
+#: wurdig/templates/component/posts.html:102
 #: wurdig/templates/component/settings.html:7
 #: wurdig/templates/derived/page/list.html:20
 #: wurdig/templates/derived/tag/list.html:20
@@ -646,12 +646,12 @@ msgid "Content"
 msgstr ""
 
 #: wurdig/templates/component/comment.html:13
-#: wurdig/templates/component/posts.html:100
+#: wurdig/templates/component/posts.html:107
 msgid "Posted"
 msgstr ""
 
 #: wurdig/templates/component/comment.html:14
-#: wurdig/templates/component/posts.html:102
+#: wurdig/templates/component/posts.html:109
 #: wurdig/templates/component/settings.html:13
 #: wurdig/templates/derived/page/list.html:26
 #: wurdig/templates/derived/tag/list.html:26
@@ -659,18 +659,18 @@ msgid "Action"
 msgstr ""
 
 #: wurdig/templates/component/comment.html:52
-#: wurdig/templates/component/posts.html:132
+#: wurdig/templates/component/posts.html:139
 #: wurdig/templates/component/settings.html:27
 #: wurdig/templates/derived/page/list.html:42
-#: wurdig/templates/derived/post/view.html:64
+#: wurdig/templates/derived/post/view.html:68
 #: wurdig/templates/derived/tag/list.html:41
 msgid "Edit"
 msgstr ""
 
 #: wurdig/templates/component/comment.html:60
-#: wurdig/templates/component/posts.html:136
+#: wurdig/templates/component/posts.html:143
 #: wurdig/templates/derived/page/list.html:46
-#: wurdig/templates/derived/post/view.html:70
+#: wurdig/templates/derived/post/view.html:74
 #: wurdig/templates/derived/tag/list.html:45
 msgid "Delete"
 msgstr ""
@@ -683,34 +683,38 @@ msgstr ""
 msgid "No posts were found that matched your request."
 msgstr ""
 
-#: wurdig/templates/component/posts.html:46
+#: wurdig/templates/component/posts.html:43
 #: wurdig/templates/derived/comment/fields.html:44
 #: wurdig/templates/derived/post/comment_fields.html:33
-#: wurdig/templates/derived/post/view.html:132
+#: wurdig/templates/derived/post/view.html:136
 msgid "Comment"
 msgstr ""
 
-#: wurdig/templates/component/posts.html:56
-#: wurdig/templates/derived/post/view.html:142
+#: wurdig/templates/component/posts.html:53
+#: wurdig/templates/derived/post/view.html:146
 msgid "No Comments"
 msgstr ""
 
-#: wurdig/templates/component/posts.html:81
+#: wurdig/templates/component/posts.html:71
+msgid "+ more"
+msgstr ""
+
+#: wurdig/templates/component/posts.html:88
 #: wurdig/templates/component/wurdig.html:103
-#: wurdig/templates/derived/post/view.html:37
+#: wurdig/templates/derived/post/view.html:41
 msgid "Admin"
 msgstr ""
 
-#: wurdig/templates/component/posts.html:83
-#: wurdig/templates/derived/post/view.html:39
+#: wurdig/templates/component/posts.html:90
+#: wurdig/templates/derived/post/view.html:43
 msgid "Edit This Post"
 msgstr ""
 
-#: wurdig/templates/component/posts.html:99
+#: wurdig/templates/component/posts.html:106
 msgid "Post Title"
 msgstr ""
 
-#: wurdig/templates/component/posts.html:124
+#: wurdig/templates/component/posts.html:131
 #: wurdig/templates/derived/post/fields.html:46
 msgid "Draft"
 msgstr ""
@@ -778,7 +782,7 @@ msgid "Blog"
 msgstr ""
 
 #: wurdig/templates/component/wurdig.html:175
-#: wurdig/templates/derived/post/view.html:115
+#: wurdig/templates/derived/post/view.html:119
 msgid "Comments Feed"
 msgstr ""
 
@@ -972,7 +976,7 @@ msgid "Comment Errors!"
 msgstr ""
 
 #: wurdig/templates/derived/comment/new.html:18
-#: wurdig/templates/derived/post/view.html:105
+#: wurdig/templates/derived/post/view.html:109
 msgid "Create Comment"
 msgstr ""
 
@@ -1137,40 +1141,40 @@ msgstr ""
 msgid "Recent Comments for \"%s\""
 msgstr ""
 
-#: wurdig/templates/derived/post/view.html:63
+#: wurdig/templates/derived/post/view.html:67
 msgid "Edit Comment From"
 msgstr ""
 
-#: wurdig/templates/derived/post/view.html:69
+#: wurdig/templates/derived/post/view.html:73
 msgid "Delete Comment From"
 msgstr ""
 
-#: wurdig/templates/derived/post/view.html:91
+#: wurdig/templates/derived/post/view.html:95
 msgid "Link"
 msgstr ""
 
-#: wurdig/templates/derived/post/view.html:100
+#: wurdig/templates/derived/post/view.html:104
 msgid "Leave a Comment"
 msgstr ""
 
-#: wurdig/templates/derived/post/view.html:116
+#: wurdig/templates/derived/post/view.html:120
 msgid "Subscribe to post comments"
 msgstr ""
 
-#: wurdig/templates/derived/post/view.html:117
+#: wurdig/templates/derived/post/view.html:121
 msgid "Subscribe to comments for"
 msgstr ""
 
-#: wurdig/templates/derived/post/view.html:122
-#: wurdig/templates/derived/post/view.html:157
+#: wurdig/templates/derived/post/view.html:126
+#: wurdig/templates/derived/post/view.html:161
 msgid "Comments have been disabled for this post"
 msgstr ""
 
-#: wurdig/templates/derived/post/view.html:162
+#: wurdig/templates/derived/post/view.html:166
 msgid "Comment for"
 msgstr ""
 
-#: wurdig/templates/derived/post/view.html:162
+#: wurdig/templates/derived/post/view.html:166
 msgid "Comments for"
 msgstr ""
 
@@ -1274,7 +1278,4 @@ msgstr ""
 #: wurdig/templates/email/new_comment.html:11
 msgid "Disapprove Comment:"
 msgstr ""
-
-#~ msgid "tagged with"
-#~ msgstr ""
 
