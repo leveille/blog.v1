@@ -26,17 +26,14 @@
 
 <%def name="display_post(post)">
     <h2>
-        <%
-            post_link = h.link_to(
-                            '%s',
-                            h.url_for(controller='post', 
-                                      action='view', 
-                                      year=post.posted_on.strftime('%Y'), 
-                                      month=post.posted_on.strftime('%m'), 
-                                      slug=post.slug)
-                        )
-        %>
-        ${post_link % post.title}
+        ${h.link_to(
+            post.title,
+            h.url_for(controller='post', 
+                      action='view', 
+                      year=post.posted_on.strftime('%Y'), 
+                      month=post.posted_on.strftime('%m'), 
+                      slug=post.slug)
+        )}
     </h2>
     <p class="wurdig-entry-date">
         ${h.literal(h.abbr_datetime(post.posted_on))},
@@ -69,7 +66,17 @@
             
             % if '<!--more-->' in post.content:
                 ${h.literal(h.chop_at(post.content, '<!--more-->'))}
-                <p class="more">${post_link % '+ more'}</p>
+                <p class="more">
+                    ${h.link_to(
+                        _(u'+ more'),
+                        h.url_for(controller='post', 
+                                  action='view', 
+                                  year=post.posted_on.strftime('%Y'), 
+                                  month=post.posted_on.strftime('%m'), 
+                                  slug=post.slug,
+                                  anchor=u'more')
+                    )}
+                </p>
             % else:
                 ${h.literal(post.content)}
             % endif

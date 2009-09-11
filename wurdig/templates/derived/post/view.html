@@ -28,7 +28,11 @@
 
 <%def name="post_data(post)">
     <div class="wurdig-entry-content">
-        ${h.literal(post.content)}
+        % if '<!--more-->' in post.content:
+            ${h.literal(post.content.replace('<!--more-->', '<a id="more" name="more"></a>'))}
+        % else:
+            ${h.literal(post.content)}
+        % endif
     </div> 
     <p class="wurdig-entry-meta">
         ${posts.tag_list(post.tags)}
