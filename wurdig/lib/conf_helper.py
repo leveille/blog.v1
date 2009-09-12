@@ -21,7 +21,10 @@ def wurdig_get_akismet_key():
     return c.settings.get('akismet_key', _('Error retrieving akismet key'))
 
 def wurdig_use_akismet():
-    return c.enable_akismet
+    try:
+        return c.enable_akismet
+    except:
+        return False
 
 def wurdig_spamword():
     return c.settings.get('spamword', _('Error retrieving spamword'))

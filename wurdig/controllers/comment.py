@@ -30,6 +30,9 @@ class AkismetSpamCheck(formencode.FancyValidator):
         if request.urlvars['action'] == 'save':
             return values
         
+        # this is a known bug.  context object
+        # is not being passed properly to the conf_helper method call
+        # since I don't use akismet I'm leaving this alone for now
         if h.wurdig_use_akismet():
             from wurdig.lib.akismet import Akismet
             # Thanks for the help from http://soyrex.com/blog/akismet-django-stop-comment-spam/
