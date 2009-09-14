@@ -35,7 +35,7 @@ wurdig.minified_js =
 #beaker.session.data_dir = %(here)s/data/sessions
 
 # SQLAlchemy database URL
-sqlalchemy.url = sqlite:///production.db
+sqlalchemy.url = sqlite:///development.db
 
 # WARNING: *THE LINE BELOW MUST BE UNCOMMENTED ON A PRODUCTION ENVIRONMENT*
 # Debug mode will enable the interactive debugging tool, allowing ANYONE to
@@ -47,7 +47,8 @@ authkit.setup.method = form, cookie
 authkit.form.authenticate.user.type = authkit.users.sqlalchemy_driver:UsersFromDatabase
 authkit.form.authenticate.user.data = wurdig.model
 authkit.form.authenticate.user.encrypt = authkit.users:md5
-authkit.cookie.secret = secret string
+authkit.form.authenticate.user.encrypt.secret = some secret string
+authkit.cookie.secret = some secret string
 authkit.cookie.signoutpath = /account/signout
 authkit.form.template.obj = wurdig.lib.auth:render_signin
 
