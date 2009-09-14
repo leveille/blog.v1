@@ -5,7 +5,23 @@
 
 ## Current Release ##
 
-There currently is no official release of my blog software.  I have a number of tickets I want to get through before delivering my first official beta release.  Because I do not have an official release, I am not providing installation instructions.  However, if you follow installation instructions found in [The Pylons Book](http://pylonsbook.com/ "The Pylons Book"), you should be able to work through any installation issues.
+There currently is no official release of my blog software.  I have a number of tickets I want to get through before delivering my first official beta release.  Because I do not have an official release, I am only providing general instructions for myself.  Installation will look like the following (for *nix ... modify to fit your needs):
+
+* wget http://pylonsbook.com/virtualenv.py
+* python virtualenv.py --no-site-packages env
+* source env/bin/activate
+* sudo apt-get install python-dev libc6-dev
+* download and install wurdig from http://github.com/leveille/wurdig (click the downloads button)
+* cd wurdig/installation
+* sudo apt-get install tidy
+* python setup.py develop
+* paster make-config "Wurdig" development.ini
+* edit development.ini
+* paster setup-app development.ini
+* paster serve --reload development.ini
+* admin login - un: admin pw: admin
+
+It's important to note that this will set up your development environment, however your setup for a production environment will vary.  For example (among other things), you do not want to deploy your application with admin/admin as your login.  If you are attempting to get Wurding up and running, it is stronly recommended that you spend some time looking at [The Pylons Book](http://pylonsbook.com/ "The Pylons Book").
 
 ## Links ##
 
