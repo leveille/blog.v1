@@ -15,9 +15,9 @@ body {
     border-radius: 13px;
     -webkit-border-radius: 13px;
     -moz-border-radius: 13px;
-    box-shadow: 2px 2px 4px #000;
-    -webkit-box-shadow: 2px 2px 4px #000;
-    -moz-box-shadow: 2px 2px 4px #000;
+    box-shadow: 2px 2px 4px rgba(0,0,0,.7);
+    -webkit-box-shadow: 2px 2px 4px rgba(0,0,0,.7);
+    -moz-box-shadow: 2px 2px 4px rgba(0,0,0,.7);
 }
 
 h1, h2, h3, h4, h5, h6, #wurdig-header-img p {
@@ -102,9 +102,7 @@ ul ul {
     margin: 0;
     padding: 0;
     line-height: 1.2em;
-    box-shadow: 2px 2px 4px #bdbcb0;
-    -webkit-box-shadow: 2px 2px 4px #bdbcb0;
-    -moz-box-shadow: 2px 2px 4px #bdbcb0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,.7)
 }
 
 #hd h1 a {
@@ -132,15 +130,13 @@ ul ul {
     margin-left: 30px;
     height: 107px;
     width: 913px;
-    border-top: dotted 1px #D0D0D0;
-    border-bottom: dotted 1px #D0D0D0;
     position: relative;
     border-radius: 13px;
     -webkit-border-radius: 13px;
     -moz-border-radius: 13px;
-    box-shadow: 2px 2px 4px #bdbcb0;
-    -webkit-box-shadow: 2px 2px 4px #bdbcb0;
-    -moz-box-shadow: 2px 2px 4px #bdbcb0;
+    box-shadow: 2px 2px 4px rgba(0,0,0,.3);
+    -webkit-box-shadow: 2px 2px 4px rgba(0,0,0,.3);
+    -moz-box-shadow: 2px 2px 4px rgba(0,0,0,.3);
 }
 
 #wurdig-header-img p,
@@ -150,7 +146,7 @@ ul ul {
     margin: 0;
     padding: 0 10px;
     background: #000;
-    background: rgba(0, 0, 0, .4);
+    background: rgba(0,0,0,.4);
     color: #FFF;
     text-transform: lowercase;
     font-size: 116%;
