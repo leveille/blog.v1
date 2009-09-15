@@ -132,10 +132,7 @@ ul ul {
     position: relative;
     border-radius: 13px;
     -webkit-border-radius: 13px;
-    -moz-border-radius: 13px;
-    box-shadow: 2px 2px 4px rgba(0,0,0,.2);
-    -webkit-box-shadow: 2px 2px 4px rgba(0,0,0,.2);
-    -moz-box-shadow: 2px 2px 4px rgba(0,0,0,.2);
+    -moz-border-radius: 13px
 }
 
 #wurdig-header-img p,
