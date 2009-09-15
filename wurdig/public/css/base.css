@@ -1,5 +1,5 @@
 html, body {
-    background:#333
+    background:#444
 }
 
 body {
@@ -12,12 +12,23 @@ body {
 
 #doc4 {
     background: #FFF;
-    border-radius: 13px;
-    -webkit-border-radius: 13px;
-    -moz-border-radius: 13px;
     box-shadow: 2px 2px 4px rgba(0,0,0,.7);
     -webkit-box-shadow: 2px 2px 4px rgba(0,0,0,.7);
     -moz-box-shadow: 2px 2px 4px rgba(0,0,0,.7);
+}
+
+#doc4,
+#wurdig-header-img,
+#wurdig-header-img p,
+#wurdig-header-img h1,
+#wurdig-header-img h2,
+#wurdig-header-img h3 {
+    border-bottom-left-radius: 13px;
+    -moz-border-radius-bottomleft: 13px;
+    -webkit-border-bottom-left-radius: 13px;
+    border-top-right-radius: 13px;
+    -moz-border-radius-topright: 13px;
+    -webkit-border-top-right-radius: 13px
 }
 
 h1, h2, h3, h4, h5, h6, #wurdig-header-img p {
@@ -129,10 +140,7 @@ ul ul {
     margin-left: 30px;
     height: 107px;
     width: 913px;
-    position: relative;
-    border-radius: 13px;
-    -webkit-border-radius: 13px;
-    -moz-border-radius: 13px
+    position: relative
 }
 
 #wurdig-header-img p,
@@ -147,13 +155,7 @@ ul ul {
     text-transform: lowercase;
     font-size: 116%;
     position: absolute;
-    bottom: 0;
-    border-bottom-left-radius: 13px;
-    -moz-border-radius-bottomleft: 13px;
-    -webkit-border-bottom-left-radius: 13px;
-    border-top-right-radius: 13px;
-    -moz-border-radius-topright: 13px;
-    -webkit-border-top-right-radius: 13px
+    bottom: 0
 }
 
 /*_NAV*/
