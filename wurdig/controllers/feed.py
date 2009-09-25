@@ -53,6 +53,72 @@ class FeedController(BaseController):
         response.content_type = 'application/atom+xml'
         return feed
     
+    # Need to DRY this up.  For now, just need to get a quick sitemap up and running
+    def posts_feed_sitemap(self):        
+        def load_posts_sitemap():
+            feed = Atom1Feed(
+                title=_(u"%s - All Posts") % h.wurdig_title(),
+                subtitle=h.wurdig_subtitle(),
+                link=u'http://%s' % request.environ['HTTP_HOST'],
+                description=_(u"All posts for %s") % h.wurdig_title(),
+                language=u'en',
+            )
+            
+            posts_q = meta.Session.query(model.Post).filter(
+                model.Post.draft == False
+            ).order_by([model.Post.posted_on.desc()])
+        
+            for post in posts_q:
+                tags = [tag.name for tag in post.tags]
+                feed.add_item(
+                    title=post.title,
+                    link=u'http://%s%s' % (request.environ['HTTP_HOST'], h.url_for(
+                        controller='post', 
+                        action='view', 
+                        year=post.posted_on.strftime('%Y'), 
+                        month=post.posted_on.strftime('%m'), 
+                        slug=post.slug
+                    )),
+                    description=post.content,
+                    pubdate=post.posted_on,
+                    categories=tuple(tags)
+                )
+            return feed.writeString('utf-8')
+        
+        feed = load_posts_sitemap()
+        response.content_type = 'application/atom+xml'
+        return feed
+    
+    # Need to DRY this up.  For now, just need to get a quick sitemap up and running
+    def pages_feed_sitemap(self):
+        def load_pages_sitemap():
+            feed = Atom1Feed(
+                title=_(u"%s - All Pages") % h.wurdig_title(),
+                subtitle=h.wurdig_subtitle(),
+                link=u'http://%s' % request.environ['HTTP_HOST'],
+                description=_(u"All pages for %s") % h.wurdig_title(),
+                language=u'en',
+            )
+            
+            pages_q = meta.Session.query(model.Page).order_by([model.Page.created_on.desc()])
+        
+            for page in pages_q:
+                feed.add_item(
+                    title=page.title,
+                    link=u'http://%s%s' % (request.environ['HTTP_HOST'], h.url_for(
+                        controller='page', 
+                        action='view', 
+                        slug=page.slug
+                    )),
+                    description=page.content,
+                    pubdate=page.created_on
+                )
+            return feed.writeString('utf-8')
+        
+        feed = load_pages_sitemap()
+        response.content_type = 'application/atom+xml'
+        return feed
+    
     def comments_feed(self):
         @app_globals.cache.region('medium_term', 'comments_feed')
         def load_comments():

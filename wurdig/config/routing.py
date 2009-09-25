@@ -29,6 +29,14 @@ def make_map():
                 controller='feed', 
                 action='posts_feed')
     
+    map.connect('/feeds/blog/sitemap', 
+                controller='feed', 
+                action='posts_feed_sitemap')
+    
+    map.connect('/feeds/pages/sitemap', 
+                controller='feed', 
+                action='pages_feed_sitemap')
+    
     map.connect('/feeds/comments', 
                 controller='feed', 
                 action='comments_feed')
