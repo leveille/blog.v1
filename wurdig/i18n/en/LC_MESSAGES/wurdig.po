@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Wurdig 0.1\n"
 "Report-Msgid-Bugs-To: json.leveille@gmail.com\n"
 "POT-Creation-Date: 2009-08-24 14:34+0400\n"
-"PO-Revision-Date: 2009-09-11 13:13-0400\n"
+"PO-Revision-Date: 2009-09-25 12:52-0400\n"
 "Last-Translator: Jason R. Leveille <json.leveille@gmail.com>\n"
 "Language-Team: en <json.levceille@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -219,48 +219,48 @@ msgstr ""
 msgid "Your comment has been identified as spam.  Are you a spammer?"
 msgstr ""
 
-#: wurdig/controllers/comment.py:58
+#: wurdig/controllers/comment.py:61
 msgid "Double check your answer to the spam prevention question and resubmit."
 msgstr ""
 
-#: wurdig/controllers/comment.py:69
+#: wurdig/controllers/comment.py:72
 msgid "Please enter the name of the person leaving the comment."
 msgstr ""
 
-#: wurdig/controllers/comment.py:84
+#: wurdig/controllers/comment.py:87
 msgid "Please enter a comment."
 msgstr ""
 
-#: wurdig/controllers/comment.py:167
+#: wurdig/controllers/comment.py:170
 #, python-format
 msgid "New Comment for \"%s\""
 msgstr ""
 
-#: wurdig/controllers/comment.py:172
+#: wurdig/controllers/comment.py:175
 msgid "Your comment is currently being moderated."
 msgstr ""
 
-#: wurdig/controllers/comment.py:174
+#: wurdig/controllers/comment.py:177
 msgid "Your comment has been approved."
 msgstr ""
 
-#: wurdig/controllers/comment.py:233
+#: wurdig/controllers/comment.py:236
 msgid "Comment successfully updated."
 msgstr ""
 
-#: wurdig/controllers/comment.py:303
+#: wurdig/controllers/comment.py:306
 msgid "The comment has been approved"
 msgstr ""
 
-#: wurdig/controllers/comment.py:305 wurdig/controllers/comment.py:352
+#: wurdig/controllers/comment.py:308 wurdig/controllers/comment.py:355
 msgid "Comment successfully approved."
 msgstr ""
 
-#: wurdig/controllers/comment.py:397
+#: wurdig/controllers/comment.py:400
 msgid "The comment has been deleted"
 msgstr ""
 
-#: wurdig/controllers/comment.py:399
+#: wurdig/controllers/comment.py:402
 msgid "Comment successfully deleted."
 msgstr ""
 
@@ -275,33 +275,53 @@ msgstr ""
 
 #: wurdig/controllers/feed.py:60
 #, python-format
+msgid "%s - All Posts"
+msgstr ""
+
+#: wurdig/controllers/feed.py:63
+#, python-format
+msgid "All posts for %s"
+msgstr ""
+
+#: wurdig/controllers/feed.py:96
+#, python-format
+msgid "%s - All Pages"
+msgstr ""
+
+#: wurdig/controllers/feed.py:99
+#, python-format
+msgid "All pages for %s"
+msgstr ""
+
+#: wurdig/controllers/feed.py:126
+#, python-format
 msgid "Comments for %s"
 msgstr ""
 
-#: wurdig/controllers/feed.py:72 wurdig/controllers/feed.py:136
+#: wurdig/controllers/feed.py:138 wurdig/controllers/feed.py:202
 msgid "Posted in"
 msgstr ""
 
-#: wurdig/controllers/feed.py:121
+#: wurdig/controllers/feed.py:187
 msgid "Most Recent Comments"
 msgstr ""
 
-#: wurdig/controllers/feed.py:129
+#: wurdig/controllers/feed.py:195
 #, python-format
 msgid "Most recent comments for %s"
 msgstr ""
 
-#: wurdig/controllers/feed.py:149
+#: wurdig/controllers/feed.py:215
 #, python-format
 msgid "Comment from %s"
 msgstr ""
 
-#: wurdig/controllers/feed.py:189
+#: wurdig/controllers/feed.py:255
 #, python-format
 msgid "Blog posts tagged \"%s\""
 msgstr ""
 
-#: wurdig/controllers/feed.py:195
+#: wurdig/controllers/feed.py:261
 #, python-format
 msgid "Blog posts tagged %s"
 msgstr ""
@@ -463,31 +483,31 @@ msgstr ""
 msgid "Error retrieving akismet key"
 msgstr ""
 
-#: wurdig/lib/conf_helper.py:27
+#: wurdig/lib/conf_helper.py:30
 msgid "Error retrieving spamword"
 msgstr ""
 
-#: wurdig/lib/conf_helper.py:30
+#: wurdig/lib/conf_helper.py:33
 msgid "Error retrieving site title"
 msgstr ""
 
-#: wurdig/lib/conf_helper.py:33
+#: wurdig/lib/conf_helper.py:36
 msgid "Error retrieving site tagline"
 msgstr ""
 
-#: wurdig/lib/conf_helper.py:39
+#: wurdig/lib/conf_helper.py:42
 msgid "Error retrieving admin email"
 msgstr ""
 
-#: wurdig/lib/conf_helper.py:45
+#: wurdig/lib/conf_helper.py:48
 msgid "Error retrieving Google search key"
 msgstr ""
 
-#: wurdig/lib/conf_helper.py:51
+#: wurdig/lib/conf_helper.py:54
 msgid "Error retrieving Google analytics key"
 msgstr ""
 
-#: wurdig/lib/conf_helper.py:57
+#: wurdig/lib/conf_helper.py:60
 msgid "Error retrieving external posts feed url"
 msgstr ""
 
@@ -495,15 +515,15 @@ msgstr ""
 msgid "Bookmarks"
 msgstr ""
 
-#: wurdig/lib/feed_display.py:55
+#: wurdig/lib/feed_display.py:56
 msgid "Public Flickr Stream"
 msgstr ""
 
-#: wurdig/lib/feed_display.py:90
+#: wurdig/lib/feed_display.py:91
 msgid "Twitter Updates"
 msgstr ""
 
-#: wurdig/lib/feed_display.py:92
+#: wurdig/lib/feed_display.py:93
 msgid "Follow"
 msgstr ""
 
