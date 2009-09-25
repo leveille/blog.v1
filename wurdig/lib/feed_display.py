@@ -33,7 +33,7 @@ def flickr():
     if not c.enable_flickr_display:
         return u''
     
-    flickr_feed = feedparser.parse('http://api.flickr.com/services/feeds/photos_public.gne?id=%s&lang=%s&format=atom' % (c.settings.get('flickr_id'), get_lang()[0]))
+    flickr_feed = feedparser.parse('http://api.flickr.com/services/feeds/photos_public.gne?id=%s&lang=%s&format=atom' % (c.settings.get('flickr_id'), get_lang()))
 
     if len(flickr_feed.entries):
         items = []
