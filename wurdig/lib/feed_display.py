@@ -61,36 +61,33 @@ def twitter():
     if not c.enable_twitter_display:
         return u''
     
-    twitter_feed = feedparser.parse("http://twitter.com/statuses/user_timeline/%s.rss" % c.settings.get('twitter_screenname'))
-    if len(twitter_feed.entries):
-        items = []
-        template = """
+    html = """
         <div id="wurdig-twitter-feed" class="wurdig-sidebar-list">
-            <h4>%s (<a href="http://twitter.com/%s">%s</a>)</h4>
-            <ul>
-                %s
-            </ul>
+        <h4>%s</h4>
+        <div id="twtr-profile-widget"></div>
+        <script src="http://widgets.twimg.com/j/1/widget.js"></script>
+        <link href="http://widgets.twimg.com/j/1/widget.css" type="text/css" rel="stylesheet">
+        <script>
+        new TWTR.Widget({
+          profile: true,
+          id: 'twtr-profile-widget',
+          loop: true,
+          width: 227,
+          height: 300,
+          theme: {
+            shell: {
+              background: '#f3f3f3',
+              color: '#000'
+            },
+            tweets: {
+              background: '#ffffff',
+              color: '#444444',
+              links: '#1985b5'
+            }
+          }
+        }).render().setProfile('%s').start();
+        </script>
         </div>
-        """
-
-        for entry in twitter_feed.entries[:4]:
-            description = entry['description'].split(':', 1)[1]
-            i = '<li><span class="lone">%s</span> <span>%s</span></li>' % (
-                h.link_to(
-                    h.literal(
-                        '<abbr title="%s" class="localize_datetime">%s</abbr>' % (
-                            entry.updated, 
-                            entry.updated
-                        )
-                    ),
-                    entry['guid']
-                ),
-                h.auto_link(description)
-            )
-            items.append(i)
-        return template % (_('Twitter Updates'), 
-                           c.settings.get('twitter_screenname'), 
-                           _('Follow'),
-                           '\n'.join(items))
-    else:
-        return u''
+    """ % (_('Twitter Updates'), c.settings.get('twitter_screenname'))
+    
+    return html

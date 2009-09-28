@@ -347,7 +347,6 @@ div.wurdig-entry-content blockquote p {
 }
 
 #wurdig-sidebar ul {
-    border-top: solid 1px #000;
     margin: 0 0 1.5em 0
 }
 
@@ -372,6 +371,10 @@ div.wurdig-entry-content blockquote p {
     padding-left: 22px
 }
 
+#wurdig-sidebar #wurdig-twitter-feed {
+    margin-bottom: 15px
+}
+
 #wurdig-sidebar #wurdig-twitter-feed li span {
     padding-left: 22px;
     display: block
@@ -381,13 +384,8 @@ div.wurdig-entry-content blockquote p {
     background: url('../images/sprite.png') no-repeat left -61px
 }
 
-#wurdig-sidebar #wurdig-twitter-feed h4 a {
-    text-decoration: none;
-    color: #CC0000
-}
-
-#wurdig-sidebar #wurdig-twitter-feed h4 a:hover {
-    text-decoration: underline
+#wurdig-sidebar #wurdig-twitter-feed h4 {
+    margin-bottom: 10px
 }
 
 #wurdig-sidebar div.hTagCloud h4 {
