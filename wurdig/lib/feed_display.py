@@ -1,4 +1,3 @@
-import feedparser
 import helpers as h
 from pylons import tmpl_context as c
 from pylons.i18n.translation import _, get_lang
