@@ -8,25 +8,17 @@ def delicious():
     if not c.enable_delicious_display:
         return u''
     
-    delicious_feed = feedparser.parse('http://feeds.delicious.com/v2/rss/%s?count=10' % c.settings.get('delicious_username'))
-    if len(delicious_feed.entries):
-        items = []
-        template = """
-        <div id="wurdig-delicious-feed" class="wurdig-secondary-list">
-            <h4>%s</h4>
-            <ul>
-                %s
-            </ul>
-        </div>
-        """
-        for entry in delicious_feed.entries[:7]:
-            i = '<li>%s</li>'
-            link = '<a href="%s" title="%s">%s (%s)</a>'
-            link = link % (entry['guid'], entry['title'], entry['title'], entry.updated[:11])
-            items.append(i % link)
-        return template % (_('Bookmarks'), '\n'.join(items))
-    else:
-        return u''
+    html = """
+    <div id="wurdig-delicious-feed" class="wurdig-secondary-list">
+        <h4>%s</h4>
+        <script type="text/javascript" src="http://feeds.delicious.com/v2/js/%s?title=&count=7&sort=date&extended&name"></script>
+    </div>
+    """ % (
+        _('Bookmarks'),
+        c.settings.get('delicious_username')
+    )
+    
+    return html
 
 def flickr():
     if not c.enable_flickr_display:
