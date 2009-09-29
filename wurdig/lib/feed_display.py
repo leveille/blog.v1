@@ -12,7 +12,7 @@ def delicious():
     html = """
     <div id="wurdig-delicious-feed" class="wurdig-secondary-list">
         <h4>%s</h4>
-        <script type="text/javascript" src="http://feeds.delicious.com/v2/js/%s?title=&count=8&sort=date&extended"></script>
+        <script type="text/javascript" src="http://feeds.delicious.com/v2/js/%s?title=&count=7&sort=date&extended&name"></script>
     </div>
     """ % (
         _('Bookmarks'),
