@@ -33,29 +33,29 @@ def flickr():
     if not c.enable_flickr_display:
         return u''
     
-    flickr_feed = feedparser.parse('http://api.flickr.com/services/feeds/photos_public.gne?id=%s&lang=%s&format=atom' % (c.settings.get('flickr_id'), get_lang()))
-
-    if len(flickr_feed.entries):
-        items = []
-        template = """
-        <div id="wurdig-flickr-feed">
-            <h4>%s</h4>
-            <ul>
-                %s
-            </ul>
-        </div>
-        """
-        for entry in flickr_feed.entries[:12]:
-            image = entry['enclosures'][0]['href']
-            image = image.replace('m.jpg', 's.jpg')
-            i = '<li>%s</li>' % h.link_to(
-                                        h.literal('<img src="%s" title="%s" alt="%s">' % (image, entry['title'], entry['title'])),
-                                        entry['link']
-                                        )
-            items.append(i)
-        return template % (_('Public Flickr Stream'), '\n'.join(items))
-    else:
-        return u''
+    html = """
+    <div id="wurdig-flickr-feed">
+        <h4>%s</h4>
+        %s
+    </div>
+    """  % (_('Public Flickr Stream'), """
+    <object width="100%" height="310"> 
+        <param name="flashvars" 
+            value="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fleveille%2Fshow%2F&page_show_back_url=%2Fphotos%2F{{username}}%2F&user_id={{flickr_id}}&jump_to="></param> 
+        <param name="movie" value="http://www.flickr.com/apps/slideshow/show.swf?v=71649"></param> 
+        <param name="allowFullScreen" value="true"></param>
+        <embed type="application/x-shockwave-flash" 
+            src="http://www.flickr.com/apps/slideshow/show.swf?v=71649" 
+            allowFullScreen="true" 
+            flashvars="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fleveille%2Fshow%2F&page_show_back_url=%2Fphotos%2F{{username}}%2F&user_id={{flickr_id}}&jump_to=" 
+            width="100%" height="310">
+        </embed>
+    </object>
+    """)
+    html = html.replace('{{flickr_id}}', c.settings.get('flickr_id'))
+    # @todo: Add a setting entry for the flickr username (though this isn't my flickr username)
+    html = html.replace('{{username}}', 'leveille')
+    return html
 
 def twitter():
     if not c.enable_twitter_display:
