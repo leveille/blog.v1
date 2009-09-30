@@ -32,20 +32,19 @@ def flickr():
     """  % (_('Public Flickr Stream'), """
     <object width="100%" height="310"> 
         <param name="flashvars" 
-            value="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fleveille%2Fshow%2F&page_show_back_url=%2Fphotos%2F{{username}}%2F&user_id={{flickr_id}}&jump_to="></param> 
+            value="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fleveille%2Fshow%2F&page_show_back_url=%2Fphotos%2F{{web_address_identifier}}%2F&user_id={{flickr_id}}&jump_to="></param> 
         <param name="movie" value="http://www.flickr.com/apps/slideshow/show.swf?v=71649"></param> 
         <param name="allowFullScreen" value="true"></param>
         <embed type="application/x-shockwave-flash" 
             src="http://www.flickr.com/apps/slideshow/show.swf?v=71649" 
             allowFullScreen="true" 
-            flashvars="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fleveille%2Fshow%2F&page_show_back_url=%2Fphotos%2F{{username}}%2F&user_id={{flickr_id}}&jump_to=" 
+            flashvars="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fleveille%2Fshow%2F&page_show_back_url=%2Fphotos%2F{{web_address_identifier}}%2F&user_id={{flickr_id}}&jump_to=" 
             width="100%" height="310">
         </embed>
     </object>
     """)
     html = html.replace('{{flickr_id}}', c.settings.get('flickr_id'))
-    # @todo: Add a setting entry for the flickr username (though this isn't my flickr username)
-    html = html.replace('{{username}}', 'leveille')
+    html = html.replace('{{web_address_identifier}}', c.settings.get('flickr_web_address_identifier'))
     return html
 
 def twitter():

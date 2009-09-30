@@ -204,6 +204,14 @@ def setup_app(command, conf, vars):
     meta.Session.add(setting_flickr_id)
     meta.Session.flush()
     
+    setting_flickr_web_address = model.Setting()
+    setting_flickr_web_address.key = u'flickr_web_address_identifier'
+    setting_flickr_web_address.value = u''
+    setting_flickr_web_address.description = _(u'Your Flickr Web Address Identifier?')
+    setting_flickr_web_address.help = _(u'The part of your Flickr Web Address after photos.  Ex. http://flickr.com/photos/{web_address_identifier}/?')
+    meta.Session.add(setting_flickr_web_address)
+    meta.Session.flush()
+    
     setting_use_minified_assets = model.Setting()
     setting_use_minified_assets.key = u'use_minified_assets'
     setting_use_minified_assets.value = u'false'
