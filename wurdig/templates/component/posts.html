@@ -10,7 +10,11 @@
 
 <%def name="paginated()">
     % if len(c.paginator):
+    
+        % if request.urlvars['action'] != 'home':
         <p class="paginator_links paginator_links_long">${ c.paginator.pager('$link_first $link_previous $first_item %s $last_item %s $item_count $link_next $link_last' % (_('to'), _('of')), page_param='posts_page')}</p>
+        % endif
+        
         <div class="wurdig-entries">
             % for post in c.paginator:
                 ${display_post(post)}

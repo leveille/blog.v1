@@ -4,7 +4,6 @@
 <%inherit file="/base/master.html"/>
 <%namespace file="/component/posts.html" name="posts" import="*"/>
 
-<%def name="title()">${parent.title()} - ${c.page}</%def>
 <%def name="content_header()"><p>${_('Home')}</p></%def>
 
 ${posts.paginated()}
