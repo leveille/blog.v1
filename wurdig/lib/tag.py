@@ -4,7 +4,7 @@ from pylons.i18n.translation import _
 from wurdig import model
 from wurdig.model import meta
 
-__all__ = ['cloud', 'post_tags']
+__all__ = ['post_tags']
 
 def cloud():
     # grab tag list and x recent comments for display in sidebar

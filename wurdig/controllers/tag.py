@@ -105,9 +105,6 @@ class NewTagForm(formencode.Schema):
     )
 
 class TagController(BaseController):
-
-    def cloud(self):
-        return render('/derived/tag/cloud.html')
     
     def category(self, slug=None):   
         if slug is None:
@@ -176,7 +173,7 @@ class TagController(BaseController):
         meta.Session.commit()
         session['flash'] = _('Tag successfully added.')
         session.save()
-        return redirect_to(controller='tag', action='cloud')
+        return redirect_to(controller='tag', action='list')
     
     @h.auth.authorize(h.auth.is_valid_user)
     def edit(self, id=None):

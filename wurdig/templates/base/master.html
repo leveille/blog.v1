@@ -46,7 +46,7 @@ ${wurdig.doctype()}
                         ${wurdig.recent_comments()}
                         ${wurdig.twitter_updates()}
                         % if request.urlvars['action'] != 'cloud':
-                            ${wurdig.tags()}
+                            <!-- call to wurdig.tags() if you want to display the tag cloud -->
                         % endif
                     </div>
                 </div>

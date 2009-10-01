@@ -105,6 +105,11 @@ class Tag(object):
 
 orm.mapper(Setting, settings_table)
 orm.mapper(Comment, comments_table)
+orm.mapper(Tag, tags_table, order_by='name')
+
+"""
+Removing post count for tags.  The operation is expensive
+and I just don't care that much
 orm.mapper(Tag, tags_table, order_by='name', properties={
     'post_count': column_property(
         select(
@@ -116,6 +121,8 @@ orm.mapper(Tag, tags_table, order_by='name', properties={
         ).label('post_count')
     )
 })
+"""
+
 orm.mapper(Page, pages_table, order_by='title')
 orm.mapper(Post, posts_table, order_by='posted_on DESC', polymorphic_identity='posts', properties={
     'comments':orm.relation(Comment, backref='posts', cascade='all',order_by='created_on', 
