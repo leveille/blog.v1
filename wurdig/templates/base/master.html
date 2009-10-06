@@ -45,24 +45,28 @@ ${wurdig.doctype()}
                         ${wurdig.search_form()}
                         ${wurdig.subscribe()}
                         ${wurdig.recent_comments()}
-                        ${wurdig.twitter_updates()}
+                        ${wurdig.blogroll()}
                         % if request.urlvars['action'] != 'cloud':
                             <!-- call to wurdig.tags() if you want to display the tag cloud -->
                         % endif
                     </div>
                 </div>
             </div>
-            <div class="yui-gb" id="wurdig-secondary-content">
-                <div class="yui-u first">
-                    ${wurdig.delicious()}
+            % if c.enable_delicious_display or \
+                 c.enable_flickr_display or \
+                 c.enable_twitter_display:
+                <div class="yui-gb" id="wurdig-secondary-content">
+                    <div class="yui-u first">
+                        ${wurdig.delicious()}
+                    </div>
+                    <div class="yui-u">
+                        ${wurdig.flickr()}
+                    </div>
+                    <div class="yui-u">
+                        ${wurdig.twitter_updates()}
+                    </div>
                 </div>
-                <div class="yui-u">
-                    ${wurdig.flickr()}
-                </div>
-                <div class="yui-u">
-                    ${wurdig.blogroll()}
-                </div>
-            </div>
+            % endif
             <div id="ft" role="contentinfo">
                 ${wurdig.footer()}
             </div>
