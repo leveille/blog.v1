@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Wurdig 0.1\n"
 "Report-Msgid-Bugs-To: json.leveille@gmail.com\n"
 "POT-Creation-Date: 2009-08-24 14:34+0400\n"
-"PO-Revision-Date: 2009-09-28 16:33-0400\n"
+"PO-Revision-Date: 2009-10-06 11:37-0400\n"
 "Last-Translator: Jason R. Leveille <json.leveille@gmail.com>\n"
 "Language-Team: en <json.levceille@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -168,38 +168,48 @@ msgid "What is your Flickr ID (http://idgettr.com/)?"
 msgstr ""
 
 #: wurdig/websetup.py:210
+msgid "Your Flickr Web Address Identifier?"
+msgstr ""
+
+#: wurdig/websetup.py:211
+msgid ""
+"The part of your Flickr Web Address after photos.  Ex. "
+"http://flickr.com/photos/{web_address_identifier}/?"
+msgstr ""
+
+#: wurdig/websetup.py:218
 msgid "Use Minified Assets (CSS/JS)?"
 msgstr ""
 
-#: wurdig/websetup.py:212
+#: wurdig/websetup.py:220
 msgid ""
 "Do you want to combine and minify your js/css files?  If you're unsure, "
 "don't do anything."
 msgstr ""
 
-#: wurdig/websetup.py:221
+#: wurdig/websetup.py:229
 msgid "Use External Posts Feed (ex. Feedburner)?"
 msgstr ""
 
-#: wurdig/websetup.py:223
+#: wurdig/websetup.py:231
 msgid "Do you want to point your blog posts feed at an external URL?"
 msgstr ""
 
-#: wurdig/websetup.py:231
+#: wurdig/websetup.py:239
 msgid "Your External Posts Feed URL?"
 msgstr ""
 
-#: wurdig/websetup.py:232
+#: wurdig/websetup.py:240
 msgid ""
 "What is the external URL that contains your post feed (ex. "
 "http://feeds2.feedburner.com/leveille)?"
 msgstr ""
 
-#: wurdig/websetup.py:254 wurdig/websetup.py:255
+#: wurdig/websetup.py:262 wurdig/websetup.py:263
 msgid "Blogroll"
 msgstr ""
 
-#: wurdig/websetup.py:257
+#: wurdig/websetup.py:265
 msgid "Your favorite links!"
 msgstr ""
 
@@ -455,19 +465,19 @@ msgstr ""
 msgid "Enter a tag slug, ex: my-tag-name."
 msgstr ""
 
-#: wurdig/controllers/tag.py:177
+#: wurdig/controllers/tag.py:174
 msgid "Tag successfully added."
 msgstr ""
 
-#: wurdig/controllers/tag.py:220
+#: wurdig/controllers/tag.py:217
 msgid "Tag successfully updated."
 msgstr ""
 
-#: wurdig/controllers/tag.py:275
+#: wurdig/controllers/tag.py:272
 msgid "The tag has been deleted"
 msgstr ""
 
-#: wurdig/controllers/tag.py:277
+#: wurdig/controllers/tag.py:274
 msgid "Tag successfully deleted."
 msgstr ""
 
@@ -511,18 +521,6 @@ msgstr ""
 msgid "Error retrieving external posts feed url"
 msgstr ""
 
-#: wurdig/lib/feed_display.py:28
-msgid "Bookmarks"
-msgstr ""
-
-#: wurdig/lib/feed_display.py:56
-msgid "Public Flickr Stream"
-msgstr ""
-
-#: wurdig/lib/feed_display.py:91
-msgid "Twitter Updates"
-msgstr ""
-
 #: wurdig/lib/mail.py:92 wurdig/lib/mail.py:112
 #, python-format
 msgid "Header values can't contain newlines (got %r for header %r)"
@@ -547,6 +545,18 @@ msgstr ""
 
 #: wurdig/lib/tag.py:37
 msgid "Tagged in"
+msgstr ""
+
+#: wurdig/lib/widgets.py:19
+msgid "Bookmarks"
+msgstr ""
+
+#: wurdig/lib/widgets.py:40
+msgid "Public Flickr Stream"
+msgstr ""
+
+#: wurdig/lib/widgets.py:96
+msgid "Twitter Updates"
 msgstr ""
 
 #: wurdig/templates/base/admin-login.html:11
@@ -590,8 +600,8 @@ msgid "New"
 msgstr ""
 
 #: wurdig/templates/base/admin.html:123
-#: wurdig/templates/component/posts.html:43
-#: wurdig/templates/component/posts.html:108
+#: wurdig/templates/component/posts.html:47
+#: wurdig/templates/component/posts.html:112
 #: wurdig/templates/component/wurdig.html:162
 #: wurdig/templates/component/wurdig.html:163
 #: wurdig/templates/component/wurdig.html:241
@@ -619,7 +629,7 @@ msgstr ""
 msgid "Wurdig"
 msgstr ""
 
-#: wurdig/templates/base/master.html:75
+#: wurdig/templates/base/master.html:80
 msgid "Topics in Web Application Development"
 msgstr ""
 
@@ -630,8 +640,8 @@ msgid "Search"
 msgstr ""
 
 #: wurdig/templates/component/comment.html:7
-#: wurdig/templates/component/posts.html:13
-#: wurdig/templates/component/posts.html:102
+#: wurdig/templates/component/posts.html:15
+#: wurdig/templates/component/posts.html:106
 #: wurdig/templates/component/settings.html:7
 #: wurdig/templates/derived/page/list.html:20
 #: wurdig/templates/derived/tag/list.html:20
@@ -639,8 +649,8 @@ msgid "to"
 msgstr ""
 
 #: wurdig/templates/component/comment.html:7
-#: wurdig/templates/component/posts.html:13
-#: wurdig/templates/component/posts.html:102
+#: wurdig/templates/component/posts.html:15
+#: wurdig/templates/component/posts.html:106
 #: wurdig/templates/component/settings.html:7
 #: wurdig/templates/derived/page/list.html:20
 #: wurdig/templates/derived/tag/list.html:20
@@ -662,12 +672,12 @@ msgid "Content"
 msgstr ""
 
 #: wurdig/templates/component/comment.html:13
-#: wurdig/templates/component/posts.html:107
+#: wurdig/templates/component/posts.html:111
 msgid "Posted"
 msgstr ""
 
 #: wurdig/templates/component/comment.html:14
-#: wurdig/templates/component/posts.html:109
+#: wurdig/templates/component/posts.html:113
 #: wurdig/templates/component/settings.html:13
 #: wurdig/templates/derived/page/list.html:26
 #: wurdig/templates/derived/tag/list.html:26
@@ -675,7 +685,7 @@ msgid "Action"
 msgstr ""
 
 #: wurdig/templates/component/comment.html:52
-#: wurdig/templates/component/posts.html:139
+#: wurdig/templates/component/posts.html:143
 #: wurdig/templates/component/settings.html:27
 #: wurdig/templates/derived/page/list.html:42
 #: wurdig/templates/derived/post/view.html:68
@@ -684,7 +694,7 @@ msgid "Edit"
 msgstr ""
 
 #: wurdig/templates/component/comment.html:60
-#: wurdig/templates/component/posts.html:143
+#: wurdig/templates/component/posts.html:147
 #: wurdig/templates/derived/page/list.html:46
 #: wurdig/templates/derived/post/view.html:74
 #: wurdig/templates/derived/tag/list.html:45
@@ -695,42 +705,42 @@ msgstr ""
 msgid "No comments have yet been created"
 msgstr ""
 
-#: wurdig/templates/component/posts.html:22
+#: wurdig/templates/component/posts.html:26
 msgid "No posts were found that matched your request."
 msgstr ""
 
-#: wurdig/templates/component/posts.html:43
+#: wurdig/templates/component/posts.html:47
 #: wurdig/templates/derived/comment/fields.html:44
 #: wurdig/templates/derived/post/comment_fields.html:33
 #: wurdig/templates/derived/post/view.html:136
 msgid "Comment"
 msgstr ""
 
-#: wurdig/templates/component/posts.html:53
+#: wurdig/templates/component/posts.html:57
 #: wurdig/templates/derived/post/view.html:146
 msgid "No Comments"
 msgstr ""
 
-#: wurdig/templates/component/posts.html:71
+#: wurdig/templates/component/posts.html:75
 msgid "+ more"
 msgstr ""
 
-#: wurdig/templates/component/posts.html:88
+#: wurdig/templates/component/posts.html:92
 #: wurdig/templates/component/wurdig.html:103
 #: wurdig/templates/derived/post/view.html:41
 msgid "Admin"
 msgstr ""
 
-#: wurdig/templates/component/posts.html:90
+#: wurdig/templates/component/posts.html:94
 #: wurdig/templates/derived/post/view.html:43
 msgid "Edit This Post"
 msgstr ""
 
-#: wurdig/templates/component/posts.html:106
+#: wurdig/templates/component/posts.html:110
 msgid "Post Title"
 msgstr ""
 
-#: wurdig/templates/component/posts.html:131
+#: wurdig/templates/component/posts.html:135
 #: wurdig/templates/derived/post/fields.html:46
 msgid "Draft"
 msgstr ""
@@ -751,7 +761,7 @@ msgstr ""
 #: wurdig/templates/component/wurdig.html:50
 #: wurdig/templates/component/wurdig.html:78
 #: wurdig/templates/component/wurdig.html:79
-#: wurdig/templates/derived/post/home.html:8
+#: wurdig/templates/derived/post/home.html:7
 msgid "Home"
 msgstr ""
 
@@ -1294,7 +1304,4 @@ msgstr ""
 #: wurdig/templates/email/new_comment.html:11
 msgid "Disapprove Comment:"
 msgstr ""
-
-#~ msgid "Follow"
-#~ msgstr ""
 
