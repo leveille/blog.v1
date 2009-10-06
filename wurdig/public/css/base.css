@@ -354,8 +354,19 @@ div.wurdig-entry-content blockquote p {
     border-top: none
 }
 
+#wurdig-sidebar .wurdig-sidebar-list {
+    margin-top: 20px
+}
+
+#wurdig-sidebar .wurdig-sidebar-list ul {
+    margin: 0;
+    padding: 0;
+    margin-top: 1em;
+    border-top: solid 1px #000
+}
+
 #wurdig-sidebar .wurdig-sidebar-list li {
-    border-bottom: solid 1px #D0D0D0;
+    border-bottom: solid 1px #EEEEEE;
     padding: .4em 0 .4em 0;
     margin: .4em 0 .4em 0;
     list-style: none
@@ -394,6 +405,25 @@ div.wurdig-entry-content blockquote p {
 
 #wurdig-sidebar div.hTagCloud ul {
     padding-top: 1em
+}
+
+#wurdig-sidebar #wurdig-blogroll h4 {
+    padding-left: 24px;
+    background: url('../images/sprite.png') no-repeat left -242px
+}
+
+#wurdig-sidebar #wurdig-blogroll ul li {
+    margin: 0;
+    padding: 0
+}
+
+#wurdig-sidebar #wurdig-blogroll ul li a {
+    display: block;
+    padding: .5em
+}
+
+#wurdig-sidebar #wurdig-blogroll ul li a:hover {
+    background: #F6F6F5
 }
 
 /*_COMMENTS*/
@@ -666,10 +696,6 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
     background: url('../images/sprite.png') no-repeat left -152px
 }
 
-#wurdig-secondary-content #wurdig-blogroll {
-    padding-right: 2em
-}
-
 #wurdig-secondary-content #wurdig-flickr-feed h4 {
     padding-left: 24px;
     margin-bottom: 10px;
@@ -696,15 +722,10 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
     border: 4px solid #FFF
 }
 
-#wurdig-secondary-content #wurdig-blogroll h4 {
-    padding-left: 24px;
-    background: url('../images/sprite.png') no-repeat left -242px
-}
-
 /*_FOOTER*/
 #ft {
     border-top: dotted .1em #D0D0D0;
-    font-size: 93%;
+    font-size: 85%;
     clear: both;
     float: left;
     width: 100%;
