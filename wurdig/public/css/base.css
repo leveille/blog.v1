@@ -1,23 +1,15 @@
 html, body {
-    background:#444
+    background:#FFF
 }
 
 body {
     color:#444;
-    font-family: 'Lucida Grande',Geneva,Arial,Verdana,sans-serif;
-    line-height: 1.6em;
-    margin: 10px 0;
+    font-family: Arial,sans-serif;
+    line-height: 1.7em;
+    margin: 0;
     padding: 0
 }
 
-#doc4 {
-    background: #FFF;
-    box-shadow: 2px 2px 4px rgba(0,0,0,.7);
-    -webkit-box-shadow: 2px 2px 4px rgba(0,0,0,.7);
-    -moz-box-shadow: 2px 2px 4px rgba(0,0,0,.7);
-}
-
-#doc4,
 #wurdig-header-img,
 #wurdig-header-img p,
 #wurdig-header-img h1,
@@ -31,9 +23,9 @@ body {
     -webkit-border-top-right-radius: 13px
 }
 
-h1, h2, h3, h4, h5, h6, #wurdig-header-img p {
+h1, h2, h3, h4, h5, h6 {
     color: #000;
-    font-family: "URW Gothic L","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Helvetica,Arial,sans-serif;
+    font-family: Georgia;
     font-weight: normal;
     font-style: normal;
     line-height: 1.6em
@@ -44,7 +36,7 @@ h1 {
 }
 
 h2 {
-    font-size: 167%
+    font-size: 182%
 }
 
 h3 {
@@ -65,7 +57,7 @@ h6 {
 
 a:focus,
 a:hover {
-    color:#CC0000
+    color:#CD553C
 }
 
 a{
@@ -85,7 +77,7 @@ ul ul {
 
 /*_LOGO*/
 #hd {
-    padding: 30px 30px 15px 30px;
+    padding: 10px 30px 10px 30px;
     float: left;
     width: 913px;
     position: relative
@@ -109,15 +101,16 @@ ul ul {
 }
 
 #hd h1 {
-    text-transform: uppercase;
-    margin: 0;
-    padding: 0;
-    line-height: 1.2em
+    text-transform: lowercase;
+    font-size: 50px;
+    letter-spacing: -3px;
+    margin: 0 0 -10px 0;
+    padding: 0
 }
 
 #hd h1 a {
     text-decoration: none;
-    color: #CC0000
+    color: #CD553C
 }
 
 #hd h1 a:hover {
@@ -125,9 +118,8 @@ ul ul {
 }
 
 #hd p {
-    margin: 0;
-    padding: 0;
-    font-size: 93%
+    margin: 0 0 0 2px;
+    padding: 0
 }
 
 #hd p.wurdig-tagline {
@@ -155,15 +147,17 @@ ul ul {
     text-transform: lowercase;
     font-size: 116%;
     position: absolute;
-    bottom: 0
+    bottom: 0;
+    font-family: Geneva;
+    font-weight: normal;
+    font-style: normal
 }
 
 /*_NAV*/
 #wurdig-primary-nav ul {
     position: absolute;
-    bottom: 15px;
-    right: 30px;
-    font-size: 93%;
+    top: 60px;
+    right: 35px;
     margin: 0;
     padding: 0
 }
@@ -192,7 +186,7 @@ ul ul {
 #wurdig-primary-nav li a:hover,
 #wurdig-primary-nav li a.wurdig-active {
     text-decoration: underline;
-    color: #CC0000
+    color: #CD553C
 }
 
 /*_PRIMARY_CONTENT*/
@@ -208,6 +202,15 @@ ul ul {
 #yui-main h2 {
     text-transform: capitalize;
     margin-bottom: .7em;
+}
+
+#yui-main h2 a {
+    text-decoration: none;
+    border-bottom: dotted 1px #000
+}
+
+#yui-main h2 a:hover {
+    border-bottom: dashed 1px #000
 }
 
 #yui-main h2:first-child,
@@ -228,9 +231,16 @@ ul ul {
 
 #yui-main p.wurdig-entry-date {
     color: #999;
-    margin-top: -19px;
-    font-size: 85%
+    margin-top: 10px;
+    font-size: 85%;
+    float: right;
+    text-align: right
 }
+
+#yui-main .wurdig-entry-comments {
+    display: block
+}
+
 
 #yui-main p.wurdig-entry-meta {
     margin-bottom: 3em;
@@ -779,6 +789,7 @@ div.hTagCloud ul.popularity li.vvvv-popular { font-size: 2.5em }
 }
 
 /*_DEFAULTS*/
+abbr{border-bottom: none}
 strong{font-weight:bold}dfn{font-style:italic;font-weight:bold}sup,sub{line-height:0}
 del{color:#666}pre,code{margin:1.5em 0;white-space:pre}
 table{margin-bottom:1.4em;width:100%}th{font-weight:bold;background:#C3D9FF}th,td{padding:4px 10px 4px 5px}tr.even td{background:#E5ECF9}tfoot{font-style:italic}caption{background:#eee}

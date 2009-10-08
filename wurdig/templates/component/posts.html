@@ -29,18 +29,8 @@
 </%def>
 
 <%def name="display_post(post)">
-    <h2>
-        ${h.link_to(
-            post.title,
-            h.url_for(controller='post', 
-                      action='view', 
-                      year=post.posted_on.strftime('%Y'), 
-                      month=post.posted_on.strftime('%m'), 
-                      slug=post.slug)
-        )}
-    </h2>
     <p class="wurdig-entry-date">
-        ${h.literal(h.abbr_datetime(post.posted_on))},
+        ${h.literal(h.abbr_datetime(post.posted_on))}
         <span class="wurdig-entry-comments">
             % if len(post.comments):
                 ${h.link_to(
@@ -65,6 +55,16 @@
             % endif
         </span>
     </p>
+    <h2>
+        ${h.link_to(
+            post.title,
+            h.url_for(controller='post', 
+                      action='view', 
+                      year=post.posted_on.strftime('%Y'), 
+                      month=post.posted_on.strftime('%m'), 
+                      slug=post.slug)
+        )}
+    </h2>
     <div class="wurdig-entry">
         <div class="wurdig-entry-content">
             

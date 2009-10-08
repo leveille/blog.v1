@@ -127,9 +127,8 @@
     % endif
 </%def>
 
-<h2>${c.post.title}</h2>
 <p class="wurdig-entry-date">
-    ${h.literal(h.abbr_datetime(c.post.posted_on))}, 
+    ${h.literal(h.abbr_datetime(c.post.posted_on))}
     <span class="wurdig-entry-comments">
         % if len(c.post.comments):
             ${h.link_to(
@@ -154,6 +153,7 @@
         % endif
     </span>
 </p>
+<h2>${c.post.title}</h2>
 <div class="wurdig-entry">
     ${post_data(c.post)}
 
