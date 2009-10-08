@@ -194,7 +194,7 @@ ul ul {
 
 /*_ABOUT_SNIPPET*/
 #about-snippet {
-    margin: 0 30px
+    margin: 0
 }
 
 #about-snippet p {
@@ -203,7 +203,7 @@ ul ul {
     border-top: dotted 1px #CCC;
     border-bottom: dotted 1px #CCC;
     margin: 20px 0 0 0;
-    padding: 5px 14px 10px 14px;
+    padding: 5px 30px 10px 30px;
     color: #000
 }
 
@@ -236,7 +236,7 @@ ul ul {
 }
 
 #yui-main h2 a:hover {
-    border-bottom: dashed 1px #000
+    border-bottom: solid 1px #000
 }
 
 #yui-main h2:first-child,
