@@ -12,7 +12,6 @@ WURDIG.app = function(){
                 //inject sidebar about me content from about page
                 jQuery('#about-snippet').load('/about #about-intro', function(){
                     jQuery(this).slideDown('slow');
-                    jQuery('span.hide', this).removeClass('hide');
                 });
             }
         }
