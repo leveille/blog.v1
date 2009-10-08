@@ -102,7 +102,7 @@ ul ul {
 
 #hd h1 {
     text-transform: lowercase;
-    font-size: 50px;
+    font-size: 55px;
     letter-spacing: -3px;
     margin: 0 0 -10px 0;
     padding: 0
@@ -187,6 +187,29 @@ ul ul {
 #wurdig-primary-nav li a.wurdig-active {
     text-decoration: underline;
     color: #CD553C
+}
+
+/*_ABOUT_SNIPPET*/
+#about-snippet {
+    margin: 0 30px
+}
+
+#about-snippet p {
+    text-transform: lowercase;
+    font: 31px/1.5em Arial;
+    border-top: dotted 1px #CCC;
+    border-bottom: dotted 1px #CCC;
+    margin: 20px 0 0 0;
+    padding: 5px 14px 10px 14px;
+    color: #000
+}
+
+#about-snippet p:hover {
+    color: #555
+}
+
+#about-snippet p a {
+    font-weight: bold
 }
 
 /*_PRIMARY_CONTENT*/

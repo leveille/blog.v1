@@ -32,6 +32,7 @@ ${wurdig.doctype()}
             <div id="wurdig-header-img" style="${wurdig.random_header_img()}">
                 ${self.content_header()}
             </div>
+            <div id="about-snippet" class="hide"></div>
             <div id="bd">
                 <div id="yui-main">
                     <div class="yui-b in in-main" role="main">
@@ -41,7 +42,6 @@ ${wurdig.doctype()}
                 </div>
                 <div class="yui-b" id="wurdig-sidebar" role="complementary">
                     <div class="in in-sidebar">
-                    	<div id="sidebar-about"></div>
                         ${wurdig.search_form()}
                         ${wurdig.subscribe()}
                         ${wurdig.recent_comments()}
