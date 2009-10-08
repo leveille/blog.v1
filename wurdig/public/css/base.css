@@ -194,7 +194,7 @@ ul ul {
 
 /*_ABOUT_SNIPPET*/
 #about-snippet {
-    margin: 0
+    margin: 0 0 5px 0
 }
 
 #about-snippet p {
@@ -202,13 +202,14 @@ ul ul {
     font: 31px/1.5em Arial;
     border-top: dotted 1px #555;
     border-bottom: dotted 1px #CCC;
-    margin: 20px 0 0 0;
+    margin: 20px 0 10px 0;
     padding: 5px 30px 10px 30px;
-    color: #000
+    color: #000;
+    background: #f6f6f5
 }
 
 #about-snippet p:hover {
-    color: #FFF
+    color: #f6f6f5
 }
 
 #about-snippet p a {
