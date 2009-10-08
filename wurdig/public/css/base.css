@@ -200,7 +200,7 @@ ul ul {
 #about-snippet p {
     text-transform: lowercase;
     font: 31px/1.5em Arial;
-    border-top: dotted 1px #CCC;
+    border-top: dotted 1px #555;
     border-bottom: dotted 1px #CCC;
     margin: 20px 0 0 0;
     padding: 5px 30px 10px 30px;
@@ -208,7 +208,7 @@ ul ul {
 }
 
 #about-snippet p:hover {
-    color: #555
+    color: #FFF
 }
 
 #about-snippet p a {
