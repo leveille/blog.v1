@@ -241,6 +241,7 @@ ul ul {
 }
 
 div.wurdig-entries > h2,
+div.yui-b > h2,
 #yui-main h2.wurdig-first {
     margin-top: .3em;
     padding-top: 0
