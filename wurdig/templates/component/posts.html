@@ -16,8 +16,20 @@
         % endif
         
         <div class="wurdig-entries">
+            <%
+                x = 1
+            %>
             % for post in c.paginator:
-                ${display_post(post)}
+                % if x == 1:
+                <div class="first-entry">
+                    ${display_post(post)}
+                </div>
+                % else:
+                    ${display_post(post)}
+                % endif
+                <%
+                    x = 0
+                %>
             % endfor
         </div>
         <p class="paginator_links paginator_links_short">${ c.paginator.pager(format='~2~', page_param='posts_page') }</p>

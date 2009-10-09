@@ -140,59 +140,113 @@
     </div>
 </%def>
 
-<%def name="subscribe()">
-    <div id="wurdig-subscribe">
-        <h4>${_('Feeds')}</h4>
-        <ul>
-            <li>
-                % if h.wurdig_use_externalposts_feed():
-                    <a href="${h.wurdig_external_posts_feed()}"
-                        title="${_('Blog')}">
-                        ${_('Blog')}
-                    </a>
-                % else:
-                    <a href="${h.url_for(controller='feed', action='posts_feed')}"
-                        title="${_('Blog')}">
-                        ${_('Blog')}
-                    </a>
-                % endif
-            </li>
-            <li>
-                <a href="${h.url_for(controller='feed', action='comments_feed')}"
-                    title="${_('Comments')}">
-                    ${_('Comments')}
+<%def name="feeds()">
+    <h4>${_('Feeds')}</h4>
+    <ul>
+        <li>
+            % if h.wurdig_use_externalposts_feed():
+                <a href="${h.wurdig_external_posts_feed()}"
+                    title="${_('Blog')}">
+                    ${_('Blog')}
                 </a>
-            </li>
-            % if request.urlvars['controller'] == 'post' and \
-                 request.urlvars['action'] == 'view':
-                % if c.post.comments_allowed:
-                    <li>
-                        <a href="${h.url_for(
-                                    controller='feed', 
-                                    action='post_comment_feed', 
-                                    post_id=unicode(c.post.id)
-                                )}"
-                            title="${c.post.title} ${_('Comments Feed')}">
-                            ${_('Post Comments')}
-                        </a>
-                    </li>
-                % endif
+            % else:
+                <a href="${h.url_for(controller='feed', action='posts_feed')}"
+                    title="${_('Blog')}">
+                    ${_('Blog')}
+                </a>
             % endif
-            % if request.urlvars['controller'] == 'tag' and \
-                 request.urlvars['action'] == 'archive':
+        </li>
+        <li>
+            <a href="${h.url_for(controller='feed', action='comments_feed')}"
+                title="${_('Comments')}">
+                ${_('Comments')}
+            </a>
+        </li>
+        % if request.urlvars['controller'] == 'post' and \
+             request.urlvars['action'] == 'view':
+            % if c.post.comments_allowed:
                 <li>
                     <a href="${h.url_for(
                                 controller='feed', 
-                                action='tag_feed', 
-                                slug=unicode(c.tag.slug)
+                                action='post_comment_feed', 
+                                post_id=unicode(c.post.id)
                             )}"
-                        title="${_('Posts Tagged')} ${c.tagname}">
-                        ${c.tagname}
+                        title="${c.post.title} ${_('Comments Feed')}">
+                        ${_('Post Comments')}
                     </a>
                 </li>
             % endif
-        </ul>
-    </div>
+        % endif
+        % if request.urlvars['controller'] == 'tag' and \
+             request.urlvars['action'] == 'archive':
+            <li>
+                <a href="${h.url_for(
+                            controller='feed', 
+                            action='tag_feed', 
+                            slug=unicode(c.tag.slug)
+                        )}"
+                    title="${_('Posts Tagged')} ${c.tagname}">
+                    ${c.tagname}
+                </a>
+            </li>
+        % endif
+    </ul>
+</%def>
+
+<%def name="social_media()">
+    % if c.enable_delicious_display or \
+         c.enable_flickr_display or \
+         c.enable_twitter_display:
+        <hr>
+        <div class="social-media">
+            <h4>${_('Social Media')}</h4>
+            <ul>
+                % if c.enable_delicious_display:
+                    <li class="delicious">
+                        <a href="${h.delicious_link()}"
+                            title="${_('Delicious')}">
+                            ${_('Delicious')}
+                        </a>
+                    </li>
+                % endif
+                % if c.enable_flickr_display:
+                    <li class="flickr">
+                        <a href="${h.flickr_link()}"
+                            title="${_('Flickr')}">
+                            ${_('Flickr')}
+                        </a>
+                    </li>
+                % endif
+                % if c.enable_twitter_display:
+                    <li class="twitter">
+                        <a href="${h.twitter_link()}"
+                            title="${_('Twitter')}">
+                            ${_('Twitter')}
+                        </a>
+                    </li>
+                % endif
+            </ul>
+        </div>
+    % endif
+</%def>
+
+<%def name="code()">
+    % if c.enable_github_display:
+        <hr>
+        <div class="code">
+            <h4>${_('Code')}</h4>
+            <ul>
+                % if c.enable_github_display:
+                    <li class="github">
+                        <a href="${h.github_link()}"
+                            title="${_('GitHub')}">
+                            ${_('GitHub')}
+                        </a>
+                    </li>
+                % endif
+            </ul>
+        </div>
+    % endif
 </%def>
 
 <%def name="blogroll()" cached="True" cache_timeout="86400" cache_key="blogroll" cache_type="file">

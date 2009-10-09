@@ -43,7 +43,11 @@ ${wurdig.doctype()}
                 <div class="yui-b" id="wurdig-sidebar" role="complementary">
                     <div class="in in-sidebar">
                         ${wurdig.search_form()}
-                        ${wurdig.subscribe()}
+                        <div id="wurdig-subscribe">
+                            ${wurdig.feeds()}
+                            ${wurdig.social_media()}
+                            ${wurdig.code()}
+                        </div>
                         ${wurdig.recent_comments()}
                         ${wurdig.blogroll()}
                         % if request.urlvars['action'] != 'cloud':
@@ -52,21 +56,21 @@ ${wurdig.doctype()}
                     </div>
                 </div>
             </div>
-            % if c.enable_delicious_display or \
+            <!-- if c.enable_delicious_display or \
                  c.enable_flickr_display or \
                  c.enable_twitter_display:
                 <div class="yui-gb" id="wurdig-secondary-content">
                     <div class="yui-u first">
-                        ${wurdig.delicious()}
+                        $wurdig.delicious()
                     </div>
                     <div class="yui-u">
-                        ${wurdig.flickr()}
+                        $wurdig.flickr()
                     </div>
                     <div class="yui-u">
-                        ${wurdig.twitter_updates()}
+                        $wurdig.twitter_updates()
                     </div>
                 </div>
-            % endif
+            endif -->
             <div id="ft" role="contentinfo">
                 ${wurdig.footer()}
             </div>

@@ -2,14 +2,19 @@ import helpers as h
 from pylons import tmpl_context as c
 from pylons.i18n.translation import _, get_lang
 
-__all__ = ['delicious', 'flickr', 'twitter']
+__all__ = ['delicious', 
+           'delicious_link', 
+           'flickr', 
+           'flickr_link',
+           'twitter',
+           'twitter_link',
+           'github_link']
 
-def delicious():
-    if not c.enable_delicious_display:
-        return u''
-    
+def delicious():    
     html = u''
     try:
+        if not c.enable_delicious_display:
+            return u''
         html = """
         <div id="wurdig-delicious-feed" class="wurdig-secondary-list">
             <h4>%s</h4>
@@ -26,12 +31,21 @@ def delicious():
     
     return html
 
-def flickr():
-    if not c.enable_flickr_display:
-        return u''
-    
+def delicious_link():
+    html = u''
+    try:
+        if not c.enable_delicious_display:
+            return u''
+        html = u'http://delicious.com/%s' % c.settings.get('delicious_username')
+    except:
+        pass
+    return html
+
+def flickr():    
     html = ''
     try:
+        if not c.enable_flickr_display:
+            return u''
         html = """
         <div id="wurdig-flickr-feed">
             <h4>%s</h4>
@@ -59,13 +73,21 @@ def flickr():
     
     return html
 
-def twitter():
-    if not c.enable_twitter_display:
-        return u''
-    
+def flickr_link():
     html = u''
-    
     try:
+        if not c.enable_flickr_display:
+            return u''
+        html = u'http://flickr.com/photos/%s' % c.settings.get('flickr_web_address_identifier')
+    except:
+        pass
+    return html
+
+def twitter():
+    html = u''
+    try:
+        if not c.enable_twitter_display:
+            return u''
         html = """
             <div id="wurdig-twitter-feed" class="wurdig-sidebar-list">
             <h4>%s</h4>
@@ -97,4 +119,24 @@ def twitter():
     except:
         pass
     
+    return html
+
+def twitter_link():
+    if not c.enable_twitter_display:
+        return u''
+    html = u''
+    try:
+        html = u'http://twitter.com/%s' % c.settings.get('twitter_screenname')
+    except:
+        pass
+    return html
+
+def github_link():
+    if not c.enable_github_display:
+        return u''
+    html = u''
+    try:
+        html = u'http://github.com/%s' % c.settings.get('github_screenname')
+    except:
+        pass
     return html

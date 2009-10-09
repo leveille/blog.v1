@@ -90,8 +90,7 @@ class PageController(BaseController):
         c.page = load_page(slug)
         if c.page is None:
             abort(404)
-        if c.page.slug == 'search':
-            return render('/derived/page/search.html')
+
         return render('/derived/page/view.html')
 
     @h.auth.authorize(h.auth.is_valid_user)

@@ -53,6 +53,11 @@ class BaseController(WSGIController):
         pylons.c.enable_twitter_display = asbool(pylons.c.settings.get('enable_twitter_display', 'false'))
         pylons.c.enable_delicious_display = asbool(pylons.c.settings.get('enable_delicious_display', 'false'))
         pylons.c.enable_flickr_display = asbool(pylons.c.settings.get('enable_flickr_display', 'false'))
+        
+        # This is a temporary solution until I find the time to add these settings to the database
+        pylons.c.enable_github_display = True
+        pylons.c.settings['github_screenname'] = u'leveille'
+        
         pylons.c.use_minified_assets = asbool(pylons.c.settings.get('use_minified_assets', 'false'))
         pylons.c.use_externalposts_feed = asbool(pylons.c.settings.get('use_externalposts_feed', 'false'))  
             
