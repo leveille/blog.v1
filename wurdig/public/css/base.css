@@ -240,7 +240,7 @@ ul ul {
     border-bottom: solid 1px #000
 }
 
-#yui-main h2:first-child,
+div.wurdig-entries > h2,
 #yui-main h2.wurdig-first {
     margin-top: .3em;
     padding-top: 0
