@@ -332,6 +332,24 @@ div.wurdig-entry-content blockquote p {
     font-size: 123.1%
 }
 
+div.wurdig-entry-content p.more {
+    text-align: right;
+	font-size: 108%;
+	text-transform: uppercase;
+	margin: 0 8px 8px 0
+}
+
+div.wurdig-entry-content p.more a {
+    text-decoration: none;
+	padding: 3px 9px;
+    background: #efefef;
+    color: #000
+}
+
+div.wurdig-entry-content p.more a:hover {
+    color: #CD553C
+}
+
 .wurdig-entry-gallery {
     text-align: center
 }
