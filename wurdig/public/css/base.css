@@ -14,7 +14,8 @@ body {
 #wurdig-header-img p,
 #wurdig-header-img h1,
 #wurdig-header-img h2,
-#wurdig-header-img h3 {
+#wurdig-header-img h3,
+#yui-main p.wurdig-entry-meta {
     border-bottom-left-radius: 13px;
     -moz-border-radius-bottomleft: 13px;
     -webkit-border-bottom-left-radius: 13px;
@@ -216,11 +217,6 @@ p#about-intro a {
 }
 
 /*_FIRST_HOME_ENTRY*/
-
-.home .first-entry {
-
-}
-
 .home #yui-main .first-entry h2 {
     text-transform: uppercase;
     font-size: 195%;
@@ -230,7 +226,7 @@ p#about-intro a {
 }
 
 .home #yui-main .first-entry p.wurdig-entry-meta {
-    background: #636363;
+    background: #000;
     color: #FFF
 }
 
@@ -301,7 +297,7 @@ div#wurdig-search-results > h2,
 
 #yui-main p.wurdig-entry-meta {
     margin-bottom: 3em;
-    padding: .5em;
+    padding: .5em .5em .5em 1em;
     background: #F3F3F3
 }
 
