@@ -334,7 +334,6 @@ div.wurdig-entry-content blockquote p {
 
 div.wurdig-entry-content p.more {
     text-align: right;
-	font-size: 108%;
 	text-transform: uppercase;
 	margin: 0 8px 8px 0
 }
@@ -342,12 +341,15 @@ div.wurdig-entry-content p.more {
 div.wurdig-entry-content p.more a {
     text-decoration: none;
 	padding: 3px 9px;
-    background: #efefef;
-    color: #000
+    color: #000;
+	text-decoration: underline;
+	font-weight: bold
 }
 
 div.wurdig-entry-content p.more a:hover {
-    color: #CD553C
+    color: #CD553C;
+    background: #F3F3F3;
+	text-decoration: none
 }
 
 .wurdig-entry-gallery {
