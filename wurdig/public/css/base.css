@@ -66,6 +66,10 @@ a{
     text-decoration:underline
 }
 
+a:active {
+    outline: none
+}
+
 div.yui-gb, 
 #ft {
     clear: both
@@ -219,10 +223,7 @@ p#about-intro a {
 /*_FIRST_HOME_ENTRY*/
 .home #yui-main .first-entry h2 {
     text-transform: uppercase;
-    font-size: 195%;
-    padding-left: 20px;
-    margin-left: -20px;
-    background: url(/images/color_swatch.png) no-repeat left 13px
+    font-size: 195%
 }
 
 .home #yui-main .first-entry p.wurdig-entry-meta {
@@ -255,11 +256,14 @@ p#about-intro a {
 
 #yui-main h2 a {
     text-decoration: none;
-    border-bottom: dotted 1px #000
+    border-bottom: dotted 1px #000;
+    background: #F5F5F6;
+    padding: 0 2px
 }
 
 #yui-main h2 a:hover {
-    border-bottom: solid 1px #000
+    border-bottom: solid 1px #000;
+    background: #F9F9F9;
 }
 
 div.wurdig-entries > h2,
