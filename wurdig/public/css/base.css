@@ -63,10 +63,7 @@ a:hover {
 
 a{
     color:#000;
-    text-decoration:underline
-}
-
-a:active {
+    text-decoration:underline;
     outline: none
 }
 
