@@ -1,6 +1,7 @@
 import datetime as d
 import formencode
 import logging
+import os
 import re
 import wurdig.lib.helpers as h
 import wurdig.model as model
@@ -9,7 +10,7 @@ import webhelpers.paginate as paginate
 
 from authkit.authorize.pylons_adaptors import authorize
 from formencode import htmlfill
-from pylons import app_globals, request, response, session, tmpl_context as c
+from pylons import app_globals, config, request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect_to
 from pylons.decorators import validate
 from pylons.decorators.rest import restrict
@@ -82,7 +83,7 @@ class PageController(BaseController):
         if slug is None:
             abort(404)
             
-        @app_globals.cache.region('long_term')
+        # @app_globals.cache.region('long_term')
         def load_page(slug):
             page_q = meta.Session.query(model.Page)
             return page_q.filter_by(slug=slug).first()
@@ -91,7 +92,13 @@ class PageController(BaseController):
         if c.page is None:
             abort(404)
 
-        return render('/derived/page/view.html')
+        template = '/derived/page/%s.html'
+        if os.path.isfile(config['pylons.paths']['templates'][0] + template % slug):
+            template = template % slug
+        else:
+            template = template % 'view'
+            
+        return render(template)
 
     @h.auth.authorize(h.auth.is_valid_user)
     def new(self):
