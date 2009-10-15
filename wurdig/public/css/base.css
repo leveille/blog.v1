@@ -4,7 +4,7 @@ html, body {
 
 body {
     color:#444;
-    font-family: Arial, sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     line-height: 1.7em;
     margin: 0;
     padding: 0
@@ -24,9 +24,13 @@ body {
     -webkit-border-top-right-radius: 13px
 }
 
+#wurdig-header-img p,
+h1, h2, h3, h4, h5, h6 {
+    font-family: baskerville, 'palatino linotype', georgia, 'times new roman', serif;
+}
+
 h1, h2, h3, h4, h5, h6 {
     color: #000;
-    font-family: Georgia, "Times New Roman";
     font-weight: normal;
     font-style: normal;
     line-height: 1.6em
@@ -153,7 +157,6 @@ ul ul {
     font-size: 116%;
     position: absolute;
     bottom: 0;
-    font-family: Geneva;
     font-weight: normal;
     font-style: normal
 }
@@ -200,7 +203,8 @@ ul ul {
 }
 
 p#about-intro {
-    font: 20px/1.5em Arial;
+    font-size: 20px;
+    line-height: 1.5em;
     border-top: dotted 1px #CCC;
     border-bottom: dotted 1px #CCC;
     margin: 20px 0 10px 0;
