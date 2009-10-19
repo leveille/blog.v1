@@ -1,5 +1,5 @@
 html, body {
-    background:#FFF
+    background:#EFEFEF
 }
 
 body {
@@ -8,6 +8,10 @@ body {
     line-height: 1.7em;
     margin: 0;
     padding: 0
+}
+
+#doc4 {
+    background: #FFF
 }
 
 #wurdig-header-img,
