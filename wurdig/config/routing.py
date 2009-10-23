@@ -21,6 +21,53 @@ def make_map():
     # CUSTOM ROUTES HERE
     map.connect('/', controller='post', action='home')
     
+    """Administrative actions
+    """
+    map.connect('/admin/dashboard', 
+                controller='account', 
+                action='dashboard')
+    
+    map.connect('/admin/signout', 
+                controller='account', 
+                action='signout')
+    
+    map.connect('/admin/signin', 
+                controller='account', 
+                action='signinagain')
+    
+    map.connect('/admin/{controller}/edit/{id}',
+                controller='{controller}',
+                action='edit'
+                )
+    map.connect('/admin/{controller}/list',
+                controller='{controller}',
+                action='list'
+                )
+    map.connect('/admin/{controller}/approve_confirm/{id}',
+                controller='{controller}',
+                action='approve_confirm'
+                )
+    map.connect('/admin/{controller}/approve/{id}',
+                controller='{controller}',
+                action='approve'
+                )
+    map.connect('/admin/{controller}/disapprove_confirm/{id}',
+                controller='{controller}',
+                action='disapprove_confirm'
+                )
+    map.connect('/admin/{controller}/disapprove/{id}',
+                controller='{controller}',
+                action='disapprove'
+                )
+    map.connect('/admin/{controller}/delete_confirm/{id}',
+                controller='{controller}',
+                action='delete_confirm'
+                )
+    map.connect('/admin/{controller}/delete/{id}',
+                controller='{controller}',
+                action='delete'
+                )  
+    
     map.connect('/feeds/', 
                 controller='feed', 
                 action='redirect_wp_feeds')
@@ -53,6 +100,7 @@ def make_map():
                 requirements = dict(slug='[-\w]+')
     )
     
+    # 
     map.connect('/post/{post_id}/{controller}/{action}',
                 requirements = dict(post_id='\d+')
     ) 
@@ -61,41 +109,48 @@ def make_map():
                 requirements = dict(post_id='\d+', id='\d+')
     )
     
-    map.connect('/{year}/{month}/{slug}', controller='post', 
+    
+    
+    map.connect('/{year}/{month}/{slug}', 
+                controller='post', 
                 action='view', 
                 requirements = {'year' : '\d{2,4}', 
                                 'month' : '\d{1,2}', 
                                 'slug' : '[-\w]+'})
     
-    map.redirect('/{year}/{month}/{slug}/', '/{year}/{month}/{slug}', _redirect_code='301 Moved Permanently')
     
-    map.connect('/{year}/{month}', controller='post', 
+    
+    map.connect('/archives/{year}/{month}', 
+                controller='post', 
                 action='archive', 
-                requirements = {'year' : '\d{2,4}', 'month' : '\d{1,2}'})
+                requirements = {'year' : '\d{2,4}', 
+                                'month' : '\d{1,2}'})
     
-    map.connect('/{year}', controller='post', 
+    map.connect('/archives/{year}', 
+                controller='post', 
                 action='archive', 
                 requirements = {'year' : '\d{2,4}'})
     
-    map.connect('/category/{slug}', controller='tag', 
+    
+    
+    map.connect('/category/{slug}', 
+                controller='tag', 
                 action='category', 
                 requirements = {'slug' : '[-\w]+'})
-    
-    # Not a big fan of hardcoding in these actions,
-    # but I'm unsure how to proceed otherwise in order to get
-    # a nice clean url for the tag slug
-    map.connect('/tag/{action}', controller='tag', 
+    map.connect('/tag/{action}', 
+                controller='tag', 
                 requirements = {'action' : 'cloud|new|create|edit|save|list|delete'})
-    
-    map.connect('/tag/{slug}', controller='tag', 
+    map.connect('/tag/{slug}', 
+                controller='tag', 
                 action='archive', 
                 requirements = {'slug' : '[-\w]+'})
     
-    map.connect('/{slug}', controller='page', 
+    
+    map.connect('/{slug}', 
+                controller='page', 
                 action='view', 
                 requirements = {'slug' : '[-\w]+'})
-    
-    map.redirect('/{slug}/', '/{slug}', _redirect_code='301 Moved Permanently')
+    map.redirect('/{slug}/', '/{slug}', _redirect_code='301 Moved Permanently')    
 
     map.connect('/{controller}/{action}')
     map.connect('/{controller}/{action}/{id}')
