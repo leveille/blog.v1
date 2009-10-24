@@ -171,7 +171,8 @@ ul ul {
     top: 60px;
     right: 35px;
     margin: 0;
-    padding: 0
+    padding: 0;
+	z-index: 5000
 }
 
 #wurdig-primary-nav li {
