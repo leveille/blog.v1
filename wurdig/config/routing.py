@@ -35,9 +35,21 @@ def make_map():
                 controller='account', 
                 action='signinagain')
     
+    map.connect('/admin/{controller}/new',
+                controller='{controller}',
+                action='new'
+                )
+    map.connect('/admin/{controller}/create',
+                controller='{controller}',
+                action='create'
+                )
     map.connect('/admin/{controller}/edit/{id}',
                 controller='{controller}',
                 action='edit'
+                )
+    map.connect('/admin/{controller}/save/{id}',
+                controller='{controller}',
+                action='save'
                 )
     map.connect('/admin/{controller}/list',
                 controller='{controller}',
