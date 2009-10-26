@@ -27,7 +27,7 @@ def make_map():
                 controller='account', 
                 action='dashboard')
     
-    map.connect('/signout', 
+    map.connect('/admin/signout', 
                 controller='account', 
                 action='signout')
     
@@ -123,7 +123,7 @@ def make_map():
     
     
     
-    map.connect('/{year}/{month}/{slug}', 
+    map.connect('/blog/{year}/{month}/{slug}', 
                 controller='post', 
                 action='view', 
                 requirements = {'year' : '\d{2,4}', 
@@ -132,13 +132,13 @@ def make_map():
     
     
     
-    map.connect('/archives/{year}/{month}', 
+    map.connect('/blog/{year}/{month}', 
                 controller='post', 
                 action='archive', 
                 requirements = {'year' : '\d{2,4}', 
                                 'month' : '\d{1,2}'})
     
-    map.connect('/archives/{year}', 
+    map.connect('/blog/{year}', 
                 controller='post', 
                 action='archive', 
                 requirements = {'year' : '\d{2,4}'})
