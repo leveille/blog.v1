@@ -27,7 +27,7 @@ def make_map():
                 controller='account', 
                 action='dashboard')
     
-    map.connect('/admin/signout', 
+    map.connect('/signout', 
                 controller='account', 
                 action='signout')
     
