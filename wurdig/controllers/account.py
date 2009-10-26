@@ -76,7 +76,7 @@ class AccountController(BaseController):
 
     def signinagain(self):
         request.environ['paste.auth_tkt.logout_user']()
-        return render('/derived/account/signin.html').replace('%s', h.url_for('dashboard'))
+        return render('/derived/account/signin.html').replace('%s', h.url_for(controller='account', action='dashboard'))
     
     def _recent_comments(self):
         # Get recent comments

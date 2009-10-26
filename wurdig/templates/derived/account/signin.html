@@ -5,8 +5,9 @@
 
 <%def name="title()">${parent.title()} &gt; ${_('Sign In')}</%def>
 
-${h.form('%s', method='post')}
-    <p>
+${h.form(h.url_for(controller='account', action='dashboard'), method='post')}
+    ${h.hidden('foo', value='%s')}
+	<p>
         <label for="username">${_('Username')}</label>
         ${h.text('username', tabindex=1, class_='text')}
     </p>
