@@ -133,9 +133,9 @@ class PostController(BaseController):
                 abort(400)
             
             import calendar
-            c.date = calendar.month_name[month_start] + ', ' + year
             (month_start, month_end) = (month_i, month_i)
             day_end = calendar.monthrange(year_i, month_start)[1]
+            c.date = calendar.month_name[month_start] + ', ' + year
         
         @app_globals.cache.region('short_term', 'post.archive.load_page')
         def load_page(page):
