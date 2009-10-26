@@ -96,29 +96,6 @@
                     ${h.mail_to(h.wurdig_contact_email(), _('Contact'), encode = "hex")}
                 </li>
             % endif
-            % if h.auth.authorized(h.auth.is_valid_user):
-                <li>
-                    <a href="${h.url_for(controller='account', action='dashboard')}" 
-                        title="${_('Administrator')}">
-                        ${_('Admin')}
-                    </a>
-                </li>
-            % endif
-            % if h.auth.authorized(h.auth.is_valid_user) and request.urlvars['action'] != 'signout':
-                <li class="wurdig-nav-last">
-                    <a href="${h.url_for(controller='account', action='signout')}" 
-                        title="${_('Sign Out')}">
-                        ${_('Sign Out')}
-                    </a>
-                </li>
-            % else:
-                <li class="wurdig-nav-last">
-                    <a href="${h.url_for(controller='account', action='dashboard')}" 
-                        title="${_('Sign In')}">
-                        ${_('Sign In')}
-                    </a>
-                </li>
-            % endif
         </ul>
     </div>
 </%def>
@@ -247,6 +224,21 @@
             </ul>
         </div>
     % endif
+    % if c.enable_bitbucket_display:
+        <div class="code">
+            <h4>${_('Code')}</h4>
+            <ul>
+                % if c.enable_github_display:
+                    <li class="bitbucket">
+                        <a href="${h.bitbucket_link()}"
+                            title="${_('BitBucket')}">
+                            ${_('BitBucket')}
+                        </a>
+                    </li>
+                % endif
+            </ul>
+        </div>
+    % endif
 </%def>
 
 <%def name="blogroll()" cached="True" cache_timeout="86400" cache_key="blogroll" cache_type="file">
@@ -290,12 +282,35 @@
                 </a>
             % endif
         </li>
-        <li class="wurdig-nav-last feed">
+        <li class="feed">
             <a href="${h.url_for(controller='feed', action='comments_feed')}"
                 title="${_('Comments')} (atom)">
                 ${_('Comments')}
             </a>
         </li>
+        % if h.auth.authorized(h.auth.is_valid_user):
+            <li>
+                <a href="${h.url_for(controller='account', action='dashboard')}" 
+                    title="${_('Administrator')}">
+                    ${_('Admin')}
+                </a>
+            </li>
+        % endif
+        % if h.auth.authorized(h.auth.is_valid_user) and request.urlvars['action'] != 'signout':
+            <li class="wurdig-nav-last">
+                <a href="${h.url_for(controller='account', action='signout')}" 
+                    title="${_('Sign Out')}">
+                    ${_('Sign Out')}
+                </a>
+            </li>
+        % else:
+            <li class="wurdig-nav-last">
+                <a href="${h.url_for(controller='account', action='dashboard')}" 
+                    title="${_('Sign In')}">
+                    ${_('Sign In')}
+                </a>
+            </li>
+        % endif
     </ul>
     <p>
         ${_('Powered by')}

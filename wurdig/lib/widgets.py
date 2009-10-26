@@ -8,7 +8,8 @@ __all__ = ['delicious',
            'flickr_link',
            'twitter',
            'twitter_link',
-           'github_link']
+           'github_link',
+           'bitbucket_link']
 
 def delicious():    
     html = u''
@@ -136,7 +137,17 @@ def github_link():
         return u''
     html = u''
     try:
-        html = u'http://github.com/%s' % c.settings.get('github_screenname')
+        html = u'http://github.com/%s/' % c.settings.get('github_screenname')
+    except:
+        pass
+    return html
+
+def bitbucket_link():
+    if not c.enable_bitbucket_display:
+        return u''
+    html = u''
+    try:
+        html = u'http://bitbucket.org/%s/' % c.settings.get('bitbucket_screenname')
     except:
         pass
     return html

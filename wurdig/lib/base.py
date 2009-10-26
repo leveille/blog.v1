@@ -57,6 +57,8 @@ class BaseController(WSGIController):
         # This is a temporary solution until I find the time to add these settings to the database
         pylons.c.enable_github_display = True
         pylons.c.settings['github_screenname'] = u'leveille'
+        pylons.c.enable_bitbucket_display = True
+        pylons.c.settings['bitbucket_screenname'] = u'leveille'
         
         pylons.c.use_minified_assets = asbool(pylons.c.settings.get('use_minified_assets', 'false'))
         pylons.c.use_externalposts_feed = asbool(pylons.c.settings.get('use_externalposts_feed', 'false'))  

@@ -451,6 +451,10 @@ div.wurdig-entry-content p.more a:hover {
     background: url('../images/sprite.png') no-repeat left -220px
 }
 
+#wurdig-sidebar #wurdig-subscribe div.code li.bitbucket {
+    background: url('../images/sprite.png') no-repeat left -177px
+}
+
 #wurdig-sidebar h4 {
     margin: 0 0 -6px 0;
     padding: 0
