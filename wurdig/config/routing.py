@@ -20,6 +20,7 @@ def make_map():
 
     # CUSTOM ROUTES HERE
     map.connect('/', controller='post', action='home')
+    map.connect('/blog', controller='post', action='blog')
     
     """Administrative actions
     """

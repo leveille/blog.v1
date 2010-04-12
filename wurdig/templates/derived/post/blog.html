@@ -1,0 +1,11 @@
+<%
+    from pylons.i18n.translation import _
+%>
+<%inherit file="/base/foo.html"/>
+<%namespace file="/component/posts.html" name="posts" import="*"/>
+
+<%def name="title()">${_('Blog Archives')}</%def>
+<%def name="description()">${title()}</%def>
+<%def name="content_header()"><p>${_('Archives')}</p></%def>
+
+<p><em>${title()}</em></p>

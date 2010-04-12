@@ -117,6 +117,24 @@ class PostController(BaseController):
             
         return render('/derived/post/home.html')
     
+    def blog(self):
+        def load_page():
+            posts_q = meta.Session.query(model.Post).filter(
+                and_( 
+                    model.Post.draft == False
+                )
+            ).group_by([model.Post.created_on, model.Post.posted_on]).all()
+            # ).group_by([model.Post.created_on]).fetchall()
+            # posts_q = posts_q.distinct().group_by([model.Post.posted_on])
+            return posts_q
+            
+        try:
+            c.foo = load_page()
+        except:
+            abort(400)
+                    
+        return render('/derived/post/blog.html')
+    
     def archive(self, year=None, month=None):  
          
         try:
