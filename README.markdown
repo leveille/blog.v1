@@ -1,7 +1,3 @@
-## Current Release ##
-
-There currently is no official release of my blog software.  I have a number of tickets I want to get through before delivering my first official beta release.  Because I do not have an official release, I am only providing general instructions for myself.  Installation will look like the following (for *nix ... modify to fit your needs):
-
 * wget http://pylonsbook.com/virtualenv.py
 * python virtualenv.py --no-site-packages env
 * source env/bin/activate
